@@ -1,12 +1,16 @@
 :root {
   --transition: 400ms all ease-in;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 .rocks {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
-  padding: 1.5rem 1.5rem 4rem;
+  padding: 1.5rem 0 4rem;
+  margin: 1rem 15rem 0;
   gap: 2rem;
 }
 .main-title {
@@ -17,7 +21,6 @@
 .rock {
   border-radius: 5px;
   position: relative;
-  margin-top: 1rem;
   width: 22rem;
   height: auto;
   display: inline-block;
@@ -32,9 +35,10 @@
   margin: 20px 0;
 }
 .rock p {
+  font-size: 15px;
   padding-bottom: 3.5rem;
-  margin: 10px 40px;
-  text-align: left;
+  margin: 10px 25px;
+  text-align: center;
 }
 .rock-btn {
   position: absolute;
@@ -55,7 +59,7 @@
 
 .rock img {
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 125px;
+  height: 125px;
   position: relative;
 }

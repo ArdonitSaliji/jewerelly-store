@@ -6,7 +6,7 @@
   text-decoration: none;
 }
 .navbar {
-  height: 7rem;
+  height: 7.5rem;
   display: flex;
   justify-content: space-between;
   background-color: grey;
@@ -46,7 +46,7 @@
   padding-top: 4px;
   text-align: center;
   justify-content: center;
-  margin: 5px 10px;
+  margin: 15px 10px 0 10px;
   border: 2px solid green;
 }
 
@@ -60,7 +60,7 @@
   flex-direction: row;
 }
 .nav__items ul li {
-  margin-top: 5px;
+  margin-top: 10px;
   margin-right: 1.7rem;
   text-align: center;
 }

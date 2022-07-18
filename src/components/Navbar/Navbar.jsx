@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import './Navbar.css'
-const Navbar = () => {
+const Navbar = ({ setLogin, setSignup }) => {
   return (
     <div className='navbar'>
       <div className='nav-img'>
@@ -11,13 +11,13 @@ const Navbar = () => {
 
       <div className='nav__items'>
         <div className='nav__items-btns'>
-          <a className='login'>Login</a>
-          <a className='signup'>Sign up</a>
+          <a onClick={() => setLogin(true)}>Login</a>
+          <a onClick={() => setSignup(true)}>Sign up</a>
         </div>
 
         <ul>
           <li>
-            <a href='indextext.html'>Home</a>
+            <a href=''>Home</a>
           </li>
           <li>
             <a href=''>Prices</a>
@@ -26,7 +26,7 @@ const Navbar = () => {
             <a href=''>About us</a>
           </li>
           <li>
-            <a href='basket.html'>Basket</a>
+            <a href=''>Basket</a>
           </li>
         </ul>
       </div>

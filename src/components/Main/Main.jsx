@@ -1,6 +1,7 @@
 import React from 'react'
 import './Main.css'
 import data from './data'
+// import Signup from './Signup'
 const Main = () => {
   const allGems = data.map(({ id, title, image, text }) => (
     <div className='rock'>
@@ -14,6 +15,7 @@ const Main = () => {
   ))
   return (
     <div>
+      {/* <Signup /> */}
       <h1 className='main-title'>Trading rare gems and crystals has never been easier.</h1>
       <div className='rocks'>{allGems}</div>
     </div>

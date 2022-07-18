@@ -3,13 +3,13 @@ const data = [
     id: 1,
     title: 'Citrine',
     image: require('../../images/cit1.jpg'),
-    text: 'Its pale yellow color is what gives it its name, Citrine, coming from the French citron, meaning lemon. But apart from its literal meaning, Citrine has a deep spiritual meaning, too. The spiritual meaning of Citrine is its yellow hues symbolizing the spiritual qualities of joy, abundance, and transmutation.',
+    text: 'Its pale yellow color is what gives it its name, Citrine, coming from the French citron, meaning lemon. Citrine has a deep spiritual meaning, too. The spiritual meaning of Citrine is its yellow hues symbolizing the spiritual qualities of joy, abundance, and transmutation.',
   },
   {
     id: 2,
     title: 'Amethyst',
     image: require('../../images/ame.jpg'),
-    text: 'Amethyst is one of the most famous crystals because of its beautiful coloration as well as its spiritual and literal meaning.The spiritual meaning of Amethyst is groundedness, tranquility, and calm. The literal meaning of Amethyst is “not intoxicated” – its name translates from the Greek word améthystos.',
+    text: 'Amethyst is one of the most famous crystals because of its beautiful coloration as well as its spiritual and literal meaning.The spiritual meaning of Amethyst is groundedness, tranquility, and calm. The meaning of Amethyst is “not intoxicated” – its name translates from the Greek word améthystos.',
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const data = [
     id: 6,
     title: 'Emerald',
     image: require('../../images/eme.jpg'),
-    text: 'Emerald is a life-affirming stone and one of infinite patience. It is known as the stone of successful love and represents great loyalty. Emerald is the stone of love and friendship and keeps partnerships in balance. This gem also opens up to your latent abilities and promotes the gathering of wisdom from the mental planes. ',
+    text: 'Emerald is a life-affirming stone and one of infinite patience. Emerald is the stone of love and friendship and keeps partnerships in balance. This gem also opens up to your latent abilities and promotes the gathering of wisdom from the mental planes. ',
   },
   {
     id: 7,
