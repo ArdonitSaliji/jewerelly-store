@@ -1,5 +1,5 @@
-import Navbar from './components/Navbar/Navbar'
-import Main from './components/Main/Main'
+import Navbar from './components/Navbar/Navbar.jsx'
+import Main from './components/Main/Main.jsx'
 function App() {
   return (
     <div>

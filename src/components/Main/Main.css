@@ -1,40 +1,60 @@
+:root {
+  --transition: 400ms all ease-in;
+}
 .rocks {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
-  margin-top: 0px;
-  gap: 1.5rem;
+  padding: 1.5rem 1.5rem 4rem;
+  gap: 2rem;
+}
+.main-title {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 0.8em;
 }
 .rock {
-  margin-top: 3rem;
+  border-radius: 5px;
+  position: relative;
+  margin-top: 1rem;
   width: 22rem;
   height: auto;
   display: inline-block;
   text-align: center;
-  border: 5px solid grey;
+  border: 3px solid grey;
+}
+.rock:hover {
+  background-color: green;
+  transition: var(--transition);
 }
 .rock h3 {
-  padding: 30px 0 15px 0;
-  word-wrap: break-all;
+  margin: 20px 0;
 }
-
 .rock p {
-  padding-bottom: 25px;
-  margin: 0 40px 0 40px;
+  padding-bottom: 3.5rem;
+  margin: 10px 40px;
+  text-align: left;
 }
 .rock-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5%;
+  border: none;
+  border-radius: 5px;
+  width: 8rem;
+  height: 2rem;
   color: rgb(19, 235, 19);
-  padding: 10px;
   background-color: grey;
-  box-shadow: 3px 3px 4px grey;
 }
 .rock button:hover {
   background-color: rgb(148, 147, 147);
-  box-shadow: 4px 4px 4px rgb(109, 108, 108);
+  cursor: pointer;
 }
 
 .rock img {
+  border-radius: 50%;
   width: 150px;
   height: 150px;
   position: relative;
