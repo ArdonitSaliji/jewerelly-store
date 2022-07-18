@@ -70,8 +70,7 @@
   border-radius: 10px;
   width: 80%;
 }
-/* .signup-btn:active {
-  } */
+
 .signup span {
   margin-top: 1rem;
   width: 100%;
@@ -98,6 +97,7 @@
 }
 .signup-acc {
   font-size: 18px;
+  margin-top: 0.5rem;
   margin-right: 1.5rem;
   height: 3rem;
   display: flex;

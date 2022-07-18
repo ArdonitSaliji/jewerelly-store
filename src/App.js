@@ -10,7 +10,7 @@ function App() {
   const [signup, setSignup] = React.useState(false)
 
   return (
-    <div className='cont'>
+    <div className='container'>
       <Navbar setLogin={setLogin} setSignup={setSignup} />
       <Main />
       <Login login={login} setLogin={setLogin} />

@@ -5,6 +5,9 @@
   box-sizing: border-box;
   text-decoration: none;
 }
+#root {
+  font-family: 'Oswald', sans-serif;
+}
 .navbar {
   height: 7.5rem;
   display: flex;
@@ -43,9 +46,9 @@
   display: flex;
   height: 3rem;
   width: 8rem;
-  padding-top: 4px;
   text-align: center;
   justify-content: center;
+  align-items: center;
   margin: 15px 10px 0 10px;
   border: 2px solid green;
 }
