@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="general.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="citrine.css" />
+
+    <title>Citrine</title>
+  </head>
+  <body>
+    <div class="c-container1">
+      <div class="navbar">
+        <div class="nav-img">
+          <h1 id="title">
+            Gemstone <br />
+            Traders
+          </h1>
+          <img src="rock.png" alt="" />
+        </div>
+
+        <div class="nav-items">
+          <div class="member">
+            <div class="login">
+              <a onclick="logIn()">Login</a>
+            </div>
+            <div class="signup">
+              <a onclick="signUp()">Sign up</a>
+            </div>
+          </div>
+          <ul class="navs">
+            <li>
+              <a href="indextext.html">Home</a>
+              <a>Prices</a>
+              <a>About us</a>
+              <a class="bask" href="basket.html"
+                >Basket
+                <p class="basketIndicator"></p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content">
+        <h1 class="ctitle">
+          Choose your type of Citrine that you are interested in buying or
+          selling
+        </h1>
+
+        <!-- Buy popup -->
+        <form class="buyContainer">
+          <div class="buyContent">
+            <h3 class="buyTitle">Sphere Shaped Citrine</h3>
+            <div onclick="hideSphere()" class="x"></div>
+            <div class="buyImg"><img src="cit1.jpg" alt="" /></div>
+            <h3>Quantity</h3>
+            <input id="quantity" type="number" placeholder="Karat" min="1" />
+            <h4>Price Per Karat: 25$</h4>
+            <button onclick="addToBasket()" id="add" type="button">
+              Add To Basket
+            </button>
+            <button type="button" onclick="hideSphere()">Cancel</button>
+          </div>
+        </form>
+        <form class="buyContainer">
+          <div class="buyContentRaw">
+            <h3 class="buyTitle">Raw Citrine</h3>
+            <div onclick="hideSphere2()" class="x"></div>
+            <div class="buyImg"><img src="cit2.jpg" alt="" /></div>
+            <h3>Quantity</h3>
+            <input id="quantity" type="number" placeholder="Karat" min="1" />
+            <h4>Price Per Karat: 15$</h4>
+            <button onclick="addToBasket2()" id="add" type="button">
+              Add To Basket
+            </button>
+            <button type="button" onclick="hideSphere2()">Cancel</button>
+          </div>
+        </form>
+
+        <!-- Login form  -->
+        <form>
+          <div class="log-in">
+            <h2 class="title">
+              Log In <a onclick="cancelLogIn()" class="x"></a>
+            </h2>
+            <input
+              id="login-username"
+              class="login-username"
+              type="text"
+              placeholder="Enter your username!"
+            />
+            <br />
+            <input
+              id="pass"
+              class="pass"
+              type="password"
+              placeholder="Enter your password!"
+            /><br />
+            <p id="loginStatus"></p>
+            <button
+              id="btn-click"
+              type="submit"
+              class="btn btn-primary"
+              onclick="loginButton()"
+            >
+              Log in
+            </button>
+            <button onclick="cancelLogIn()" class="btn btn-danger">
+              Cancel</button
+            ><br />
+
+            <a onclick="forgot()" class="forgot"
+              ><strong>Forgot password?</strong> </a
+            ><br />
+
+            <button type="button" onclick="signUp()" class="create">
+              Create Account
+            </button>
+          </div>
+        </form>
+
+        <!-- Sign up form  -->
+        <form>
+          <div class="sign-up">
+            <h2 class="title">
+              Sign up <a onclick="cancelSignUp()" class="x"></a>
+            </h2>
+            <input
+              id="username"
+              class="username"
+              type="text"
+              placeholder="Enter your username!"
+            />
+            <br />
+            <input
+              id="pass1"
+              class="pass1"
+              type="password"
+              placeholder="Enter your password!"
+            />
+            <input
+              id="againPass"
+              class="pass2"
+              type="password"
+              placeholder="Re enter your password!"
+            /><br />
+            <p id="check-pass"></p>
+            <input class="check" type="checkbox" name="agree" />
+            <label for="agree"
+              >By checking the box i have agreed to the
+              <a href="#">Terms and conditions</a>.</label
+            ><br />
+            <button
+              id="signUpButton"
+              class="btn btn-primary"
+              onclick="getInfo()"
+            >
+              Sign up
+            </button>
+            <button onclick="cancelSignUp()" class="btn btn-danger">
+              Cancel</button
+            ><br />
+            <h4>or</h4>
+            <a id="already" onclick="logIn()">Already have an account</a>
+          </div>
+        </form>
+
+        <!-- Croks  -->
+
+        <div class="crocks">
+          <div class="crock">
+            <h3>Sphere Citrine</h3>
+            <img src="cit1.jpg" alt="" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
+              in ipsam. Repellat voluptates officiis vel.
+            </p>
+
+            <button onclick="showSphere()" id="buy">Buy</button>
+            <button id="sell">Sell</button>
+          </div>
+
+          <div class="crock">
+            <h3>Raw citrine</h3>
+            <img src="cit2.jpg" alt="" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
+              in ipsam. Repellat voluptates officiis vel.
+            </p>
+            <button id="buy" onclick="showSphere2()">Buy</button>
+            <button id="sell">Sell</button>
+          </div>
+
+          <div class="crock">
+            <h3>Triangular Citrine</h3>
+            <img src="cit3.jpg" alt="" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
+              in ipsam. Repellat voluptates officiis vel.
+            </p>
+            <button id="buy">Buy</button>
+            <button id="sell">Sell</button>
+          </div>
+
+          <div class="crock">
+            <h3>Diamant Form Citrine</h3>
+            <img src="critrine.jpg" alt="" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
+              in ipsam. Repellat voluptates officiis vel.
+            </p>
+            <button id="buy">Buy</button>
+            <button id="sell">Sell</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="c-footer">
+        <div id="google_translate_element" style="display: none"></div>
+
+        <div id="translate" class="languages">
+          <a onclick="changeLanguage('en')">English</a>
+          <a onclick="changeLanguage('de')">Deutsch</a>
+          <a onclick="changeLanguage('sq')">Shqip</a>
+          <a onclick="changeLanguage('tr')">Türkçe</a>
+          <a onclick="changeLanguage('mk')">Македонски </a>
+          <a onclick="changeLanguage('zh-CN')">Chinese</a>
+          <a onclick="changeLanguage('ar')">Arabic</a>
+          <a onclick="changeLanguage('hr')">Hrvatski </a>
+          <a onclick="changeLanguage('es')">Español </a>
+          <a>Português Brasil </a>
+        </div>
+        <div class="copyright">
+          <p>@2022 Gemstone Traders.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_element"
+        );
+      }
+      function changeLanguage(language) {
+        var selectField = document.querySelector(
+          "#google_translate_element select"
+        );
+        for (var i = 0; i < selectField.children.length; i++) {
+          var option = selectField.children[i];
+          if (option.value == language) {
+            selectField.selectedIndex = i;
+            selectField.dispatchEvent(new Event("change"));
+            break;
+          }
+        }
+      }
+    </script>
+
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+    <script src="maintest1.js"></script>
+  </body>
+</html>

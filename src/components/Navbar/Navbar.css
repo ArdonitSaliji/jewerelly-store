@@ -1,0 +1,462 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+.navbar {
+  height: 7rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: grey;
+  box-shadow: 2px 2px 5px 0 black;
+}
+.nav-img {
+  display: flex;
+  margin-left: 1.5rem;
+  align-items: center;
+}
+.nav-img img {
+  width: 7rem;
+  height: 5rem;
+  display: inline-block;
+}
+.nav-img h2 {
+  color: green;
+  margin-left: 1rem;
+}
+
+.nav__items {
+  font-size: 24px;
+}
+
+.nav__items-btns {
+  display: flex;
+  justify-content: center;
+  margin-right: 10%;
+}
+.nav__items-btns a {
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  height: 3rem;
+  width: 8rem;
+  padding-top: 4px;
+  text-align: center;
+  justify-content: center;
+  margin: 5px 10px;
+  border: 2px solid green;
+}
+
+.nav__items-btns a:hover {
+  background-color: green;
+  transition: 0.6s;
+}
+
+.nav__items ul {
+  display: flex;
+  flex-direction: row;
+}
+.nav__items ul li {
+  margin-top: 5px;
+  margin-right: 1.7rem;
+  text-align: center;
+}
+.nav__items ul li a {
+  width: 12rem;
+  font-size: 22px;
+  color: greenyellow;
+}
+.nav__items ul li a:last-child {
+  margin-right: 25px;
+}
+.content h1 {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* title */
+#title {
+  color: green;
+  text-shadow: 2px 2px black;
+  display: inline-block;
+  position: absolute;
+  left: 100px;
+  top: 30px;
+}
+
+/* images */
+
+/* Forgot password */
+.forgot-pass {
+  box-shadow: 2px 2px 6px rgb(165, 162, 162), -2px -2px 6px rgb(165, 162, 162);
+  border-radius: 10px;
+  position: absolute;
+  top: 200px;
+  left: 400px;
+  width: 650px;
+  height: 350px;
+  background-color: grey;
+  text-align: center;
+}
+.forgot-pass h1 {
+  margin: 20px 0 25px 0;
+}
+.forgot-pass h2 {
+  margin: 20px 50px 25px 50px;
+  color: black;
+}
+#mobile {
+  margin: 15px 0 15px 0;
+  height: 40px;
+  width: 300px;
+  border-radius: 5px;
+}
+
+#mobile:placeholder-shown {
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+#search,
+#cancel {
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 13px;
+  width: 170px;
+  height: 32px;
+  border-radius: 4px;
+}
+#search:hover,
+#cancel:hover {
+  transform: scale(1.05);
+}
+#search {
+  background: green;
+  margin-right: 10px;
+}
+#cancel {
+  margin-left: 10px;
+  background-color: black;
+  color: white;
+}
+/* login */
+
+.log-in {
+  width: 450px;
+  height: 370px;
+  z-index: 100;
+  text-align: center;
+  border: 4px solid black;
+  border-radius: 8px;
+  position: absolute;
+  top: 21%;
+  left: 40%;
+  background-color: grey;
+}
+
+.log-in .title {
+  margin: 25px 0;
+  font-size: 40px;
+  color: black;
+}
+.x {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  left: 382px;
+  top: 25px;
+}
+.x:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.x::before,
+.x::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 4px;
+  background-color: black;
+}
+
+.x::before {
+  transform: rotate(45deg);
+}
+
+.x::after {
+  transform: rotate(-45deg);
+}
+
+.log-in input {
+  border: none;
+  width: 300px;
+  height: 30px;
+  border-radius: 4px;
+}
+.log-in #loginStatus {
+  color: rgb(182, 10, 10);
+  font-size: 22px;
+}
+.log-in button {
+  margin-top: 25px;
+  font-size: 18px;
+  width: 140px;
+  height: 33px;
+  background-color: green;
+  border-radius: 5px;
+}
+.log-in input:placeholder-shown {
+  font-size: 17px;
+  padding-left: 5px;
+}
+.log-in .login-username {
+  margin-bottom: 10px;
+}
+.log-in button:hover {
+  transform: scale(1.08);
+  cursor: pointer;
+}
+.forgot {
+  font-size: 20px;
+  display: inline-block;
+  margin-top: 18px;
+  cursor: pointer;
+  color: #0d6ce9;
+}
+.forgot:hover {
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+.log-in .create {
+  margin-top: 15px;
+  font-size: 19px;
+  background-color: rgb(255, 74, 3);
+  width: 180px;
+  height: 35px;
+  color: black;
+}
+
+/* Sign up */
+
+.sign-up {
+  border-radius: 10px;
+  width: 530px;
+  height: 380px;
+  z-index: 100000;
+  text-align: center;
+  border: 4px solid black;
+  position: absolute;
+  top: 21%;
+  left: 38%;
+  background-color: grey;
+}
+.sign-up .title {
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 35px;
+  /* color: rgb(22, 207, 22); */
+  color: black;
+}
+
+.sign-up .x {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  left: 455px;
+  top: 28px;
+}
+
+.username,
+.pass1,
+.pass2 {
+  width: 220px;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 25px;
+}
+.pass1 {
+  margin: 0 6px 0 0;
+}
+.username:placeholder-shown,
+.pass1:placeholder-shown,
+.pass2:placeholder-shown {
+  font-size: 17px;
+  padding-left: 5px;
+}
+.username {
+  margin-bottom: 15px;
+}
+
+#check-pass {
+  display: block;
+  transform: translateX(135px);
+  color: rgb(182, 10, 10);
+  font-size: 22px;
+  padding-top: 5px;
+}
+
+.sign-up label {
+  font-size: 18px;
+}
+.sign-up .check {
+  transform: translateY(1.3px);
+  width: 16px;
+  height: 16px;
+}
+.sign-up button {
+  border-radius: 5px;
+  background-color: green;
+  width: 140px;
+  height: 33px;
+  font-size: 18px;
+  margin-top: 25px;
+}
+
+.sign-up button:hover {
+  transform: scale(1.08);
+  cursor: pointer;
+}
+.sign-up #already {
+  display: inline-block;
+  margin: 10px 0 0 0;
+  cursor: pointer;
+  color: blue;
+  font-size: 22px;
+}
+.sign-up #already:hover {
+  text-decoration: underline;
+}
+.sign-up h4 {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.btn-primary {
+  margin-right: 10px;
+}
+
+footer {
+  position: absolute;
+
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  background-color: grey;
+}
+.bFooter {
+  position: absolute;
+  bottom: 0;
+}
+.languages {
+  text-align: center;
+}
+.languages a {
+  font-size: 18px;
+  color: black;
+  display: inline-block;
+  margin: 15px 18px 0 0;
+}
+.languages a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.copyright {
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 15px;
+}
+#google_translate_element {
+  text-align: center;
+}
+/* Citrine Tab */
+
+#buy,
+#sell {
+  position: relative;
+  display: inline-block;
+  padding: 0%;
+  right: 0;
+  top: 0;
+  width: 125px;
+  height: 35px;
+}
+#buy {
+  margin-right: 15px;
+}
+.content .ctitle {
+  margin-top: 30px;
+}
+
+.sign-up {
+  display: none;
+}
+.log-in {
+  display: none;
+}
+.buyContent {
+  display: none;
+}
+
+@media screen and (max-height: 1000px) {
+  .sign-up {
+    top: 15%;
+    left: 33%;
+  }
+  .log-in {
+    top: 15%;
+    left: 35%;
+  }
+  #me {
+    margin-bottom: 20px;
+  }
+  .rocks {
+    padding: 0 25px 25px 25px;
+    text-align: center;
+    margin-top: 0px;
+  }
+  .rock {
+    position: relative;
+    width: 25rem;
+    height: 28rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    border: 5px solid grey;
+    margin: 10px;
+  }
+  .rock h3 {
+    padding: 30px 0 15px 0;
+    word-wrap: break-all;
+  }
+
+  .rock p {
+    padding-bottom: 25px;
+    margin: 0 40px 0 40px;
+  }
+  .rock button {
+    color: rgb(19, 235, 19);
+    padding: 10px;
+    right: 135px;
+    bottom: 30px;
+    background-color: grey;
+    box-shadow: 3px 3px 4px grey;
+    position: absolute;
+    border: 2px solid black;
+  }
+  .rock button:hover {
+    background-color: rgb(148, 147, 147);
+    box-shadow: 4px 4px 4px rgb(109, 108, 108);
+  }
+
+  .rock img {
+    position: relative;
+  }
+}
