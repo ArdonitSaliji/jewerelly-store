@@ -2,7 +2,7 @@
 import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import './Signup.css'
-const Signup = ({ signup, setSignup }) => {
+const Signup = ({ signup, setSignup, setLogin }) => {
   return (
     <div className={signup ? 'signup-container active' : 'signup-container'}>
       <form className={signup ? 'login active' : 'login'}>
@@ -19,7 +19,14 @@ const Signup = ({ signup, setSignup }) => {
         </span>
         <div className='signup-acc'>
           <p>Have an account?</p>
-          <a>Login</a>
+          <a
+            onClick={() => {
+              setSignup(false)
+              setTimeout(() => setLogin(true), 300)
+            }}
+          >
+            Login
+          </a>
         </div>
       </form>
     </div>
