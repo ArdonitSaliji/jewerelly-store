@@ -2,6 +2,8 @@
 import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import './Login.css'
+import { Link } from 'react-router-dom'
+
 const Login = ({ login, setLogin, setSignup }) => {
   return (
     <div className={login ? 'login-container active' : 'login-container'}>
@@ -9,7 +11,7 @@ const Login = ({ login, setLogin, setSignup }) => {
         <AiOutlineClose onClick={() => setLogin(false)} className='login-x' />
         <h1 className='login-title'>Login</h1>
         <div className='login-inputs'>
-          <input type='text' placeholder='Phone number, username or email ' required />
+          <input type='text' placeholder='Phone number or email' required />
           <input type='password' placeholder='Password' required />
         </div>
         <button className='login-btn'>Login</button>
@@ -26,7 +28,9 @@ const Login = ({ login, setLogin, setSignup }) => {
         >
           Create new account
         </button>
-        <a>Forgot password?</a>
+        <Link onClick={() => setLogin(false)} to={'/reset-password'}>
+          Forgot password?
+        </Link>
       </form>
     </div>
   )

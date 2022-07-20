@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Navbar.css'
 const Navbar = ({ setLogin, setSignup }) => {
   return (
@@ -17,7 +18,7 @@ const Navbar = ({ setLogin, setSignup }) => {
 
         <ul>
           <li>
-            <a href=''>Home</a>
+            <Link to='/'>Home</Link>
           </li>
           <li>
             <a href=''>Prices</a>

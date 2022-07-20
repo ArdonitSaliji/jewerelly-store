@@ -5,15 +5,15 @@ import './Signup.css'
 const Signup = ({ signup, setSignup, setLogin }) => {
   return (
     <div className={signup ? 'signup-container active' : 'signup-container'}>
-      <form className={signup ? 'login active' : 'login'}>
+      <form className={signup ? 'signup active' : 'signup'}>
         <AiOutlineClose onClick={() => setSignup(false)} className='signup-x' />
-        <h1 className='signup-title'>Signup</h1>
+        <h1 className='signup-title'>Sign up</h1>
         <div className='signup-inputs'>
-          <input type='text' placeholder='Mobile Number or Email' required />
+          <input type='text' placeholder='Phone Number or Email' required />
           <input type='password' placeholder='Full Name' required />
           <input type='password' placeholder='Password' required />
         </div>
-        <button className='signup-btn'>Signup</button>
+        <button className='signup-btn'>Sign up</button>
         <span>
           <hr /> <p>OR</p> <hr />
         </span>

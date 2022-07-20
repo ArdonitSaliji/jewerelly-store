@@ -70,10 +70,9 @@
   border-radius: 10px;
   width: 80%;
 }
-/* .signup-btn:active {
-  } */
+
 .signup span {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -81,7 +80,7 @@
 }
 .signup hr {
   border: 1px solid rgb(61, 61, 61);
-  width: 8rem;
+  width: 10rem;
   height: 1px;
   text-align: center;
 }
@@ -98,7 +97,7 @@
 }
 .signup-acc {
   font-size: 18px;
-  margin-right: 1.5rem;
+  margin-top: 0.4rem;
   height: 3rem;
   display: flex;
   flex-direction: row;
@@ -106,10 +105,11 @@
   align-items: center;
 }
 .signup-acc p {
-  margin: 0 5px 0 0;
+  margin: 0 8px 0 0;
   color: #000;
 }
 .signup-acc a {
+  color: blue;
+  cursor: pointer;
   width: 3rem;
-  margin: 0;
 }
