@@ -4,6 +4,9 @@
 ::-webkit-scrollbar {
   display: none;
 }
+body {
+  caret-color: rgba(0, 0, 0, 0);
+}
 .rocks {
   display: flex;
   justify-content: center;
@@ -26,10 +29,10 @@
   display: inline-block;
   text-align: center;
   border: 3px solid grey;
+  transition: var(--transition);
 }
 .rock:hover {
   background-color: green;
-  transition: var(--transition);
 }
 .rock h3 {
   margin: 20px 0;
