@@ -6,6 +6,7 @@ import Login from './components/Popups/Login/Login.jsx'
 import Signup from './components/Popups/Signup/Signup.jsx'
 import Forgot from './components/Forgot/Forgot.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import TradeItem from './components/Popups/TradeItem/TradeItem.jsx'
 
 function App() {
   const [login, setLogin] = useState(false)
@@ -15,7 +16,7 @@ function App() {
     <BrowserRouter>
       <Navbar setLogin={setLogin} setSignup={setSignup} />
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<TradeItem />} />
         <Route
           path='/reset-password'
           element={<Forgot setSignup={setSignup} setLogin={setLogin} />}
