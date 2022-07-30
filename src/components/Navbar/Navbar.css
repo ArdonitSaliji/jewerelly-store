@@ -6,6 +6,7 @@
   text-decoration: none;
 }
 .navbar {
+  user-select: none;
   height: 7.5rem;
   display: flex;
   justify-content: space-between;

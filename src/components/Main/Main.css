@@ -4,10 +4,8 @@
 ::-webkit-scrollbar {
   display: none;
 }
-body {
-  caret-color: rgba(0, 0, 0, 0);
-}
 .rocks {
+  user-select: none;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -50,8 +48,7 @@ body {
   bottom: 5%;
   border: none;
   border-radius: 5px;
-  width: 8rem;
-  height: 2rem;
+  padding: 7px 30px;
   color: rgb(19, 235, 19);
   background-color: grey;
 }

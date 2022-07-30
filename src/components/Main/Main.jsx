@@ -2,7 +2,7 @@ import React from 'react'
 import './Main.css'
 import data from './data'
 const Main = () => {
-  const allGems = data.map(({ id, title, image, text }) => (
+  const allGems = data.map(({ title, image, text }) => (
     <div className='rock'>
       <h3>{title}</h3>
       <img src={image} alt='' />
