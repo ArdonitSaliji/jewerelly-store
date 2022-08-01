@@ -11,7 +11,7 @@
 }
 .trade {
   user-select: none;
-  width: 65%;
+  width: 40%;
   height: 80%;
   background-color: grey;
   border-radius: 5px;
@@ -25,11 +25,17 @@
 }
 
 .trade-options a {
-  width: 50%;
+  transition: width 1s;
   color: white;
   font-size: 25px;
   display: inline-block;
   padding: 7px 20px;
+}
+
+.trade-options a.active {
+  transition: width 1s;
+  width: 90%;
+  background-color: green;
 }
 .trade-options a:nth-child(1) {
   border-right: 1px solid white;
@@ -47,6 +53,7 @@
 }
 .trade-image img {
   margin-top: 1rem;
+  border-radius: 25%;
   background-color: #fff;
 }
 
@@ -87,9 +94,14 @@
   color: white;
   font-weight: 500;
   top: -80px;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease-in-out;
   line-height: 55px;
   z-index: 3;
+}
+.trade-slider-value span.show {
+  transform: translateX(-50%) scale(1);
 }
 .trade-slider-value span::after {
   content: '';

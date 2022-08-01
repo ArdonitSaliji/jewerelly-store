@@ -3,20 +3,31 @@ import React, { useRef, useState } from 'react'
 import './TradeItem.css'
 
 const TradeItem = () => {
+  const [spanValue, setSpanValue] = useState(1)
+  const [optionState, setOptionState] = useState(true)
   const inputRef = useRef()
   const spanRef = useRef()
-  const [spanValue, setSpanValue] = useState(1)
   const inputChangedHandler = () => {
+    spanRef.current.classList.add('show')
     setSpanValue(inputRef.current.value)
     spanRef.current.style.left = 5 + spanValue * 8 + '%'
   }
-  console.log(spanRef.current)
+  const hideInput = () => {
+    spanRef.current.classList.remove('show')
+  }
+  const switchOption = () => {
+    setOptionState((prev) => !prev)
+  }
   return (
     <div className='trade-container'>
       <div className='trade'>
         <div className='trade-options'>
-          <a>Buy</a>
-          <a>Sell</a>
+          <a onClick={switchOption} className={optionState && 'active'}>
+            Buy
+          </a>
+          <a onClick={switchOption} className={!optionState && 'active'}>
+            Sell
+          </a>
         </div>
         <div className='trade-image'>
           <h2>Citrine</h2>
@@ -33,6 +44,7 @@ const TradeItem = () => {
               ref={inputRef}
               type='range'
               onChange={(e) => inputChangedHandler(e)}
+              onBlur={hideInput}
               defaultValue='1'
               min='1'
               max='10'
