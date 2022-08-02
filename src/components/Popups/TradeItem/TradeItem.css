@@ -1,5 +1,6 @@
 :root {
-  --swiper-theme-color: #2f2 !important;
+  --swiper-theme-color: rgb(249, 182, 91, 0.8) !important;
+  --trade-color-o: white;
 }
 .trade-container {
   width: 100%;
@@ -10,40 +11,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  z-index: 2;
 }
 .trade {
   user-select: none;
   width: 40%;
-  height: 80%;
+  height: 76%;
+  max-height: auto;
   background-color: grey;
   border-radius: 5px;
   position: absolute;
-}
-.trade-options {
-  display: flex;
-  border-bottom: 1px solid white;
-  width: 100%;
-  text-align: center;
-}
-
-.trade-options a {
-  transition: width 1s ease;
-  width: 5rem;
-  color: white;
-  font-size: 25px;
-  display: inline-block;
-  padding: 7px 20px;
-}
-
-.trade-options a:nth-child(1) {
-  border-right: 1px solid white;
-}
-.trade-options a:hover {
-  color: white;
-  background-color: green;
-  transition: var(--transition);
-  cursor: pointer;
 }
 .trade-image {
   width: 100%;
@@ -51,45 +28,51 @@
   margin-top: 1rem;
 }
 .trade-image img {
-  margin-top: 1rem;
+  margin: 2rem 0 1.5rem;
   border-radius: 25%;
   background-color: #fff;
 }
 
-.trade-quantity {
-  width: 100%;
+.trade-price {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  margin-top: 1rem;
+}
+.trade-price h2 {
+  width: 40%;
+  color: black;
+  font-size: 22px;
+  outline: 1px solid white;
+  border-bottom: none;
 }
 
-.trade-form {
-  margin: 1rem 0;
+.trade-shape {
+  margin: 2.7rem 0 1rem;
   width: 100%;
 }
-.trade-form ul {
+
+.trade-shape ul {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.trade-form ul li {
-  padding: 8px 20px;
+.trade-shape ul li {
+  padding: 0.5rem 1.3rem;
+  color: black;
   outline: 1px solid black;
   margin: 0 10px;
   border-radius: 10px;
-  background-color: rgb(175, 175, 175);
+  background: var(--trade-color-o);
 }
-.trade-form ul li:hover {
+.trade-shape ul li:hover {
   cursor: pointer;
 }
-.trade-form ul li:active {
+.trade-shape ul li:active {
   background-color: transparent;
 }
 
 .trade-size {
-  margin: 1rem 0;
+  margin: 2rem 0 1rem;
   width: 100%;
 }
 .trade-size ul {
@@ -98,11 +81,12 @@
   align-items: center;
 }
 .trade-size ul li {
-  padding: 8px 20px;
+  color: black;
+  padding: 0.5rem 1rem;
   outline: 1px solid black;
   margin: 0 10px;
   border-radius: 10px;
-  background-color: rgb(243, 145, 27);
+  background: var(--trade-color-o);
 }
 .trade-size ul li:hover {
   cursor: pointer;
@@ -111,73 +95,24 @@
   background-color: transparent;
 }
 
-.trade-slider {
-  margin-top: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 3rem;
-  width: 17.5rem;
-  background-color: white;
-  border-radius: 5px;
-  z-index: 5;
-  position: relative;
-}
-.trade-slider-value {
+.trade-cart-btns {
   position: absolute;
-  width: 100%;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 7rem;
+  text-align: center;
 }
-.trade-val.left {
-  margin-right: 5px;
-}
-.trade-val.right {
-  margin-left: 5px;
+.trade-cart-btns button {
+  padding: 10px 30px;
+  margin: 0 10px;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  text-shadow: 0px 0px 3px black;
+  cursor: pointer;
 }
 
-.trade-slider-value span {
-  position: absolute;
-  height: 45px;
-  width: 45px;
-  color: white;
-  font-weight: 500;
-  top: -80px;
-  transform: translateX(-50%) scale(0);
-  transform-origin: bottom;
-  transition: transform 0.3s ease-in-out;
-  line-height: 55px;
-  z-index: 3;
-}
-.trade-slider-value span.show {
-  transform: translateX(-50%) scale(1);
-}
-.trade-slider-value span::after {
-  content: '';
-  position: absolute;
-  height: 45px;
-  width: 45px;
-  background: green;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  border: 3px solid #fff;
-  z-index: -1;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 50%;
-}
-.trade-slide {
-  -webkit-appearance: none;
-  background: #ddd;
-  width: 13rem;
-  height: 3px;
-  border-radius: 5px;
-  outline: none;
-}
-.trade-slide::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 19px;
-  width: 19px;
-  background-color: green;
-  border-radius: 50%;
-  border: 1px solid green;
-  cursor: pointer;
+.trade-cart-btns button:active {
+  background-color: rgb(1, 103, 1);
 }
