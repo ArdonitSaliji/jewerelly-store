@@ -1,3 +1,6 @@
+:root {
+  --swiper-theme-color: #2f2 !important;
+}
 .trade-container {
   width: 100%;
   height: 100vh;
@@ -25,18 +28,14 @@
 }
 
 .trade-options a {
-  transition: width 1s;
+  transition: width 1s ease;
+  width: 5rem;
   color: white;
   font-size: 25px;
   display: inline-block;
   padding: 7px 20px;
 }
 
-.trade-options a.active {
-  transition: width 1s;
-  width: 90%;
-  background-color: green;
-}
 .trade-options a:nth-child(1) {
   border-right: 1px solid white;
 }
@@ -61,11 +60,59 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   text-align: center;
 }
+
+.trade-form {
+  margin: 1rem 0;
+  width: 100%;
+}
+.trade-form ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.trade-form ul li {
+  padding: 8px 20px;
+  outline: 1px solid black;
+  margin: 0 10px;
+  border-radius: 10px;
+  background-color: rgb(175, 175, 175);
+}
+.trade-form ul li:hover {
+  cursor: pointer;
+}
+.trade-form ul li:active {
+  background-color: transparent;
+}
+
+.trade-size {
+  margin: 1rem 0;
+  width: 100%;
+}
+.trade-size ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.trade-size ul li {
+  padding: 8px 20px;
+  outline: 1px solid black;
+  margin: 0 10px;
+  border-radius: 10px;
+  background-color: rgb(243, 145, 27);
+}
+.trade-size ul li:hover {
+  cursor: pointer;
+}
+.trade-size ul li:active {
+  background-color: transparent;
+}
+
 .trade-slider {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
