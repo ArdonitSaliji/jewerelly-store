@@ -11,12 +11,13 @@ import TradeItem from './components/Popups/TradeItem/TradeItem.jsx'
 function App() {
   const [login, setLogin] = useState(false)
   const [signup, setSignup] = useState(false)
+  const [trade, setTrade] = useState(false)
 
   return (
     <BrowserRouter>
       <Navbar setLogin={setLogin} setSignup={setSignup} />
       <Routes>
-        <Route path='/' element={<TradeItem />} />
+        <Route path='/' element={<Main trade={trade} setTrade={setTrade} />} />
         <Route
           path='/reset-password'
           element={<Forgot setSignup={setSignup} setLogin={setLogin} />}
@@ -25,6 +26,7 @@ function App() {
 
       <Login login={login} setLogin={setLogin} setSignup={setSignup} />
       <Signup setLogin={setLogin} signup={signup} setSignup={setSignup} />
+      {trade && <TradeItem setTrade={setTrade} />}
       <Footer />
     </BrowserRouter>
   )

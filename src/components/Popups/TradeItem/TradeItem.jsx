@@ -1,14 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, A11y } from 'swiper'
+import { AiOutlineClose } from 'react-icons/ai'
 import './TradeItem.css'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
 import { trade } from './trade'
-const TradeItem = () => {
+
+const TradeItem = ({ setTrade }) => {
+  const [shapeState, setShapeState] = useState('Oval')
+  const switchShape = (e) => {
+    e.target.textContent !== shapeState && setShapeState(e.target.textContent)
+  }
+  const tradeItems = trade.map(
+    ({ citrine: { image, size, price, shape } }) =>
+      shape === shapeState && (
+        <SwiperSlide>
+          <img src={image} alt='' />
+          <div className='trade-price'>
+            <h2>{size}</h2>
+            <h2>{price}</h2>
+          </div>
+        </SwiperSlide>
+      )
+  )
   return (
     <div className='trade-container'>
       <div className='trade'>
@@ -20,15 +36,7 @@ const TradeItem = () => {
             slidesPerView={1}
             navigation
           >
-            {trade.map(({ image, size, price }) => (
-              <SwiperSlide>
-                <img src={image} alt='' />
-                <div className='trade-price'>
-                  <h2>{size}</h2>
-                  <h2>{price}</h2>
-                </div>
-              </SwiperSlide>
-            ))}
+            {tradeItems}
           </Swiper>
 
           <hr className='the-SEPARATOR' />
@@ -36,12 +44,12 @@ const TradeItem = () => {
 
         <div className='trade-shape'>
           <ul>
-            <li>Oval</li>
-            <li>Heart</li>
-            <li>Round</li>
-            <li>Octagon</li>
-            <li>Trillion</li>
-            <li>Pear</li>
+            <li onClick={(e) => switchShape(e)}>Oval</li>
+            <li onClick={(e) => switchShape(e)}>Heart</li>
+            <li onClick={(e) => switchShape(e)}>Round</li>
+            <li onClick={(e) => switchShape(e)}>Octagon</li>
+            <li onClick={(e) => switchShape(e)}>Trillion</li>
+            <li onClick={(e) => switchShape(e)}>Pear</li>
           </ul>
         </div>
 
@@ -58,8 +66,9 @@ const TradeItem = () => {
 
         <div className='trade-cart-btns'>
           <button>Add to Cart</button>
-          <button>Cancel</button>
+          <button>Buy Now</button>
         </div>
+        <AiOutlineClose className='x' onClick={() => setTrade(false)} />
       </div>
     </div>
   )

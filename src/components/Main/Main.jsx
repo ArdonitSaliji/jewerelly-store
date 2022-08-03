@@ -1,15 +1,21 @@
 import React from 'react'
 import './Main.css'
 import data from './data'
-const Main = () => {
+const Main = ({ trade, setTrade }) => {
+  const switchTrade = (e) => {
+    console.log(e.target.children[0])
+  }
   const allGems = data.map(({ title, image, text }) => (
-    <div className='rock'>
+    <div
+      className='rock'
+      onClick={(e) => {
+        setTrade(true)
+        switchTrade(e)
+      }}
+    >
       <h3>{title}</h3>
       <img src={image} alt='' />
       <p>{text}</p>
-      <button type='button' className='rock-btn'>
-        Trade
-      </button>
     </div>
   ))
   return (

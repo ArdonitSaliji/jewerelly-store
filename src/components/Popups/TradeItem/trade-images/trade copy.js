@@ -46,9 +46,9 @@ export const trade = [
     ],
     Amethyst: [
       {
-        image: require('./trade-images/ame.jpg'),
-        size: '6.0 x 4.0 mm',
-        price: '$18.62',
+        image: require('./trade-images/citrine.png'),
+        size: '6.2 x 3.9 mm',
+        price: '$4.62',
         shape: 'Oval',
       },
     ],
