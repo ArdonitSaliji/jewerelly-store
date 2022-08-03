@@ -1,7 +1,8 @@
 :root {
-  --swiper-theme-color: rgb(249, 182, 91, 0.8) !important;
+  --swiper-theme-color: #000 !important;
   --trade-color-o: white;
 }
+
 .x {
   position: absolute;
   right: 2rem;
@@ -9,6 +10,11 @@
   top: 1rem;
   font-size: 32px;
 }
+
+.active-shape {
+  background-color: grey;
+}
+
 .trade-container {
   width: 100%;
   height: 100vh;
@@ -20,9 +26,10 @@
   align-items: center;
   z-index: 2;
 }
+
 .trade {
   user-select: none;
-  width: 40%;
+  width: 41%;
   height: 76%;
   max-height: auto;
   background-color: grey;
@@ -30,13 +37,16 @@
   position: absolute;
   outline: 1px solid black;
 }
+
 .trade-image {
   width: 100%;
   text-align: center;
   margin-top: 1rem;
 }
+
 .trade-image img {
   margin: 2rem 0 1.5rem;
+  height: 13rem;
   border-radius: 25%;
   background-color: #fff;
 }
@@ -46,6 +56,7 @@
   justify-content: center;
   margin-top: 1rem;
 }
+
 .trade-price h2 {
   width: 40%;
   color: black;
@@ -53,66 +64,58 @@
   outline: 1px solid white;
   border-bottom: none;
 }
-
-.trade-shape {
-  margin: 2.7rem 0 1rem;
-  width: 100%;
+.the-SEPARATOR {
+  margin-bottom: 2.5rem;
+}
+.trade-buttons {
+  margin: 1.7rem 0 1rem;
 }
 
-.trade-shape ul {
+.trade-buttons ul {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.trade-shape ul li {
-  padding: 0.5rem 1.3rem;
-  color: black;
+
+.trade-buttons ul li {
   outline: 1px solid black;
   margin: 0 10px;
-  border-radius: 10px;
+  border-radius: 7px;
   background: var(--trade-color-o);
-}
-.trade-shape ul li:hover {
-  cursor: pointer;
-}
-.trade-shape ul li:active {
-  background-color: transparent;
-}
-
-.trade-size {
-  margin: 2rem 0 1rem;
-  width: 100%;
-}
-.trade-size ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.trade-size ul li {
   color: black;
-  padding: 0.5rem 1rem;
-  outline: 1px solid black;
-  margin: 0 10px;
-  border-radius: 10px;
-  background: var(--trade-color-o);
-}
-.trade-size ul li:hover {
-  cursor: pointer;
-}
-.trade-size ul li:active {
-  background-color: transparent;
-}
-
-.trade-cart-btns {
-  position: absolute;
-  bottom: 7%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 7rem;
   text-align: center;
 }
-.trade-cart-btns button {
-  padding: 10px 30px;
+
+.trade-buttons.shape ul li {
+  width: 5rem;
+  height: 2rem;
+  padding-top: 7px;
+}
+
+.trade-buttons.size ul li {
+  padding: 0.5rem 1rem;
+}
+
+.trade-buttons ul li:active {
+  background-color: transparent;
+}
+
+.trade-buttons ul li:hover {
+  cursor: pointer;
+}
+
+.trade-cart {
+  position: absolute;
+  display: flex;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.trade-cart button {
+  width: 9rem;
+  height: 2.5rem;
   margin: 0 10px;
   border-radius: 5px;
   background-color: green;
@@ -121,6 +124,6 @@
   cursor: pointer;
 }
 
-.trade-cart-btns button:active {
+.trade-cart button:active {
   background-color: rgb(1, 103, 1);
 }

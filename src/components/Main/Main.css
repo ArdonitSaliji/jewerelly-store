@@ -11,7 +11,7 @@
   flex-wrap: wrap;
   text-align: center;
   padding: 1.5rem 0 4rem;
-  margin: 1rem 15rem 0;
+  margin: 1rem 10rem 0;
   gap: 2rem;
 }
 .main-title {
@@ -35,9 +35,11 @@
   background-color: green;
 }
 .rock h3 {
+  pointer-events: none;
   margin: 20px 0;
 }
 .rock p {
+  pointer-events: none;
   z-index: -5;
   font-size: 15px;
   margin: 0 25px;
@@ -61,6 +63,7 @@
 }
 
 .rock img {
+  pointer-events: none;
   border-radius: 50%;
   width: 125px;
   height: 125px;

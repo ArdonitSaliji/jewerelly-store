@@ -1,12 +1,13 @@
 import React from 'react'
 import './Main.css'
 import data from './data'
-const Main = ({ trade, setTrade }) => {
+const Main = ({ setTrade, setGemState }) => {
   const switchTrade = (e) => {
-    console.log(e.target.children[0])
+    setGemState(e.target.firstElementChild.textContent.toLowerCase())
   }
-  const allGems = data.map(({ title, image, text }) => (
+  const allGems = data.map(({ title, image, text }, index) => (
     <div
+      key={index}
       className='rock'
       onClick={(e) => {
         setTrade(true)
