@@ -16,12 +16,6 @@ export const trade = [
         shape: 'Oval',
       },
       {
-        image: require('./trade-images/cit3.jpg'),
-        size: '4.3 x 5.6 mm',
-        price: '$8.62',
-        shape: 'Trillion',
-      },
-      {
         image: require('./trade-images/sold.jpg'),
         size: '-',
         price: '-',
@@ -39,6 +33,12 @@ export const trade = [
         size: '3.5 x 5.4 mm',
         price: '$13.25',
         shape: 'Octagon',
+      },
+      {
+        image: require('./trade-images/cit3.jpg'),
+        size: '4.3 x 5.6 mm',
+        price: '$8.62',
+        shape: 'Trillion',
       },
       {
         image: require('./trade-images/citrine-p.jpg'),
@@ -61,16 +61,16 @@ export const trade = [
         shape: 'Heart',
       },
       {
-        image: require('./trade-images/sold.jpg'),
-        size: '-',
-        price: '-',
-        shape: 'Octagon',
-      },
-      {
         image: require('./trade-images/diamond2.jpg'),
         size: '8.0 x 8.0 mm',
         price: '$5900',
         shape: 'Round',
+      },
+      {
+        image: require('./trade-images/sold.jpg'),
+        size: '-',
+        price: '-',
+        shape: 'Octagon',
       },
       {
         image: require('./trade-images/sold.jpg'),
@@ -100,16 +100,16 @@ export const trade = [
         shape: 'Heart',
       },
       {
-        image: require('./trade-images/sold.jpg'),
-        size: '-',
-        price: '-',
-        shape: 'Octagon',
-      },
-      {
         image: require('./trade-images/diamond2.jpg'),
         size: '8.0 x 8.0 mm',
         price: '$5900',
         shape: 'Round',
+      },
+      {
+        image: require('./trade-images/sold.jpg'),
+        size: '-',
+        price: '-',
+        shape: 'Octagon',
       },
       {
         image: require('./trade-images/sold.jpg'),
@@ -141,13 +141,13 @@ export const trade = [
         image: require('./trade-images/sold.jpg'),
         size: '-',
         price: '-',
-        shape: 'Octagon',
+        shape: 'Round',
       },
       {
         image: require('./trade-images/sold.jpg'),
         size: '-',
         price: '-',
-        shape: 'Round',
+        shape: 'Octagon',
       },
       {
         image: require('./trade-images/sold.jpg'),
