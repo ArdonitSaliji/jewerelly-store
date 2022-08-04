@@ -12,8 +12,8 @@ const TradeItem = ({ setTrade, gemState }) => {
   const [shapeState, setShapeState] = useState('oval')
   let check = new Set()
   const removedDuplicates = trade[0][gemState]
-    .filter((gem) => !check.has(gem['shape']) && check.add(gem['shape']))
-    .map((image) => image.image === require('./trade-images/sold.jpg'))
+    ?.filter((gem) => !check.has(gem['shape']) && check.add(gem['shape']))
+    ?.map((image) => image.image === require('./trade-images/sold.jpg'))
 
   const changeShape = (e) => {
     setShapeState(e.target.textContent.toLowerCase())
@@ -21,7 +21,7 @@ const TradeItem = ({ setTrade, gemState }) => {
   const shapes = trade[0].shapes.map((shape, index) => {
     return (
       <li
-        className={removedDuplicates[index] ? 'sold' : 'not-sold'}
+        className={removedDuplicates ? (removedDuplicates[index] ? 'sold' : 'not-sold') : 'sold'}
         key={index}
         onClick={(e) => changeShape(e)}
       >
