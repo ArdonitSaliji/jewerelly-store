@@ -1,7 +1,7 @@
 export const trade = [
   {
     shapes: ['Oval', 'Heart', 'Round', 'Octagon', 'Trillion', 'Pear'],
-
+    sizes: ['4 - 6 mm', '6 - 8 mm', '8 - 10 mm', '10 - 12 mm', '12 - 15 mm', '15 - 20 mm'],
     citrine: [
       {
         image: require('./trade-images/citrine.png'),

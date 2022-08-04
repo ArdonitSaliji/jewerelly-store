@@ -10,12 +10,21 @@ import { trade } from './trade'
 
 const TradeItem = ({ setTrade, gemState }) => {
   const [shapeState, setShapeState] = useState('oval')
-
+  trade[0][gemState].filter((gem) => gem)
   const changeShape = (e) => {
     setShapeState(e.target.textContent.toLowerCase())
   }
 
-  trade[0][gemState]?.map((gem) => gem)
+  const shapes = trade[0].shapes.map((shape, index) => (
+    <li key={index} onClick={(e) => changeShape(e)}>
+      {shape}
+    </li>
+  ))
+  const sizes = trade[0].sizes.map((size, index) => (
+    <li key={index} onClick={(e) => changeShape(e)}>
+      {size}
+    </li>
+  ))
   const tradeItems = trade[0][gemState]?.map(
     ({ image, size = '-', price = '-', shape }, index) =>
       shape.toLowerCase() === shapeState && (
@@ -56,25 +65,11 @@ const TradeItem = ({ setTrade, gemState }) => {
         </div>
 
         <div className='trade-buttons shape'>
-          <ul>
-            <li onClick={(e) => changeShape(e)}>Oval</li>
-            <li onClick={(e) => changeShape(e)}>Heart</li>
-            <li onClick={(e) => changeShape(e)}>Round</li>
-            <li onClick={(e) => changeShape(e)}>Octagon</li>
-            <li onClick={(e) => changeShape(e)}>Trillion</li>
-            <li onClick={(e) => changeShape(e)}>Pear</li>
-          </ul>
+          <ul>{shapes}</ul>
         </div>
 
         <div className='trade-buttons size'>
-          <ul>
-            <li>4 - 6 mm</li>
-            <li>6 - 8 mm</li>
-            <li>8 - 10 mm</li>
-            <li>10 - 12 mm</li>
-            <li>12 - 15 mm</li>
-            <li>15 - 20 mm</li>
-          </ul>
+          <ul>{sizes}</ul>
         </div>
 
         <div className='trade-cart'>
