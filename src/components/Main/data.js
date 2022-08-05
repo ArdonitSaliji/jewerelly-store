@@ -1,4 +1,4 @@
-const data = [
+export const data = [
   {
     title: 'Sapphire',
     image: require('../../images/sapphire.jpg'),
@@ -61,5 +61,12 @@ const data = [
     text: 'Rubies are a form of the mineral corundum. The deep red color of a good quality Ruby is heartwarming and uplifting to look upon. You can feel the vigor of the energies of this remarkable stone as soon as you touch it or have it near you.',
   },
 ]
-
-export default data
+export const listing = [
+  'Default Listings',
+  'Price - High To Low',
+  'Price - Low To High',
+  'Gemstones - A to Z',
+  'Gemstones - Z to A',
+  'Size - Largest To Smallest',
+  'Size - Smallest To Largest',
+]

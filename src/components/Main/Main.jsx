@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Main.css'
-import data from './data'
+import { data, listing } from './data'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 const Main = ({ setTrade, setGemState }) => {
+  const [searchState, setSearchState] = useState()
   const switchTrade = (e) => {
     setGemState(e.target.firstElementChild.textContent.toLowerCase())
   }
@@ -21,6 +22,7 @@ const Main = ({ setTrade, setGemState }) => {
       <p>{text}</p>
     </div>
   ))
+
   return (
     <div className='main' style={{ margin: '0 15rem', userSelect: 'none' }}>
       <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
@@ -30,23 +32,29 @@ const Main = ({ setTrade, setGemState }) => {
       <div className='main-search'>
         <div className='search'>
           <AiOutlineSearch style={{ fontSize: '22px', marginLeft: '0.5rem' }} />
-          <input type='text' placeholder='Search...' />
+          <input
+            onChange={(e) => setSearchState(e.target.value)}
+            type='text'
+            placeholder='Search...'
+          />
         </div>
         <div className='filter'>
           <label style={{ fontSize: '20px', marginRight: '0.5rem' }}>Sort by: </label>
           <select>
-            <option value=''>Default Listings</option>
-            <option value=''>Price - High To Low</option>
-            <option value=''>Price - Low To High</option>
-            <option value=''>Gemstones - A to Z</option>
-            <option value=''>Gemstones - Z to A</option>
-            <option value=''>Size - Largest To Smallest</option>
-            <option value=''>Size - Smallest To Largest</option>
+            {listing.map((value, i) => (
+              <option key={i}>{value}</option>
+            ))}
           </select>
         </div>
       </div>
-
-      <div className='gems'>{allGems}</div>
+      {console.log(allGems)}
+      <div className='gems'>
+        {searchState
+          ? allGems.filter(({ props: { children } }) =>
+              children[0].props.children.includes(searchState)
+            )
+          : allGems}
+      </div>
     </div>
   )
 }

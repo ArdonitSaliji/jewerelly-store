@@ -27,13 +27,14 @@ select,
 }
 .search {
   background-color: rgb(171, 171, 171);
-  width: 48rem;
   border-radius: 5px;
   align-items: center;
   margin-bottom: 1rem;
 }
 .search input {
   user-select: none;
+  width: 48rem;
+
   height: 2rem;
   color: white;
   background-color: rgb(171, 171, 171);
