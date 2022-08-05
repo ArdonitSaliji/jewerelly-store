@@ -1,49 +1,40 @@
-:root {
-  --transition: 400ms all ease-in;
-}
 ::-webkit-scrollbar {
   display: none;
 }
-.gems {
-  user-select: none;
+.filter option,
+select,
+.gem p,
+.search input {
+  font-size: 15px;
+}
+.gems,
+.main-search,
+.search {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+}
+.gems {
+  justify-content: center;
   text-align: center;
   padding: 1.5rem 0 4rem;
-  margin: 1rem 15rem 0;
+  margin-top: 1rem;
   gap: 2rem;
 }
-.main-title {
-  text-align: center;
-  margin-top: 2rem;
-}
-.main-title h1 {
-  font-size: 30px;
-}
 .main-search {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin: 1.5rem 25rem 0;
+  margin: 2rem 10rem 0;
 }
 .search {
   background-color: rgb(171, 171, 171);
-  display: flex;
+  width: 48rem;
   border-radius: 5px;
   align-items: center;
   margin-bottom: 1rem;
 }
-.search-icon {
-  font-size: 22px;
-  margin-left: 0.5rem;
-}
 .search input {
   user-select: none;
   height: 2rem;
-  font-size: 15px;
-  width: 50rem;
   color: white;
   background-color: rgb(171, 171, 171);
   border-radius: 5px;
@@ -56,17 +47,13 @@
 .search input:focus {
   outline: none;
 }
-
 .filter select {
+  cursor: pointer;
   border-radius: 5px;
   height: 2rem;
   margin-bottom: 1rem;
   margin-right: 1rem;
   background-color: rgb(171, 171, 171);
-}
-.filter label {
-  font-size: 20px;
-  margin-right: 0.5rem;
 }
 .gem {
   z-index: 2;
@@ -78,19 +65,19 @@
   display: inline-block;
   text-align: center;
   border: 3px solid grey;
-  transition: var(--transition);
+  transition: 400ms all ease-in;
+}
+.gem > * {
+  pointer-events: none;
 }
 .gem:hover {
   background-color: green;
 }
 .gem h3 {
-  pointer-events: none;
   margin: 20px 0;
 }
 .gem p {
-  pointer-events: none;
   z-index: -5;
-  font-size: 15px;
   margin: 0 25px;
   margin-top: 1.5rem;
   text-align: center;
@@ -106,13 +93,7 @@
   color: rgb(19, 235, 19);
   background-color: grey;
 }
-.gem button:hover {
-  background-color: rgb(148, 147, 147);
-  cursor: pointer;
-}
-
 .gem img {
-  pointer-events: none;
   border-radius: 50%;
   width: 130px;
   height: 130px;

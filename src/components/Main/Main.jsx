@@ -22,19 +22,20 @@ const Main = ({ setTrade, setGemState }) => {
     </div>
   ))
   return (
-    <div>
-      <div className='main-title'>
+    <div className='main' style={{ margin: '0 15rem', userSelect: 'none' }}>
+      <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
         <h1>Trading rare gems and crystals has never been easier.</h1>
       </div>
 
       <div className='main-search'>
         <div className='search'>
-          <AiOutlineSearch className='search-icon' />
-          <input type='text' placeholder='Search gem...' />
+          <AiOutlineSearch style={{ fontSize: '22px', marginLeft: '0.5rem' }} />
+          <input type='text' placeholder='Search...' />
         </div>
         <div className='filter'>
-          <label>Sort by: </label>
+          <label style={{ fontSize: '20px', marginRight: '0.5rem' }}>Sort by: </label>
           <select>
+            <option value=''>Default Listings</option>
             <option value=''>Price - High To Low</option>
             <option value=''>Price - Low To High</option>
             <option value=''>Gemstones - A to Z</option>
