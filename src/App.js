@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar.jsx'
 import Main from './components/Main/Main.jsx'
@@ -30,7 +30,9 @@ function App() {
 
       <Login login={login} setLogin={setLogin} setSignup={setSignup} />
       <Signup setLogin={setLogin} signup={signup} setSignup={setSignup} />
+
       {trade && <TradeItem setTrade={setTrade} gemState={gemState} />}
+
       <Footer />
     </BrowserRouter>
   )

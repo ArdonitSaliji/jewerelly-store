@@ -4,7 +4,7 @@
 ::-webkit-scrollbar {
   display: none;
 }
-.rocks {
+.gems {
   user-select: none;
   display: flex;
   justify-content: center;
@@ -15,11 +15,60 @@
   gap: 2rem;
 }
 .main-title {
-  font-size: 30px;
   text-align: center;
-  margin-top: 0.8em;
+  margin-top: 2rem;
 }
-.rock {
+.main-title h1 {
+  font-size: 30px;
+}
+.main-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5rem 25rem 0;
+}
+.search {
+  background-color: rgb(171, 171, 171);
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.search-icon {
+  font-size: 22px;
+  margin-left: 0.5rem;
+}
+.search input {
+  user-select: none;
+  height: 2rem;
+  font-size: 15px;
+  width: 50rem;
+  color: white;
+  background-color: rgb(171, 171, 171);
+  border-radius: 5px;
+  border: none;
+  text-indent: 5px;
+}
+.search input::placeholder {
+  color: white;
+}
+.search input:focus {
+  outline: none;
+}
+
+.filter select {
+  border-radius: 5px;
+  height: 2rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  background-color: rgb(171, 171, 171);
+}
+.filter label {
+  font-size: 20px;
+  margin-right: 0.5rem;
+}
+.gem {
   z-index: 2;
   cursor: pointer;
   border-radius: 5px;
@@ -31,14 +80,14 @@
   border: 3px solid grey;
   transition: var(--transition);
 }
-.rock:hover {
+.gem:hover {
   background-color: green;
 }
-.rock h3 {
+.gem h3 {
   pointer-events: none;
   margin: 20px 0;
 }
-.rock p {
+.gem p {
   pointer-events: none;
   z-index: -5;
   font-size: 15px;
@@ -46,7 +95,7 @@
   margin-top: 1.5rem;
   text-align: center;
 }
-.rock-btn {
+.gem-btn {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -57,15 +106,15 @@
   color: rgb(19, 235, 19);
   background-color: grey;
 }
-.rock button:hover {
+.gem button:hover {
   background-color: rgb(148, 147, 147);
   cursor: pointer;
 }
 
-.rock img {
+.gem img {
   pointer-events: none;
   border-radius: 50%;
-  width: 125px;
-  height: 125px;
+  width: 130px;
+  height: 130px;
   position: relative;
 }
