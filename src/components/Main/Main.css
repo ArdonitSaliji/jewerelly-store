@@ -1,19 +1,20 @@
 ::-webkit-scrollbar {
   display: none;
 }
+.main {
+  min-height: 81.1vh;
+  height: 100%;
+}
 .filter option,
 select,
 .gem p,
 .search input {
   font-size: 15px;
 }
-.gems,
-.main-search,
-.search {
+
+.gems {
   display: flex;
   flex-wrap: wrap;
-}
-.gems {
   justify-content: center;
   text-align: center;
   padding: 1.5rem 0 4rem;
@@ -21,20 +22,25 @@ select,
   gap: 2rem;
 }
 .main-search {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   align-items: center;
-  justify-content: space-between;
-  margin: 2rem 10rem 0;
+  justify-content: center;
+  margin: 2rem 0 1rem 0;
 }
 .search {
+  display: flex;
   background-color: rgb(171, 171, 171);
   border-radius: 5px;
+  width: 48rem;
   align-items: center;
   margin-bottom: 1rem;
+  margin-right: 3rem;
 }
 .search input {
   user-select: none;
-  width: 48rem;
-
+  width: 100%;
   height: 2rem;
   color: white;
   background-color: rgb(171, 171, 171);
@@ -53,10 +59,11 @@ select,
   border-radius: 5px;
   height: 2rem;
   margin-bottom: 1rem;
-  margin-right: 1rem;
+  margin-right: 3rem;
   background-color: rgb(171, 171, 171);
 }
 .gem {
+  display: flex;
   z-index: 2;
   cursor: pointer;
   border-radius: 5px;

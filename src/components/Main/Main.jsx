@@ -24,7 +24,7 @@ const Main = ({ setTrade, setGemState }) => {
   ))
 
   return (
-    <div className='main' style={{ margin: '0 15rem', userSelect: 'none' }}>
+    <div className='main'>
       <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
         <h1>Trading rare gems and crystals has never been easier.</h1>
       </div>
@@ -48,7 +48,7 @@ const Main = ({ setTrade, setGemState }) => {
         </div>
       </div>
       {console.log(allGems)}
-      <div className='gems'>
+      <div className='gems' style={{ margin: '0 10rem', userSelect: 'none' }}>
         {searchState
           ? allGems.filter(({ props: { children } }) =>
               children[0].props.children.includes(searchState)

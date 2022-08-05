@@ -62,7 +62,7 @@ export const data = [
   },
 ]
 export const listing = [
-  'Default Listings',
+  'Random Listings',
   'Price - High To Low',
   'Price - Low To High',
   'Gemstones - A to Z',
