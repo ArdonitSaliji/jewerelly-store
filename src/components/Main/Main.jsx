@@ -47,7 +47,6 @@ const Main = ({ setTrade, setGemState }) => {
           </select>
         </div>
       </div>
-      {console.log(allGems)}
       <div className='gems' style={{ margin: '0 10rem', userSelect: 'none' }}>
         {searchState
           ? allGems.filter(({ props: { children } }) =>
