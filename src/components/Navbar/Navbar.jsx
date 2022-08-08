@@ -27,7 +27,7 @@ const Navbar = ({ setLogin, setSignup }) => {
             <a href=''>About us</a>
           </li>
           <li>
-            <a href=''>Basket</a>
+            <Link to='/basket'>Basket</Link>
           </li>
         </ul>
       </div>

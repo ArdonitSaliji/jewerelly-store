@@ -7,6 +7,7 @@ import Signup from './components/Popups/Signup/Signup.jsx'
 import Forgot from './components/ForgotPassword/ForgotPass.jsx'
 import TradeItem from './components/Popups/TradeItem/TradeItem.jsx'
 import './App.css'
+import Basket from './components/Basket/Basket.jsx'
 function App() {
   const [login, setLogin] = useState(false)
   const [signup, setSignup] = useState(false)
@@ -26,6 +27,7 @@ function App() {
             path='/reset-password'
             element={<Forgot setSignup={setSignup} setLogin={setLogin} />}
           />
+          <Route path='/basket' element={<Basket />} />
         </Routes>
 
         <Login login={login} setLogin={setLogin} setSignup={setSignup} />
