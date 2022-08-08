@@ -1,0 +1,26 @@
+.basket {
+  min-height: 81.1vh;
+  height: 100%;
+}
+.basket h2 {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.basket-items {
+  display: flex;
+  margin: 0 3rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.basket-item {
+  text-align: center;
+  padding: 10px;
+  background-color: green;
+  margin: 1rem;
+  width: 15rem;
+  height: 20rem;
+}
+.basket-item img {
+  width: 80%;
+  background-color: white;
+}

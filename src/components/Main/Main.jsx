@@ -50,7 +50,7 @@ const Main = ({ setTrade, setGemState }) => {
       <div className='gems' style={{ margin: '0 10rem', userSelect: 'none' }}>
         {searchState
           ? allGems.filter(({ props: { children } }) =>
-              children[0].props.children.includes(searchState)
+              children[0].props.children.toLowerCase().includes(searchState.toLowerCase())
             )
           : allGems}
       </div>
