@@ -7,7 +7,7 @@
 }
 .navbar {
   user-select: none;
-  height: 7.5rem;
+  height: 6.5rem;
   display: flex;
   justify-content: space-between;
   background-color: grey;
@@ -23,27 +23,28 @@
   height: 5rem;
   display: inline-block;
 }
-.nav-img h2 {
+.nav-img h3 {
   color: green;
   margin-left: 1rem;
 }
 
-.nav__items {
+.nav-items {
   font-size: 24px;
 }
 
-.nav__items-btns {
+.nav-items-btns {
   display: flex;
   justify-content: center;
   margin-right: 13%;
 }
-.nav__items-btns a {
+.nav-items-btns a {
+  font-size: 20px;
   cursor: pointer;
   color: white;
   text-decoration: none;
   display: flex;
-  height: 3rem;
-  width: 8rem;
+  height: 2.5rem;
+  width: 7.5rem;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -51,26 +52,26 @@
   border: 2px solid green;
 }
 
-.nav__items-btns a:hover {
+.nav-items-btns a:hover {
   background-color: green;
   transition: 0.6s;
 }
 
-.nav__items ul {
+.nav-items ul {
   display: flex;
   flex-direction: row;
 }
-.nav__items ul li {
-  margin-top: 13px;
+.nav-items ul li {
+  margin-top: 0.5rem;
   margin-right: 1.7rem;
   text-align: center;
 }
-.nav__items ul li a {
+.nav-items ul li a {
   width: 12rem;
-  font-size: 22px;
+  font-size: 20px;
   color: greenyellow;
 }
-.nav__items ul li a:last-child {
+.nav-items ul li a:last-child {
   margin-right: 25px;
 }
 .content h1 {

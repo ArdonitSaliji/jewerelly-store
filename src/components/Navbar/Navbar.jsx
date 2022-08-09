@@ -7,11 +7,11 @@ const Navbar = ({ setLogin, setSignup }) => {
     <div className='navbar'>
       <div className='nav-img'>
         <img src={require('../../images/logo2.jpg')} alt='' />
-        <h2>Jewellery Traders</h2>
+        <h3>Jewellery Traders</h3>
       </div>
 
-      <div className='nav__items'>
-        <div className='nav__items-btns'>
+      <div className='nav-items'>
+        <div className='nav-items-btns'>
           <a onClick={() => setLogin(true)}>Login</a>
           <a onClick={() => setSignup(true)}>Sign up</a>
         </div>

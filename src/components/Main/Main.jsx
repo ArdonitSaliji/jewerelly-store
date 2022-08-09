@@ -39,7 +39,7 @@ const Main = ({ setTrade, setGemState }) => {
           />
         </div>
         <div className='filter'>
-          <label style={{ fontSize: '20px', marginRight: '0.5rem' }}>Sort by: </label>
+          <label style={{ fontSize: '18px', marginRight: '0.5rem' }}>Sort by: </label>
           <select>
             {listing.map((value, i) => (
               <option key={i}>{value}</option>
@@ -47,7 +47,7 @@ const Main = ({ setTrade, setGemState }) => {
           </select>
         </div>
       </div>
-      <div className='gems' style={{ margin: '0 10rem', userSelect: 'none' }}>
+      <div className='gems-container' style={{ margin: '0 10rem', userSelect: 'none' }}>
         {searchState
           ? allGems.filter(({ props: { children } }) =>
               children[0].props.children.toLowerCase().includes(searchState.toLowerCase())

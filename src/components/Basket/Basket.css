@@ -1,6 +1,13 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .basket {
-  min-height: 81.1vh;
+  min-height: 82.8vh;
   height: 100%;
+  user-select: none;
 }
 .basket h2 {
   text-align: center;
@@ -13,14 +20,52 @@
   align-items: center;
 }
 .basket-item {
-  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  letter-spacing: 0.5px;
+  color: white;
   padding: 10px;
   background-color: green;
   margin: 1rem;
   width: 15rem;
   height: 20rem;
 }
+
 .basket-item img {
   width: 80%;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
   background-color: white;
+}
+.item-info {
+  margin-top: 0.2rem;
+  width: 10.5rem;
+}
+.item-info input {
+  text-indent: -2px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 16px;
+  border: none;
+  width: 2rem;
+}
+.basket-item p {
+  margin-top: 0.5rem;
+}
+
+.basket-item button {
+  background-color: white;
+  color: black;
+  padding: 4px 12px;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid black;
+  cursor: pointer;
+  margin-top: 1.3rem;
+}
+.basket-item button:active {
+  background-color: green;
 }
