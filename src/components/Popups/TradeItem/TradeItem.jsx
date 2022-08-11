@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, A11y } from 'swiper'
 import { AiOutlineClose } from 'react-icons/ai'
@@ -8,8 +8,12 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import { trade } from './trade'
 
-const TradeItem = ({ setTrade, gemState }) => {
+const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
   const [shapeState, setShapeState] = useState('oval')
+  const currentTitle = useRef()
+  const currentImage = useRef()
+  const currentPrice = useRef()
+  const currentSize = useRef()
   let check = new Set()
 
   const changeShape = (e) => {
@@ -37,10 +41,10 @@ const TradeItem = ({ setTrade, gemState }) => {
     ({ image, size = '-', price = '-', shape }, index) =>
       shape.toLowerCase() === shapeState && (
         <SwiperSlide key={index}>
-          <img src={image} alt='' />
+          <img src={image} ref={currentImage} alt='' />
           <div className='trade-price'>
-            <h2>{size}</h2>
-            <h2>{price}</h2>
+            <h2 ref={currentSize}>{size}</h2>
+            <h2 ref={currentPrice}>{price}</h2>
           </div>
         </SwiperSlide>
       )
@@ -49,7 +53,7 @@ const TradeItem = ({ setTrade, gemState }) => {
     <div className='trade-container'>
       <div className='trade'>
         <div className='trade-image'>
-          <h2>{gemState[0].toUpperCase() + gemState.substring(1)}</h2>
+          <h2 ref={currentTitle}>{gemState[0].toUpperCase() + gemState.substring(1)}</h2>
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             spaceBetween={50}
@@ -81,7 +85,22 @@ const TradeItem = ({ setTrade, gemState }) => {
         </div>
 
         <div className='trade-cart'>
-          <button>Add To Cart</button>
+          <button
+            onClick={() => {
+              console.log(...basketState)
+              setBasketState([
+                ...basketState,
+                {
+                  title: currentTitle.current.innerText,
+                  image: currentImage.current.src,
+                  price: currentPrice.current.innerText,
+                  size: currentSize.current.innerText,
+                },
+              ])
+            }}
+          >
+            Add To Cart
+          </button>
           <button>Buy Now</button>
         </div>
         <AiOutlineClose

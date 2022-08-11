@@ -54,6 +54,8 @@ select,
   background-color: rgb(171, 171, 171);
 }
 .gems-container {
+  user-select: none;
+  margin: 0 10rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -87,23 +89,14 @@ select,
   margin: 20px 0;
 }
 .gem p {
+  font-size: 14px;
   line-height: 18px;
   z-index: -5;
   margin: 0 25px;
   margin-top: 1.5rem;
   text-align: center;
 }
-.gem-btn {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 5%;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 7px 30px;
-  color: rgb(19, 235, 19);
-  background-color: grey;
-}
+
 .gem img {
   border-radius: 50%;
   width: 130px;

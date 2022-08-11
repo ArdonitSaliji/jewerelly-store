@@ -7,7 +7,7 @@
 }
 .navbar {
   user-select: none;
-  height: 6.5rem;
+  height: 7rem;
   display: flex;
   justify-content: space-between;
   background-color: grey;
@@ -25,6 +25,7 @@
 }
 .nav-img h3 {
   color: green;
+  font-size: 20px;
   margin-left: 1rem;
 }
 
@@ -38,17 +39,17 @@
   margin-right: 13%;
 }
 .nav-items-btns a {
-  font-size: 20px;
+  font-size: 21px;
   cursor: pointer;
   color: white;
   text-decoration: none;
   display: flex;
   height: 2.5rem;
-  width: 7.5rem;
+  width: 7rem;
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin: 15px 10px 0 10px;
+  margin: 1rem 0.6rem 0 0.6rem;
   border: 2px solid green;
 }
 
@@ -62,7 +63,7 @@
   flex-direction: row;
 }
 .nav-items ul li {
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
   margin-right: 1.7rem;
   text-align: center;
 }

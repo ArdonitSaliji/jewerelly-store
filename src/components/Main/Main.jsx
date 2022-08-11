@@ -5,9 +5,11 @@ import { AiOutlineSearch } from 'react-icons/ai'
 
 const Main = ({ setTrade, setGemState }) => {
   const [searchState, setSearchState] = useState()
+
   const switchTrade = (e) => {
     setGemState(e.target.firstElementChild.textContent.toLowerCase())
   }
+
   const allGems = data.map(({ title, image, text }, index) => (
     <div
       key={index}
@@ -47,7 +49,7 @@ const Main = ({ setTrade, setGemState }) => {
           </select>
         </div>
       </div>
-      <div className='gems-container' style={{ margin: '0 10rem', userSelect: 'none' }}>
+      <div className='gems-container'>
         {searchState
           ? allGems.filter(({ props: { children } }) =>
               children[0].props.children.toLowerCase().includes(searchState.toLowerCase())

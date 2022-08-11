@@ -26,16 +26,17 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   letter-spacing: 0.5px;
   color: white;
-  padding: 10px;
+  padding: 15px 5px;
   background-color: green;
   margin: 1rem;
-  width: 15rem;
+  width: 16rem;
   height: 20rem;
+  max-height: 100%;
 }
 
 .basket-item img {
-  width: 80%;
-  margin-top: 0.3rem;
+  width: 75%;
+  margin-top: 0.7rem;
   margin-bottom: 0.5rem;
   border-radius: 5px;
   background-color: white;
@@ -53,18 +54,19 @@ input::-webkit-inner-spin-button {
   width: 2rem;
 }
 .basket-item p {
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .basket-item button {
   background-color: white;
   color: black;
-  padding: 4px 12px;
+  width: 5rem;
+  height: 1.8rem;
   border-radius: 5px;
   border: none;
   outline: 1px solid black;
   cursor: pointer;
-  margin-top: 1.3rem;
+  margin-top: 0.8rem;
 }
 .basket-item button:active {
   background-color: green;

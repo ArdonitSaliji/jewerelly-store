@@ -13,6 +13,7 @@ function App() {
   const [signup, setSignup] = useState(false)
   const [trade, setTrade] = useState(false)
   const [gemState, setGemState] = useState('')
+  const [basketState, setBasketState] = useState([])
 
   return (
     <BrowserRouter>
@@ -27,13 +28,20 @@ function App() {
             path='/reset-password'
             element={<Forgot setSignup={setSignup} setLogin={setLogin} />}
           />
-          <Route path='/basket' element={<Basket />} />
+          <Route path='/basket' element={<Basket basketState={basketState} />} />
         </Routes>
 
         <Login login={login} setLogin={setLogin} setSignup={setSignup} />
         <Signup setLogin={setLogin} signup={signup} setSignup={setSignup} />
 
-        {trade && <TradeItem setTrade={setTrade} gemState={gemState} />}
+        {trade && (
+          <TradeItem
+            basketState={basketState}
+            setBasketState={setBasketState}
+            setTrade={setTrade}
+            gemState={gemState}
+          />
+        )}
 
         <div className='footer'>
           <h2>&copy; Jewellery Traders</h2>
