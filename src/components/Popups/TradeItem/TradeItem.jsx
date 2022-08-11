@@ -87,7 +87,6 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
         <div className='trade-cart'>
           <button
             onClick={() => {
-              console.log(...basketState)
               setBasketState([
                 ...basketState,
                 {

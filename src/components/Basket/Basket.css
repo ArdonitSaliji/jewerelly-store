@@ -5,17 +5,24 @@ input::-webkit-inner-spin-button {
 }
 
 .basket {
+  position: relative;
   min-height: 82.8vh;
   height: 100%;
   user-select: none;
+}
+.basket {
+  display: flex;
+  flex-direction: column;
 }
 .basket h2 {
   text-align: center;
   padding: 1.5rem 0;
 }
+
 .basket-items {
   display: flex;
-  margin: 0 3rem;
+  width: 70%;
+  margin-left: 3rem;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -35,26 +42,20 @@ input::-webkit-inner-spin-button {
 }
 
 .basket-item img {
-  width: 75%;
+  height: 9rem;
   margin-top: 0.7rem;
   margin-bottom: 0.5rem;
   border-radius: 5px;
   background-color: white;
 }
 .item-info {
-  margin-top: 0.2rem;
-  width: 10.5rem;
-}
-.item-info input {
-  text-indent: -2px;
   text-align: center;
-  border-radius: 5px;
-  font-size: 16px;
-  border: none;
-  width: 2rem;
+  margin-top: 0.2rem;
+  width: 12rem;
 }
+
 .basket-item p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .basket-item button {
@@ -70,4 +71,12 @@ input::-webkit-inner-spin-button {
 }
 .basket-item button:active {
   background-color: green;
+}
+.basket-checkout {
+  position: absolute;
+  z-index: -3;
+  right: 0;
+  width: 22%;
+  height: 100%;
+  background-color: yellow;
 }

@@ -10,12 +10,15 @@ const Basket = ({ basketState }) => {
               <h3>{el.title}</h3>
               <img src={el.image} alt='' />
               <div className='item-info'>
-                <p>{el.size}</p>
                 <p>{el.price}</p>
+                <p>{el.size}</p>
               </div>
-              <button>Remove</button>
+              <button onClick={(e) => e.target.parentElement.remove()}>Remove</button>
             </div>
           ))}
+      </div>
+      <div className='basket-checkout'>
+        <h1>h</h1>
       </div>
     </div>
   )
