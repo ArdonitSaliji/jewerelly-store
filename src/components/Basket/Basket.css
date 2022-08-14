@@ -33,6 +33,7 @@ input::-webkit-inner-spin-button {
 .basket-item {
   border-radius: 5px;
   display: flex;
+  overflow: hidden;
   align-items: center;
   flex-direction: column;
   letter-spacing: 0.5px;
@@ -95,12 +96,21 @@ input::-webkit-inner-spin-button {
 }
 .checkout-item {
   display: flex;
+  overflow: hidden;
+  margin-top: 1rem;
   align-items: center;
   height: 3.5rem;
   width: 80%;
   border-radius: 5px;
   background-color: white;
 }
+
 .checkout-item img {
+  height: 100%;
+}
+.checkout-item p {
+  display: flex;
+  margin: 0 1rem;
+  align-items: center;
   height: 100%;
 }

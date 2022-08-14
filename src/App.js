@@ -36,7 +36,12 @@ function App() {
           />
           <Route
             path="/basket"
-            element={<Basket basketState={basketState} />}
+            element={
+              <Basket
+                basketState={basketState}
+                setBasketState={setBasketState}
+              />
+            }
           />
         </Routes>
 

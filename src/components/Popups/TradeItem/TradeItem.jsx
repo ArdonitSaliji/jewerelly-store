@@ -22,7 +22,7 @@ const TradeItem = ({
   const currentSize = useRef();
   let check = new Set();
   useEffect(() => {
-    sessionStorage.setItem("basket", JSON.stringify(basketState));
+    localStorage.setItem("basket", JSON.stringify(basketState));
   }, [basketState]);
 
   const changeShape = (e) => {
