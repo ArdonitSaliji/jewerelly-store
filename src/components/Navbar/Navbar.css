@@ -7,6 +7,7 @@
 }
 .navbar {
   user-select: none;
+  z-index: 10;
   height: 7rem;
   display: flex;
   justify-content: space-between;
