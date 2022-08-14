@@ -1,14 +1,22 @@
 import { useRef } from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import './Basket.css'
 
 const Basket = ({ basketState, setBasketState }) => {
-  //
-  const basket = JSON.parse(localStorage.getItem('basket'))
   useEffect(() => {
     const retriveProducts = JSON.parse(localStorage.getItem('basket'))
     setBasketState(retriveProducts)
   }, [])
+  const [radioValue, setRadioValue] = useState(true)
+
+  const changeValue = (e) => {
+    const { name, value } = e.target
+
+    setRadioValue({ [name]: value })
+  }
+
+  const basket = JSON.parse(localStorage.getItem('basket'))
   const checkoutItemRef = useRef()
   return (
     <div className='basket-container'>
@@ -53,6 +61,33 @@ const Basket = ({ basketState, setBasketState }) => {
                 </div>
               )
           )}
+        </div>
+        <div className='checkout-shipping'>
+          <p>Shipping Options</p>
+          <div className='shipping-option'>
+            <label htmlFor='standard'>
+              <input
+                onChange={(e) => changeValue(e)}
+                type='radio'
+                name='option'
+                value='standard'
+                checked={radioValue.selectedOption === 'standard'}
+              />
+              Standard Shipping [$9.25]
+            </label>
+          </div>
+          <div className='shipping-option'>
+            <label htmlFor='express'>
+              <input
+                onChange={(e) => changeValue(e)}
+                type='radio'
+                name='option'
+                value='express'
+                checked={radioValue.selectedOption === 'express'}
+              />
+              Express Shipping [$16.25]
+            </label>
+          </div>
         </div>
       </div>
     </div>
