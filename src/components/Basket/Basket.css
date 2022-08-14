@@ -3,15 +3,18 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-.basket {
-  position: relative;
+.basket-container {
+  display: flex;
+  flex-direction: row;
   min-height: 82.8vh;
+  max-height: 100vh;
+  position: relative;
   height: 100%;
-  user-select: none;
 }
 .basket {
+  width: 70%;
   display: flex;
+  user-select: none;
   flex-direction: column;
 }
 .basket h2 {
@@ -72,7 +75,7 @@ input::-webkit-inner-spin-button {
 .basket-item button:active {
   background-color: green;
 }
-.basket-checkout {
+.checkout {
   position: absolute;
   z-index: -3;
   right: 0;
