@@ -13,7 +13,7 @@ input::-webkit-inner-spin-button {
 }
 .basket {
   width: 77%;
-  margin-left: 3.8rem;
+  margin-left: 2.5rem;
   display: flex;
   user-select: none;
   flex-direction: column;

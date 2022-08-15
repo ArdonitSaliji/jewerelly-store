@@ -8,14 +8,10 @@ const Basket = ({ basketState, setBasketState }) => {
     const retriveProducts = JSON.parse(localStorage.getItem('basket'))
     setBasketState(retriveProducts)
   }, [])
-  const [radioValue, setRadioValue] = useState(true)
+  const [radioValue, setRadioValue] = useState('standard')
 
-  const changeValue = (e) => {
-    const { name, value } = e.target
-
-    setRadioValue({ [name]: value })
-  }
-
+  const changeRadio = (value) => radioValue === value
+  const radioClick = (e) => setRadioValue(e.currentTarget.value)
   const basket = JSON.parse(localStorage.getItem('basket'))
   const checkoutItemRef = useRef()
   return (
@@ -34,10 +30,10 @@ const Basket = ({ basketState, setBasketState }) => {
                     <p>{el?.size}</p>
                   </div>
                   <button
-                    onClick={(e, index) => {
-                      const removeItem = basket.splice(index, i)
-                      setBasketState(basketState.splice(index, i))
-                      localStorage.setItem('basket', JSON.stringify(removeItem))
+                    onClick={() => {
+                      basket.splice(i, 1)
+                      setBasketState(basket)
+                      localStorage.setItem('basket', JSON.stringify(basket))
                     }}
                   >
                     Remove
@@ -65,25 +61,27 @@ const Basket = ({ basketState, setBasketState }) => {
         <div className='checkout-shipping'>
           <p>Shipping Options</p>
           <div className='shipping-option'>
-            <label htmlFor='standard'>
+            <label>
               <input
-                onChange={(e) => changeValue(e)}
+                onChange={(e) => radioClick(e)}
                 type='radio'
                 name='option'
                 value='standard'
-                checked={radioValue.selectedOption === 'standard'}
+                id='option'
+                checked={changeRadio('standard')}
               />
               Standard Shipping [$9.25]
             </label>
           </div>
           <div className='shipping-option'>
-            <label htmlFor='express'>
+            <label>
               <input
-                onChange={(e) => changeValue(e)}
+                onChange={(e) => radioClick(e)}
                 type='radio'
                 name='option'
                 value='express'
-                checked={radioValue.selectedOption === 'express'}
+                id='option'
+                checked={changeRadio('express')}
               />
               Express Shipping [$16.25]
             </label>
