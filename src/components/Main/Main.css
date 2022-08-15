@@ -13,6 +13,7 @@ select,
 }
 .main-title h1 {
   font-size: 27px;
+  font-weight: 400;
 }
 .main-search {
   display: flex;
