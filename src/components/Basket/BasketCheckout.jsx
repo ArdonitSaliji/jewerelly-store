@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 const Checkout = ({ basketState }) => {
   const [radioValue, setRadioValue] = useState('standard')
+
   const changeRadio = (value) => radioValue === value
   const clickRadio = (e) => setRadioValue(e.currentTarget.value)
   const checkoutItemRef = useRef()
   let val = 0
   basketState?.map(({ price }) => (val += Number(price.split('$').pop())))
-  return (
+  return basketState && basketState.length > 0 ? (
     <div className='checkout'>
       <h2>Proceed to checkout</h2>
 
@@ -73,6 +75,19 @@ const Checkout = ({ basketState }) => {
       <div className='checkout-buttons'>
         <button className='checkout-button red'>Go Back</button>
         <button className='checkout-button'>Proceed To Checkout</button>
+      </div>
+    </div>
+  ) : (
+    <div className='checkout'>
+      <div className='checkout-empty'>
+        <h2>Your Basket is empty</h2>
+      </div>
+
+      <div className='checkout-buttons'>
+        <Link className='checkout-button red' to={'/'}>
+          Go Back
+        </Link>
+        <button className='checkout-button'>Continue Shopping</button>
       </div>
     </div>
   )

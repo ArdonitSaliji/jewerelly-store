@@ -57,6 +57,7 @@ input::-webkit-inner-spin-button {
 }
 .item-info {
   text-align: center;
+  font-size: smaller;
   margin-top: 0.2rem;
   width: 12rem;
 }
@@ -174,8 +175,12 @@ input::-webkit-inner-spin-button {
   bottom: 1.5rem;
 }
 .checkout-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 600;
   width: 12rem;
+  border: 1px solid black;
   height: 2.5rem;
   border-radius: 5px;
   background-color: green;
@@ -187,4 +192,17 @@ input::-webkit-inner-spin-button {
 }
 .checkout-button:hover {
   cursor: pointer;
+}
+.checkout-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.basket-empty {
+  display: flex;
+  height: 90%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }

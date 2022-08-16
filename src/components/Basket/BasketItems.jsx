@@ -1,6 +1,6 @@
 const Items = ({ basketState, setBasketState }) => {
   const basket = JSON.parse(localStorage.getItem('basket'))
-  return (
+  return basketState && basketState.length > 0 ? (
     <div className='basket'>
       <h3 className='details'>Your Basket Details</h3>
       <div className='basket-items'>
@@ -27,6 +27,12 @@ const Items = ({ basketState, setBasketState }) => {
               </div>
             )
         )}
+      </div>
+    </div>
+  ) : (
+    <div className='basket'>
+      <div className='basket-empty'>
+        <h2>Add Items To Proceed To Checkout</h2>
       </div>
     </div>
   )
