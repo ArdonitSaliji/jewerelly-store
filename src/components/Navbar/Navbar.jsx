@@ -2,32 +2,37 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
-const Navbar = ({ setLogin, setSignup }) => {
+const Navbar = ({ setLogin, setSignUp, basketState }) => {
   return (
     <div className='navbar'>
-      <div className='nav-img'>
+      <div className='navbar-title'>
         <img src={require('../../images/logo2.jpg')} alt='' />
         <h3>Jewellery Traders</h3>
       </div>
 
-      <div className='nav-items'>
-        <div className='nav-items-btns'>
+      <div className='navbar-content'>
+        <div className='navbar-content-user'>
           <a onClick={() => setLogin(true)}>Login</a>
-          <a onClick={() => setSignup(true)}>Sign up</a>
+          <a onClick={() => setSignUp(true)}>Sign up</a>
         </div>
 
-        <ul>
+        <ul className='navbar-content-links'>
           <li>
             <Link to='/'>Home</Link>
           </li>
           <li>
-            <a href=''>Prices</a>
+            <Link to='/'>Prices</Link>
           </li>
           <li>
-            <a href=''>About us</a>
+            <Link to='/'>About us</Link>
           </li>
           <li>
-            <Link to='/basket'>Basket</Link>
+            <Link to='/basket'>
+              Basket&nbsp;
+              {basketState && basketState.length > 0 && (
+                <span className='basket-items-indicator'>{basketState.length}</span>
+              )}
+            </Link>
           </li>
         </ul>
       </div>

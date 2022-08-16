@@ -48,7 +48,7 @@ export const trade = [
           shape: 'Pear',
         },
       ],
-      { colors: ['291637', '6E1A7D', 'fb7eff', 'CE9AD6'] },
+      { colors: ['203,65,11', '244,136,35', '232,97,0', '228,155,15', '242,133,0'] },
     ],
     amethyst: [
       [
@@ -90,7 +90,7 @@ export const trade = [
           shape: 'Pear',
         },
       ],
-      { colors: ['291637', '6E1A7D', 'fb7eff', 'CE9AD6'] },
+      { colors: ['41,22,55', '47,0,70', '110,26,125', '251,126,255', '206,154,214'] },
     ],
     diamond: [
       [

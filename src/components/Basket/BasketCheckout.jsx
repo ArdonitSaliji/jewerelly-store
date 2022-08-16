@@ -87,7 +87,7 @@ const Checkout = ({ basketState }) => {
   ) : (
     <div className='checkout'>
       <div className='checkout-empty'>
-        <h2>Your Basket is empty</h2>
+        <h3>Your Basket is empty</h3>
       </div>
 
       <div className='checkout-buttons'>

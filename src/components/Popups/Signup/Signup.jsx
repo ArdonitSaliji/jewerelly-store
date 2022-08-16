@@ -2,11 +2,11 @@
 import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import './Signup.css'
-const Signup = ({ signup, setSignup, setLogin }) => {
+const Signup = ({ signUp, setSignUp, setLogin }) => {
   return (
-    <div className={signup ? 'signup-container active' : 'signup-container'}>
-      <form className={signup ? 'signup active' : 'signup'}>
-        <AiOutlineClose onClick={() => setSignup(false)} className='signup-x' />
+    <div className={signUp ? 'signup-container active' : 'signup-container'}>
+      <form className={signUp ? 'signup active' : 'signup'}>
+        <AiOutlineClose onClick={() => setSignUp(false)} className='signup-x' />
         <h1 className='signup-title'>Sign up</h1>
         <div className='signup-inputs'>
           <input type='text' placeholder='Phone Number or Email' required />
@@ -20,9 +20,10 @@ const Signup = ({ signup, setSignup, setLogin }) => {
         <div className='signup-acc'>
           <p>Have an account?</p>
           <a
+            style={{ textDecoration: 'underline' }}
             onClick={() => {
-              setSignup(false)
-              setTimeout(() => setLogin(true), 300)
+              setSignUp(false)
+              setTimeout(() => setLogin(true), 200)
             }}
           >
             Login

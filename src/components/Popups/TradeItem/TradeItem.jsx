@@ -40,11 +40,15 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
       </li>
     )
   })
+
   const sizes = trade[0].sizes.map((size, index) => <li key={index}>{size}</li>)
   const colors =
     trade[0][gemState] &&
     trade[0][gemState][1]?.colors.map((color, index) => (
-      <li key={index} style={{ backgroundColor: `#${color}` }}></li>
+      <li
+        key={index}
+        style={{ background: `linear-gradient(to right, rgba(${color})  , rgba(${color}, 0.6)  )` }}
+      ></li>
     ))
 
   const tradeItems = trade[0][gemState] ? (

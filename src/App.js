@@ -10,7 +10,7 @@ import './App.css'
 import Basket from './components/Basket/Basket.jsx'
 function App() {
   const [login, setLogin] = useState(false)
-  const [signup, setSignup] = useState(false)
+  const [signUp, setSignUp] = useState(false)
   const [trade, setTrade] = useState(false)
   const [gemState, setGemState] = useState('')
   const [basketState, setBasketState] = useState([])
@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className='app'>
-        <Navbar setLogin={setLogin} setSignup={setSignup} />
+        <Navbar setLogin={setLogin} setSignUp={setSignUp} basketState={basketState} />
         <Routes>
           <Route
             path='/'
@@ -26,7 +26,7 @@ function App() {
           />
           <Route
             path='/reset-password'
-            element={<Forgot setSignup={setSignup} setLogin={setLogin} />}
+            element={<Forgot setSignUp={setSignUp} setLogin={setLogin} />}
           />
           <Route
             path='/basket'
@@ -34,8 +34,8 @@ function App() {
           />
         </Routes>
 
-        <Login login={login} setLogin={setLogin} setSignup={setSignup} />
-        <Signup setLogin={setLogin} signup={signup} setSignup={setSignup} />
+        <Login login={login} setLogin={setLogin} setSignUp={setSignUp} />
+        <Signup setLogin={setLogin} signUp={signUp} setSignUp={setSignUp} />
 
         {trade && (
           <TradeItem

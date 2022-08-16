@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import './Login.css'
 import { Link } from 'react-router-dom'
 
-const Login = ({ login, setLogin, setSignup }) => {
+const Login = ({ login, setLogin, setSignUp }) => {
   return (
     <div className={login ? 'login-container active' : 'login-container'}>
       <form className={login ? 'login active' : 'login'}>
@@ -21,7 +21,7 @@ const Login = ({ login, setLogin, setSignup }) => {
         <button
           onClick={() => {
             setLogin(false)
-            setTimeout(() => setSignup(true), 300)
+            setTimeout(() => setSignUp(true), 200)
           }}
           type='button'
           className='login-btn new'

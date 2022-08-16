@@ -14,32 +14,32 @@
   background-color: grey;
   box-shadow: 2px 2px 5px 0 black;
 }
-.nav-img {
+.navbar-title {
   display: flex;
   margin-left: 1.5rem;
   align-items: center;
 }
-.nav-img img {
+.navbar-title img {
   width: 7rem;
   height: 5rem;
   display: inline-block;
 }
-.nav-img h3 {
+.navbar-title h3 {
   color: green;
   font-size: 20px;
   margin-left: 1rem;
 }
 
-.nav-items {
+.navbar-content {
   font-size: 24px;
 }
 
-.nav-items-btns {
+.navbar-content-user {
   display: flex;
   justify-content: center;
   margin-right: 13%;
 }
-.nav-items-btns a {
+.navbar-content-user a {
   font-size: 21px;
   cursor: pointer;
   color: white;
@@ -53,30 +53,31 @@
   margin: 1rem 0.6rem 0 0.6rem;
   border: 2px solid green;
 }
-
-.nav-items-btns a:hover {
+.navbar-content-user a:hover {
   background-color: green;
   transition: 0.6s;
 }
-
-.nav-items ul {
+.navbar-content-links {
   display: flex;
   flex-direction: row;
 }
-.nav-items ul li {
+.navbar-content-links li {
   margin-top: 0.7rem;
   margin-right: 1.7rem;
   text-align: center;
+  position: relative;
 }
-.nav-items ul li a {
+.navbar-content-links li a {
   width: 12rem;
   font-size: 20px;
   color: greenyellow;
+  margin-right: 1.5rem;
 }
-.nav-items ul li a:last-child {
-  margin-right: 25px;
-}
-.content h1 {
-  text-align: center;
-  margin-top: 15px;
+.basket-items-indicator {
+  color: yellowgreen;
+  display: inline-block;
+  background-color: white;
+  border-radius: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
 }

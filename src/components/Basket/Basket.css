@@ -15,8 +15,9 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   width: 80%;
+  min-width: 60%;
   padding-bottom: 1rem;
-  margin: 0 5.5rem;
+  margin: 0 4rem;
   user-select: none;
 }
 .basket .details {
@@ -29,7 +30,6 @@ input::-webkit-inner-spin-button {
   flex-wrap: wrap;
   gap: 2rem;
   margin-bottom: 2rem;
-  justify-content: left !important;
 }
 .basket-item {
   border-radius: 5px;
@@ -38,18 +38,18 @@ input::-webkit-inner-spin-button {
   align-items: center;
   flex-direction: column;
   letter-spacing: 0.5px;
-  color: white;
-  padding: 15px 5px;
+  padding: 1rem;
   background-color: green;
-  width: 16rem;
+  width: 15rem;
   height: 20rem;
-  max-height: 100%;
+  color: white;
 }
 .basket-item h3 {
   font-weight: 400;
 }
 .basket-item img {
   height: 9rem;
+  max-width: 10rem;
   margin-top: 0.7rem;
   margin-bottom: 0.5rem;
   border-radius: 5px;
@@ -172,17 +172,17 @@ input::-webkit-inner-spin-button {
   bottom: 1.5rem;
 }
 .checkout-button {
+  color: white;
   display: flex;
-  font-size: 16px;
+  font-size: 18px;
   justify-content: center;
+  text-align: center;
   align-items: center;
-  font-weight: 600;
   width: 12rem;
   border: 1px solid black;
   height: 2.5rem;
   border-radius: 5px;
   background-color: green;
-  color: white;
 }
 .checkout-button.red {
   width: 6rem;

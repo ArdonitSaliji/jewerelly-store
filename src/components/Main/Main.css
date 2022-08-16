@@ -56,14 +56,13 @@ select,
 }
 .gems-container {
   user-select: none;
-  margin: 0 10rem;
+  margin: 0 7.1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
   padding: 1.5rem 0 4rem;
-  margin-top: 1rem;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .gem {
@@ -72,12 +71,12 @@ select,
   cursor: pointer;
   border-radius: 5px;
   position: relative;
-  width: 21rem;
+  width: 20rem;
   max-height: 100%;
-  height: 24rem;
+  height: 23.5rem;
   display: inline-block;
   text-align: center;
-  border: 3px solid grey;
+  border: 2.5px solid grey;
   transition: 400ms all ease-in;
 }
 .gem > * {
@@ -87,14 +86,14 @@ select,
   background-color: green;
 }
 .gem h3 {
-  margin: 20px 0;
+  margin: 1.3rem 0;
 }
 .gem p {
   font-size: 14px;
   line-height: 18px;
   z-index: -5;
-  margin: 0 25px;
-  margin-top: 1.5rem;
+  margin: 0 1rem;
+  margin-top: 1rem;
   text-align: center;
 }
 
