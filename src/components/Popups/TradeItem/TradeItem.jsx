@@ -14,19 +14,20 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
   const currentImage = useRef()
   const currentPrice = useRef()
   const currentSize = useRef()
-  let check = new Set()
 
   useEffect(() => {
     localStorage.setItem('basket', JSON.stringify(basketState))
   }, [basketState])
-
   const changeShape = (e) => {
     setShapeState(e.target.textContent.toLowerCase())
   }
 
-  const removedDuplicates = trade[0][gemState]
-    ?.filter((gem) => !check.has(gem['shape']) && check.add(gem['shape']))
-    ?.map((image) => image.image === require('./trade-images/sold.jpg'))
+  let check = new Set()
+  const removedDuplicates =
+    trade[0][gemState] &&
+    trade[0][gemState][0]
+      ?.filter((gem) => !check.has(gem['shape']) && check.add(gem['shape']))
+      ?.map((image) => image.image === require('./trade-images/sold.jpg'))
 
   const shapes = trade[0].shapes.map((shape, index) => {
     return (
@@ -40,18 +41,33 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
     )
   })
   const sizes = trade[0].sizes.map((size, index) => <li key={index}>{size}</li>)
+  const colors =
+    trade[0][gemState] &&
+    trade[0][gemState][1]?.colors.map((color, index) => (
+      <li key={index} style={{ backgroundColor: `#${color}` }}></li>
+    ))
 
-  const tradeItems = trade[0][gemState]?.map(
-    ({ image, size = '-', price = '-', shape }, index) =>
-      shape.toLowerCase() === shapeState && (
-        <SwiperSlide key={index}>
-          <img src={image} ref={currentImage} alt='' />
-          <div className='trade-price'>
-            <h2 ref={currentSize}>{size}</h2>
-            <h2 ref={currentPrice}>{price}</h2>
-          </div>
-        </SwiperSlide>
-      )
+  const tradeItems = trade[0][gemState] ? (
+    trade[0][gemState][0].map(
+      ({ image, size = '-', price = '-', shape }, index) =>
+        shape.toLowerCase() === shapeState && (
+          <SwiperSlide key={index}>
+            <img src={image} ref={currentImage} alt='' />
+            <div className='trade-price'>
+              <h2 ref={currentSize}>{size}</h2>
+              <h2 ref={currentPrice}>{price}</h2>
+            </div>
+          </SwiperSlide>
+        )
+    )
+  ) : (
+    <SwiperSlide>
+      <img src={require('./trade-images/sold.jpg')} alt='' />
+      <div className='trade-price'>
+        <h2>-</h2>
+        <h2>-</h2>
+      </div>
+    </SwiperSlide>
   )
   return (
     <div className='trade-container'>
@@ -64,17 +80,7 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
             slidesPerView={1}
             navigation
           >
-            {tradeItems ? (
-              tradeItems
-            ) : (
-              <SwiperSlide>
-                <img src={require('./trade-images/sold.jpg')} alt='' />
-                <div className='trade-price'>
-                  <h2>-</h2>
-                  <h2>-</h2>
-                </div>
-              </SwiperSlide>
-            )}
+            {tradeItems}
           </Swiper>
 
           <hr className='the-SEPARATOR' />
@@ -86,6 +92,9 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
 
         <div className='trade-buttons size'>
           <ul>{sizes}</ul>
+        </div>
+        <div className='trade-buttons color'>
+          <ul>{colors}</ul>
         </div>
 
         <div className='trade-cart'>

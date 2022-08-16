@@ -4,9 +4,9 @@ const Items = ({ basketState, setBasketState }) => {
     <div className='basket'>
       <h3 className='details'>Your Basket Details</h3>
       <div className='basket-items'>
-        {basketState?.map(
+        {basketState.map(
           (el, i) =>
-            el?.image !== require('../Popups/TradeItem/trade-images/sold.jpg') && (
+            el.image !== require('../Popups/TradeItem/trade-images/sold.jpg') && (
               <div key={i} className='basket-item'>
                 <h3>{el?.title}</h3>
                 <img src={el?.image} alt='' />

@@ -7,7 +7,7 @@ const Checkout = ({ basketState }) => {
   const clickRadio = (e) => setRadioValue(e.currentTarget.value)
   const checkoutItemRef = useRef()
   let val = 0
-  basketState?.map(({ price }) => (val += Number(price.split('$').pop())))
+  basketState && basketState.map(({ price }) => (val += Number(price.split('$').pop())))
   return basketState && basketState.length > 0 ? (
     <div className='checkout'>
       <h2>Proceed to checkout</h2>
@@ -33,6 +33,7 @@ const Checkout = ({ basketState }) => {
         <div className='shipping-option'>
           <label>
             <input
+              style={{ marginRight: '0.3rem' }}
               onChange={(e) => clickRadio(e)}
               type='radio'
               name='option'
@@ -47,6 +48,7 @@ const Checkout = ({ basketState }) => {
         <div className='shipping-option'>
           <label>
             <input
+              style={{ marginRight: '0.3rem' }}
               onChange={(e) => clickRadio(e)}
               type='radio'
               name='option'
@@ -72,9 +74,14 @@ const Checkout = ({ basketState }) => {
 
         <hr />
       </div>
+
       <div className='checkout-buttons'>
-        <button className='checkout-button red'>Go Back</button>
-        <button className='checkout-button'>Proceed To Checkout</button>
+        <Link className='checkout-button red' to={'/'}>
+          Go Back
+        </Link>
+        <Link to={'/'} className='checkout-button'>
+          Proceed To Checkout
+        </Link>
       </div>
     </div>
   ) : (
@@ -87,7 +94,10 @@ const Checkout = ({ basketState }) => {
         <Link className='checkout-button red' to={'/'}>
           Go Back
         </Link>
-        <button className='checkout-button'>Continue Shopping</button>
+
+        <Link to={'/'} className='checkout-button'>
+          Continue Shopping
+        </Link>
       </div>
     </div>
   )

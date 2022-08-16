@@ -142,9 +142,6 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   margin-bottom: 0.7rem;
 }
-.shipping-option input {
-  margin-right: 0.3rem;
-}
 .shipping-light {
   color: rgb(232, 232, 232);
   margin-left: 1.3rem;
@@ -176,6 +173,7 @@ input::-webkit-inner-spin-button {
 }
 .checkout-button {
   display: flex;
+  font-size: 16px;
   justify-content: center;
   align-items: center;
   font-weight: 600;
@@ -189,6 +187,9 @@ input::-webkit-inner-spin-button {
 .checkout-button.red {
   width: 6rem;
   background-color: red;
+}
+.checkout-button.red > * {
+  color: white;
 }
 .checkout-button:hover {
   cursor: pointer;

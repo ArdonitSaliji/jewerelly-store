@@ -13,7 +13,7 @@ function App() {
   const [signup, setSignup] = useState(false)
   const [trade, setTrade] = useState(false)
   const [gemState, setGemState] = useState('')
-  const [basketState, setBasketState] = useState()
+  const [basketState, setBasketState] = useState([])
 
   return (
     <BrowserRouter>

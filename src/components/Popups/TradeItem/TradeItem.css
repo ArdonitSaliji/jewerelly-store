@@ -83,7 +83,7 @@
   outline: 1px solid black;
   margin: 0 10px;
   border-radius: 7px;
-  background: var(--trade-color-o);
+  background-color: var(--trade-color-o);
   color: black;
   text-align: center;
 }
@@ -105,7 +105,10 @@
 .trade-buttons ul li:hover {
   cursor: pointer;
 }
-
+.trade-buttons.color ul li {
+  width: 5rem;
+  height: 2rem;
+}
 .trade-cart {
   position: absolute;
   display: flex;
