@@ -32,7 +32,7 @@ const Items = ({ basketState, setBasketState }) => {
   ) : (
     <div className='basket'>
       <div className='basket-empty'>
-        <h3>Add Items To Proceed To Checkout</h3>
+        <h3>Your Basket is empty</h3>
       </div>
     </div>
   )

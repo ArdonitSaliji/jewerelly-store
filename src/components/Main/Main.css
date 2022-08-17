@@ -8,6 +8,7 @@ select,
   font-size: 15px;
 }
 .main {
+  user-select: none;
   min-height: 81.1vh;
   height: 100%;
 }
