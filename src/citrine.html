@@ -43,8 +43,7 @@
 
       <div class="content">
         <h1 class="ctitle">
-          Choose your type of Citrine that you are interested in buying or
-          selling
+          Choose your type of Citrine that you are interested in buying or selling
         </h1>
 
         <!-- Buy popup -->
@@ -56,9 +55,7 @@
             <h3>Quantity</h3>
             <input id="quantity" type="number" placeholder="Karat" min="1" />
             <h4>Price Per Karat: 25$</h4>
-            <button onclick="addToBasket()" id="add" type="button">
-              Add To Basket
-            </button>
+            <button onclick="addToBasket()" id="add" type="button">Add To Basket</button>
             <button type="button" onclick="hideSphere()">Cancel</button>
           </div>
         </form>
@@ -70,9 +67,7 @@
             <h3>Quantity</h3>
             <input id="quantity" type="number" placeholder="Karat" min="1" />
             <h4>Price Per Karat: 15$</h4>
-            <button onclick="addToBasket2()" id="add" type="button">
-              Add To Basket
-            </button>
+            <button onclick="addToBasket2()" id="add" type="button">Add To Basket</button>
             <button type="button" onclick="hideSphere2()">Cancel</button>
           </div>
         </form>
@@ -80,9 +75,7 @@
         <!-- Login form  -->
         <form>
           <div class="log-in">
-            <h2 class="title">
-              Log In <a onclick="cancelLogIn()" class="x"></a>
-            </h2>
+            <h2 class="title">Log In <a onclick="cancelLogIn()" class="x"></a></h2>
             <input
               id="login-username"
               class="login-username"
@@ -97,47 +90,24 @@
               placeholder="Enter your password!"
             /><br />
             <p id="loginStatus"></p>
-            <button
-              id="btn-click"
-              type="submit"
-              class="btn btn-primary"
-              onclick="loginButton()"
-            >
+            <button id="btn-click" type="submit" class="btn btn-primary" onclick="loginButton()">
               Log in
             </button>
-            <button onclick="cancelLogIn()" class="btn btn-danger">
-              Cancel</button
-            ><br />
+            <button onclick="cancelLogIn()" class="btn btn-danger">Cancel</button><br />
 
-            <a onclick="forgot()" class="forgot"
-              ><strong>Forgot password?</strong> </a
-            ><br />
+            <a onclick="forgot()" class="forgot"><strong>Forgot password?</strong> </a><br />
 
-            <button type="button" onclick="signUp()" class="create">
-              Create Account
-            </button>
+            <button type="button" onclick="signUp()" class="create">Create Account</button>
           </div>
         </form>
 
         <!-- Sign up form  -->
         <form>
           <div class="sign-up">
-            <h2 class="title">
-              Sign up <a onclick="cancelSignUp()" class="x"></a>
-            </h2>
-            <input
-              id="username"
-              class="username"
-              type="text"
-              placeholder="Enter your username!"
-            />
+            <h2 class="title">Sign up <a onclick="cancelSignUp()" class="x"></a></h2>
+            <input id="username" class="username" type="text" placeholder="Enter your username!" />
             <br />
-            <input
-              id="pass1"
-              class="pass1"
-              type="password"
-              placeholder="Enter your password!"
-            />
+            <input id="pass1" class="pass1" type="password" placeholder="Enter your password!" />
             <input
               id="againPass"
               class="pass2"
@@ -147,19 +117,10 @@
             <p id="check-pass"></p>
             <input class="check" type="checkbox" name="agree" />
             <label for="agree"
-              >By checking the box i have agreed to the
-              <a href="#">Terms and conditions</a>.</label
+              >By checking the box i have agreed to the <a href="#">Terms and conditions</a>.</label
             ><br />
-            <button
-              id="signUpButton"
-              class="btn btn-primary"
-              onclick="getInfo()"
-            >
-              Sign up
-            </button>
-            <button onclick="cancelSignUp()" class="btn btn-danger">
-              Cancel</button
-            ><br />
+            <button id="signUpButton" class="btn btn-primary" onclick="getInfo()">Sign up</button>
+            <button onclick="cancelSignUp()" class="btn btn-danger">Cancel</button><br />
             <h4>or</h4>
             <a id="already" onclick="logIn()">Already have an account</a>
           </div>
@@ -172,8 +133,8 @@
             <h3>Sphere Citrine</h3>
             <img src="cit1.jpg" alt="" />
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-              in ipsam. Repellat voluptates officiis vel.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, in ipsam. Repellat
+              voluptates officiis vel.
             </p>
 
             <button onclick="showSphere()" id="buy">Buy</button>
@@ -184,8 +145,8 @@
             <h3>Raw citrine</h3>
             <img src="cit2.jpg" alt="" />
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-              in ipsam. Repellat voluptates officiis vel.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, in ipsam. Repellat
+              voluptates officiis vel.
             </p>
             <button id="buy" onclick="showSphere2()">Buy</button>
             <button id="sell">Sell</button>
@@ -195,8 +156,8 @@
             <h3>Triangular Citrine</h3>
             <img src="cit3.jpg" alt="" />
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-              in ipsam. Repellat voluptates officiis vel.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, in ipsam. Repellat
+              voluptates officiis vel.
             </p>
             <button id="buy">Buy</button>
             <button id="sell">Sell</button>
@@ -206,8 +167,8 @@
             <h3>Diamant Form Citrine</h3>
             <img src="critrine.jpg" alt="" />
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-              in ipsam. Repellat voluptates officiis vel.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, in ipsam. Repellat
+              voluptates officiis vel.
             </p>
             <button id="buy">Buy</button>
             <button id="sell">Sell</button>
@@ -238,21 +199,16 @@
 
     <script type="text/javascript">
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-          { pageLanguage: "en" },
-          "google_translate_element"
-        );
+        new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element')
       }
       function changeLanguage(language) {
-        var selectField = document.querySelector(
-          "#google_translate_element select"
-        );
+        var selectField = document.querySelector('#google_translate_element select')
         for (var i = 0; i < selectField.children.length; i++) {
-          var option = selectField.children[i];
+          var option = selectField.children[i]
           if (option.value == language) {
-            selectField.selectedIndex = i;
-            selectField.dispatchEvent(new Event("change"));
-            break;
+            selectField.selectedIndex = i
+            selectField.dispatchEvent(new Event('change'))
+            break
           }
         }
       }

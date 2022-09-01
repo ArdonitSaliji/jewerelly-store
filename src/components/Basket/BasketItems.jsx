@@ -27,6 +27,7 @@ const Items = ({ basketState, setBasketState }) => {
               </div>
             )
         )}
+        {localStorage.setItem('basketLength', JSON.stringify(basketState.length))}
       </div>
     </div>
   ) : (

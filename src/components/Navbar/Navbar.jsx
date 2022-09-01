@@ -13,7 +13,13 @@ const Navbar = ({ setLogin, setSignUp, basketState }) => {
       <div className='navbar-content'>
         <div className='navbar-content-user'>
           <a onClick={() => setLogin(true)}>Login</a>
-          <a onClick={() => setSignUp(true)}>Sign up</a>
+          <a
+            onClick={() => {
+              setSignUp(true)
+            }}
+          >
+            Sign up
+          </a>
         </div>
 
         <ul className='navbar-content-links'>

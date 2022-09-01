@@ -6,8 +6,9 @@ import Login from './components/Popups/Login/Login.jsx'
 import Signup from './components/Popups/Signup/Signup.jsx'
 import Forgot from './components/ForgotPassword/ForgotPass.jsx'
 import TradeItem from './components/Popups/TradeItem/TradeItem.jsx'
-import './App.css'
 import Basket from './components/Basket/Basket.jsx'
+import './App.css'
+
 function App() {
   const [login, setLogin] = useState(false)
   const [signUp, setSignUp] = useState(false)
@@ -19,6 +20,7 @@ function App() {
     <BrowserRouter>
       <div className='app'>
         <Navbar setLogin={setLogin} setSignUp={setSignUp} basketState={basketState} />
+
         <Routes>
           <Route
             path='/'
@@ -34,8 +36,8 @@ function App() {
           />
         </Routes>
 
-        <Login login={login} setLogin={setLogin} setSignUp={setSignUp} />
-        <Signup setLogin={setLogin} signUp={signUp} setSignUp={setSignUp} />
+        {login && <Login login={login} setLogin={setLogin} setSignUp={setSignUp} />}
+        {signUp && <Signup setLogin={setLogin} setSignUp={setSignUp} />}
 
         {trade && (
           <TradeItem
