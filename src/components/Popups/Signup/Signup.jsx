@@ -14,14 +14,11 @@ const Signup = ({ setSignUp, setLogin }) => {
     e.preventDefault()
     const res = await fetch('http://localhost:5000/api/signup', {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ emailOrPhone: state.emailOrPhone, password: state.password }),
     })
-    const data = await res.json()
-    console.log(data)
   }
   return (
     <div className='signup-container'>

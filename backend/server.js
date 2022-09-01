@@ -7,18 +7,16 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const routesUrls = require('./routes')
+app.use(cors())
+app.use(express.json())
 
 dotenv.config()
 mongoose.connect(
   process.env.DATABASE_ACCESS,
-  { useNewUrlParse: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log('Database Connected')
 )
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-// app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use('/', routesUrls)
-app.use(cors())
 
 app.listen(port, () => console.log(`Server started at port ${port}`))

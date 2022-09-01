@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
-const signUpModel = new mongoose.Schema({
+const Schema = mongoose.Schema
+const signUpModel = new Schema({
   emailOrPhone: {
     type: String,
     required: true,
