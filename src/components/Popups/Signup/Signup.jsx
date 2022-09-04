@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-// const axios = require('axios')
+
 import './Signup.css'
 
 const Signup = ({ setSignUp, setLogin }) => {
@@ -10,8 +10,9 @@ const Signup = ({ setSignUp, setLogin }) => {
     emailOrPhone: '',
     password2: '',
   })
+  const [message, setMessage] = useState()
+
   const submitInfo = async (e) => {
-    e.preventDefault()
     const res = await fetch('http://localhost:5000/api/signup', {
       method: 'POST',
       headers: {
@@ -19,10 +20,48 @@ const Signup = ({ setSignUp, setLogin }) => {
       },
       body: JSON.stringify({ emailOrPhone: state.emailOrPhone, password: state.password }),
     })
+    if (res.status === 201) {
+      alert('Account created successfully')
+      setMessage('Account created successfully')
+      setTimeout(() => {
+        setSignUp(false)
+        setState({
+          password: '',
+          emailOrPhone: '',
+          password2: '',
+        })
+        setMessage('')
+      }, 1000)
+    }
+    if (res.status === 409) {
+      e.preventDefault()
+      setMessage('Account already exists')
+    }
   }
+
+  const passwordIsNotMatching = (e) => {
+    if (state.password.length < 1 && state.password2.length < 1) {
+      setMessage('Password must be longer than 8 characters')
+      e.preventDefault()
+    } else {
+      if (state.password !== state.password2) {
+        e.preventDefault()
+        setMessage('Sorry, your passwords need to be the same.')
+      } else {
+        e.preventDefault()
+        submitInfo(e)
+      }
+    }
+  }
+
   return (
     <div className='signup-container'>
-      <form onSubmit={submitInfo} className='signup'>
+      <form
+        onSubmit={(e) => {
+          passwordIsNotMatching(e)
+        }}
+        className='signup'
+      >
         <AiOutlineClose onClick={() => setSignUp(false)} className='signup-x' />
         <h1 className='signup-title'>Sign up</h1>
         <div className='signup-inputs'>
@@ -40,6 +79,7 @@ const Signup = ({ setSignUp, setLogin }) => {
             placeholder='Password'
             required
           />
+
           <input
             onChange={(e) => setState({ ...state, password2: e.target.value })}
             value={state.password2}
@@ -48,6 +88,13 @@ const Signup = ({ setSignUp, setLogin }) => {
             required
           />
         </div>
+        <p
+          className='wrong-password'
+          style={message === 'Account created successfully' ? { color: 'green' } : { color: 'red' }}
+        >
+          {message}
+        </p>
+
         <button className='signup-btn'>Sign up</button>
         <span>
           <hr /> <p>OR</p> <hr />
