@@ -5,17 +5,43 @@ import './Login.css'
 import { Link } from 'react-router-dom'
 
 const Login = ({ login, setLogin, setSignUp }) => {
-  const [usernameState, setUsernameState] = useState()
-  const getUser = async () => {
-    const res = await fetch(`http://localhost:5000/api/users?email=${usernameState}`, {
+  const [loginState, setLoginState] = useState({
+    emailOrPhone: '',
+    password: '',
+  })
+  const [response, setResponse] = useState()
+  const getUser = async (e) => {
+    const res = await fetch(`http://localhost:5000/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        emailOrPhone: loginState.emailOrPhone,
+        password: loginState.password,
+      }),
     })
-      .then((res) => res.json())
-      .catch((err) => console.log(err))
+    if (res.status === 200) {
+      e.preventDefault()
+      alert('Welcome Ardonit!')
+      setTimeout(() => {
+        setLogin(false)
+        setLoginState({
+          emailOrPhone: '',
+          password: '',
+        })
+      }, 1000)
+    }
+    if (res.status === 404) {
+      e.preventDefault()
+      setResponse('Account does not exist')
+    }
+    if (res.status === 401) {
+      e.preventDefault()
+      setResponse('Double check your password')
+    }
   }
+
   return (
     login && (
       <div className={'login-container'}>
@@ -24,16 +50,24 @@ const Login = ({ login, setLogin, setSignUp }) => {
           <h1 className='login-title'>Login</h1>
           <div className='login-inputs'>
             <input
-              onChange={(e) => setUsernameState(e.target.value)}
-              value={usernameState}
+              onChange={(e) => setLoginState({ ...loginState, emailOrPhone: e.target.value })}
+              value={loginState.emailOrPhone}
               type='text'
               placeholder='Phone number or email'
-              name='username'
+              name='email'
               required
             />
-            <input type='password' placeholder='Password' name='password' required />
+            <input
+              onChange={(e) => setLoginState({ ...loginState, password: e.target.value })}
+              value={loginState.password}
+              type='password'
+              placeholder='Password'
+              name='password'
+              required
+            />
           </div>
-          <button type='button' onClick={getUser} className='login-btn'>
+          {response}
+          <button type='button' onClick={(e) => getUser(e)} className='login-btn'>
             Login
           </button>
           <span>

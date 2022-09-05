@@ -4,12 +4,11 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const port = 5000
 const cors = require('cors')
-
 const routesUrls = require('./routes')
 app.use(cors())
 app.use(express.json())
-
 dotenv.config()
+
 mongoose.connect(
   process.env.DATABASE_ACCESS,
   { useNewUrlParser: true, useUnifiedTopology: true },

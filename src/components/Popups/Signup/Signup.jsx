@@ -11,31 +11,34 @@ const Signup = ({ setSignUp, setLogin }) => {
     password2: '',
   })
   const [message, setMessage] = useState()
-
   const submitInfo = async (e) => {
-    const res = await fetch('http://localhost:5000/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ emailOrPhone: state.emailOrPhone, password: state.password }),
-    })
-    if (res.status === 201) {
-      alert('Account created successfully')
-      setMessage('Account created successfully')
-      setTimeout(() => {
-        setSignUp(false)
-        setState({
-          password: '',
-          emailOrPhone: '',
-          password2: '',
-        })
-        setMessage('')
-      }, 1000)
-    }
-    if (res.status === 409) {
-      e.preventDefault()
-      setMessage('Account already exists')
+    try {
+      const res = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ emailOrPhone: state.emailOrPhone, password: state.password }),
+      })
+      if (res.status === 201) {
+        alert('Account created successfully')
+        setMessage('Account created successfully')
+        setTimeout(() => {
+          setSignUp(false)
+          setState({
+            password: '',
+            emailOrPhone: '',
+            password2: '',
+          })
+          setMessage('')
+        }, 1000)
+      }
+      if (res.status === 409) {
+        e.preventDefault()
+        setMessage('Account already exists')
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 

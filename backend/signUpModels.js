@@ -15,4 +15,5 @@ const signUpModel = new Schema({
     default: Date.now,
   },
 })
+
 module.exports = mongoose.model('mytables', signUpModel)
