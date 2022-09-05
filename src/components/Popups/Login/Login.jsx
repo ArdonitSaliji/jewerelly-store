@@ -23,6 +23,7 @@ const Login = ({ login, setLogin, setSignUp }) => {
     })
     if (res.status === 200) {
       e.preventDefault()
+      setResponse('Welcome Ardonit!')
       alert('Welcome Ardonit!')
       setTimeout(() => {
         setLogin(false)
@@ -30,7 +31,7 @@ const Login = ({ login, setLogin, setSignUp }) => {
           emailOrPhone: '',
           password: '',
         })
-      }, 1000)
+      }, 1500)
     }
     if (res.status === 404) {
       e.preventDefault()
@@ -44,8 +45,8 @@ const Login = ({ login, setLogin, setSignUp }) => {
 
   return (
     login && (
-      <div className={'login-container'}>
-        <form className={'login'}>
+      <div className='login-container'>
+        <form className='login'>
           <AiOutlineClose onClick={() => setLogin(false)} className='login-x' />
           <h1 className='login-title'>Login</h1>
           <div className='login-inputs'>
@@ -66,7 +67,15 @@ const Login = ({ login, setLogin, setSignUp }) => {
               required
             />
           </div>
-          {response}
+          <p
+            style={
+              response === 'Welcome Ardonit!' ? { color: 'green' } : { color: 'rgb(201, 0, 0)' }
+            }
+            className='response'
+          >
+            {response}
+          </p>
+
           <button type='button' onClick={(e) => getUser(e)} className='login-btn'>
             Login
           </button>

@@ -6,6 +6,7 @@ router.post('/api/login', async (req, res) => {
     emailOrPhone: req.body.emailOrPhone,
   })
   const password = await signUpModel.find({ password: req.body.password })
+  console.log(password)
   if (email.length < 1) {
     return res.status(404).send({ login: 'Account does not exist' })
   }
