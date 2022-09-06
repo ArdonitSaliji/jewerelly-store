@@ -46,13 +46,12 @@ const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState
               </li>
             </ul>
             {loginStatus && (
-              <button className='navbar-account'>
-                <img
-                  onClick={() => setAccountPopup(true)}
-                  src='https://yt3.ggpht.com/yti/AJo0G0m-2Y8iR9ecaHPVTitXtXBSyBivDb6SNOPmBg=s88-c-k-c0x00ffffff-no-rj-mo'
-                  alt=''
-                />
-              </button>
+              <img
+                className='navbar-account same'
+                onClick={() => setAccountPopup(true)}
+                src='https://yt3.ggpht.com/yti/AJo0G0m-2Y8iR9ecaHPVTitXtXBSyBivDb6SNOPmBg=s88-c-k-c0x00ffffff-no-rj-mo'
+                alt=''
+              />
             )}
           </div>
         </div>

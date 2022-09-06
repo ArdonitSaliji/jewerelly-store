@@ -4,7 +4,7 @@ const Account = ({ accountPopup, setAccountPopup }) => {
   return (
     <div
       style={accountPopup ? { transform: 'translateX(0)' } : { transform: 'translateX(100%)' }}
-      className='account-popup'
+      className='account-popup same'
     >
       <div className='account-credentials'>
         <div className='account-username'>

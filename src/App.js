@@ -19,7 +19,11 @@ function App() {
   const status = JSON.parse(sessionStorage.getItem('loginStatus'))
   const [loginStatus, setLoginStatus] = useState(status)
   const [accountPopup, setAccountPopup] = useState(false)
-
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.same')) {
+      setAccountPopup(false)
+    }
+  })
   return (
     <BrowserRouter>
       <div className='app'>
