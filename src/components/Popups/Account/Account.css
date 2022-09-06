@@ -1,0 +1,43 @@
+.account-popup {
+  transition: 0.5s ease-out;
+  z-index: 3;
+  position: fixed;
+  display: flex;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 15%;
+  background-color: black;
+}
+.account-credentials {
+  width: 100%;
+  justify-content: right;
+  display: flex;
+  height: 7rem;
+  border-bottom: 1px solid white;
+}
+.account-username {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.account-username h3 {
+  font-size: 1.2rem;
+  color: white;
+  padding-top: 2.5rem;
+}
+.account-username p {
+  padding-top: 0.3rem;
+  color: grey;
+}
+.account-credentials img {
+  z-index: 10;
+  margin-top: 2rem;
+  margin-right: 3.5rem;
+  cursor: pointer;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+}

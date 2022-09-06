@@ -22,13 +22,13 @@ const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
       }),
     })
     if (res.status === 200) {
-      sessionStorage.setItem('loginStatus', JSON.stringify(true))
       e.preventDefault()
       setResponse('Welcome Ardonit!')
       alert('Welcome Ardonit!')
       setTimeout(() => {
         setLogin(false)
         setLoginStatus(true)
+        sessionStorage.setItem('loginStatus', JSON.stringify(true))
         setLoginState({
           emailOrPhone: '',
           password: '',

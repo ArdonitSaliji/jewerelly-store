@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const signUpModel = require('./signUpModels')
+let a = 'myname'
 router.post('/api/login', async (req, res) => {
   const email = await signUpModel.find({
     emailOrPhone: req.body.emailOrPhone,

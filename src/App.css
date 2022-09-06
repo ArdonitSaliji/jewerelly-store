@@ -1,6 +1,9 @@
 * {
   font-family: sans-serif;
 }
+body {
+  overflow-x: hidden;
+}
 .footer {
   user-select: none;
   display: flex;

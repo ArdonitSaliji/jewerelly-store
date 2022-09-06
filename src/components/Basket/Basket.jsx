@@ -7,7 +7,7 @@ const Basket = ({ basketState, setBasketState }) => {
   useEffect(() => {
     const retriveProducts = JSON.parse(localStorage.getItem('basket'))
     setBasketState(retriveProducts)
-  }, [basketState])
+  }, [setBasketState])
 
   return (
     <div className='basket-container'>

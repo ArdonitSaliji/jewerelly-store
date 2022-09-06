@@ -8,6 +8,7 @@ import Forgot from './components/ForgotPassword/ForgotPass.jsx'
 import TradeItem from './components/Popups/TradeItem/TradeItem.jsx'
 import Basket from './components/Basket/Basket.jsx'
 import './App.css'
+import Account from './components/Popups/Account/Account.jsx'
 
 function App() {
   const [login, setLogin] = useState(false)
@@ -17,11 +18,14 @@ function App() {
   const [basketState, setBasketState] = useState([])
   const status = JSON.parse(sessionStorage.getItem('loginStatus'))
   const [loginStatus, setLoginStatus] = useState(status)
+  const [accountPopup, setAccountPopup] = useState(false)
 
   return (
     <BrowserRouter>
       <div className='app'>
         <Navbar
+          accountPopup={accountPopup}
+          setAccountPopup={setAccountPopup}
           loginStatus={loginStatus}
           setLoginStatus={setLoginStatus}
           setLogin={setLogin}
@@ -63,7 +67,7 @@ function App() {
             gemState={gemState}
           />
         )}
-
+        <Account accountPopup={accountPopup} setAccountPopup={setAccountPopup} />
         <div className='footer'>
           <h2>&copy; Jewellery Traders</h2>
         </div>

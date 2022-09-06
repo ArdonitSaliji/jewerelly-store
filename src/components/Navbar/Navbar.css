@@ -5,9 +5,15 @@
   box-sizing: border-box;
   text-decoration: none;
 }
+.navbar-container {
+  height: 7rem;
+  position: relative;
+}
 .navbar {
+  position: fixed;
+  width: 100%;
   user-select: none;
-  z-index: 100;
+  z-index: 3;
   height: 7rem;
   display: flex;
   justify-content: space-between;
@@ -86,6 +92,8 @@
   height: 1.5rem;
 }
 .navbar-account {
+  z-index: 10;
+  cursor: pointer;
   margin-left: -1rem;
   margin-right: 3.5rem;
   height: 3rem;
