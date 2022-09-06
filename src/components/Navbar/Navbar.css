@@ -31,15 +31,16 @@
 }
 
 .navbar-content {
+  margin: auto 0;
   font-size: 24px;
 }
 
-.navbar-content-user {
+.navbar-user {
   display: flex;
   justify-content: center;
   margin-right: 13%;
 }
-.navbar-content-user a {
+.navbar-user a {
   font-size: 21px;
   cursor: pointer;
   color: white;
@@ -50,34 +51,49 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin: 1rem 0.6rem 0 0.6rem;
+  margin: -0.3rem 0.6rem 0.7rem;
   border: 2px solid green;
 }
-.navbar-content-user a:hover {
+.navbar-user a:hover {
   background-color: green;
   transition: 0.6s;
 }
-.navbar-content-links {
+.navbar-links {
+  display: flex;
+}
+.navbar-links ul {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
-.navbar-content-links li {
-  margin-top: 0.7rem;
+.navbar-links ul li {
   margin-right: 1.7rem;
   text-align: center;
   position: relative;
 }
-.navbar-content-links li a {
-  width: 12rem;
+.navbar-links ul li a {
+  width: 18rem;
   font-size: 20px;
   color: greenyellow;
   margin-right: 1.5rem;
 }
-.basket-items-indicator {
+.basket-indicator {
   color: yellowgreen;
   display: inline-block;
   background-color: white;
   border-radius: 5px;
   width: 1.5rem;
   height: 1.5rem;
+}
+.navbar-account {
+  margin-left: -1rem;
+  margin-right: 3.5rem;
+  height: 3rem;
+  overflow: hidden;
+  width: 3rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.navbar-account img {
+  width: 100%;
 }

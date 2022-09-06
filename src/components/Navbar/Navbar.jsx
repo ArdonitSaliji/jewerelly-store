@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
-const Navbar = ({ setLogin, setSignUp, basketState }) => {
+const Navbar = ({ loginStatus, setLoginStatus, setLogin, setSignUp, basketState }) => {
   return (
     <div className='navbar'>
       <div className='navbar-title'>
@@ -11,36 +11,53 @@ const Navbar = ({ setLogin, setSignUp, basketState }) => {
       </div>
 
       <div className='navbar-content'>
-        <div className='navbar-content-user'>
-          <a onClick={() => setLogin(true)}>Login</a>
-          <a
-            onClick={() => {
-              setSignUp(true)
-            }}
-          >
-            Sign up
-          </a>
+        {!loginStatus && (
+          <div className='navbar-user'>
+            <a onClick={() => setLogin(true)}>Login</a>
+            <a
+              onClick={() => {
+                setSignUp(true)
+              }}
+            >
+              Sign up
+            </a>
+          </div>
+        )}
+        <div className='navbar-links'>
+          <ul>
+            <li>
+              <Link to='/'>Home</Link>
+            </li>
+            <li>
+              <Link to='/'>Prices</Link>
+            </li>
+            <li>
+              <Link to='/'>About us</Link>
+            </li>
+            <li>
+              <Link to='/basket'>
+                Basket&nbsp;
+                {basketState && basketState.length > 0 && (
+                  <span className='basket-indicator'>{basketState.length}</span>
+                )}
+              </Link>
+            </li>
+          </ul>
+          {loginStatus && (
+            <button
+              onClick={() => {
+                sessionStorage.setItem('loginStatus', JSON.stringify(false))
+                setLoginStatus(false)
+              }}
+              className='navbar-account'
+            >
+              <img
+                src='https://yt3.ggpht.com/yti/AJo0G0m-2Y8iR9ecaHPVTitXtXBSyBivDb6SNOPmBg=s88-c-k-c0x00ffffff-no-rj-mo'
+                alt=''
+              />
+            </button>
+          )}
         </div>
-
-        <ul className='navbar-content-links'>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/'>Prices</Link>
-          </li>
-          <li>
-            <Link to='/'>About us</Link>
-          </li>
-          <li>
-            <Link to='/basket'>
-              Basket&nbsp;
-              {basketState && basketState.length > 0 && (
-                <span className='basket-items-indicator'>{basketState.length}</span>
-              )}
-            </Link>
-          </li>
-        </ul>
       </div>
     </div>
   )

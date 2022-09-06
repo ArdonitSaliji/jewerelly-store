@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import './Login.css'
 import { Link } from 'react-router-dom'
 
-const Login = ({ login, setLogin, setSignUp }) => {
+const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
   const [loginState, setLoginState] = useState({
     emailOrPhone: '',
     password: '',
@@ -22,16 +22,18 @@ const Login = ({ login, setLogin, setSignUp }) => {
       }),
     })
     if (res.status === 200) {
+      sessionStorage.setItem('loginStatus', JSON.stringify(true))
       e.preventDefault()
       setResponse('Welcome Ardonit!')
       alert('Welcome Ardonit!')
       setTimeout(() => {
         setLogin(false)
+        setLoginStatus(true)
         setLoginState({
           emailOrPhone: '',
           password: '',
         })
-      }, 1500)
+      }, 1000)
     }
     if (res.status === 404) {
       e.preventDefault()
@@ -75,7 +77,6 @@ const Login = ({ login, setLogin, setSignUp }) => {
           >
             {response}
           </p>
-
           <button type='button' onClick={(e) => getUser(e)} className='login-btn'>
             Login
           </button>

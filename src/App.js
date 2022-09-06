@@ -15,11 +15,19 @@ function App() {
   const [trade, setTrade] = useState(false)
   const [gemState, setGemState] = useState('')
   const [basketState, setBasketState] = useState([])
+  const status = JSON.parse(sessionStorage.getItem('loginStatus'))
+  const [loginStatus, setLoginStatus] = useState(status)
 
   return (
     <BrowserRouter>
       <div className='app'>
-        <Navbar setLogin={setLogin} setSignUp={setSignUp} basketState={basketState} />
+        <Navbar
+          loginStatus={loginStatus}
+          setLoginStatus={setLoginStatus}
+          setLogin={setLogin}
+          setSignUp={setSignUp}
+          basketState={basketState}
+        />
 
         <Routes>
           <Route
@@ -36,7 +44,15 @@ function App() {
           />
         </Routes>
 
-        {login && <Login login={login} setLogin={setLogin} setSignUp={setSignUp} />}
+        {login && (
+          <Login
+            loginStatus={loginStatus}
+            setLoginStatus={setLoginStatus}
+            login={login}
+            setLogin={setLogin}
+            setSignUp={setSignUp}
+          />
+        )}
         {signUp && <Signup setLogin={setLogin} setSignUp={setSignUp} />}
 
         {trade && (
