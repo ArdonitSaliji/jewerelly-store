@@ -3,6 +3,7 @@
   z-index: 3;
   position: fixed;
   display: flex;
+  flex-direction: column;
   right: 0;
   top: 0;
   height: 100%;
@@ -40,4 +41,38 @@
   width: 3rem;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.5);
+}
+.account-lists {
+  width: 100%;
+  color: white;
+  font-display: column;
+}
+.account-lists ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+.account-lists ul li {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  width: 100%;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+
+}
+.account-lists ul li:hover {
+  background-color: rgb(78, 78, 78);
+  transition: background-color 0.5s;
+}
+.account-lists ul li:active {
+  transition: background-color 0s;
+  background-color: rgb(58, 58, 58);
+}
+.same {
+  border: 1px solid black;
 }
