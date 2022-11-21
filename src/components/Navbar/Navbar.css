@@ -1,0 +1,100 @@
+.navbar-container {
+  height: 7rem;
+  position: relative;
+}
+.navbar {
+  position: fixed;
+  width: 100%;
+  user-select: none;
+  z-index: 3;
+  height: 7rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: grey;
+  box-shadow: 2px 2px 5px 0 black;
+}
+.navbar-title {
+  display: flex;
+  margin-left: 1.5rem;
+  align-items: center;
+}
+.navbar-title img {
+  width: 7rem;
+  height: 5rem;
+  display: inline-block;
+}
+.navbar-title h3 {
+  color: green;
+  font-size: 20px;
+  margin-left: 1rem;
+}
+
+.navbar-content {
+  margin: auto 0;
+  font-size: 24px;
+}
+
+.navbar-user {
+  display: flex;
+  justify-content: center;
+  margin-right: 13%;
+}
+.navbar-user a {
+  font-size: 21px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  height: 2.5rem;
+  width: 7rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: -0.3rem 0.6rem 0.7rem;
+  border: 2px solid green;
+}
+.navbar-user a:hover {
+  background-color: green;
+  transition: 0.6s;
+}
+.navbar-links {
+  display: flex;
+}
+.navbar-links ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.navbar-links ul li {
+  margin-right: 1.7rem;
+  text-align: center;
+  position: relative;
+}
+.navbar-links ul li a {
+  width: 18rem;
+  font-size: 20px;
+  color: greenyellow;
+  margin-right: 1.5rem;
+}
+.basket-indicator {
+  color: yellowgreen;
+  display: inline-block;
+  background-color: white;
+  border-radius: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.navbar-account {
+  z-index: 10;
+  cursor: pointer;
+  margin-left: -1rem;
+  margin-right: 3.5rem;
+  height: 3rem;
+  overflow: hidden;
+  width: 3rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.navbar-account img {
+  width: 100%;
+}
