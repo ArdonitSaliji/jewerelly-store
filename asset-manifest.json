@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/jewerelly-eCommerce/static/css/main.91aef714.css",
+    "main.js": "/jewerelly-eCommerce/static/js/main.c4a2b474.js",
+    "static/media/citrine.png": "/jewerelly-eCommerce/static/media/citrine.8b435961fdadc68d70b6.png",
+    "static/media/zircon-gem.jpg": "/jewerelly-eCommerce/static/media/zircon-gem.81096f9b9f5132742381.jpg",
+    "static/media/opal.jpg": "/jewerelly-eCommerce/static/media/opal.865f2fe4425bb4a1be24.jpg",
+    "static/media/aventurine.jpg": "/jewerelly-eCommerce/static/media/aventurine.cff0677920bdce3e0cec.jpg",
+    "static/media/amazonite.jpg": "/jewerelly-eCommerce/static/media/amazonite.0b7ded0bef0623385254.jpg",
+    "static/media/diamant.jpg": "/jewerelly-eCommerce/static/media/diamant.c9a0eaf09817d1747688.jpg",
+    "static/media/aquamarine.jpg": "/jewerelly-eCommerce/static/media/aquamarine.b4ed2c150b79acef6097.jpg",
+    "static/media/cit3.jpg": "/jewerelly-eCommerce/static/media/cit3.b386a0679d1172b4eb99.jpg",
+    "static/media/eme.jpg": "/jewerelly-eCommerce/static/media/eme.6a5f69f1fd4c5ef39758.jpg",
+    "index.html": "/jewerelly-eCommerce/index.html",
+    "main.91aef714.css.map": "/jewerelly-eCommerce/static/css/main.91aef714.css.map",
+    "main.c4a2b474.js.map": "/jewerelly-eCommerce/static/js/main.c4a2b474.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.91aef714.css",
+    "static/js/main.c4a2b474.js"
+  ]
+}
