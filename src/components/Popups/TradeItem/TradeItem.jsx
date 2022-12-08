@@ -1,33 +1,33 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useRef, useState, useEffect } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, A11y } from 'swiper'
-import { AiOutlineClose } from 'react-icons/ai'
-import './TradeItem.css'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import { trade } from './trade'
+import React, { useRef, useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y } from 'swiper';
+import { AiOutlineClose } from 'react-icons/ai';
+import './TradeItem.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { trade } from './trade';
 
 const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
-  const [shapeState, setShapeState] = useState('oval')
-  const currentTitle = useRef()
-  const currentImage = useRef()
-  const currentPrice = useRef()
-  const currentSize = useRef()
+  const [shapeState, setShapeState] = useState('oval');
+  const currentTitle = useRef();
+  const currentImage = useRef();
+  const currentPrice = useRef();
+  const currentSize = useRef();
 
   useEffect(() => {
-    localStorage.setItem('basket', JSON.stringify(basketState))
-  }, [basketState])
+    localStorage.setItem('basket', JSON.stringify(basketState));
+  }, [basketState]);
   const changeShape = (e) => {
-    setShapeState(e.target.textContent.toLowerCase())
-  }
+    setShapeState(e.target.textContent.toLowerCase());
+  };
 
-  let check = new Set()
+  let check = new Set();
   const removedDuplicates =
     trade[0][gemState] &&
     trade[0][gemState][0]
       ?.filter((gem) => !check.has(gem['shape']) && check.add(gem['shape']))
-      ?.map((image) => image.image === require('./trade-images/sold.jpg'))
+      ?.map((image) => image.image === require('./trade-images/sold.jpg'));
 
   const shapes = trade[0].shapes.map((shape, index) => {
     return (
@@ -38,18 +38,18 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
       >
         {shape}
       </li>
-    )
-  })
+    );
+  });
 
-  const sizes = trade[0].sizes.map((size, index) => <li key={index}>{size}</li>)
-  const colors =
-    trade[0][gemState] &&
-    trade[0][gemState][1]?.colors.map((color, index) => (
-      <li
-        key={index}
-        style={{ background: `linear-gradient(to right, rgba(${color})  , rgba(${color}, 0.6)  )` }}
-      ></li>
-    ))
+  const sizes = trade[0].sizes.map((size, index) => <li key={index}>{size}</li>);
+  // const colors =
+  //   trade[0][gemState] &&
+  //   trade[0][gemState][1]?.colors.map((color, index) => (
+  //     <li
+  //       key={index}
+  //       style={{ background: `linear-gradient(to right, rgba(${color})  , rgba(${color}, 0.6)  )` }}
+  //     ></li>
+  //   ))
 
   const tradeItems = trade[0][gemState] ? (
     trade[0][gemState][0].map(
@@ -72,7 +72,7 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
         <h2>-</h2>
       </div>
     </SwiperSlide>
-  )
+  );
   return (
     <div className='trade-container'>
       <div className='trade'>
@@ -97,9 +97,9 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
         <div className='trade-buttons size'>
           <ul>{sizes}</ul>
         </div>
-        <div className='trade-buttons color'>
+        {/* <div className='trade-buttons color'>
           <ul>{colors}</ul>
-        </div>
+        </div> */}
 
         <div className='trade-cart'>
           <button
@@ -112,7 +112,7 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
                   price: currentPrice.current.innerText,
                   size: currentSize.current.innerText,
                 },
-              ])
+              ]);
             }}
           >
             Add To Cart
@@ -122,12 +122,12 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
         <AiOutlineClose
           className='x'
           onClick={() => {
-            setTrade(false)
+            setTrade(false);
           }}
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TradeItem
+export default TradeItem;

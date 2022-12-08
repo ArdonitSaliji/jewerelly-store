@@ -9,6 +9,8 @@ import TradeItem from './components/Popups/TradeItem/TradeItem.jsx';
 import Basket from './components/Basket/Basket.jsx';
 import './App.css';
 import Account from './components/Popups/Account/Account.jsx';
+import Checkout from './components/Checkout/Checkout.jsx';
+import Footer from './components/Footer/Footer.jsx';
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -50,6 +52,7 @@ function App() {
             path='/basket'
             element={<Basket basketState={basketState} setBasketState={setBasketState} />}
           />
+          <Route path='/checkout' element={<Checkout />} />
         </Routes>
 
         {login && (
@@ -71,14 +74,14 @@ function App() {
             gemState={gemState}
           />
         )}
-        <Account
-          setLoginStatus={setLoginStatus}
-          accountPopup={accountPopup}
-          setAccountPopup={setAccountPopup}
-        />
-        <div className='footer'>
-          <h2>&copy; Jewellery Traders</h2>
-        </div>
+        {accountPopup && (
+          <Account
+            setLoginStatus={setLoginStatus}
+            accountPopup={accountPopup}
+            setAccountPopup={setAccountPopup}
+          />
+        )}
+        <Footer />
       </div>
     </BrowserRouter>
   );

@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 const Checkout = ({ basketState }) => {
-  const [radioValue, setRadioValue] = useState('standard')
+  const [radioValue, setRadioValue] = useState('standard');
 
-  const changeRadio = (value) => radioValue === value
-  const clickRadio = (e) => setRadioValue(e.currentTarget.value)
-  const checkoutItemRef = useRef()
-  let val = 0
-  basketState && basketState.map(({ price }) => (val += Number(price.split('$').pop())))
+  const changeRadio = (value) => radioValue === value;
+  const clickRadio = (e) => setRadioValue(e.currentTarget.value);
+  const checkoutItemRef = useRef();
+  let val = 0;
+  basketState && basketState.map(({ price }) => (val += Number(price.split('$').pop())));
   return basketState && basketState.length > 0 ? (
     <div className='checkout'>
       <h2>Proceed to checkout</h2>
@@ -79,7 +79,7 @@ const Checkout = ({ basketState }) => {
         <Link className='checkout-button red' to={'/'}>
           Go Back
         </Link>
-        <Link to={'/'} className='checkout-button'>
+        <Link to={'/checkout'} className='checkout-button'>
           Proceed To Checkout
         </Link>
       </div>
@@ -100,7 +100,7 @@ const Checkout = ({ basketState }) => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;
