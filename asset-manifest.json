@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/jewerelly-store/static/css/main.4dd9e6d1.css",
-    "main.js": "/jewerelly-store/static/js/main.09d777b6.js",
+    "main.js": "/jewerelly-store/static/js/main.67da6ed5.js",
     "static/media/citrine.png": "/jewerelly-store/static/media/citrine.8b435961fdadc68d70b6.png",
     "static/media/zircon-gem.jpg": "/jewerelly-store/static/media/zircon-gem.81096f9b9f5132742381.jpg",
     "static/media/opal.jpg": "/jewerelly-store/static/media/opal.865f2fe4425bb4a1be24.jpg",
@@ -14,10 +14,10 @@
     "static/media/eme.jpg": "/jewerelly-store/static/media/eme.6a5f69f1fd4c5ef39758.jpg",
     "index.html": "/jewerelly-store/index.html",
     "main.4dd9e6d1.css.map": "/jewerelly-store/static/css/main.4dd9e6d1.css.map",
-    "main.09d777b6.js.map": "/jewerelly-store/static/js/main.09d777b6.js.map"
+    "main.67da6ed5.js.map": "/jewerelly-store/static/js/main.67da6ed5.js.map"
   },
   "entrypoints": [
     "static/css/main.4dd9e6d1.css",
-    "static/js/main.09d777b6.js"
+    "static/js/main.67da6ed5.js"
   ]
 }
