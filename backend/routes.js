@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const signUpSchema = require('./signUpSchema');
+router.use('/basket', (req, res) => {
+  res.send('hi');
+});
 router.post('/api/login', async (req, res) => {
   const email = await signUpSchema.find({
     emailOrPhone: req.body.emailOrPhone,

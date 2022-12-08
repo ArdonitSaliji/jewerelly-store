@@ -5,32 +5,32 @@ const Checkout = () => {
       <form action=''>
         <div className='row'>
           <div className='col'>
-            <h3 className='title'>billing address</h3>
+            <h3 className='title'>Billing address</h3>
 
             <div className='inputBox'>
-              <span>full name :</span>
+              <span>Full name :</span>
               <input type='text' placeholder='john deo' />
             </div>
             <div className='inputBox'>
-              <span>email :</span>
+              <span>Email :</span>
               <input type='email' placeholder='example@example.com' />
             </div>
             <div className='inputBox'>
-              <span>address :</span>
+              <span>Address :</span>
               <input type='text' placeholder='room - street - locality' />
             </div>
             <div className='inputBox'>
-              <span>city :</span>
+              <span>City :</span>
               <input type='text' placeholder='mumbai' />
             </div>
 
             <div className='flex'>
               <div className='inputBox'>
-                <span>state :</span>
-                <input type='text' placeholder='india' />
+                <span>State :</span>
+                <input type='text' placeholder='State' />
               </div>
               <div className='inputBox'>
-                <span>zip code :</span>
+                <span>Zip code :</span>
                 <input type='text' placeholder='123 456' />
               </div>
             </div>

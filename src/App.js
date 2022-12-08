@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Main from './components/Main/Main.jsx';
 import Login from './components/Popups/Login/Login.jsx';
@@ -27,7 +27,7 @@ function App() {
     }
   });
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className='app'>
         <Navbar
           accountPopup={accountPopup}
@@ -38,7 +38,6 @@ function App() {
           setSignUp={setSignUp}
           basketState={basketState}
         />
-
         <Routes>
           <Route
             path='/'
@@ -83,7 +82,7 @@ function App() {
         )}
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
