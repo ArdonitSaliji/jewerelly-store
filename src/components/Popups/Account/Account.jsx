@@ -1,5 +1,5 @@
-import React from 'react'
-import './Account.css'
+import React from 'react';
+import './Account.css';
 const Account = ({ setLoginStatus, accountPopup, setAccountPopup }) => {
   return (
     <div
@@ -24,10 +24,9 @@ const Account = ({ setLoginStatus, accountPopup, setAccountPopup }) => {
           <li></li>
           <li
             onClick={() => {
-              sessionStorage.setItem('loginStatus', JSON.stringify(false))
-              setAccountPopup(false)
-              setLoginStatus(false)
-              window.location.reload()
+              sessionStorage.setItem('loginStatus', JSON.stringify(false));
+              setAccountPopup(false);
+              setLoginStatus(false);
             }}
           >
             Logout
@@ -35,7 +34,7 @@ const Account = ({ setLoginStatus, accountPopup, setAccountPopup }) => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Account
+export default Account;

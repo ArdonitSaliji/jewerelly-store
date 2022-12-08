@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './Navbar.css'
+import React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
 const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState }) => {
   return (
     <div className='navbar-container'>
@@ -17,7 +18,7 @@ const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState
               <a onClick={() => setLogin(true)}>Login</a>
               <a
                 onClick={() => {
-                  setSignUp(true)
+                  setSignUp(true);
                 }}
               >
                 Sign up
@@ -27,16 +28,16 @@ const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState
           <div className='navbar-links'>
             <ul>
               <li>
-                <Link to='/jewerelly-eCommerce'>Home</Link>
+                <Link to='/'>Home</Link>
               </li>
               <li>
-                <Link to='/jewerelly-eCommerce'>Prices</Link>
+                <Link to='/'>Prices</Link>
               </li>
               <li>
-                <Link to='/jewerelly-eCommerce'>About us</Link>
+                <Link to='/'>About us</Link>
               </li>
               <li>
-                <Link to='jewerelly-eCommerce/basket'>
+                <Link to='/basket'>
                   Basket&nbsp;
                   {basketState && basketState.length > 0 && (
                     <span className='basket-indicator'>{basketState.length}</span>
@@ -56,7 +57,7 @@ const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -1,26 +1,29 @@
-import React, { useState } from 'react'
-import './Main.css'
-import { data, listing } from './data'
-import { AiOutlineSearch } from 'react-icons/ai'
+import React, { useState } from 'react';
+import './Main.css';
+import { data, listing } from './data';
+import { AiOutlineSearch } from 'react-icons/ai';
+
 const Main = ({ setTrade, setGemState }) => {
-  const [searchState, setSearchState] = useState()
+  const [searchState, setSearchState] = useState();
+
   const switchTrade = (e) => {
-    setGemState(e.target.firstElementChild.textContent.toLowerCase())
-  }
+    setGemState(e.target.firstElementChild.textContent.toLowerCase());
+  };
+
   const allGems = data.map(({ title, image, text }, index) => (
     <div
       key={index}
       className='gem'
       onClick={(e) => {
-        setTrade(true)
-        switchTrade(e)
+        setTrade(true);
+        switchTrade(e);
       }}
     >
       <h3>{title}</h3>
       <img src={image} alt='' />
       <p>{text}</p>
     </div>
-  ))
+  ));
 
   return (
     <div className='main'>
@@ -54,7 +57,7 @@ const Main = ({ setTrade, setGemState }) => {
           : allGems}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

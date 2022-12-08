@@ -1,17 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
-import { useRef } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
+
 import './Signup.css'
 
-const Signup = ({ signUp, setSignUp, setLogin }) => {
+const Signup = ({ setSignUp, setLogin }) => {
   const [state, setState] = useState({
     password: '',
     emailOrPhone: '',
     password2: '',
   })
   const [message, setMessage] = useState()
-
   const submitInfo = async (e) => {
     try {
       const res = await fetch('http://localhost:5000/api/signup', {
@@ -22,11 +21,17 @@ const Signup = ({ signUp, setSignUp, setLogin }) => {
         body: JSON.stringify({ emailOrPhone: state.emailOrPhone, password: state.password }),
       })
       if (res.status === 201) {
+        alert('Account created successfully')
         setMessage('Account created successfully')
         setTimeout(() => {
-          setMessage('')
           setSignUp(false)
-        }, 700)
+          setState({
+            password: '',
+            emailOrPhone: '',
+            password2: '',
+          })
+          setMessage('')
+        }, 1000)
       }
       if (res.status === 409) {
         e.preventDefault()
@@ -54,12 +59,6 @@ const Signup = ({ signUp, setSignUp, setLogin }) => {
 
   return (
     <div className='signup-container'>
-      {!signUp &&
-        setState({
-          password: '',
-          emailOrPhone: '',
-          password2: '',
-        })}
       <form
         onSubmit={(e) => {
           passwordIsNotMatching(e)

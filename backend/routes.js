@@ -1,41 +1,35 @@
-const express = require('express')
-const signUpModel = require('./signUpModels')
-const uuid = require('uuid').v4
-const router = express.Router()
-const fs = require('fs')
-
-router.post('/api/login', async (req, res) => {
-  const email = await signUpModel.find({ emailOrPhone: req.body.emailOrPhone })
-  const account = await signUpModel.findOne({
+const express = require("express");
+const router = express.Router();
+const signUpModel = require("./signUpModels");
+router.post("/api/login", async (req, res) => {
+  const email = await signUpModel.find({
     emailOrPhone: req.body.emailOrPhone,
-    password: req.body.password,
-  })
-  if (account) {
-    return res.status(200).send({ login: 'successful' })
+  });
+  const password = await signUpModel.find({ password: req.body.password });
+  if (email && email.length > 0 && password && password.length > 0) {
+    return res.status(200).send({ login: "successful" });
   }
-  if (email.length < 1 && !account) {
-    return res.status(404).send({ login: 'Account does not exist' })
+  if (email.length < 1) {
+    return res.status(404).send({ login: "Account does not exist" });
   }
-  if (email && !account) {
-    return res.status(401).send({ login: 'wrong password' })
+  if (email && email.length > 0 && password.length < 1) {
+    return res.status(401).send({ login: "wrong password" });
   }
-})
+});
 
-router.post('/api/signup', async (req, res) => {
+router.post("/api/signup", async (req, res) => {
   const userExists = await signUpModel.findOne({
     emailOrPhone: req.body.emailOrPhone,
-  })
-  if (userExists) {
-    return res.status(409).json({ error: 'User already exists' })
+  });
+  if (userExists && userExists !== []) {
+    return res.status(409).json({ error: "User already exists" });
   }
-  if (!userExists) {
-    const user = new signUpModel({
-      emailOrPhone: req.body.emailOrPhone,
-      password: req.body.password,
-    })
-    const userCreated = await user.save()
-    return res.status(201).json({ data: { id: userCreated.id } })
-  }
-})
+  const user = new signUpModel({
+    emailOrPhone: req.body.emailOrPhone,
+    password: req.body.password,
+  });
+  const userCreated = await user.save();
+  return res.status(201).json({ data: { id: userCreated.id } });
+});
 
-module.exports = router
+module.exports = router;

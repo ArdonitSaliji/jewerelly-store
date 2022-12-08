@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
-import './ForgotPass.css'
-import { HiLockClosed } from 'react-icons/hi'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import './ForgotPass.css';
+import { HiLockClosed } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 const Forgot = ({ setSignup }) => {
   return (
@@ -19,12 +19,12 @@ const Forgot = ({ setSignup }) => {
           <hr className='forgot-or-hr' />
         </span>
         <a onClick={() => setTimeout(() => setSignup(true), 200)}>Create New Account</a>
-        <Link to={'/jewerelly-eCommerce'} className='forgot-back'>
+        <Link to={'/'} className='forgot-back'>
           Go Back
         </Link>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Forgot
+export default Forgot;

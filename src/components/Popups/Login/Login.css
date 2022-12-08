@@ -8,16 +8,15 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 .login {
+  user-select: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  user-select: none;
   border: 1px solid black;
   position: fixed;
   border-radius: 10px;
   width: 28rem;
   height: 30rem;
-  max-height: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -56,33 +55,14 @@
 .login input:placeholder-shown {
   font-size: 17px;
 }
-.login-response {
-  padding: 0 0 0.8rem 0;
+.login .response {
+  padding: 1rem 0;
   color: rgb(201, 0, 0);
 }
-.login-remember {
-  display: flex;
-  padding: 0.8rem 0;
-  align-items: center;
-}
-.login-remember p {
-  color: black !important;
-  width: auto;
-}
-.login-remember input {
-  margin: 0 5px;
-  width: auto;
-  height: auto;
-}
-.login-button {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.login-button button {
+.login-btn {
   background-color: green;
   color: white;
-  font-size: 1.3rem;
+  font-size: 20px;
   height: 2.5rem;
   border: none;
   cursor: pointer;
@@ -91,7 +71,7 @@
 }
 
 .login span {
-  padding: 1.5rem 0;
+  padding: 1.8rem 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -104,23 +84,20 @@
   text-align: center;
 }
 .login p {
+  margin: 0 18px;
   color: rgb(61, 61, 61);
 }
-.login-button button.new {
+.login-btn.new {
   background-color: whitesmoke;
   color: green;
   margin-bottom: 5px;
   width: 45%;
   height: 2.5rem;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
 }
 .login a {
   cursor: pointer;
   color: rgb(51, 51, 193);
-  margin: 1.2rem 0;
+  margin: 1.5rem 0;
   width: 100%;
   display: inline-block;
   text-align: center;
