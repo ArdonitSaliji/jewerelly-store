@@ -2,7 +2,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.scss';
-const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState }) => {
+const Navbar = ({
+  userFirstLetter,
+  setAccountPopup,
+  loginStatus,
+  setLogin,
+  setSignUp,
+  basketState,
+}) => {
   return (
     <div className='navbar-container'>
       <div className='navbar'>
@@ -45,12 +52,9 @@ const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState
               </li>
             </ul>
             {loginStatus && (
-              <img
-                className='navbar-account same'
-                onClick={() => setAccountPopup(true)}
-                src='https://yt3.ggpht.com/yti/AJo0G0m-2Y8iR9ecaHPVTitXtXBSyBivDb6SNOPmBg=s88-c-k-c0x00ffffff-no-rj-mo'
-                alt=''
-              />
+              <span className='navbar-account same' onClick={() => setAccountPopup(true)}>
+                {userFirstLetter}
+              </span>
             )}
           </div>
         </div>

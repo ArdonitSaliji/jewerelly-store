@@ -21,6 +21,42 @@
   height: 29.5rem;
   z-index: 5;
   background-color: grey;
+  input {
+    font-size: 17px;
+    margin-top: 1rem;
+    width: 80%;
+    text-indent: 10px;
+    border: none;
+    height: 2.2rem;
+    border-radius: 5px;
+  }
+  input:placeholder-shown {
+    font-size: 1rem;
+  }
+  .wrong-password {
+    transition: 0.5s all;
+    text-shadow: 0.5px 0.5px black;
+    color: rgb(255, 0, 0);
+    text-align: center;
+    padding: 0.5rem 4rem 0.5rem;
+  }
+  span {
+    padding: 2rem 0 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  hr {
+    border: 1px solid rgb(61, 61, 61);
+    width: 8.2rem;
+    height: 1px;
+    text-align: center;
+  }
+  p {
+    margin: 0 1.1rem;
+    color: rgb(61, 61, 61);
+  }
 }
 .signup-title {
   text-align: center;
@@ -40,24 +76,7 @@
   align-items: center;
   flex-wrap: nowrap;
 }
-.signup input {
-  font-size: 17px;
-  margin-top: 1rem;
-  width: 80%;
-  text-indent: 10px;
-  border: none;
-  height: 2.2rem;
-  border-radius: 5px;
-}
-.signup input:placeholder-shown {
-  font-size: 1rem;
-}
-.signup .wrong-password {
-  text-shadow: 0.5px 0.5px black;
-  color: rgb(255, 0, 0);
-  text-align: center;
-  padding: 0.5rem 4rem 0.5rem;
-}
+
 .signup-btn {
   background-color: green;
   color: white;
@@ -67,27 +86,11 @@
   cursor: pointer;
   border-radius: 10px;
   width: 80%;
+  &:active {
+    background-color: rgb(0, 87, 0);
+  }
 }
-.signup-btn:active {
-  background-color: rgb(0, 87, 0);
-}
-.signup span {
-  padding: 2rem 0 0.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.signup hr {
-  border: 1px solid rgb(61, 61, 61);
-  width: 8.2rem;
-  height: 1px;
-  text-align: center;
-}
-.signup p {
-  margin: 0 1.1rem;
-  color: rgb(61, 61, 61);
-}
+
 .signup-acc {
   font-size: 18px;
   padding: 1rem 0;
@@ -95,13 +98,13 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-.signup-acc p {
-  margin: 0 8px 0 0;
-  color: #000;
-}
-.signup-acc a {
-  color: blue;
-  cursor: pointer;
-  width: 3rem;
+  p {
+    margin: 0 8px 0 0;
+    color: #000;
+  }
+  a {
+    color: blue;
+    cursor: pointer;
+    width: 3rem;
+  }
 }

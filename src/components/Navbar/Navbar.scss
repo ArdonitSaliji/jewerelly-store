@@ -97,16 +97,20 @@
 }
 
 .navbar-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 10;
   cursor: pointer;
   margin-left: -1rem;
-  margin-right: 3.5rem;
+  margin-right: 3rem;
   height: 3rem;
-  overflow: hidden;
   width: 3rem;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
-  .navbar-account img {
-    width: 100%;
-  }
+  color: white;
+  font-size: 1.5rem;
+  user-select: none;
+  border: 1px solid white;
+  background-color: green;
+  z-index: 10;
 }

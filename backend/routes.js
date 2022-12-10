@@ -9,7 +9,6 @@ router.post('/api/login', async (req, res) => {
   const username = await signUpSchema.find({
     username: req.body.emailOrUsername,
   });
-
   const password = await signUpSchema.find({ password: req.body.password });
   if (email.length < 1 && username.length < 1) {
     return res.status(404).send({ login: 'Account does not exist' });
@@ -20,7 +19,7 @@ router.post('/api/login', async (req, res) => {
     password &&
     password.length > 0
   ) {
-    return res.status(200).send({ login: 'successful' });
+    return res.status(200).send({ firstLetter: username[0].username[0] });
   }
 
   if (email && email.length > 0 && password.length < 1) {
@@ -33,7 +32,7 @@ router.post('/api/signup', async (req, res) => {
     email: req.body.email,
   });
   if (userExists && userExists !== []) {
-    return res.status(409).json({ error: 'User already exists' });
+    return res.status(409).json({ error: 'Account already exists' });
   }
   const user = new signUpSchema({
     username: req.body.username,

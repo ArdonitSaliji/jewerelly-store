@@ -21,6 +21,7 @@ function App() {
   const status = JSON.parse(sessionStorage.getItem('loginStatus'));
   const [loginStatus, setLoginStatus] = useState(status);
   const [accountPopup, setAccountPopup] = useState(false);
+  const [userFirstLetter, setUserFirstLetter] = useState();
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.same')) {
       setAccountPopup(false);
@@ -30,6 +31,7 @@ function App() {
     <HashRouter>
       <div className='app'>
         <Navbar
+          userFirstLetter={userFirstLetter}
           accountPopup={accountPopup}
           setAccountPopup={setAccountPopup}
           loginStatus={loginStatus}
@@ -56,6 +58,7 @@ function App() {
 
         {login && (
           <Login
+            setUserFirstLetter={setUserFirstLetter}
             loginStatus={loginStatus}
             setLoginStatus={setLoginStatus}
             login={login}
@@ -75,6 +78,7 @@ function App() {
         )}
 
         <Account
+          userFirstLetter={userFirstLetter}
           setLoginStatus={setLoginStatus}
           accountPopup={accountPopup}
           setAccountPopup={setAccountPopup}

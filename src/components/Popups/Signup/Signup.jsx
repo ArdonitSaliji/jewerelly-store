@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import './Signup.css';
+import './Signup.scss';
 
 const Signup = ({ setSignUp, setLogin }) => {
   const [state, setState] = useState({
@@ -48,14 +48,30 @@ const Signup = ({ setSignUp, setLogin }) => {
     }
   };
 
-  const passwordIsNotMatching = (e) => {
-    if (state.password.length < 1 && state.password2.length < 1) {
-      setMessage('Password must be longer than 8 characters');
+  const incorrectCredentials = (e) => {
+    if (state.username.length < 4) {
       e.preventDefault();
+      setMessage('Username must be at least 4 characters!');
+      setTimeout(() => {
+        setMessage('');
+      }, 7000);
+      return false;
+    }
+    if (state.password.length < 8 && state.password2.length < 8) {
+      e.preventDefault();
+      setMessage('Password must be longer than 8 characters!');
+      setTimeout(() => {
+        setMessage('');
+      }, 5000);
+      return false;
     } else {
       if (state.password !== state.password2) {
         e.preventDefault();
         setMessage('Passwords need to match.');
+        setTimeout(() => {
+          setMessage('');
+        }, 5000);
+        return false;
       } else {
         e.preventDefault();
         submitInfo(e);
@@ -67,7 +83,7 @@ const Signup = ({ setSignUp, setLogin }) => {
     <div className='signup-container'>
       <form
         onSubmit={(e) => {
-          passwordIsNotMatching(e);
+          incorrectCredentials(e);
         }}
         className='signup'
       >

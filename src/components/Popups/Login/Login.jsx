@@ -5,7 +5,7 @@ import './Login.scss';
 import { Link } from 'react-router-dom';
 import { message } from 'antd';
 
-const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
+const Login = ({ setUserFirstLetter, setLoginStatus, login, setLogin, setSignUp }) => {
   const [loginState, setLoginState] = useState({
     emailOrUsername: '',
     password: '',
@@ -23,6 +23,8 @@ const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
       }),
     });
     if (res.status === 200) {
+      const json = await res.json();
+      setUserFirstLetter(json.firstLetter.toUpperCase());
       e.preventDefault();
       message.success('Login Successful');
       setTimeout(() => {
@@ -77,7 +79,7 @@ const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
             <hr /> <p>OR</p> <hr />
           </span>
           <button
-            onClick={(e) => {
+            onClick={() => {
               setLogin(false);
               setTimeout(() => setSignUp(true), 200);
             }}

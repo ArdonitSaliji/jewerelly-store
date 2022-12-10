@@ -1,0 +1,81 @@
+.account-popup {
+  transition: 0.5s ease-out;
+  z-index: 3;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 13rem;
+  background-color: black;
+}
+.account-credentials {
+  width: 100%;
+  justify-content: right;
+  display: flex;
+  height: 7rem;
+  border-bottom: 1px solid white;
+  span {
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    border: 1px solid white;
+    background-color: green;
+    z-index: 10;
+    margin-top: 2rem;
+    margin-right: 3rem;
+    cursor: pointer;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+  }
+}
+.account-username {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    padding-top: 0.3rem;
+    color: grey;
+  }
+}
+.account-lists {
+  width: 100%;
+  color: white;
+  font-display: column;
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    li {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 4rem;
+      width: 100%;
+      border-top: 1px solid grey;
+      border-bottom: 1px solid grey;
+      &:hover {
+        background-color: rgb(78, 78, 78);
+        transition: background-color 0.5s;
+      }
+      &:active {
+        transition: background-color 0s;
+        background-color: rgb(58, 58, 58);
+      }
+    }
+  }
+}
+
+.same {
+  border: 1px solid black;
+}
