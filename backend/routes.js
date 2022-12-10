@@ -4,15 +4,25 @@ const signUpSchema = require('./signUpSchema');
 
 router.post('/api/login', async (req, res) => {
   const email = await signUpSchema.find({
-    emailOrPhone: req.body.emailOrPhone,
+    email: req.body.emailOrUsername,
   });
+  const username = await signUpSchema.find({
+    username: req.body.emailOrUsername,
+  });
+
   const password = await signUpSchema.find({ password: req.body.password });
-  if (email && email.length > 0 && password && password.length > 0) {
-    return res.status(200).send({ login: 'successful' });
-  }
-  if (email.length < 1) {
+  if (email.length < 1 && username.length < 1) {
     return res.status(404).send({ login: 'Account does not exist' });
   }
+
+  if (
+    ((email && email.length > 0) || (username && username.length > 0)) &&
+    password &&
+    password.length > 0
+  ) {
+    return res.status(200).send({ login: 'successful' });
+  }
+
   if (email && email.length > 0 && password.length < 1) {
     return res.status(401).send({ login: 'wrong password' });
   }
@@ -26,6 +36,7 @@ router.post('/api/signup', async (req, res) => {
     return res.status(409).json({ error: 'User already exists' });
   }
   const user = new signUpSchema({
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });

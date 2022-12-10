@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import './Login.css';
+import './Login.scss';
 import { Link } from 'react-router-dom';
+import { message } from 'antd';
 
 const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
   const [loginState, setLoginState] = useState({
-    emailOrPhone: '',
+    emailOrUsername: '',
     password: '',
   });
   const [response, setResponse] = useState();
@@ -17,20 +18,19 @@ const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        emailOrPhone: loginState.emailOrPhone,
+        emailOrUsername: loginState.emailOrUsername,
         password: loginState.password,
       }),
     });
     if (res.status === 200) {
       e.preventDefault();
-      setResponse('Welcome Ardonit!');
-      alert('Welcome Ardonit!');
+      message.success('Login Successful');
       setTimeout(() => {
         setLogin(false);
         setLoginStatus(true);
         sessionStorage.setItem('loginStatus', JSON.stringify(true));
         setLoginState({
-          emailOrPhone: '',
+          emailOrUsername: '',
           password: '',
         });
       }, 500);
@@ -50,33 +50,26 @@ const Login = ({ loginStatus, setLoginStatus, login, setLogin, setSignUp }) => {
       <div className='login-container'>
         <form className='login'>
           <AiOutlineClose onClick={() => setLogin(false)} className='login-x' />
-          <h1 className='login-title'>Login</h1>
+          <h2 className='login-title'>Login</h2>
           <div className='login-inputs'>
             <input
-              onChange={(e) => setLoginState({ ...loginState, emailOrPhone: e.target.value })}
-              value={loginState.emailOrPhone}
-              type='text'
-              placeholder='Phone number or email'
-              name='email'
               required
+              onChange={(e) => setLoginState({ ...loginState, emailOrUsername: e.target.value })}
+              value={loginState.emailOrUsername}
+              type='text'
+              placeholder='Username or email'
+              name='email'
             />
             <input
+              required
               onChange={(e) => setLoginState({ ...loginState, password: e.target.value })}
               value={loginState.password}
               type='password'
               placeholder='Password'
               name='password'
-              required
             />
           </div>
-          <p
-            style={
-              response === 'Welcome Ardonit!' ? { color: 'green' } : { color: 'rgb(201, 0, 0)' }
-            }
-            className='response'
-          >
-            {response}
-          </p>
+          <p className='response'>{response}</p>
           <button type='button' onClick={(e) => getUser(e)} className='login-btn'>
             Login
           </button>

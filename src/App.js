@@ -73,13 +73,13 @@ function App() {
             gemState={gemState}
           />
         )}
-        {accountPopup && (
-          <Account
-            setLoginStatus={setLoginStatus}
-            accountPopup={accountPopup}
-            setAccountPopup={setAccountPopup}
-          />
-        )}
+
+        <Account
+          setLoginStatus={setLoginStatus}
+          accountPopup={accountPopup}
+          setAccountPopup={setAccountPopup}
+        />
+
         <Footer />
       </div>
     </HashRouter>

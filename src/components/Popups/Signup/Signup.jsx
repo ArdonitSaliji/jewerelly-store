@@ -19,7 +19,11 @@ const Signup = ({ setSignUp, setLogin }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: state.email, password: state.password }),
+        body: JSON.stringify({
+          username: state.username,
+          email: state.email,
+          password: state.password,
+        }),
       });
       if (res.status === 201) {
         alert('Account created successfully');
@@ -51,7 +55,7 @@ const Signup = ({ setSignUp, setLogin }) => {
     } else {
       if (state.password !== state.password2) {
         e.preventDefault();
-        setMessage('Sorry, your passwords need to be the same.');
+        setMessage('Passwords need to match.');
       } else {
         e.preventDefault();
         submitInfo(e);
@@ -100,12 +104,7 @@ const Signup = ({ setSignUp, setLogin }) => {
             required
           />
         </div>
-        <p
-          className='wrong-password'
-          style={message === 'Account created successfully' ? { color: 'green' } : { color: 'red' }}
-        >
-          {message}
-        </p>
+        <p className='wrong-password'>{message}</p>
 
         <button className='signup-btn'>Sign up</button>
         <span>

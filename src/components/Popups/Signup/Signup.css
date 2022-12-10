@@ -16,8 +16,8 @@
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
-  border-radius: 10px;
-  width: 27rem;
+  border-radius: 5px;
+  width: 26rem;
   height: 29.5rem;
   z-index: 5;
   background-color: grey;
@@ -53,8 +53,8 @@
   font-size: 1rem;
 }
 .signup .wrong-password {
-  display: inline-block;
-  color: rgb(99, 0, 0);
+  text-shadow: 0.5px 0.5px black;
+  color: rgb(255, 0, 0);
   text-align: center;
   padding: 0.5rem 4rem 0.5rem;
 }
@@ -80,7 +80,7 @@
 }
 .signup hr {
   border: 1px solid rgb(61, 61, 61);
-  width: 10rem;
+  width: 8.2rem;
   height: 1px;
   text-align: center;
 }
