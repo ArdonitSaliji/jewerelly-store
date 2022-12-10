@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Main from './components/Main/Main.jsx';
 import Login from './components/Popups/Login/Login.jsx';

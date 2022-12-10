@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const signUpSchema = require('./signUpSchema');
-router.use('/basket', (req, res) => {
-  res.send('hi');
-});
+
 router.post('/api/login', async (req, res) => {
   const email = await signUpSchema.find({
     emailOrPhone: req.body.emailOrPhone,
@@ -22,13 +20,13 @@ router.post('/api/login', async (req, res) => {
 
 router.post('/api/signup', async (req, res) => {
   const userExists = await signUpSchema.findOne({
-    emailOrPhone: req.body.emailOrPhone,
+    email: req.body.email,
   });
   if (userExists && userExists !== []) {
     return res.status(409).json({ error: 'User already exists' });
   }
   const user = new signUpSchema({
-    emailOrPhone: req.body.emailOrPhone,
+    email: req.body.email,
     password: req.body.password,
   });
   const userCreated = await user.save();

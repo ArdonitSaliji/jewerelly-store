@@ -76,10 +76,10 @@ const Checkout = ({ basketState }) => {
       </div>
 
       <div className='checkout-buttons'>
-        <Link className='checkout-button red' to={'/jewerelly-store'}>
+        <Link className='checkout-button red' to={'/'}>
           Go Back
         </Link>
-        <Link to={'/jewerelly-store/checkout'} className='checkout-button'>
+        <Link to={'/checkout'} className='checkout-button'>
           Proceed To Checkout
         </Link>
       </div>
@@ -95,7 +95,7 @@ const Checkout = ({ basketState }) => {
           Go Back
         </Link>
 
-        <Link to={'/jewerelly-store'} className='checkout-button'>
+        <Link to={'/'} className='checkout-button'>
           Continue Shopping
         </Link>
       </div>

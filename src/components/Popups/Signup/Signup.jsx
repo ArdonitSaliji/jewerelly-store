@@ -1,16 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
-import { AiOutlineClose } from 'react-icons/ai'
+import React, { useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 
-import './Signup.css'
+import './Signup.css';
 
 const Signup = ({ setSignUp, setLogin }) => {
   const [state, setState] = useState({
+    username: '',
+    email: '',
     password: '',
-    emailOrPhone: '',
     password2: '',
-  })
-  const [message, setMessage] = useState()
+  });
+  const [message, setMessage] = useState();
   const submitInfo = async (e) => {
     try {
       const res = await fetch('http://localhost:5000/api/signup', {
@@ -18,61 +19,69 @@ const Signup = ({ setSignUp, setLogin }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ emailOrPhone: state.emailOrPhone, password: state.password }),
-      })
+        body: JSON.stringify({ email: state.email, password: state.password }),
+      });
       if (res.status === 201) {
-        alert('Account created successfully')
-        setMessage('Account created successfully')
+        alert('Account created successfully');
+        setMessage('Account created successfully');
         setTimeout(() => {
-          setSignUp(false)
+          setSignUp(false);
           setState({
+            username: '',
             password: '',
-            emailOrPhone: '',
+            email: '',
             password2: '',
-          })
-          setMessage('')
-        }, 1000)
+          });
+          setMessage('');
+        }, 1000);
       }
       if (res.status === 409) {
-        e.preventDefault()
-        setMessage('Account already exists')
+        e.preventDefault();
+        setMessage('Account already exists');
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const passwordIsNotMatching = (e) => {
     if (state.password.length < 1 && state.password2.length < 1) {
-      setMessage('Password must be longer than 8 characters')
-      e.preventDefault()
+      setMessage('Password must be longer than 8 characters');
+      e.preventDefault();
     } else {
       if (state.password !== state.password2) {
-        e.preventDefault()
-        setMessage('Sorry, your passwords need to be the same.')
+        e.preventDefault();
+        setMessage('Sorry, your passwords need to be the same.');
       } else {
-        e.preventDefault()
-        submitInfo(e)
+        e.preventDefault();
+        submitInfo(e);
       }
     }
-  }
+  };
 
   return (
     <div className='signup-container'>
       <form
         onSubmit={(e) => {
-          passwordIsNotMatching(e)
+          passwordIsNotMatching(e);
         }}
         className='signup'
       >
         <AiOutlineClose onClick={() => setSignUp(false)} className='signup-x' />
-        <h1 className='signup-title'>Sign up</h1>
+        <h2 className='signup-title'>Sign up</h2>
         <div className='signup-inputs'>
           <input
-            onChange={(e) => setState({ ...state, emailOrPhone: e.target.value })}
-            value={state.emailOrPhone}
+            onChange={(e) => setState({ ...state, username: e.target.value })}
+            value={state.username}
             type='text'
-            placeholder='Phone Number or Email'
+            placeholder='Username'
+            required
+          />
+          <input
+            onChange={(e) => setState({ ...state, email: e.target.value })}
+            value={state.email}
+            type='text'
+            placeholder='Email'
             required
           />
           <input
@@ -107,8 +116,8 @@ const Signup = ({ setSignUp, setLogin }) => {
           <a
             style={{ textDecoration: 'underline' }}
             onClick={() => {
-              setSignUp(false)
-              setTimeout(() => setLogin(true), 200)
+              setSignUp(false);
+              setTimeout(() => setLogin(true), 200);
             }}
           >
             Login
@@ -116,7 +125,7 @@ const Signup = ({ setSignUp, setLogin }) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
