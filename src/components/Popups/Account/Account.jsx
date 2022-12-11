@@ -1,6 +1,6 @@
 import React from 'react';
 import './Account.scss';
-const Account = ({ userFirstLetter, setLoginStatus, accountPopup, setAccountPopup }) => {
+const Account = ({ setLoginStatus, accountPopup, setAccountPopup }) => {
   return (
     <div
       style={accountPopup ? { transform: 'translateX(0)' } : { transform: 'translateX(100%)' }}
@@ -8,9 +8,11 @@ const Account = ({ userFirstLetter, setLoginStatus, accountPopup, setAccountPopu
     >
       <div className='account-credentials'>
         <div className='account-username'>
-          <p>@Ardonit</p>
+          <p>@{JSON.parse(sessionStorage.getItem('user'))}</p>
         </div>
-        <span onClick={() => setAccountPopup(false)}>{userFirstLetter}</span>
+        <span onClick={() => setAccountPopup(false)}>
+          {JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
+        </span>
       </div>
       <div className='account-lists'>
         <ul>

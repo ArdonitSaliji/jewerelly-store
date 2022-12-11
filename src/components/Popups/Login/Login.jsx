@@ -5,7 +5,7 @@ import './Login.scss';
 import { Link } from 'react-router-dom';
 import { message } from 'antd';
 
-const Login = ({ setUserFirstLetter, setLoginStatus, login, setLogin, setSignUp }) => {
+const Login = ({ setLoginStatus, login, setLogin, setSignUp }) => {
   const [loginState, setLoginState] = useState({
     emailOrUsername: '',
     password: '',
@@ -22,9 +22,9 @@ const Login = ({ setUserFirstLetter, setLoginStatus, login, setLogin, setSignUp 
         password: loginState.password,
       }),
     });
+    const json = await res.json();
+    sessionStorage.setItem('user', JSON.stringify(json.user.emailOrUsername));
     if (res.status === 200) {
-      const json = await res.json();
-      setUserFirstLetter(json.firstLetter.toUpperCase());
       e.preventDefault();
       message.success('Login Successful');
       setTimeout(() => {

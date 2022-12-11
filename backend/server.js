@@ -6,6 +6,15 @@ const port = 5000;
 const cors = require('cors');
 const routesUrls = require('./routes');
 const path = require('path');
+const session = require('express-session');
+
+app.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(cors());
 app.use(express.json());
 dotenv.config();
@@ -16,5 +25,10 @@ mongoose.connect(
   () => console.log('Database Connected')
 );
 app.use('/', routesUrls);
+
+app.use((req, res, next) => {
+  if (req.session.user) next();
+  else res.send(401);
+});
 
 app.listen(port, () => console.log(`Server started at port ${port}`));

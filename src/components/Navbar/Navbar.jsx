@@ -2,14 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.scss';
-const Navbar = ({
-  userFirstLetter,
-  setAccountPopup,
-  loginStatus,
-  setLogin,
-  setSignUp,
-  basketState,
-}) => {
+const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState }) => {
   return (
     <div className='navbar-container'>
       <div className='navbar'>
@@ -53,7 +46,7 @@ const Navbar = ({
             </ul>
             {loginStatus && (
               <span className='navbar-account same' onClick={() => setAccountPopup(true)}>
-                {userFirstLetter}
+                {JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
               </span>
             )}
           </div>

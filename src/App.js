@@ -22,6 +22,7 @@ function App() {
   const [loginStatus, setLoginStatus] = useState(status);
   const [accountPopup, setAccountPopup] = useState(false);
   const [userFirstLetter, setUserFirstLetter] = useState();
+  const [loggedInUsername, setLoggedInUsername] = useState();
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.same')) {
       setAccountPopup(false);
@@ -31,6 +32,7 @@ function App() {
     <HashRouter>
       <div className='app'>
         <Navbar
+          loggedInUsername={loggedInUsername}
           userFirstLetter={userFirstLetter}
           accountPopup={accountPopup}
           setAccountPopup={setAccountPopup}
