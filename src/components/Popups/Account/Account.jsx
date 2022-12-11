@@ -16,10 +16,11 @@ const Account = ({ setLoginStatus, accountPopup, setAccountPopup }) => {
     >
       <div className='account-credentials'>
         <div className='account-username'>
-          <p>@{JSON.parse(sessionStorage.getItem('user'))}</p>
+          <p>@{sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user'))}</p>
         </div>
         <span onClick={() => setAccountPopup(false)}>
-          {JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
+          {sessionStorage.getItem('user') &&
+            JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
         </span>
       </div>
       <div className='account-lists'>

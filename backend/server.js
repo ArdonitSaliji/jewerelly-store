@@ -7,12 +7,14 @@ const cors = require('cors');
 const routesUrls = require('./routes');
 const path = require('path');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 app.use(
   session({
     secret: 'secret',
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
 app.use(cors());

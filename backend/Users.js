@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
-const SignUpSchema = new Schema({
+const Users = new Schema({
   username: {
     type: String,
     required: true,
@@ -23,4 +23,4 @@ const SignUpSchema = new Schema({
 // Todo:
 // Encrypt Passwords
 
-module.exports = mongoose.model('User', SignUpSchema);
+module.exports = mongoose.model('User', Users);

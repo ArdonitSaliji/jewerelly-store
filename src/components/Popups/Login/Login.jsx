@@ -23,8 +23,10 @@ const Login = ({ setLoginStatus, login, setLogin, setSignUp }) => {
       }),
     });
     const json = await res.json();
-    sessionStorage.setItem('user', JSON.stringify(json.user.emailOrUsername));
+    console.log(json);
+
     if (res.status === 200) {
+      sessionStorage.setItem('user', JSON.stringify(json.user.emailOrUsername));
       e.preventDefault();
       message.success('Login Successful');
       setTimeout(() => {

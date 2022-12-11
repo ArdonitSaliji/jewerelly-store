@@ -1,54 +1,60 @@
 const express = require('express');
 const router = express.Router();
-const signUpSchema = require('./signUpSchema');
-
+const Users = require('./Users');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 router.post('/api/login', async (req, res) => {
+  const userLoggingIn = req.body;
   const { emailOrUsername } = req.body;
-  const email = await signUpSchema.find({
-    email: req.body.emailOrUsername,
+
+  const email = await Users.findOne({
+    email: emailOrUsername,
   });
-  const findUsername = await signUpSchema.find({
-    username: req.body.emailOrUsername,
+  const userExists = await Users.findOne({
+    username: emailOrUsername,
   });
-  const password = await signUpSchema.find({ password: req.body.password });
-  if (email.length < 1 && findUsername.length < 1) {
+  let foundUser;
+  if (email) foundUser = email;
+  else foundUser = userExists;
+
+  if (!email && !userExists) {
     return res.status(404).send({ login: 'Account does not exist' });
   }
-
-  if (
-    ((email && email.length > 0) || (findUsername && findUsername.length > 0)) &&
-    password &&
-    password.length > 0
-  ) {
-    if (req.session.user) {
-      res.send(req.session.user);
-    } else {
-      req.session.user = {
-        emailOrUsername,
-      };
-    }
-    return res.status(200).send({ user: req.session.user, success: 'Login successful' });
+  if (req.session.user) {
+    res.send(req.session.user);
+  } else {
+    req.session.user = {
+      emailOrUsername,
+    };
   }
-
-  if (email && email.length > 0 && password.length < 1) {
-    return res.status(401).send({ login: 'wrong password' });
+  if (foundUser) {
+    let authPassword = await bcrypt.compare(userLoggingIn.password, foundUser.password);
+    if (authPassword)
+      return res.status(200).send({ user: req.session.user, msg: 'login successful' });
   }
+  return res.status(401).send({ msg: 'Incorrect Username/Email or Password' });
 });
 
 router.post('/api/signup', async (req, res) => {
-  const userExists = await signUpSchema.findOne({
+  const user = req.body;
+  const takenEmail = await Users.findOne({
     email: req.body.email,
   });
-  if (userExists && userExists !== []) {
+  const takenUsername = await Users.findOne({
+    username: user.username,
+  });
+  if (takenEmail || takenUsername) {
     return res.status(409).json({ error: 'Account already exists' });
+  } else {
+    user.password = await bcrypt.hash(req.body.password, 10);
+    const dbUser = new Users({
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    });
+    const userCreated = await dbUser.save();
+    return res.status(201).json({ data: { id: userCreated.id } });
   }
-  const user = new signUpSchema({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  });
-  const userCreated = await user.save();
-  return res.status(201).json({ data: { id: userCreated.id } });
 });
 
 router.post('/api/logout', (req, res) => {
