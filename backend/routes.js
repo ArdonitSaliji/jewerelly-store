@@ -51,4 +51,9 @@ router.post('/api/signup', async (req, res) => {
   return res.status(201).json({ data: { id: userCreated.id } });
 });
 
+router.post('/api/logout', (req, res) => {
+  req.session.destroy();
+  res.clearCookie('connect.sid'); // clean up!
+  return res.json({ msg: 'logging you out' });
+});
 module.exports = router;
