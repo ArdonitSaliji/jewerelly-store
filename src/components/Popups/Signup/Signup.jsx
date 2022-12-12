@@ -54,7 +54,7 @@ const Signup = ({ setSignUp, setLogin }) => {
       setMessage('Username must be at least 4 characters!');
       setTimeout(() => {
         setMessage('');
-      }, 7000);
+      }, 5000);
       return false;
     }
     if (state.password.length < 8 && state.password2.length < 8) {

@@ -18,7 +18,18 @@ const Account = ({ setLoginStatus, accountPopup, setAccountPopup }) => {
         <div className='account-username'>
           <p>@{sessionStorage.getItem('user') && JSON.parse(sessionStorage.getItem('user'))}</p>
         </div>
-        <span onClick={() => setAccountPopup(false)}>
+        <span
+          onClick={() => {
+            // const isAuth = await fetch('http://localhost:5000/api/auth', {
+            //   headers: {
+            //     'x-access-token': sessionStorage.getItem('token'),
+            //   },
+            // });
+            // const json = await isAuth.json();
+            // console.log(json);
+            setAccountPopup(false);
+          }}
+        >
           {sessionStorage.getItem('user') &&
             JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
         </span>

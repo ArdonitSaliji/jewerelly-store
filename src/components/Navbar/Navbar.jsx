@@ -46,7 +46,8 @@ const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState
             </ul>
             {loginStatus && (
               <span className='navbar-account same' onClick={() => setAccountPopup(true)}>
-                {JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
+                {sessionStorage.getItem('user') &&
+                  JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
               </span>
             )}
           </div>

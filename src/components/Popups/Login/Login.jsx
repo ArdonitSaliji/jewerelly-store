@@ -22,11 +22,10 @@ const Login = ({ setLoginStatus, login, setLogin, setSignUp }) => {
         password: loginState.password,
       }),
     });
-    const json = await res.json();
-    console.log(json);
-
     if (res.status === 200) {
-      sessionStorage.setItem('user', JSON.stringify(json.user.emailOrUsername));
+      const json = await res.json();
+      sessionStorage.setItem('token', json.accessToken);
+      sessionStorage.setItem('user', JSON.stringify(json.username));
       e.preventDefault();
       message.success('Login Successful');
       setTimeout(() => {
@@ -42,10 +41,16 @@ const Login = ({ setLoginStatus, login, setLogin, setSignUp }) => {
     if (res.status === 404) {
       e.preventDefault();
       setResponse('Account does not exist');
+      setTimeout(() => {
+        setResponse('');
+      }, 5000);
     }
     if (res.status === 401) {
       e.preventDefault();
       setResponse('Double check your password');
+      setTimeout(() => {
+        setResponse('');
+      }, 5000);
     }
   };
 
