@@ -1,12 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const Users = require('./Users');
+const Users = require('./Schema/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Products = require('./Schema/Products');
+router.get('/api/products', async (req, res) => {
+  let allProducts = await Products.find({});
+  if (allProducts) {
+    res.status(200).json(allProducts);
+  } else {
+    return res.send(404);
+  }
+});
 
 const authenticateToken = (req, res, next) => {
   const token = req.headers['x-access-token'];
-  console.log(token);
 
   if (!token) {
     res.status(401).send({ msg: 'No token provided!' });
@@ -21,6 +29,7 @@ const authenticateToken = (req, res, next) => {
     });
   }
 };
+
 router.get('/api/auth', authenticateToken, async (req, res) => {
   res.send({ message: 'Authenticated Succesfully' });
 });
@@ -47,17 +56,15 @@ router.post('/api/login', async (req, res) => {
       if (user) {
         const signUser = { username: emailOrUsername };
         const accessToken = jwt.sign(signUser, process.env.ACCESS_TOKEN_SECRET, {
-          expiresIn: '10m',
-        });
-        const refreshToken = jwt.sign(signUser, process.env.ACCESS_TOKEN_SECRET, {
           expiresIn: '1d',
         });
+
         req.session.user = user;
+        req.session.emailOrUsername = emailOrUsername;
         res.status(200).json({
           auth: true,
           accessToken: accessToken,
-          refreshToken: refreshToken,
-          user: req.session.user,
+          user: req.session.emailOrUsername,
           username: emailOrUsername,
           msg: 'login successful',
         });
@@ -96,3 +103,13 @@ router.post('/api/logout', (req, res) => {
   return res.json({ msg: 'logging you out' });
 });
 module.exports = router;
+
+// router.post('/user/update/cart', async (req, res) => {
+//   const username = JSON.parse(sessionStorage.getItem('user'));
+//   const user = await Users.findOne({
+//     username: username,
+//   });
+
+//   user.cart.insert(req.body.product);
+//   res.send({ msg: 'success' });
+// });

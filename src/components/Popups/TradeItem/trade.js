@@ -53,6 +53,7 @@ export const trade = [
     amethyst: [
       [
         {
+          name: 'amethyst',
           image: require('./trade-images/ame.jpg'),
           size: '6.0 x 4.0 mm',
           price: '$18.62',
@@ -65,7 +66,7 @@ export const trade = [
           shape: 'Heart',
         },
         {
-          image: require('./trade-images/diamond2.jpg'),
+          image: require('./trade-images/amethyst3.jpg'),
           size: '8.0 x 8.0 mm',
           price: '$5900',
           shape: 'Round',
@@ -173,4 +174,4 @@ export const trade = [
       ],
     ],
   },
-]
+];

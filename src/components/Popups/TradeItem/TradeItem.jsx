@@ -14,6 +14,24 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
   const currentImage = useRef();
   const currentPrice = useRef();
   const currentSize = useRef();
+  // const updateUserCart = async () => {
+  //   const updateCart = await fetch('http://localhost:5000/user/update/cart', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: {
+  //       product: {
+  //         title: currentTitle.current.innerText,
+  //         image: currentImage.current.src,
+  //         price: currentPrice.current.innerText,
+  //         size: currentSize.current.innerText,
+  //       },
+  //     },
+  //   });
+  //   const json = await updateCart.json();
+  //   console.log(json);
+  // };
 
   useEffect(() => {
     localStorage.setItem('basket', JSON.stringify(basketState));
@@ -97,6 +115,7 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
         <div className='trade-buttons size'>
           <ul>{sizes}</ul>
         </div>
+        {/* Planning to add option to choose gem by color */}
         {/* <div className='trade-buttons color'>
           <ul>{colors}</ul>
         </div> */}
@@ -104,6 +123,7 @@ const TradeItem = ({ setTrade, gemState, basketState, setBasketState }) => {
         <div className='trade-cart'>
           <button
             onClick={() => {
+              // updateUserCart();
               setBasketState([
                 ...basketState,
                 {

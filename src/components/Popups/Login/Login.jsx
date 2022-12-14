@@ -24,6 +24,7 @@ const Login = ({ setLoginStatus, login, setLogin, setSignUp }) => {
     });
     if (res.status === 200) {
       const json = await res.json();
+      console.log(json);
       sessionStorage.setItem('token', json.accessToken);
       sessionStorage.setItem('user', JSON.stringify(json.username));
       e.preventDefault();
