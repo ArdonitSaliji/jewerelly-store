@@ -1,24 +1,29 @@
 {
   "files": {
     "main.css": "/jewerelly-store/static/css/main.8ca3025e.css",
-    "main.js": "/jewerelly-store/static/js/main.468f0e73.js",
+    "main.js": "/jewerelly-store/static/js/main.a0e02632.js",
     "static/media/citrine.png": "/jewerelly-store/static/media/citrine.8b435961fdadc68d70b6.png",
+    "static/media/citrine2.png": "/jewerelly-store/static/media/citrine2.8b435961fdadc68d70b6.png",
     "static/media/zircon1.jpg": "/jewerelly-store/static/media/zircon1.81096f9b9f5132742381.jpg",
     "static/media/opal1.jpg": "/jewerelly-store/static/media/opal1.865f2fe4425bb4a1be24.jpg",
     "static/media/aventurine1.jpg": "/jewerelly-store/static/media/aventurine1.cff0677920bdce3e0cec.jpg",
     "static/media/amazonite1.jpg": "/jewerelly-store/static/media/amazonite1.0b7ded0bef0623385254.jpg",
     "static/media/diamant.jpg": "/jewerelly-store/static/media/diamant.c9a0eaf09817d1747688.jpg",
     "static/media/diamond1.jpg": "/jewerelly-store/static/media/diamond1.c9a0eaf09817d1747688.jpg",
+    "static/media/aquamarine2.jpg": "/jewerelly-store/static/media/aquamarine2.333145919b949a687a7f.jpg",
+    "static/media/amethyst2.jpg": "/jewerelly-store/static/media/amethyst2.d710ade24e17eb26f4c2.jpg",
+    "static/media/amethyst3.jpg": "/jewerelly-store/static/media/amethyst3.d710ade24e17eb26f4c2.jpg",
     "static/media/aquamarine1.jpg": "/jewerelly-store/static/media/aquamarine1.b4ed2c150b79acef6097.jpg",
     "static/media/cit3.jpg": "/jewerelly-store/static/media/cit3.b386a0679d1172b4eb99.jpg",
+    "static/media/citrine3.jpg": "/jewerelly-store/static/media/citrine3.b386a0679d1172b4eb99.jpg",
     "static/media/card_img.png": "/jewerelly-store/static/media/card_img.942a5891094842eda4f3.png",
     "static/media/emerald1.jpg": "/jewerelly-store/static/media/emerald1.6a5f69f1fd4c5ef39758.jpg",
     "index.html": "/jewerelly-store/index.html",
     "main.8ca3025e.css.map": "/jewerelly-store/static/css/main.8ca3025e.css.map",
-    "main.468f0e73.js.map": "/jewerelly-store/static/js/main.468f0e73.js.map"
+    "main.a0e02632.js.map": "/jewerelly-store/static/js/main.a0e02632.js.map"
   },
   "entrypoints": [
     "static/css/main.8ca3025e.css",
-    "static/js/main.468f0e73.js"
+    "static/js/main.a0e02632.js"
   ]
 }
