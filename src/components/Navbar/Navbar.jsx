@@ -13,8 +13,8 @@ const Navbar = ({ setAccountPopup, loginStatus, setLogin, setSignUp, basketState
         <div className='navbar-content'>
           {!loginStatus && (
             <div className='navbar-user'>
-              <a onClick={() => setLogin(true)}>Login</a>
-              <a
+              <a className="btn btn-default" onClick={() => setLogin(true)}>Login</a>
+              <a className="btn btn-default"
                 onClick={() => {
                   setSignUp(true);
                 }}

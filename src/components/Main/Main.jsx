@@ -56,8 +56,8 @@ const Main = ({ setTrade, setGemState }) => {
                   setGemState(e.target.firstElementChild.textContent.toLowerCase());
                 }}
               >
-                <h3>{product.name.charAt(0).toUpperCase() + product.name.slice(1)}</h3>
                 <img src={product.image} alt='' />
+                <h3>{product.name.charAt(0).toUpperCase() + product.name.slice(1)}</h3>
                 <p>{product.text}</p>
               </div>
             );
