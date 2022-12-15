@@ -1,0 +1,27 @@
+/* make the customizations */
+/* https://huemint.com/bootstrap-basic/ */
+
+$white: #ffffff;
+
+$theme-colors: (
+  'light': #231e26,
+  'dark': #f4f7f4,
+  'primary': #2d3351,
+  'secondary': #066ae3,
+  'info': #3f86fd,
+  'accent1': #aaa9b5,
+  'accent2': #555662,
+  'accent3': #c2c718,
+  'success': #03ab63,
+  'warning': #e4cd02,
+  'danger': #f51a01,
+);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
