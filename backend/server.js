@@ -19,6 +19,7 @@ app.use(
 );
 app.use(cors());
 app.use(express.json());
+app.options('*', cors())
 dotenv.config();
 app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect(

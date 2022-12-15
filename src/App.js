@@ -53,17 +53,6 @@ function App() {
           <Route path='/checkout' element={<Checkout />} />
         </Routes>
 
-        {login && (
-          <Login
-            loginStatus={loginStatus}
-            setLoginStatus={setLoginStatus}
-            login={login}
-            setLogin={setLogin}
-            setSignUp={setSignUp}
-          />
-        )}
-        {signUp && <Signup setLogin={setLogin} setSignUp={setSignUp} />}
-
         {trade && (
           <TradeItem
             basketState={basketState}

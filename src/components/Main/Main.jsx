@@ -15,7 +15,7 @@ const Main = ({ setTrade, setGemState }) => {
   }, [searchState, setGemState, setTrade]);
 
   return (
-    <div className='main'>
+    <div className='main container'>
       <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
         <h1>Trading rare gems and crystals has never been easier.</h1>
       </div>
@@ -48,7 +48,7 @@ const Main = ({ setTrade, setGemState }) => {
           allProducts?.map((product) => {
             sessionStorage.setItem('shape', JSON.stringify('oval'));
             return (
-              <div
+              <div title={"Explorer " + product.name}
                 key={product._id}
                 className='gem'
                 onClick={(e) => {
