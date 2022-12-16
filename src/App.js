@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Main from './components/Main/Main.jsx';
-import Login from './components/Popups/Login/Login.jsx';
-import Signup from './components/Popups/Signup/Signup.jsx';
 import Forgot from './components/ForgotPassword/ForgotPass.jsx';
 import TradeItem from './components/Popups/TradeItem/TradeItem.jsx';
 import Basket from './components/Basket/Basket.jsx';
@@ -12,8 +10,6 @@ import Checkout from './components/Checkout/Checkout.jsx';
 import Footer from './components/Footer/Footer.jsx';
 
 function App() {
-  const [login, setLogin] = useState(false);
-  const [signUp, setSignUp] = useState(false);
   const [trade, setTrade] = useState(false);
   const [gemState, setGemState] = useState('');
   const [basketState, setBasketState] = useState([]);
@@ -33,8 +29,6 @@ function App() {
           setAccountPopup={setAccountPopup}
           loginStatus={loginStatus}
           setLoginStatus={setLoginStatus}
-          setLogin={setLogin}
-          setSignUp={setSignUp}
           basketState={basketState}
         />
         <Routes>
@@ -44,7 +38,11 @@ function App() {
           />
           <Route
             path='/reset-password'
-            element={<Forgot setSignUp={setSignUp} setLogin={setLogin} />}
+            element={
+              <Forgot
+              // setSignUp={setSignUp} setLogin={setLogin}
+              />
+            }
           />
           <Route
             path='/basket'
