@@ -4,7 +4,7 @@ const SelectProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const selectProducts = async () => {
-      const product = JSON.parse(sessionStorage.getItem('selectProduct'));
+      const product = JSON.parse(sessionStorage.getItem('selectProduct').toLocaleLowerCase());
       const res = await fetch('http://localhost:5000/api/products/select', {
         method: 'POST',
         headers: {
@@ -22,7 +22,7 @@ const SelectProducts = () => {
 
   return products.map((product, index) => (
     <div key={index}>
-      <img src={product.image} alt='' />
+      <img src={process.env.PUBLIC_URL + product.image} alt='' />
       <h2>{product.price}</h2>
     </div>
   ));
