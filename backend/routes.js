@@ -13,6 +13,13 @@ router.get('/api/products', async (req, res) => {
   }
 });
 
+router.post('/api/products/select', async (req, res) => {
+  let foundProduct = await Products.find({ name: req.body.name });
+  foundProduct
+    ? res.status(202).json(foundProduct)
+    : res.status(204).send({ message: 'No Products Available' });
+});
+
 router.post('/api/products/find', async (req, res) => {
   let foundProduct = await Products.find({ name: req.body.name, shape: req.body.shape });
   foundProduct

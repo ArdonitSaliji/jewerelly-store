@@ -8,6 +8,7 @@ import Basket from './components/Basket/Basket.jsx';
 import Account from './components/Popups/Account/Account.jsx';
 import Checkout from './components/Checkout/Checkout.jsx';
 import Footer from './components/Footer/Footer.jsx';
+import SelectProducts from './components/SelectProducts';
 
 function App() {
   const [trade, setTrade] = useState(false);
@@ -21,6 +22,7 @@ function App() {
       setAccountPopup(false);
     }
   });
+
   return (
     <HashRouter>
       <div className='app'>
@@ -34,7 +36,18 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<Main trade={trade} setTrade={setTrade} setGemState={setGemState} />}
+            element={
+              <Main
+                trade={trade}
+                gemState={gemState}
+                setTrade={setTrade}
+                setGemState={setGemState}
+              />
+            }
+          />
+          <Route
+            path={`/${JSON.parse(sessionStorage.getItem('selectProduct'))}`}
+            element={<SelectProducts />}
           />
           <Route
             path='/reset-password'

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { data, listing } from './data';
+// import { listing } from './data';
 import { AiOutlineSearch } from 'react-icons/ai';
-const Main = ({ setTrade, setGemState }) => {
+const Main = ({ setGemState, gemState }) => {
   const [searchState, setSearchState] = useState('');
   const [allProducts, setAllProducts] = useState(null);
 
@@ -9,10 +9,12 @@ const Main = ({ setTrade, setGemState }) => {
     const getAllProducts = async () => {
       const getProducts = await fetch('http://localhost:5000/api/products');
       let json = await getProducts.json();
+
       setAllProducts(json);
     };
+
     getAllProducts();
-  }, [searchState, setGemState, setTrade]);
+  }, [searchState, setGemState]);
 
   return (
     <div className='main container'>
@@ -29,14 +31,14 @@ const Main = ({ setTrade, setGemState }) => {
             placeholder='Search...'
           />
         </div>
-        <div className='filter'>
+        {/* <div className='filter'>
           <label style={{ fontSize: '18px', marginRight: '0.5rem' }}>Sort by: </label>
           <select>
             {listing.map((value, i) => (
               <option key={i}>{value}</option>
             ))}
           </select>
-        </div>
+        </div> */}
       </div>
       <div className='gems-container'>
         {
@@ -48,12 +50,20 @@ const Main = ({ setTrade, setGemState }) => {
           allProducts?.map((product) => {
             sessionStorage.setItem('shape', JSON.stringify('oval'));
             return (
-              <div title={"Explorer " + product.name}
+              <div
+                title={'Explorer ' + product.name}
                 key={product._id}
                 className='gem'
                 onClick={(e) => {
-                  setTrade(true);
-                  setGemState(e.target.firstElementChild.textContent.toLowerCase());
+                  const product = e.target;
+                  setGemState(product.children[1].textContent.toLowerCase());
+                  sessionStorage.setItem(
+                    'selectProduct',
+                    JSON.stringify(product.children[1].textContent.toLowerCase())
+                  );
+                  window.location.assign(
+                    `${window.location.href}${product.children[1].textContent.toLowerCase()}`
+                  );
                 }}
               >
                 <img src={product.image} alt='' />

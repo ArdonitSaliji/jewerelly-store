@@ -51,6 +51,7 @@
   }
 
   .navbar-tabs {
+    position: absolute;
     transform: translateY(-130%);
     overflow: hidden;
     &.show-login {
