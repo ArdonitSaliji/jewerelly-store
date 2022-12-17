@@ -20,12 +20,18 @@ const SelectProducts = () => {
     selectProducts();
   }, []);
 
-  return products.map((product, index) => (
-    <div key={index}>
-      <img src={process.env.PUBLIC_URL + product.image} alt='' />
-      <h2>{product.price}</h2>
+  return (
+    <div className='product-container'>
+      {products?.map((product, index) => {
+        return (
+          <div className='product' key={index}>
+            <img src={process.env.PUBLIC_URL + product.image} alt='' />
+            <p>{product.price}</p>
+          </div>
+        );
+      })}
     </div>
-  ));
+  );
 };
 
 export default SelectProducts;

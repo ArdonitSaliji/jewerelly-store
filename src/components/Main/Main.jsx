@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { data } from './data';
 import { AiOutlineSearch } from 'react-icons/ai';
-const Main = ({ setGemState, gemState }) => {
+const Main = ({ setGemState }) => {
   const [searchState, setSearchState] = useState('');
   const [allProducts, setAllProducts] = useState(null);
 
@@ -20,7 +20,6 @@ const Main = ({ setGemState, gemState }) => {
       <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
         <h1>Trading rare gems and crystals has never been easier.</h1>
       </div>
-
       <div className='main-search'>
         <div className='search'>
           <AiOutlineSearch style={{ fontSize: '22px', marginLeft: '0.5rem' }} />
@@ -31,6 +30,7 @@ const Main = ({ setGemState, gemState }) => {
           />
         </div>
       </div>
+
       <div className='gems-container'>
         {allProducts?.map((product) => {
           sessionStorage.setItem('shape', JSON.stringify('oval'));

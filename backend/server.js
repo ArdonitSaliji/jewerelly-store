@@ -19,7 +19,7 @@ app.use(
 );
 app.use(cors());
 app.use(express.json());
-app.options('*', cors())
+app.options('*', cors());
 dotenv.config();
 app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect(
@@ -28,6 +28,9 @@ mongoose.connect(
   () => console.log('Database Connected')
 );
 app.use('/', routesUrls);
+app.all('*', function (req, res) {
+  res.sendFile('index.html');
+});
 
 app.use((req, res, next) => {
   if (req.session.user) next();

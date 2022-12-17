@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Main from './components/Main/Main.jsx';
 import Forgot from './components/ForgotPassword/ForgotPass.jsx';
@@ -24,7 +24,7 @@ function App() {
   });
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className='app'>
         <Navbar
           accountPopup={accountPopup}
@@ -81,7 +81,7 @@ function App() {
 
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

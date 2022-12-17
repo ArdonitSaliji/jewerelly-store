@@ -1,0 +1,12 @@
+.product-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .product {
+    height: 18rem;
+    width: 20%;
+    img {
+      width: auto;
+    }
+  }
+}
