@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import './ForgotPass.css';
 import { HiLockClosed } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 

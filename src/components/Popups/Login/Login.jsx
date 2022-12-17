@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import './Login.scss';
 import { Link } from 'react-router-dom';
 import { message } from 'antd';
 

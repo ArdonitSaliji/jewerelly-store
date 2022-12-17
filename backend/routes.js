@@ -4,6 +4,23 @@ const Users = require('./Schema/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Products = require('./Schema/Products');
+
+router.get('/api/products/find', async (req, res) => {
+  let foundProduct = await Products.find({
+    $expr: { $gt: [{ $strLenCP: '$text' }, 1] },
+  });
+  foundProduct
+    ? res.status(202).json(foundProduct)
+    : res.status(204).send({ message: 'No Products Available' });
+});
+
+router.post('/api/products/select', async (req, res) => {
+  let foundProduct = await Products.find({ name: { $regex: `^${req.body.name}` } });
+  foundProduct
+    ? res.status(202).json(foundProduct)
+    : res.status(204).send({ message: 'No Products Available' });
+});
+
 router.get('/api/products', async (req, res) => {
   let allProducts = await Products.find({});
   if (allProducts) {
@@ -13,13 +30,18 @@ router.get('/api/products', async (req, res) => {
   }
 });
 
-const authenticateToken = (req, res, next) => {
+router.post('/api/products/find/shape', async (req, res) => {
+  let foundProductShapes = await Products.find({ name: req.body.name });
+  res.status(202).json(foundProductShapes);
+});
+
+const authenticateToken = async (req, res, next) => {
   const token = req.headers['x-access-token'];
 
   if (!token) {
     res.status(401).send({ msg: 'No token provided!' });
   } else {
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
       if (err) {
         res.json({ auth: false, message: 'Authentication failed' });
       } else {
@@ -109,7 +131,22 @@ module.exports = router;
 //   const user = await Users.findOne({
 //     username: username,
 //   });
+// 3
 
 //   user.cart.insert(req.body.product);
 //   res.send({ msg: 'success' });
+// });
+
+// router.post('/api/products/upload', async (req, res) => {
+//   const body = req.body;
+//   const newProduct = new Products({
+//     name: body.name,
+//     image: body.image,
+//     shape: body.shape,
+//     size: body.size,
+//     price: body.price,
+//     text: body.text,
+//   });
+//   const saveProduct = await newProduct.save();
+//   res.json(saveProduct);
 // });

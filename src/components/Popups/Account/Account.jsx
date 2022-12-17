@@ -1,5 +1,4 @@
 import React from 'react';
-import './Account.scss';
 const Account = ({ setLoginStatus, accountPopup, setAccountPopup }) => {
   const logout = async () => {
     const res = await fetch('http://localhost:5000/api/logout', {

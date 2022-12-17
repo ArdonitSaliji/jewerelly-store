@@ -1,0 +1,128 @@
+::-webkit-scrollbar {
+  display: none;
+}
+.filter option,
+select,
+.gem p,
+.search input {
+  font-size: 15px;
+}
+.main {
+  user-select: none;
+  min-height: 81.1vh;
+  height: 100%;
+}
+.main-title h1 {
+  font-size: 27px;
+  font-weight: 400;
+}
+.main-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0 1rem;
+}
+.search {
+  display: flex;
+  background-color: rgb(171, 171, 171);
+  border-radius: 5px;
+  width: 48rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-right: 3rem;
+}
+.search input {
+  user-select: none;
+  width: 100%;
+  height: 2rem;
+  color: white;
+  background-color: rgb(171, 171, 171);
+  border-radius: 5px;
+  border: none;
+  text-indent: 5px;
+}
+.search input::placeholder {
+  color: white;
+}
+.search input:focus {
+  outline: none;
+}
+.filter select {
+  cursor: pointer;
+  border-radius: 5px;
+  height: 2rem;
+  margin-bottom: 1rem;
+  background-color: rgb(171, 171, 171);
+}
+.gems-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .gem {
+    width: 33.3%;
+    padding: 1em;
+    position: relative;
+    height: 450px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 2em;
+    cursor: pointer;
+    &::before {
+      content: ' ';
+      width: 100%;
+      height: 150%;
+      display: block;
+      background-color: theme-color('secondary');
+      position: absolute;
+      z-index: 2;
+      opacity: 0;
+      transition: all 0.75s;
+      bottom: 0;
+    }
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      z-index: 1;
+      transition: all 0.5s;
+    }
+    h3 {
+      pointer-events: none;
+      position: relative;
+      z-index: 3;
+      margin: 0 1em;
+      color: theme-color('light');
+      text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+    }
+    p {
+      pointer-events: none;
+      position: relative;
+      z-index: 3;
+      max-height: 0;
+      overflow: hidden;
+      margin: 1em 2em;
+      color: theme-color('light');
+      font-size: 1rem;
+    }
+    &:hover {
+      p {
+        max-height: 100%;
+        transition: all 1s;
+      }
+      img {
+        opacity: 1;
+        transition: all 1.5s;
+      }
+      &::before {
+        opacity: 0.9;
+      }
+    }
+  }
+}

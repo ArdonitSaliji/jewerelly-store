@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import './Signup.scss';
-
 const Signup = ({ setSignUp, setLogin }) => {
   const [state, setState] = useState({
     username: '',
