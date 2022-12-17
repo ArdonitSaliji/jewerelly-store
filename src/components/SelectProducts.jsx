@@ -25,7 +25,7 @@ const SelectProducts = () => {
       {products?.map((product, index) => {
         return (
           <div className='product' key={index}>
-            <img src={process.env.PUBLIC_URL + product.image} alt='' />
+            <img src={product.image} alt='' />
             <p>{product.price}</p>
           </div>
         );
