@@ -6,9 +6,11 @@ const jwt = require('jsonwebtoken');
 const Products = require('./Schema/Products');
 
 router.post('/api/user/basket', async (req, res) => {
-  let foundUser = await Users.findOne({ username: req.body.user });
-  const allProducts = await Products.find({ _id: { $in: foundUser.cart } });
-  res.status(200).json({ allProducts });
+  let foundUser = await Users.find({ username: req.body.user });
+
+  const allProducts = await Products.find({ _id: { $in: foundUser[0].cart } });
+
+  console.log(allProducts);
   //
 });
 
