@@ -5,6 +5,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Products = require('./Schema/Products');
 
+router.post('/api/user/basket', async (req, res) => {
+  let foundUser = await Users.find({ username: req.body.user });
+  //
+});
+
 router.get('/api/products/find', async (req, res) => {
   let foundProduct = await Products.find({
     $expr: { $gt: [{ $strLenCP: '$text' }, 1] },
@@ -15,13 +20,12 @@ router.get('/api/products/find', async (req, res) => {
 });
 
 router.post('/user/cart/add', async (req, res) => {
-  let foundProduct = await Products.find({ name: req.body.name });
-  let foundUser = await Users.find({ username: 'ardonit' });
+  let foundProduct = await Products.find({ name: req.body.product });
+  let foundUser = await Users.find({ username: req.body.user }).updateOne({
+    $push: { cart: foundProduct[0]._id },
+  });
   console.log(foundUser);
-  // const addToCart = await foundUser.cart.insertOne(foundProduct);
-  // const done = await addToCart.save();
-  // console.log(done);
-  res.send({ msg: 'success' });
+  res.status(202).send({ msg: foundUser });
 });
 
 router.post('/api/products/select', async (req, res) => {
@@ -134,28 +138,3 @@ router.post('/api/logout', (req, res) => {
   return res.json({ msg: 'logging you out' });
 });
 module.exports = router;
-
-// router.post('/user/update/cart', async (req, res) => {
-//   const username = JSON.parse(sessionStorage.getItem('user'));
-//   const user = await Users.findOne({
-//     username: username,
-//   });
-// 3
-
-//   user.cart.insert(req.body.product);
-//   res.send({ msg: 'success' });
-// });
-
-// router.post('/api/products/upload', async (req, res) => {
-//   const body = req.body;
-//   const newProduct = new Products({
-//     name: body.name,
-//     image: body.image,
-//     shape: body.shape,
-//     size: body.size,
-//     price: body.price,
-//     text: body.text,
-//   });
-//   const saveProduct = await newProduct.save();
-//   res.json(saveProduct);
-// });

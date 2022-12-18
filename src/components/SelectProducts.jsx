@@ -27,11 +27,11 @@ const SelectProducts = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: e.target.parentElement.parentElement.title,
+        product: e.target.parentElement.parentElement.title,
         user: JSON.parse(sessionStorage.getItem('user')),
       }),
     });
-    const json = addProduct.json();
+    const json = await addProduct.json();
     console.log(json);
   };
 
