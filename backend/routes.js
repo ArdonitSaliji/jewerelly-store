@@ -5,6 +5,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Products = require('./Schema/Products');
 
+router.post('/api/user/basket', async (req, res) => {
+  let foundUser = await Users.find({ username: req.body.user });
+  //
+});
+
 router.get('/api/products/find', async (req, res) => {
   let foundProduct = await Products.find({
     $expr: { $gt: [{ $strLenCP: '$text' }, 1] },
@@ -12,6 +17,15 @@ router.get('/api/products/find', async (req, res) => {
   foundProduct
     ? res.status(202).json(foundProduct)
     : res.status(204).send({ message: 'No Products Available' });
+});
+
+router.post('/user/cart/add', async (req, res) => {
+  let foundProduct = await Products.find({ name: req.body.product });
+  let foundUser = await Users.find({ username: req.body.user }).updateOne({
+    $push: { cart: foundProduct[0]._id },
+  });
+  console.log(foundUser);
+  res.status(202).send({ msg: foundUser });
 });
 
 router.post('/api/products/select', async (req, res) => {
@@ -58,7 +72,7 @@ router.get('/api/auth', authenticateToken, async (req, res) => {
 
 router.post('/api/login', async (req, res) => {
   const userLoggingIn = req.body;
-  const { emailOrUsername } = req.body;
+  const emailOrUsername = req.body.email;
 
   const email = await Users.findOne({
     email: emailOrUsername,
@@ -82,7 +96,6 @@ router.post('/api/login', async (req, res) => {
         });
 
         req.session.user = user;
-        req.session.emailOrUsername = emailOrUsername;
         res.status(200).json({
           auth: true,
           accessToken: accessToken,
@@ -125,28 +138,3 @@ router.post('/api/logout', (req, res) => {
   return res.json({ msg: 'logging you out' });
 });
 module.exports = router;
-
-// router.post('/user/update/cart', async (req, res) => {
-//   const username = JSON.parse(sessionStorage.getItem('user'));
-//   const user = await Users.findOne({
-//     username: username,
-//   });
-// 3
-
-//   user.cart.insert(req.body.product);
-//   res.send({ msg: 'success' });
-// });
-
-// router.post('/api/products/upload', async (req, res) => {
-//   const body = req.body;
-//   const newProduct = new Products({
-//     name: body.name,
-//     image: body.image,
-//     shape: body.shape,
-//     size: body.size,
-//     price: body.price,
-//     text: body.text,
-//   });
-//   const saveProduct = await newProduct.save();
-//   res.json(saveProduct);
-// });

@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar.jsx";
-import Main from "./components/Main/Main.jsx";
-import Forgot from "./components/ForgotPassword/ForgotPass.jsx";
-import TradeItem from "./components/Popups/TradeItem/TradeItem.jsx";
-import Basket from "./components/Basket/Basket.jsx";
-import Account from "./components/Popups/Account/Account.jsx";
-import Checkout from "./components/Checkout/Checkout.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import SelectProducts from "./components/SelectProducts";
+import React, { useState } from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar.jsx';
+import Main from './components/Main/Main.jsx';
+import Forgot from './components/ForgotPassword/ForgotPass.jsx';
+import TradeItem from './components/Popups/TradeItem/TradeItem.jsx';
+import Basket from './components/Basket/Basket.jsx';
+import Account from './components/Popups/Account/Account.jsx';
+import Checkout from './components/Checkout/Checkout.jsx';
+import Footer from './components/Footer/Footer.jsx';
+import SelectProducts from './components/SelectProducts';
 
 function App() {
   const [trade, setTrade] = useState(false);
-  const [gemState, setGemState] = useState("");
+  const [gemState, setGemState] = useState('');
   const [basketState, setBasketState] = useState([]);
-  const status = JSON.parse(sessionStorage.getItem("loginStatus"));
+  const status = JSON.parse(sessionStorage.getItem('loginStatus'));
   const [loginStatus, setLoginStatus] = useState(status);
   const [accountPopup, setAccountPopup] = useState(false);
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".same")) {
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.same')) {
       setAccountPopup(false);
     }
   });
 
   return (
     <BrowserRouter>
-      <div className="app">
+      <div className='app'>
         <Navbar
           accountPopup={accountPopup}
           setAccountPopup={setAccountPopup}
@@ -35,7 +35,7 @@ function App() {
         />
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <Main
                 trade={trade}
@@ -47,7 +47,7 @@ function App() {
           />
           <Route path={`/product/:name`} element={<SelectProducts />} />
           <Route
-            path="/reset-password"
+            path='/reset-password'
             element={
               <Forgot
               // setSignUp={setSignUp} setLogin={setLogin}
@@ -55,15 +55,10 @@ function App() {
             }
           />
           <Route
-            path="/basket"
-            element={
-              <Basket
-                basketState={basketState}
-                setBasketState={setBasketState}
-              />
-            }
+            path='/basket'
+            element={<Basket basketState={basketState} setBasketState={setBasketState} />}
           />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Routes>
 
         {trade && (

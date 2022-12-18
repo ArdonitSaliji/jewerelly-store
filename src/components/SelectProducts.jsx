@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 const SelectProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -20,13 +20,41 @@ const SelectProducts = () => {
     selectProducts();
   }, []);
 
+  const addToBasket = async (e) => {
+    const addProduct = await fetch('http://localhost:5000/user/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        product: e.target.parentElement.parentElement.title,
+        user: JSON.parse(sessionStorage.getItem('user')),
+      }),
+    });
+    const json = await addProduct.json();
+    console.log(json);
+  };
+
   return (
     <div className='product-container'>
       {products?.map((product, index) => {
         return (
-          <div className='product' key={index}>
+          <div className='product' title={product.name} key={index}>
             <img src={process.env.PUBLIC_URL + product.image} alt='' />
-            <p>{product.price}</p>
+            <div className='content'>
+              <div className='description'>
+                <p>Size: {product.size}</p>
+                <p>Price: {product.price}</p>
+              </div>
+              <div
+                className='cart-container'
+                onClick={(e) => {
+                  addToBasket(e);
+                }}
+              >
+                <AiOutlineShoppingCart className='cart' />
+              </div>
+            </div>
           </div>
         );
       })}
