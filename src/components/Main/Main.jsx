@@ -47,7 +47,7 @@ const Main = ({ setGemState }) => {
                   JSON.stringify(product.children[1].textContent.toLowerCase())
                 );
                 window.location.assign(
-                  `${window.location.href}${product.children[1].textContent.toLowerCase()}`
+                  `${window.location.href}product/${product.children[1].textContent.toLowerCase()}`
                 );
               }}
             >

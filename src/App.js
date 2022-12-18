@@ -45,10 +45,7 @@ function App() {
               />
             }
           />
-          <Route
-            path={`/${JSON.parse(sessionStorage.getItem('selectProduct'))}`}
-            element={<SelectProducts />}
-          />
+          <Route path={`/product/:name`} element={<SelectProducts />} />
           <Route
             path='/reset-password'
             element={
