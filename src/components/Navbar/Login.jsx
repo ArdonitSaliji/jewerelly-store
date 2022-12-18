@@ -1,18 +1,36 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = (props) => {
+const Login = () => {
+  const [loginInUser, setLoginInUser] = useState({ email: '', password: '' });
+  const login = async () => {
+    const res = await fetch('http://localhost:5000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: loginInUser.email, password: loginInUser.password }),
+    });
+    const json = await res.json();
+    console.log(json);
+    sessionStorage.setItem('user', JSON.stringify(json.username));
+  };
   return (
-    <div ref={props.loginRef} className='navbar-tab navbar-tab-login'>
+    <div className='navbar-tab navbar-tab-login'>
       <div className='left'>
-        <form className='login-form'>
+        <form name='login' className='login-form'>
           <h4 className='login-title'>Login</h4>
-          <p className='response'>&nbsp;</p>
+          <br />
+          <br />
           <div className='login-inputs'>
             <div className='form-group'>
               <label htmlFor='email' className='sr-only'>
                 Username or Email
               </label>
               <input
+                onChange={(e) => {
+                  setLoginInUser({ ...loginInUser, email: e.target.value });
+                }}
                 required
                 type='text'
                 placeholder='Username or email'
@@ -25,6 +43,9 @@ const Login = (props) => {
                 Password
               </label>
               <input
+                onChange={(e) => {
+                  setLoginInUser({ ...loginInUser, password: e.target.value });
+                }}
                 required
                 type='password'
                 placeholder='Password'
@@ -43,11 +64,11 @@ const Login = (props) => {
       </div>
       <div className='right'>
         <form>
-          <button type='button' className='btn btn-primary'>
+          <button type='button' className='btn btn-primary' onClick={() => login()}>
             Login
           </button>
           <hr />
-          <button onClick={() => {}} type='button' className='btn btn-accent1'>
+          <button type='button' className='btn btn-accent1'>
             Create new account
           </button>
         </form>

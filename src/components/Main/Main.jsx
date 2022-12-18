@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { data } from './data';
 import { AiOutlineSearch } from 'react-icons/ai';
 const Main = ({ setGemState }) => {
   const [searchState, setSearchState] = useState('');

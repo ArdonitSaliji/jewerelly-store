@@ -14,6 +14,16 @@ router.get('/api/products/find', async (req, res) => {
     : res.status(204).send({ message: 'No Products Available' });
 });
 
+router.post('/user/cart/add', async (req, res) => {
+  let foundProduct = await Products.find({ name: req.body.name });
+  let foundUser = await Users.find({ username: 'ardonit' });
+  console.log(foundUser);
+  // const addToCart = await foundUser.cart.insertOne(foundProduct);
+  // const done = await addToCart.save();
+  // console.log(done);
+  res.send({ msg: 'success' });
+});
+
 router.post('/api/products/select', async (req, res) => {
   let foundProduct = await Products.find({ name: { $regex: `^${req.body.name}` } });
   foundProduct
@@ -58,7 +68,7 @@ router.get('/api/auth', authenticateToken, async (req, res) => {
 
 router.post('/api/login', async (req, res) => {
   const userLoggingIn = req.body;
-  const { emailOrUsername } = req.body;
+  const emailOrUsername = req.body.email;
 
   const email = await Users.findOne({
     email: emailOrUsername,
@@ -82,7 +92,6 @@ router.post('/api/login', async (req, res) => {
         });
 
         req.session.user = user;
-        req.session.emailOrUsername = emailOrUsername;
         res.status(200).json({
           auth: true,
           accessToken: accessToken,
