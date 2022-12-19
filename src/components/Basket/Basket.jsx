@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Checkout from './BasketCheckout';
-import Items from './BasketItems';
 
 const Basket = ({ basketState, setBasketState }) => {
   useEffect(() => {
@@ -21,6 +20,7 @@ const Basket = ({ basketState, setBasketState }) => {
         }),
       });
       let json = await res.json();
+      console.log(json);
       setUserProducts(json);
     };
     getBasketProducts();
@@ -30,7 +30,7 @@ const Basket = ({ basketState, setBasketState }) => {
       <div className='basket'>
         <h3 className='details'>Your Basket Details</h3>
         <div className='basket-items'>
-          {basketState.map(
+          {/* {basketState?.map(
             (el, i) =>
               el.image !== require('../Popups/TradeItem/trade-images/sold.jpg') && (
                 <div key={i} className='basket-item'>
@@ -45,7 +45,7 @@ const Basket = ({ basketState, setBasketState }) => {
                   </button>
                 </div>
               )
-          )}
+          )} */}
           {localStorage.setItem('basketLength', JSON.stringify(basketState.length))}
         </div>
       </div>

@@ -5,7 +5,6 @@ const Checkout = ({ basketState }) => {
 
   const changeRadio = (value) => radioValue === value;
   const clickRadio = (e) => setRadioValue(e.currentTarget.value);
-  const checkoutItemRef = useRef();
   let val = 0;
   basketState && basketState.map(({ price }) => (val += Number(price.split('$').pop())));
   return basketState && basketState.length > 0 ? (
@@ -13,16 +12,6 @@ const Checkout = ({ basketState }) => {
       <h2>Proceed to checkout</h2>
 
       <div className='checkout-items'>
-        {basketState?.map(
-          (el, i) =>
-            el?.image !== require('../Popups/TradeItem/trade-images/sold.jpg') && (
-              <div ref={checkoutItemRef} key={i} className='checkout-item'>
-                <img src={el?.image} alt='' />
-                <p>{el?.size}</p>
-                <p>{el?.price}</p>
-              </div>
-            )
-        )}
         <h3 className='items-total'>
           Items Total: ${val.toFixed(2)} <br />
           <hr />

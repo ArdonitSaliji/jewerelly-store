@@ -2,6 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
+import Signup from './Signup';
 const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
@@ -44,13 +45,20 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
 
         <div className='navbar-content'>
           <div className='navbar-user'>
-            <a className='btn btn-default login-btn' onClick={() => setLogin((log) => !log)}>
+            <a
+              className='btn btn-default login-btn'
+              onClick={() => {
+                setLogin((log) => !log);
+                setSignUp(false);
+              }}
+            >
               Login
             </a>
             <a
               className='btn btn-default signup-btn'
               onClick={() => {
-                setSignUp(true);
+                setSignUp((log) => !log);
+                setLogin(false);
               }}
             >
               Sign up
@@ -59,13 +67,8 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
         </div>
       </div>
 
-      <div
-        className={
-          login ? 'navbar-tabs show-login' : signUp ? 'navbar-tabs show-signup' : 'navbar-tabs'
-        }
-      >
-        <Login />
-      </div>
+      <Login login={login} />
+      <Signup signUp={signUp} />
     </div>
   );
 };

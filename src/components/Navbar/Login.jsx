@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ login }) => {
   const [loginInUser, setLoginInUser] = useState({ email: '', password: '' });
-  const login = async () => {
+
+  const loginUser = async () => {
     const res = await fetch('http://localhost:5000/api/login', {
       method: 'POST',
       headers: {
@@ -16,7 +17,9 @@ const Login = () => {
     sessionStorage.setItem('user', JSON.stringify(json.username));
   };
   return (
-    <div className='navbar-tab navbar-tab-login'>
+    <div
+      className={login ? 'navbar-tab navbar-tab-login show-login' : 'navbar-tab navbar-tab-login'}
+    >
       <div className='left'>
         <form name='login' className='login-form'>
           <h4 className='login-title'>Login</h4>

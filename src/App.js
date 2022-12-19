@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar.jsx';
-import Main from './components/Main/Main.jsx';
+import Main from './components/Main.jsx';
 import Forgot from './components/ForgotPassword/ForgotPass.jsx';
 import TradeItem from './components/Popups/TradeItem/TradeItem.jsx';
 import Basket from './components/Basket/Basket.jsx';
 import Account from './components/Popups/Account/Account.jsx';
-import Checkout from './components/Checkout/Checkout.jsx';
-import Footer from './components/Footer/Footer.jsx';
+import Checkout from './components/Checkout.jsx';
+import Footer from './components/Footer.jsx';
 import SelectProducts from './components/SelectProducts';
 
 function App() {

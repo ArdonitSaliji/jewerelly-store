@@ -1,0 +1,130 @@
+.navbar-container {
+  color: theme-color('light');
+  position: relative;
+  z-index: 999;
+  width: 100vw;
+  transition: all 0.5s;
+  &.sticky {
+    position: fixed;
+    .navbar-tabs {
+      height: 0;
+    }
+  }
+  .container-fluid {
+    background-color: theme-color('secondary');
+    z-index: 312;
+  }
+  a {
+    color: theme-color('light');
+    padding: 0 1em;
+    text-decoration: none;
+    transition: all 0.3s;
+    opacity: 0.75;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .navbar {
+    .navbar-title h3 {
+      font-weight: 300;
+      padding: 0 0.5em;
+      font-size: 1.1rem;
+    }
+
+    .navbar-links {
+      ul {
+        li {
+          a {
+            color: theme-color('light');
+            padding: 0 1em;
+            text-decoration: none;
+            transition: all 0.3s;
+            opacity: 0.75;
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-tab {
+    background-color: theme-color-level('secondary', -10%);
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 1em 0;
+    transition: all 0.7s;
+
+    .left,
+    .right {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-login {
+      position: absolute;
+      transition: all 0.7s;
+      transform: translateY(-100%);
+
+      &.show-login {
+        transform: translateY(0);
+      }
+      .left {
+        form {
+          .login-title {
+            margin-bottom: -1rem;
+          }
+          .form-group {
+            padding-bottom: 1em;
+          }
+        }
+      }
+      form {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+    &-signup {
+      transition: all 0.7s;
+      transform: translateY(-100%);
+      position: absolute;
+      &.show-signup {
+        transform: translateY(0);
+      }
+      .left {
+        width: 100%;
+        form {
+          .signup-inputs {
+            display: flex;
+          }
+          .login-title {
+            margin-bottom: -1rem;
+          }
+          .form-group {
+            margin: 0 1rem;
+            padding-bottom: 1em;
+          }
+        }
+      }
+      .right {
+        margin-right: 2rem;
+      }
+      form {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+  }
+}

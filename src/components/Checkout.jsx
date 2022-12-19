@@ -40,7 +40,7 @@ const Checkout = () => {
 
             <div className='inputBox'>
               <span>cards accepted :</span>
-              <img src={require('./images/card_img.png')} alt='' />
+              {/* <img src={require('./images/card_img.png')} alt='' /> */}
             </div>
             <div className='inputBox'>
               <span>name on card :</span>

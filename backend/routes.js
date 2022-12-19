@@ -7,10 +7,13 @@ const Products = require('./Schema/Products');
 
 router.post('/api/user/basket', async (req, res) => {
   let foundUser = await Users.find({ username: req.body.user });
+  if (foundUser[0]) {
+    const allProducts = await Products.find({ _id: { $in: foundUser[0].cart } });
+    res.status(200).send(allProducts);
+  } else {
+    res.status(404).send({ message: 'You need to login first' });
+  }
 
-  const allProducts = await Products.find({ _id: { $in: foundUser[0].cart } });
-
-  console.log(allProducts);
   //
 });
 
