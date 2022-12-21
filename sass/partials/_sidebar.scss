@@ -2,10 +2,25 @@
   display: flex;
   position: fixed;
   flex-direction: column;
-  inset: 0 80% 0 0;
+  justify-content: space-between;
+  inset: 0 0 0 80%;
   z-index: 110;
   background-color: hsla(0, 2%, 10%, 0.558);
   transition: 0.5s all;
+  nav .ul-item li .icon {
+    margin-right: 3rem;
+    color: rgb(0, 255, 145);
+    font-size: 30px;
+  }
+  nav .ul-item li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    cursor: pointer;
+    padding-block: 1.2rem;
+    margin-block: 0.1rem;
+  }
 }
 
 .header.mobile {
@@ -15,11 +30,26 @@
   flex-direction: column;
   z-index: 110;
   align-items: center;
-  inset: 0 96% 0 0;
+  inset: 0 0 0 96%;
   background-color: hsla(0, 2%, 10%, 0.558);
+  nav .ul-item li .icon {
+    margin-right: 2rem;
+    color: rgb(0, 255, 145);
+    margin-inline: 1rem;
+    font-size: 30px;
+  }
+  nav .ul-item li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    cursor: pointer;
+    padding-block: 1.2rem;
+    margin-block: 0.1rem;
+  }
 }
 nav {
-  padding-top: 2rem;
+  padding-top: 3rem;
 }
 nav .ul-item {
   display: flex;
@@ -40,34 +70,19 @@ nav .ul-item.oicon li::after {
   width: 1%;
   height: 4%;
   background-color: #fff;
-  right: 0;
-}
-
-nav .ul-item li {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  cursor: pointer;
-  padding-block: 1.2rem;
-  margin-block: 0.1rem;
+  left: 0;
 }
 
 nav .ul-item li:hover {
   background-color: rgb(66, 81, 52);
 }
 
-nav .ul-item li .icon {
-  color: rgb(0, 255, 145);
-  margin-inline: 1rem;
-  font-size: 30px;
-}
-
 nav .ul-item li a {
   text-transform: uppercase;
   text-decoration: none;
   color: #fff;
-  border-left: 1px solid white;
-  padding-left: 2rem;
+  border-right: 1px solid white;
+  padding-right: 2rem;
 }
 .menu-icon {
   margin-inline: 1rem;
@@ -82,26 +97,4 @@ nav .ul-item li a {
 
 nav .ul-item li:hover {
   transition: 1s ease;
-}
-
-@media (max-width: 900px) {
-  .header-mobile {
-    inset: 0 90% 0 0;
-    justify-content: center;
-  }
-
-  nav .ul-item {
-    display: none;
-  }
-
-  nav .ul-item.oicon {
-    display: flex;
-  }
-  .menu-icon {
-    display: none;
-  }
-
-  nav .ul-item li .icon {
-    font-size: clamp(1rem, 2vw + 1rem, 4rem);
-  }
 }

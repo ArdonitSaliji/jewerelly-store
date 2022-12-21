@@ -20,52 +20,52 @@ const Sidebar = () => {
   const activateNav = () => {
     setActive(!active);
   };
-  useEffect(() => {
-    window.addEventListener('mousemove', (e) => {
-      if (e.clientX < 75) {
-        e.target.classList.remove('mobile');
-        setActive(true);
-      }
-    });
-    window.addEventListener('mousemove', (e) => {
-      if (e.clientX > 400) {
-        e.target.classList.add('mobile');
-        setActive(false);
-      }
-    });
-  }, []);
+  const showSideBar = (e) => {
+    setActive(true);
+    e.target.classList.remove('mobile');
+  };
+  const hideSideBar = (e) => {
+    setActive(false);
+    e.target.classList.add('mobile');
+  };
 
   return (
-    <div className={active ? 'header' : 'header mobile'}>
+    <div
+      onMouseLeave={(e) => {
+        hideSideBar(e);
+      }}
+      onMouseEnter={(e) => showSideBar(e)}
+      className={active ? 'header' : 'header mobile'}
+    >
       <nav>
         <ul className={active ? 'ul-item' : 'ul-item oicon'}>
           <li>
-            <IoMdPerson className='icon' />
             <Link to='/'>Testimonials</Link>
+            <IoMdPerson className='icon' />
           </li>
           <li>
-            <IoMdBookmark className='icon' />
             <Link to='/'>History</Link>
+            <IoMdBookmark className='icon' />
           </li>
 
           <li>
-            <IoMdHome className='icon' />
             <Link to='/'>Partners</Link>
+            <IoMdHome className='icon' />
           </li>
 
           <li>
-            <IoMdHammer className='icon' />
             <Link to='/'>Tutorials</Link>
+            <IoMdHammer className='icon' />
           </li>
 
           <li>
-            <IoMdCall className='icon' />
             <Link to='/'>Contact</Link>
+            <IoMdCall className='icon' />
           </li>
 
           <li>
-            <IoMdClipboard className='icon' />
             <Link to='/'>FAQ</Link>
+            <IoMdClipboard className='icon' />
           </li>
         </ul>
       </nav>
