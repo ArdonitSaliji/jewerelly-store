@@ -9,8 +9,12 @@ body {
   line-height: 1.5;
   margin: 0;
   text-align: left;
-  color: theme-color("dark");
+  color: theme-color('dark');
   background-color: $white;
+}
+
+.app {
+  position: relative;
 }
 
 .sr-only {

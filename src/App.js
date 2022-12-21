@@ -9,6 +9,7 @@ import Account from './components/Popups/Account/Account.jsx';
 import Checkout from './components/Checkout.jsx';
 import Footer from './components/Footer.jsx';
 import SelectProducts from './components/SelectProducts';
+import Sidebar from './components/Sidebar.jsx';
 
 function App() {
   const [trade, setTrade] = useState(false);
@@ -75,7 +76,7 @@ function App() {
           accountPopup={accountPopup}
           setAccountPopup={setAccountPopup}
         />
-
+        <Sidebar />
         <Footer />
       </div>
     </BrowserRouter>
