@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = ({ login }) => {
+const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: '', password: '' });
 
   const loginUser = async () => {
@@ -13,9 +13,11 @@ const Login = ({ login }) => {
       body: JSON.stringify({ email: loginInUser.email, password: loginInUser.password }),
     });
     const json = await res.json();
-    console.log(json);
+    sessionStorage.setItem('isLoggedIn', JSON.stringify(json.isLoggedIn));
+    setIsLoggedIn(json.isLoggedIn);
     sessionStorage.setItem('user', JSON.stringify(json.username));
   };
+
   return (
     <div
       className={login ? 'navbar-tab navbar-tab-login show-login' : 'navbar-tab navbar-tab-login'}
@@ -67,7 +69,7 @@ const Login = ({ login }) => {
       </div>
       <div className='right'>
         <form>
-          <button type='button' className='btn btn-primary' onClick={() => login()}>
+          <button type='button' className='btn btn-primary' onClick={() => loginUser()}>
             Login
           </button>
           <hr />

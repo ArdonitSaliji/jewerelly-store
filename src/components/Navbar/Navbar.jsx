@@ -6,7 +6,7 @@ import Signup from './Signup';
 const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('isLoggedIn')));
   return (
     <div className='navbar-container'>
       <div className='navbar container-fluid'>
@@ -35,42 +35,60 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
               </Link>
             </li>
           </ul>
-          {loginStatus && (
-            <span className='navbar-account same' onClick={() => setAccountPopup(true)}>
-              {sessionStorage.getItem('user') &&
-                JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
-            </span>
-          )}
         </div>
 
         <div className='navbar-content'>
           <div className='navbar-user'>
-            <a
-              className='btn btn-default login-btn'
-              onClick={() => {
-                setLogin((log) => !log);
-                setSignUp(false);
-              }}
-            >
-              Login
-            </a>
-            <a
-              className='btn btn-default signup-btn'
-              onClick={() => {
-                setSignUp((log) => !log);
-                setLogin(false);
-              }}
-            >
-              Sign up
-            </a>
+            {!isLoggedIn && (
+              <>
+                <a
+                  className='btn btn-default login-btn'
+                  onClick={() => {
+                    setLogin((log) => !log);
+                    setSignUp(false);
+                  }}
+                >
+                  Login
+                </a>
+                <a
+                  className='btn btn-default signup-btn'
+                  onClick={() => {
+                    setSignUp((log) => !log);
+                    setLogin(false);
+                  }}
+                >
+                  Sign up
+                </a>
+              </>
+            )}
+
+            {isLoggedIn && (
+              <div className='navbar-user'>
+                <div className='navbar-user-photo'>
+                  <img src={process.env.PUBLIC_URL + '/images/user.webp'} alt='' />
+                </div>
+                <div className='navbar-user-username'>
+                  @{JSON.parse(sessionStorage.getItem('user'))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      <Login login={login} />
-      <Signup signUp={signUp} />
+      {!isLoggedIn && (
+        <>
+          <Login login={login} setIsLoggedIn={setIsLoggedIn} /> <Signup signUp={signUp} />
+        </>
+      )}
     </div>
   );
 };
 
 export default Navbar;
+
+/* {loginStatus && (
+  <span className='navbar-account same' onClick={() => setAccountPopup(true)}>
+    {sessionStorage.getItem('user') &&
+      JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
+  </span>
+)} */

@@ -109,6 +109,7 @@ router.post('/api/login', async (req, res) => {
           user: req.session.emailOrUsername,
           username: emailOrUsername,
           msg: 'login successful',
+          isLoggedIn: true,
         });
       } else {
         res.status(401).send({ msg: 'Incorrect Username/Email or Password' });
