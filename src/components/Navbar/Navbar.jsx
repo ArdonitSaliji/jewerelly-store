@@ -64,7 +64,12 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
 
             {isLoggedIn && (
               <div className='navbar-user'>
-                <div className='navbar-user-photo'>
+                <div
+                  className='navbar-user-photo'
+                  onClick={() => {
+                    document.querySelector('.sidebar').classList.toggle('show');
+                  }}
+                >
                   <img src={process.env.PUBLIC_URL + '/images/user.webp'} alt='' />
                 </div>
                 <div className='navbar-user-username'>
