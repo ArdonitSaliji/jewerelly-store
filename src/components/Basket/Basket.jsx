@@ -1,30 +1,7 @@
-import { useEffect, useState } from 'react';
-import Checkout from './BasketCheckout';
+// import { useEffect, useState } from 'react';
+// import Checkout from './BasketCheckout';
 
-const Basket = ({ basketState, setBasketState }) => {
-  useEffect(() => {
-    const retriveProducts = JSON.parse(localStorage.getItem('basket'));
-    setBasketState(retriveProducts);
-  }, [setBasketState]);
-  const [userProducts, setUserProducts] = useState([]);
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem('user'));
-    const getBasketProducts = async () => {
-      const res = await fetch('http://localhost:5000/api/user/basket', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user: user,
-        }),
-      });
-      let json = await res.json();
-      console.log(json);
-      setUserProducts(json);
-    };
-    getBasketProducts();
-  }, []);
+const Basket = ({ basketProducts }) => {
   return (
     <div className='basket-container'>
       <div className='basket'>
@@ -46,11 +23,10 @@ const Basket = ({ basketState, setBasketState }) => {
                 </div>
               )
           )} */}
-          {localStorage.setItem('basketLength', JSON.stringify(basketState.length))}
         </div>
       </div>
 
-      <Checkout basketState={basketState} setBasketState={setBasketState} />
+      {/* <Checkout /> */}
     </div>
   );
 };

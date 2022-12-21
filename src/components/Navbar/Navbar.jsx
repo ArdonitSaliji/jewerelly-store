@@ -29,8 +29,10 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
             <li>
               <Link to='/basket'>
                 Basket&nbsp;
-                {basketState && basketState.length > 0 && (
-                  <span className='basket-indicator'>{basketState.length}</span>
+                {JSON.parse(sessionStorage.getItem('basketItems').length) > 0 && (
+                  <span className='basket-indicator'>
+                    {JSON.parse(sessionStorage.getItem('basketItems'))}
+                  </span>
                 )}
               </Link>
             </li>

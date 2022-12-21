@@ -55,7 +55,8 @@
       ul {
         li {
           a {
-            color: theme-color('light');
+            font-weight: 500;
+            color: $white;
             padding: 0 1em;
             text-decoration: none;
             transition: all 0.3s;
@@ -64,6 +65,14 @@
               opacity: 1;
             }
           }
+        }
+        .basket-indicator {
+          text-align: center;
+          border-radius: 5px;
+          display: inline-block;
+          background-color: theme-color('dark');
+          color: white;
+          width: 1rem;
         }
       }
     }

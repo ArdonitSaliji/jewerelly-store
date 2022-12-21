@@ -3,14 +3,12 @@ import { AiOutlineSearch } from 'react-icons/ai';
 const Main = ({ setGemState }) => {
   const [searchState, setSearchState] = useState('');
   const [allProducts, setAllProducts] = useState(null);
-
   useEffect(() => {
     const getAllProducts = async () => {
       const getProducts = await fetch('http://localhost:5000/api/products/find');
       let json = await getProducts.json();
       setAllProducts(json);
     };
-
     getAllProducts();
   }, [searchState, setGemState]);
 
