@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
-const Navbar = ({ basketProducts, setBasketProducts }) => {
+const Navbar = ({ setBasketProducts }) => {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('isLoggedIn')));
@@ -11,7 +11,6 @@ const Navbar = ({ basketProducts, setBasketProducts }) => {
     <div className='navbar-container'>
       <div className='navbar container-fluid'>
         <div className='navbar-title'>
-          {/* <img src={require('../../images/logo2.jpg')} alt='' /> */}
           <h3>Jewellery Traders</h3>
         </div>
 
@@ -97,10 +96,3 @@ const Navbar = ({ basketProducts, setBasketProducts }) => {
 };
 
 export default Navbar;
-
-/* {loginStatus && (
-  <span className='navbar-account same' onClick={() => setAccountPopup(true)}>
-    {sessionStorage.getItem('user') &&
-      JSON.parse(sessionStorage.getItem('user'))[0].toUpperCase()}
-  </span>
-)} */

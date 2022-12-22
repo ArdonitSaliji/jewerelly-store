@@ -79,12 +79,7 @@ const Signup = ({ signUp }) => {
               </div>
             </div>
           </div>
-          <Link
-            //   onClick={() => setsignup(false)}
-            to={'/reset-password'}
-          >
-            Have an account? Login.
-          </Link>
+          <Link to={'/reset-password'}>Have an account? Login.</Link>
         </form>
       </div>
       <div className='right'>
