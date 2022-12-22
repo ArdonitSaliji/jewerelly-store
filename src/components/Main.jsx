@@ -11,7 +11,6 @@ const Main = ({ setGemState }) => {
     };
     getAllProducts();
   }, [searchState, setGemState]);
-
   return (
     <div className='main container'>
       <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
@@ -30,7 +29,6 @@ const Main = ({ setGemState }) => {
 
       <div className='gems-container'>
         {allProducts?.map((product) => {
-          sessionStorage.setItem('shape', JSON.stringify('oval'));
           return (
             <div
               title={'Explorer ' + product.name}
@@ -39,6 +37,7 @@ const Main = ({ setGemState }) => {
               onClick={(e) => {
                 const product = e.target;
                 setGemState(product.children[1].textContent.toLowerCase());
+                console.log(product.children[1].textContent.toLowerCase());
                 sessionStorage.setItem(
                   'selectProduct',
                   JSON.stringify(product.children[1].textContent.toLowerCase())
@@ -60,33 +59,3 @@ const Main = ({ setGemState }) => {
 };
 
 export default Main;
-
-// useEffect(() => {
-//   data.map((product) => {
-//     const uploadProducts = async () => {
-//       const res = await fetch('http://localhost:5000/api/products/upload', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           name: product.name,
-//           image: product.image,
-//           shape: product.shape,
-//           size: product.size,
-//           price: product.price,
-//           text: product.text,
-//         }),
-//       });
-//     };
-//     uploadProducts();
-//   });
-// }, []);
-/* <div className='filter'>
-          <label style={{ fontSize: '18px', marginRight: '0.5rem' }}>Sort by: </label>
-          <select>
-            {listing.map((value, i) => (
-              <option key={i}>{value}</option>
-            ))}
-          </select>
-        </div> */

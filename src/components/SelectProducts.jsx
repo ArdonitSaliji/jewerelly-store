@@ -32,7 +32,6 @@ const SelectProducts = () => {
       }),
     });
     const json = await addProduct.json();
-    console.log(json);
   };
 
   return (

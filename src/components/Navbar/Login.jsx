@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = ({ login, setIsLoggedIn }) => {
+const Login = ({ setBasketProducts, login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: '', password: '' });
-
+  sessionStorage.clear();
   const loginUser = async () => {
     const res = await fetch('http://localhost:5000/api/login', {
       method: 'POST',
@@ -15,6 +15,7 @@ const Login = ({ login, setIsLoggedIn }) => {
     const json = await res.json();
     sessionStorage.setItem('isLoggedIn', JSON.stringify(json.isLoggedIn));
     setIsLoggedIn(json.isLoggedIn);
+    sessionStorage.setItem('basketProducts', json.basketProducts.length);
     sessionStorage.setItem('user', JSON.stringify(json.username));
   };
 

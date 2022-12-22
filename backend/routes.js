@@ -5,18 +5,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Products = require('./Schema/Products');
 
-router.post('/api/user/basket', async (req, res) => {
-  let foundUser = await Users.find({ username: req.body.user });
-  if (foundUser[0]) {
-    const allProducts = await Products.find({ _id: { $in: foundUser[0].cart } });
-    res.status(200).send(allProducts);
-  } else {
-    res.status(404).send({ message: 'You need to login first' });
-  }
-
-  //
-});
-
 router.get('/api/products/find', async (req, res) => {
   let foundProduct = await Products.find({
     $expr: { $gt: [{ $strLenCP: '$text' }, 1] },
@@ -27,12 +15,15 @@ router.get('/api/products/find', async (req, res) => {
 });
 
 router.post('/user/cart/add', async (req, res) => {
-  let foundProduct = await Products.find({ name: req.body.product });
-  let foundUser = await Users.find({ username: req.body.user }).updateOne({
-    $push: { cart: foundProduct[0]._id },
-  });
-  console.log(foundUser);
-  res.status(202).send({ msg: foundUser });
+  let foundProduct = await Products.findOne({ name: req.body.product });
+  let foundUser = await Users.findOne({ username: req.body.user });
+  if (foundUser) {
+    const update = await Users.findOne({ username: foundUser.username }).updateOne({
+      $push: { cart: foundProduct._id },
+    });
+    return res.status(202).send({ msg: foundUser });
+  }
+  res.status(404).send({ msg: foundUser });
 });
 
 router.post('/api/products/select', async (req, res) => {
@@ -95,6 +86,8 @@ router.post('/api/login', async (req, res) => {
     return res.status(404).send({ login: 'Account does not exist' });
   }
   if (foundUser) {
+    const basketProducts = await Products.find({ _id: { $in: foundUser.cart } });
+    console.log(basketProducts);
     bcrypt.compare(userLoggingIn.password, foundUser.password, (err, user) => {
       if (user) {
         const signUser = { username: emailOrUsername };
@@ -106,10 +99,10 @@ router.post('/api/login', async (req, res) => {
         res.status(200).json({
           auth: true,
           accessToken: accessToken,
-          user: req.session.emailOrUsername,
           username: emailOrUsername,
           msg: 'login successful',
           isLoggedIn: true,
+          basketProducts: basketProducts,
         });
       } else {
         res.status(401).send({ msg: 'Incorrect Username/Email or Password' });

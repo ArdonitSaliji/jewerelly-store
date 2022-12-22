@@ -28,9 +28,6 @@ mongoose.connect(
   () => console.log('Database Connected')
 );
 app.use('/', routesUrls);
-app.all('*', function (req, res) {
-  res.sendFile('index.html');
-});
 
 app.use((req, res, next) => {
   if (req.session.user) next();

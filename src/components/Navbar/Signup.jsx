@@ -92,7 +92,10 @@ const Signup = ({ signUp }) => {
           <button
             type='button'
             className='btn btn-primary'
-            //  onClick={() => signup()}
+            onClick={() =>
+              // signup() /////////  TODO: Add signup functionality.
+              window.location.reload()
+            }
           >
             Sign up
           </button>

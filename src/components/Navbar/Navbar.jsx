@@ -3,14 +3,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
-const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
+const Navbar = ({ basketProducts, setBasketProducts }) => {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('isLoggedIn')));
-  const basketItems =
-    sessionStorage.getItem('basketItems') !== 'undefined' &&
-    sessionStorage.getItem('basketItems').length > 0;
-
   return (
     <div className='navbar-container'>
       <div className='navbar container-fluid'>
@@ -33,8 +29,10 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
             <li>
               <Link to='/basket'>
                 Basket&nbsp;
-                {basketItems && (
-                  <span className='basket-indicator'>{sessionStorage.getItem('basketItems')}</span>
+                {isLoggedIn && (
+                  <span className='basket-indicator'>
+                    {sessionStorage.getItem('basketProducts')}
+                  </span>
                 )}
               </Link>
             </li>
@@ -86,7 +84,12 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
       </div>
       {!isLoggedIn && (
         <>
-          <Login login={login} setIsLoggedIn={setIsLoggedIn} /> <Signup signUp={signUp} />
+          <Login
+            setBasketProducts={setBasketProducts}
+            login={login}
+            setIsLoggedIn={setIsLoggedIn}
+          />
+          <Signup signUp={signUp} />
         </>
       )}
     </div>
