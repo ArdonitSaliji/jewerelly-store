@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
@@ -7,6 +7,10 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('isLoggedIn')));
+  const basketItems =
+    sessionStorage.getItem('basketItems') !== 'undefined' &&
+    sessionStorage.getItem('basketItems').length > 0;
+
   return (
     <div className='navbar-container'>
       <div className='navbar container-fluid'>
@@ -29,10 +33,8 @@ const Navbar = ({ setAccountPopup, loginStatus, basketState }) => {
             <li>
               <Link to='/basket'>
                 Basket&nbsp;
-                {JSON.parse(sessionStorage.getItem('basketItems').length) > 0 && (
-                  <span className='basket-indicator'>
-                    {JSON.parse(sessionStorage.getItem('basketItems'))}
-                  </span>
+                {basketItems && (
+                  <span className='basket-indicator'>{sessionStorage.getItem('basketItems')}</span>
                 )}
               </Link>
             </li>
