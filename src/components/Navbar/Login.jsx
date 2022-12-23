@@ -14,9 +14,10 @@ const Login = ({ setBasketProducts, login, setIsLoggedIn }) => {
     });
     const json = await res.json();
     sessionStorage.setItem('isLoggedIn', JSON.stringify(json.isLoggedIn));
-    setIsLoggedIn(json.isLoggedIn);
     sessionStorage.setItem('basketProducts', json.basketProducts.length);
     sessionStorage.setItem('user', JSON.stringify(json.username));
+    setIsLoggedIn(json.isLoggedIn);
+    window.location.reload()
   };
 
   return (
