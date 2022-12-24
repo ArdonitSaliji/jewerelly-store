@@ -18,7 +18,7 @@ document.addEventListener('click', (e) => {
 const logUserOur = async () => {
   const res = await fetch('http://localhost:5000/api/logout');
 
-  sessionStorage.setItem('isLoggedIn', JSON.stringify(false));
+  sessionStorage.clear();
   window.location.reload();
 };
 const Sidebar = () => {

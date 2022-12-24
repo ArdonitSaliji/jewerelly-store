@@ -26,6 +26,16 @@ router.post('/user/cart/add', async (req, res) => {
   res.status(404).send({ msg: foundUser });
 });
 
+router.post('/user/cart/products', async (req, res) => {
+  const foundUser = await Users.findOne({
+    username: req.body.user,
+  });
+  if (foundUser) {
+    const basketProducts = await Products.find({ _id: { $in: foundUser.cart } });
+    return res.status(200).send(basketProducts);
+  }
+});
+
 router.post('/api/products/select', async (req, res) => {
   let foundProduct = await Products.find({ name: { $regex: `^${req.body.name}` } });
   foundProduct

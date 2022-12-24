@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-const Login = ({ setBasketProducts, login, setIsLoggedIn }) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { updateBasket } from '../../feature/basketSlice';
+const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: '', password: '' });
-  sessionStorage.clear();
+  const basket = useSelector((state) => state.basket.updateBasket);
+  const dispatch = useDispatch();
   const loginUser = async () => {
     const res = await fetch('http://localhost:5000/api/login', {
       method: 'POST',
@@ -16,8 +18,9 @@ const Login = ({ setBasketProducts, login, setIsLoggedIn }) => {
     sessionStorage.setItem('isLoggedIn', JSON.stringify(json.isLoggedIn));
     sessionStorage.setItem('basketProducts', json.basketProducts.length);
     sessionStorage.setItem('user', JSON.stringify(json.username));
+    console.log(json.basketProducts);
+    dispatch(updateBasket(json.basketProducts));
     setIsLoggedIn(json.isLoggedIn);
-    window.location.reload()
   };
 
   return (
