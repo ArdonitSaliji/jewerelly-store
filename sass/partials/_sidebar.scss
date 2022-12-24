@@ -9,25 +9,28 @@
   flex-direction: column;
   z-index: 110;
   align-items: center;
-  width: 15%;
+  min-width: 15%;
+  max-width: 25%;
+
   background-color: hsla(0, 2%, 10%, 0.658);
   &.show {
     transform: translateX(0);
   }
   nav {
-    width: 100%;
+    min-width: 100%;
     padding-top: 3rem;
   }
   nav .ul-item {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    min-width: 100%;
+
     padding: 0;
     margin-block: 0.5rem;
     list-style: none;
   }
   .ul-item li {
-    width: 100%;
+    min-width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +41,7 @@
     margin-block: 0.1rem;
   }
   .ul-item li .icon {
-    margin-right: 2rem;
+    margin-right: 1rem;
     color: rgb(83, 206, 255);
     min-width: 1.5rem;
     min-height: 1.5rem;
@@ -52,8 +55,9 @@
     text-transform: uppercase;
     text-decoration: none;
     color: #fff;
+    padding-left: -1rem;
+    padding-right: 1rem;
     border-right: 1px solid white;
-    padding-right: 2rem;
   }
   .menu-icon {
     margin-inline: 1rem;
