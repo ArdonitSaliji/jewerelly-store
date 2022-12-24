@@ -14,14 +14,18 @@ const Basket = () => {
       <div className='productContainer'>
         <ListGroup>
           {sessionStorage.getItem('isLoggedIn') ? (
-            basketProducts.map((prod, index) => (
-              <ListGroup.Item key={index}>
+            basketProducts.map((prod) => (
+              <ListGroup.Item key={prod._id}>
                 <Row>
                   <Col md={2}>
                     <Image src={prod.image} alt={prod.name} fluid rounded />
                   </Col>
                   <Col md={2}>
                     <span>{prod.name}</span>
+                    <br />
+                    <br />
+                    <br />
+                    <span>{prod.size}</span>
                   </Col>
                   <Col md={2}>{prod.price}</Col>
 

@@ -129,18 +129,23 @@ router.post('/api/signup', async (req, res) => {
   const takenUsername = await Users.findOne({
     username: user.username,
   });
-  if (takenEmail || takenUsername) {
-    return res.status(409).json({ error: 'Account already exists' });
+  if (takenEmail) {
+    return res.status(409).json({ error: 'Email already exists!' });
+  } else if (takenUsername) {
+    return res.status(409).json({ error: 'Username already exists!' });
   } else {
-    user.password = await bcrypt.hash(req.body.password, 10);
-    const dbUser = new Users({
-      username: user.username,
-      email: user.email,
-      password: user.password,
-    });
-    const userCreated = await dbUser.save();
-    return res.status(201).json({ data: { id: userCreated.id } });
+    if (user.password1 === user.password2) {
+      user.password1 = await bcrypt.hash(req.body.password1, 10);
+      const dbUser = new Users({
+        username: user.username,
+        email: user.email,
+        password: user.password1,
+      });
+      const userCreated = await dbUser.save();
+      return res.status(201).json({ success: 'Account created successfully!' });
+    }
   }
+  res.status(403).json({ error: 'Passwords not matching!' });
 });
 
 router.post('/api/logout', (req, res) => {

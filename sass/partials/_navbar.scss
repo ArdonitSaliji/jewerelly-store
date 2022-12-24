@@ -86,7 +86,23 @@
     align-items: center;
     padding: 1em 0;
     transition: all 0.7s;
-
+    .message {
+      width: auto;
+      display: inline-block;
+      word-break: keep-all;
+      white-space: nowrap;
+      opacity: 0;
+      transition: 0.5s all;
+      &.show {
+        opacity: 1;
+        &.error {
+          color: rgb(141, 1, 1);
+        }
+        &.success {
+          color: green;
+        }
+      }
+    }
     .left,
     .right {
       width: 50%;
