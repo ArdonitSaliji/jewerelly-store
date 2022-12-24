@@ -22,8 +22,15 @@ router.post('/user/cart/add', async (req, res) => {
     const basketProducts = await Users.findOne({
       'cart.product': foundProduct.name,
     });
-    console.log(basketProducts);
     if (basketProducts) {
+      await Users.updateOne(
+        { 'cart.product': foundProduct.name },
+        {
+          $inc: {
+            'cart.$.quantity': 1,
+          },
+        }
+      );
       return res.status(203).json({ message: 'Product already exists' });
     }
 
