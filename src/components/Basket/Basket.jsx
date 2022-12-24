@@ -1,20 +1,36 @@
-// import { useEffect, useState } from 'react';
-// import Checkout from './BasketCheckout';
-
 import { useEffect, useState } from 'react';
 import { Button, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
 import { AiFillDelete } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
-import { selectAllProducts } from '../../feature/basketSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllProducts, updateLength } from '../../feature/basketSlice';
 const Basket = () => {
   const [total, setTotal] = useState();
+  const [userProducts, setUserProducts] = useState([]);
   const basketProducts = useSelector(selectAllProducts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getUserProducts = async () => {
+      const res = await fetch('http://localhost:5000/user/cart/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user: JSON.parse(sessionStorage.getItem('user')),
+        }),
+      });
+      const json = await res.json();
+      dispatch(updateLength(json.length));
+      setUserProducts(json);
+    };
+    getUserProducts();
+  }, []);
   return (
     <div className='home'>
       <div className='productContainer'>
         <ListGroup>
           {sessionStorage.getItem('isLoggedIn') ? (
-            basketProducts.map((prod) => (
+            userProducts?.map((prod) => (
               <ListGroup.Item key={prod._id}>
                 <Row>
                   <Col md={2}>
@@ -66,7 +82,7 @@ const Basket = () => {
               </ListGroup.Item>
             ))
           ) : (
-            <h3>You need to login to view your basket products.</h3>
+            <h3 className='login-first'>Login to add items to basket.</h3>
           )}
         </ListGroup>
       </div>

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
@@ -7,6 +8,8 @@ const Navbar = ({ setBasketProducts }) => {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('isLoggedIn')));
+  const indicator = sessionStorage.getItem('basketProducts');
+  const basketLength = useSelector((state) => state.basket.length);
   return (
     <div className='navbar-container'>
       <div className='navbar container-fluid'>
@@ -28,11 +31,7 @@ const Navbar = ({ setBasketProducts }) => {
             <li>
               <Link to='/basket'>
                 Basket&nbsp;
-                {isLoggedIn && (
-                  <span className='basket-indicator'>
-                    {sessionStorage.getItem('basketProducts')}
-                  </span>
-                )}
+                {isLoggedIn && <span className='basket-indicator'>{basketLength}</span>}
               </Link>
             </li>
           </ul>

@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateLength, updateLengthByOne } from '../feature/basketSlice';
 const SelectProducts = () => {
+  const dispatch = useDispatch();
+  const basketLength = useSelector((state) => state.basket.length);
+
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const selectProducts = async () => {
@@ -21,24 +26,31 @@ const SelectProducts = () => {
   }, []);
 
   const addToBasket = async (e) => {
-    const addProduct = await fetch('http://localhost:5000/user/cart/add', {
+    const res = await fetch('http://localhost:5000/user/cart/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        _id: e.target.parentElement.parentElement.id,
         product: e.target.parentElement.parentElement.title,
         user: JSON.parse(sessionStorage.getItem('user')),
       }),
     });
-    const json = await addProduct.json();
+    const json = await res.json();
+    sessionStorage.setItem('basketProducts', json.length);
+    if (res.status === 202) {
+      console.log(basketLength);
+      dispatch(updateLengthByOne());
+      console.log(basketLength);
+    }
   };
 
   return (
     <div className='product-container'>
-      {products?.map((product, index) => {
+      {products?.map((product) => {
         return (
-          <div className='product' title={product.name} key={index}>
+          <div className='product' title={product.name} id={product._id} key={product._id}>
             <img src={process.env.PUBLIC_URL + product.image} alt='' />
             <div className='content'>
               <div className='description'>

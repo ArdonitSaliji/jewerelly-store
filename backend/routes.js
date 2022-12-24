@@ -15,15 +15,25 @@ router.get('/api/products/find', async (req, res) => {
 });
 
 router.post('/user/cart/add', async (req, res) => {
+  const _id = req.body._id;
   let foundProduct = await Products.findOne({ name: req.body.product });
   let foundUser = await Users.findOne({ username: req.body.user });
   if (foundUser) {
-    const update = await Users.findOne({ username: foundUser.username }).updateOne({
-      $push: { cart: foundProduct._id },
+    const basketProducts = await Users.findOne({
+      'cart.product': foundProduct.name,
     });
-    return res.status(202).send({ msg: foundUser });
+    console.log(basketProducts);
+    if (basketProducts) {
+      return res.status(203).json({ message: 'Product already exists' });
+    }
+
+    const update = await Users.findOne({ username: foundUser.username }).updateOne({
+      $push: { cart: { _id: foundProduct._id, product: foundProduct.name, quantity: 1 } },
+    });
+
+    return res.status(202).json({ message: 'success' });
   }
-  res.status(404).send({ msg: foundUser });
+  res.status(404).json({ msg: 'error' });
 });
 
 router.post('/user/cart/products', async (req, res) => {

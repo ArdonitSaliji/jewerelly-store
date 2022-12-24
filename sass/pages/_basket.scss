@@ -87,13 +87,35 @@ body::-webkit-scrollbar-thumb {
   width: 30%;
 }
 .list-group {
+  position: relative;
+
   width: 70%;
   gap: 1rem;
   &-item {
     box-shadow: 0px 0px 2px black;
   }
 }
+.login-first {
+  white-space: nowrap;
 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.empty-cart {
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* Media Queries */
 @media (max-width: 771px) {
   .filters {
