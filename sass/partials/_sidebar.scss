@@ -1,5 +1,5 @@
 .sidebar {
-  transform: translateX(100%);
+  transform: translateX(130%);
   transition: 0.5s all;
   display: flex;
   position: fixed;
@@ -10,18 +10,19 @@
   z-index: 110;
   align-items: center;
   width: 15%;
-  background-color: hsla(0, 2%, 10%, 0.558);
+  background-color: hsla(0, 2%, 10%, 0.658);
   &.show {
     transform: translateX(0);
   }
   nav {
+    width: 100%;
     padding-top: 3rem;
   }
   nav .ul-item {
     display: flex;
     flex-direction: column;
     width: 100%;
-
+    padding: 0;
     margin-block: 0.5rem;
     list-style: none;
   }
@@ -29,20 +30,22 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 2rem;
     cursor: pointer;
+    padding-left: 0.5rem;
     padding-block: 1.2rem;
     margin-block: 0.1rem;
   }
   .ul-item li .icon {
     margin-right: 2rem;
     color: rgb(83, 206, 255);
-    font-size: 30px;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
   }
 
   nav .ul-item li:hover {
-    background-color: rgb(66, 81, 52);
+    background-color: rgb(68, 77, 60);
   }
 
   nav .ul-item li a {
