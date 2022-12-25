@@ -31,7 +31,9 @@ const Navbar = ({ setBasketProducts }) => {
             <li>
               <Link to='/basket'>
                 Basket&nbsp;
-                {isLoggedIn && <span className='basket-indicator'>{basketLength}</span>}
+                {isLoggedIn && (
+                  <span className='basket-indicator'>{basketLength > 0 && basketLength}</span>
+                )}
               </Link>
             </li>
           </ul>

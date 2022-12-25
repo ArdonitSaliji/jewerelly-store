@@ -65,7 +65,12 @@ body::-webkit-scrollbar-thumb {
 .filters > span {
   padding-bottom: 20px;
 }
-
+.form-control {
+  -webkit-appearance: menulist-button;
+  option {
+    height: 100px;
+  }
+}
 .title {
   font-size: 30px;
 }

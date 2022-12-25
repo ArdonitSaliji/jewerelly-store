@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { data } from '../data';
 const Main = ({ setGemState }) => {
   const [searchState, setSearchState] = useState('');
   const [allProducts, setAllProducts] = useState(null);
+
   useEffect(() => {
     const getAllProducts = async () => {
       const getProducts = await fetch('http://localhost:5000/api/products/find');

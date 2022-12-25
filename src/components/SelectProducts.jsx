@@ -38,11 +38,8 @@ const SelectProducts = () => {
       }),
     });
     const json = await res.json();
-    sessionStorage.setItem('basketProducts', json.length);
     if (res.status === 202) {
-      console.log(basketLength);
       dispatch(updateLengthByOne());
-      console.log(basketLength);
     }
   };
 

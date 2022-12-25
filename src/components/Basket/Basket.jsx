@@ -1,13 +1,21 @@
+/* eslint-disable array-callback-return */
 import { useEffect, useState } from 'react';
 import { Button, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
 import { AiFillDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllProducts, updateLength } from '../../feature/basketSlice';
+import { data } from '../../data';
+import {
+  selectAllProducts,
+  sumProductPrices,
+  updateBasket,
+  updateLength,
+  updateProductsQuantity,
+} from '../../feature/basketSlice';
 const Basket = () => {
-  const [total, setTotal] = useState();
-  const [userProducts, setUserProducts] = useState([]);
   const basketProducts = useSelector(selectAllProducts);
+  const productsSum = useSelector((state) => state.basket.sum);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const getUserProducts = async () => {
       const res = await fetch('http://localhost:5000/user/cart/products', {
@@ -20,17 +28,27 @@ const Basket = () => {
         }),
       });
       const json = await res.json();
-      dispatch(updateLength(json.length));
-      setUserProducts(json);
+      dispatch(updateProductsQuantity(json.foundUser.cart));
+      dispatch(updateLength(json.basketProducts.length));
+      dispatch(updateBasket(json.basketProducts));
+      const sum = basketProducts
+        .map((product) => {
+          const price = product.price.split('$').join('');
+          return price;
+        })
+        .reduce((a, b) => Number(a) + Number(b));
+      dispatch(sumProductPrices(sum));
     };
     getUserProducts();
   }, []);
+  const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   return (
     <div className='home'>
       <div className='productContainer'>
         <ListGroup>
           {sessionStorage.getItem('isLoggedIn') ? (
-            userProducts?.map((prod) => (
+            basketProducts?.map((prod) => (
               <ListGroup.Item key={prod._id}>
                 <Row>
                   <Col md={2}>
@@ -48,19 +66,13 @@ const Basket = () => {
                   <Col md={2}>
                     <Form.Control
                       as='select'
-                      value={prod.qty}
-                      // onChange={(e) =>
-                      //   dispatch({
-                      //     type: 'CHANGE_CART_QTY',
-                      //     payload: {
-                      //       id: prod.id,
-                      //       qty: e.target.value,
-                      //     },
-                      //   })
-                      // }
+                      defaultValue={prod.quantity}
+                      onChange={(e) => e.target.value}
                     >
-                      {[...Array(prod.inStock).keys()].map((x, index) => (
-                        <option key={index}>{x + 1}</option>
+                      {optionArray.map((x, index) => (
+                        <option style={{ height: '20px' }} key={index}>
+                          {x + 1}
+                        </option>
                       ))}
                     </Form.Control>
                   </Col>
@@ -88,7 +100,7 @@ const Basket = () => {
       </div>
       <div className='filters summary'>
         <span className='title'>Subtotal ({}) items</span>
-        <span style={{ fontWeight: 700, fontSize: 20 }}>Total: ₹ {total}</span>
+        <span style={{ fontWeight: 700, fontSize: 20 }}>Total: $ {productsSum.toFixed(2)}</span>
         <Button type='button'>Proceed to Checkout</Button>
       </div>
     </div>

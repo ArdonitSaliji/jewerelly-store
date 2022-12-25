@@ -15,7 +15,6 @@ router.get('/api/products/find', async (req, res) => {
 });
 
 router.post('/user/cart/add', async (req, res) => {
-  const _id = req.body._id;
   let foundProduct = await Products.findOne({ name: req.body.product });
   let foundUser = await Users.findOne({ username: req.body.user });
   if (foundUser) {
@@ -34,7 +33,7 @@ router.post('/user/cart/add', async (req, res) => {
       return res.status(203).json({ message: 'Product already exists' });
     }
 
-    const update = await Users.findOne({ username: foundUser.username }).updateOne({
+    await Users.findOne({ username: foundUser.username }).updateOne({
       $push: { cart: { _id: foundProduct._id, product: foundProduct.name, quantity: 1 } },
     });
 
@@ -49,7 +48,8 @@ router.post('/user/cart/products', async (req, res) => {
   });
   if (foundUser) {
     const basketProducts = await Products.find({ _id: { $in: foundUser.cart } });
-    return res.status(200).send(basketProducts);
+
+    return res.status(200).send({ basketProducts, foundUser });
   }
 });
 
@@ -114,7 +114,6 @@ router.post('/api/login', async (req, res) => {
   }
   if (foundUser) {
     const basketProducts = await Products.find({ _id: { $in: foundUser.cart } });
-    console.log(basketProducts);
     bcrypt.compare(userLoggingIn.password, foundUser.password, (err, user) => {
       if (user) {
         const signUser = { username: emailOrUsername };
@@ -158,7 +157,7 @@ router.post('/api/signup', async (req, res) => {
         email: user.email,
         password: user.password1,
       });
-      const userCreated = await dbUser.save();
+      await dbUser.save();
       return res.status(201).json({ success: 'Account created successfully!' });
     }
   }

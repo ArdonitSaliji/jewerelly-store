@@ -14,6 +14,7 @@ export const data = [
     shape: 'pear',
     size: '8.2 carat',
     price: '$22.75',
+    inStock: '100',
     text: 'Agate is formed in the cavities of igneous rocks, through deposits of silica which settle into the characteristic banded patterns we see in all forms of this semi-precious stone. It measures 7 on the Mohs scale of hardness.',
   },
   {
@@ -22,6 +23,7 @@ export const data = [
     shape: 'pear',
     size: '6.6 carat',
     price: '$19.55',
+    inStock: '100',
     text: '',
   },
   {
@@ -30,6 +32,7 @@ export const data = [
     shape: 'pear',
     size: '9.5 carat',
     price: '$47.50',
+    inStock: '100',
     text: '',
   },
   {
@@ -38,6 +41,7 @@ export const data = [
     shape: 'pear',
     size: '12.9 carat',
     price: '$64.75',
+    inStock: '100',
     text: '',
   },
   {
@@ -46,6 +50,7 @@ export const data = [
     shape: 'pear',
     size: '7.0 carat',
     price: '$20.99',
+    inStock: '100',
     text: '',
   },
   {
@@ -54,6 +59,7 @@ export const data = [
     shape: 'pear',
     size: '3.9 carat',
     price: '$12.99',
+    inStock: '100',
     text: '',
   },
   {
@@ -62,6 +68,7 @@ export const data = [
     shape: 'pear',
     size: '6.2 carat',
     price: '$52.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -70,6 +77,7 @@ export const data = [
     shape: 'pear',
     size: '20.0 carat',
     price: '$62.50',
+    inStock: '100',
     text: '',
   },
   {
@@ -78,6 +86,7 @@ export const data = [
     shape: 'pear',
     size: '15.0 carat',
     price: '$55.50',
+    inStock: '100',
     text: '',
   },
   {
@@ -86,6 +95,7 @@ export const data = [
     shape: 'pear',
     size: '6.2 carat',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -94,6 +104,7 @@ export const data = [
     shape: 'pear',
     size: '26.84 carat',
     price: '$82.99',
+    inStock: '100',
     text: 'Also called "Amazon stone, amazonite is the only microcline you are likely to encounter as a gemstone. Microclines are potassium feldspars with a triclinic crystal structure Amazonite color can range from pale green to dark green and blue-green. These specimens usually (but not always) show white mottling.',
   },
   {
@@ -102,6 +113,7 @@ export const data = [
     shape: 'pear',
     size: '42.24 carat',
     price: '$110.00',
+    inStock: '100',
     text: '',
   },
   {
@@ -110,14 +122,16 @@ export const data = [
     shape: 'pear',
     size: '64.20 carat',
     price: '$168.99',
+    inStock: '100',
     text: '',
   },
   {
     name: 'amazonite7',
     image: '/images/amazonite7.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '18.50 carat',
+    price: '$210.35',
+    inStock: '100',
     text: ``,
   },
   {
@@ -126,38 +140,43 @@ export const data = [
     shape: 'pear',
     size: '894.26.84carat',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
     name: 'amethyst2',
     image: '/images/amethyst2.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '69.69 carat',
+    price: '$189.99',
+    inStock: '100',
     text: '',
   },
   {
     name: 'amethyst3',
     image: '/images/amethyst3.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '72.84 carat',
+    price: '$172.15',
+    inStock: '100',
     text: '',
   },
   {
     name: 'amethyst4',
     image: '/images/amethyst4.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '28.24 carat',
+    price: '$115.15',
+    inStock: '100',
     text: '',
   },
   {
     name: 'amethyst5',
     image: '/images/amethyst5.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
+    size: '100.58 carat',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -166,6 +185,7 @@ export const data = [
     shape: 'pear',
     size: '894.26.84carat',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -174,6 +194,7 @@ export const data = [
     shape: 'pear',
     size: '894.26.84carat',
     price: '$42.15',
+    inStock: '100',
     text: ``,
   },
   {
@@ -182,6 +203,7 @@ export const data = [
     shape: 'oval',
     size: '6.2mm x 5.2mm',
     price: '$104.15',
+    inStock: '100',
     text: 'Amethyst is one of the most famous crystals because of its beautiful coloration as well as its spiritual and literal meaning.The spiritual meaning of Amethyst is groundedness, tranquility, and calm. The meaning of Amethyst is “not intoxicated” – its name translates from the Greek word améthystos.',
   },
   {
@@ -190,46 +212,52 @@ export const data = [
     shape: 'pear',
     size: '894.26.84carat',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
     name: 'aquamarine2',
     image: '/images/aquamarine2.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '120.00 carat',
+    price: '$670.00',
+    inStock: '100',
     text: '',
   },
   {
     name: 'aquamarine3',
     image: '/images/aquamarine3.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '84.50 carat',
+    price: '$476.50',
+    inStock: '100',
     text: '',
   },
   {
     name: 'aquamarine4',
     image: '/images/aquamarine4.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '82.50 carat',
+    price: '$652.15',
+    inStock: '100',
     text: '',
   },
   {
     name: 'aquamarine5',
     image: '/images/aquamarine5.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '64.50 carat',
+    price: '$722.00',
+    inStock: '100',
     text: '',
   },
   {
     name: 'aquamarine6',
     image: '/images/aquamarine6.jpg',
     shape: 'pear',
-    size: '894.26.84carat',
-    price: '$42.15',
+    size: '25.28 carat',
+    price: '$158.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -238,6 +266,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: 'Aquamarine is the green-blue to blue variety of the mineral beryl. (Emerald is the green to bluish green variety of the same mineral. Its color is usually a light pastel greenish blue.',
   },
   {
@@ -246,6 +275,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -254,6 +284,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -262,14 +293,16 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
     name: 'citrine4',
     image: '/images/citrine4.jpg',
     shape: 'pear',
-    size: '6.2mm x 3.9mm',
-    price: '$42.15',
+    size: '7.8mm x 4.9mm',
+    price: '$82.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -278,6 +311,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: 'Its pale yellow color is what gives it its name, Citrine, coming from the French citron, meaning lemon. Citrine has a deep spiritual meaning, too. The spiritual meaning of Citrine is its yellow hues symbolizing the spiritual qualities of joy, abundance, and transmutation',
   },
   {
@@ -286,6 +320,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -294,6 +329,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: ``,
   },
   {
@@ -302,6 +338,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -310,6 +347,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -318,6 +356,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -326,6 +365,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -334,6 +374,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: 'Diamond is a solid form of the element carbon with its atoms arranged in a crystal structure called diamond cubic. Diamond has the highest hardness and thermal conductivity of any natural material, properties that are used in major industrial applications such as cutting and polishing tools. ',
   },
   {
@@ -342,6 +383,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -350,6 +392,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -358,6 +401,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -366,6 +410,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -374,6 +419,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -382,6 +428,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -390,6 +437,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: 'Emerald is a life-affirming stone and one of infinite patience. Emerald is the stone of love and friendship and keeps partnerships in balance. This gem also opens up to your latent abilities and promotes the gathering of wisdom from the mental planes.',
   },
   {
@@ -398,6 +446,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: ``,
   },
   {
@@ -406,6 +455,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -414,6 +464,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -422,6 +473,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -430,6 +482,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -438,6 +491,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -446,6 +500,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -454,6 +509,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: `Opal is the product of seasonal rains that drenched dry ground in regions such as Australia’s semi-desert “outback.” The showers soaked deep into ancient underground rock, carrying dissolved silica (a compound of silicon and oxygen downward.`,
   },
   {
@@ -462,6 +518,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -470,6 +527,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -478,6 +536,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -486,6 +545,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -494,6 +554,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -502,6 +563,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: 'Rubies are a form of the mineral corundum. The deep red color of a good quality Ruby is heartwarming and uplifting to look upon. You can feel the vigor of the energies of this remarkable stone as soon as you touch it or have it near you.',
   },
   {
@@ -510,6 +572,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: ``,
   },
   {
@@ -518,6 +581,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -526,6 +590,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -534,6 +599,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: 'Sapphire is known as a wisdom stone, with each color carrying its own special wisdom. Sapphire calms the mind and helps you to focus. It also deals with unwanted thoughts and is a good choice for anyone seeking to deal with over-thinking or over-analyzing. ',
   },
   {
@@ -542,6 +608,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -550,6 +617,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -558,6 +626,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -566,6 +635,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: ``,
   },
 
@@ -575,6 +645,7 @@ export const data = [
     shape: 'round',
     size: '6.8mm x 5.9mm',
     price: '$48.28',
+    inStock: '100',
     text: '',
   },
   {
@@ -583,6 +654,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: 'Colorless zircon is well known for its brilliance and flashes of multicolored light, called fire. These two zircon properties are close enough to the properties of diamond to account for centuries of confusion between the two gems.',
   },
   {
@@ -591,6 +663,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -599,6 +672,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -607,6 +681,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
   {
@@ -615,6 +690,7 @@ export const data = [
     shape: 'pear',
     size: '6.2mm x 3.9mm',
     price: '$42.15',
+    inStock: '100',
     text: '',
   },
 ];
