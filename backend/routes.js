@@ -161,7 +161,7 @@ router.post('/api/signup', async (req, res) => {
       return res.status(201).json({ success: 'Account created successfully!' });
     }
   }
-  res.status(403).json({ error: 'Passwords not matching!' });
+  res.status(403).json({ error: 'Passwords must be matching!' });
 });
 
 router.post('/api/logout', (req, res) => {

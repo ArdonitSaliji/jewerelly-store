@@ -9,6 +9,7 @@ const Navbar = ({ setBasketProducts }) => {
   const [signUp, setSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('isLoggedIn')));
   const basketLength = useSelector((state) => state.basket.length);
+
   return (
     <div className='navbar-container'>
       <div className='navbar container-fluid'>

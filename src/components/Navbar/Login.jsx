@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateBasket } from '../../feature/basketSlice';
+import { toast } from 'react-toastify';
 const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: '', password: '' });
   const [message, setMessage] = useState();
@@ -16,6 +17,9 @@ const Login = ({ login, setIsLoggedIn }) => {
     });
     const json = await res.json();
     if (res.status === 200) {
+      toast.success('Login successful!', {
+        position: 'top-center',
+      });
       sessionStorage.setItem('isLoggedIn', JSON.stringify(json.isLoggedIn));
       sessionStorage.setItem('user', JSON.stringify(json.username));
       console.log(json.basketProducts);

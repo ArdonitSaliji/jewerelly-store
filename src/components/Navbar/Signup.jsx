@@ -16,31 +16,36 @@ const Signup = ({ signUp }) => {
       signingInUser.password1 !== '' &&
       signingInUser.password2 !== ''
     ) {
-      const res = await fetch('http://localhost:5000/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: signingInUser.username,
-          email: signingInUser.email,
-          password1: signingInUser.password1,
-          password2: signingInUser.password2,
-        }),
-      });
-      const json = await res.json();
-      if (res.status === 409) {
+      if (signingInUser.password1.length < 8 && signingInUser.password2.length < 8) {
+        setMessage('Password must be at least 8 characters!');
         document.querySelector('.signup-message').classList.add('show', 'error');
-        setMessage(json.error);
-      } else if (res.status === 201) {
-        document.querySelector('.signup-message').classList.add('show', 'success');
-        setMessage(json.success);
-        setTimeout(() => {
-          document.querySelector('.navbar-tab-signup').classList.remove('show-signup');
-        }, 3000);
       } else {
-        document.querySelector('.signup-message').classList.add('show', 'error');
-        setMessage(json.error);
+        const res = await fetch('http://localhost:5000/api/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: signingInUser.username,
+            email: signingInUser.email,
+            password1: signingInUser.password1,
+            password2: signingInUser.password2,
+          }),
+        });
+        const json = await res.json();
+        if (res.status === 409) {
+          document.querySelector('.signup-message').classList.add('show', 'error');
+          setMessage(json.error);
+        } else if (res.status === 201) {
+          document.querySelector('.signup-message').classList.add('show', 'success');
+          setMessage(json.success);
+          setTimeout(() => {
+            document.querySelector('.navbar-tab-signup').classList.remove('show-signup');
+          }, 3000);
+        } else {
+          document.querySelector('.signup-message').classList.add('show', 'error');
+          setMessage(json.error);
+        }
       }
     } else {
       document.querySelector('.signup-message').classList.add('show', 'error');

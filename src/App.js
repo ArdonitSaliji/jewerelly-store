@@ -8,7 +8,8 @@ import Checkout from './components/Checkout.jsx';
 import Footer from './components/Footer.jsx';
 import SelectProducts from './components/SelectProducts';
 import Sidebar from './components/Sidebar.jsx';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [gemState, setGemState] = useState('');
   const [basketProducts, setBasketProducts] = useState([]);
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <div className='app'>
         <Navbar basketProducts={basketProducts} setBasketProducts={setBasketProducts} />
+        <ToastContainer />
         <Routes>
           <Route path='/' element={<Main gemState={gemState} setGemState={setGemState} />} />
           <Route path={`/product/:name`} element={<SelectProducts />} />
