@@ -41,6 +41,21 @@ const Basket = () => {
     };
     getUserProducts();
   }, []);
+
+  const deleteBasketProduct = async (e) => {
+    const res = await fetch('http://localhost:5000/user/cart/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user: JSON.parse(sessionStorage.getItem('user')),
+        productId: e.target.parentElement.parentElement.parentElement.id,
+      }),
+    });
+    e.target.parentElement.parentElement.parentElement.remove();
+  };
+
   const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
@@ -49,7 +64,7 @@ const Basket = () => {
         <ListGroup>
           {sessionStorage.getItem('isLoggedIn') ? (
             basketProducts?.map((prod) => (
-              <ListGroup.Item key={prod._id}>
+              <ListGroup.Item id={prod._id} key={prod._id}>
                 <Row>
                   <Col md={2}>
                     <Image src={prod.image} alt={prod.name} fluid rounded />
@@ -78,6 +93,9 @@ const Basket = () => {
                   </Col>
                   <Col md={2}>
                     <Button
+                      onClick={(e) => {
+                        deleteBasketProduct(e);
+                      }}
                       type='button'
                       variant='light'
                       // onClick={() =>
@@ -87,7 +105,7 @@ const Basket = () => {
                       //   })
                       // }
                     >
-                      <AiFillDelete fontSize='20px' />
+                      <AiFillDelete fontSize='20px' style={{ pointerEvents: 'none' }} />
                     </Button>
                   </Col>
                 </Row>

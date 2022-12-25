@@ -42,6 +42,10 @@ router.post('/user/cart/add', async (req, res) => {
   res.status(404).json({ msg: 'error' });
 });
 
+router.post('/user/cart/delete', async (req, res) => {
+  await Users.findOne({ username: req.body.user });
+});
+
 router.post('/user/cart/products', async (req, res) => {
   const foundUser = await Users.findOne({
     username: req.body.user,

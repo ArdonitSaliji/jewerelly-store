@@ -97,6 +97,7 @@
       word-break: keep-all;
       white-space: nowrap;
       opacity: 0;
+
       transition: 0.5s all;
       &.show {
         opacity: 1;
