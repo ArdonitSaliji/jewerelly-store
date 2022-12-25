@@ -100,7 +100,9 @@ const Basket = () => {
       </div>
       <div className='filters summary'>
         <span className='title'>Subtotal ({}) items</span>
-        <span style={{ fontWeight: 700, fontSize: 20 }}>Total: $ {productsSum.toFixed(2)}</span>
+        <span style={{ fontWeight: 700, fontSize: 20 }}>
+          Total: $ {sessionStorage.getItem('isLoggedIn') && productsSum.toFixed(2)}
+        </span>
         <Button type='button'>Proceed to Checkout</Button>
       </div>
     </div>

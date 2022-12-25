@@ -110,7 +110,7 @@ router.post('/api/login', async (req, res) => {
   else foundUser = userExists;
 
   if (!foundUser) {
-    return res.status(404).send({ login: 'Account does not exist' });
+    return res.status(404).send({ error: 'Account does not exist' });
   }
   if (foundUser) {
     const basketProducts = await Products.find({ _id: { $in: foundUser.cart } });
@@ -126,12 +126,12 @@ router.post('/api/login', async (req, res) => {
           auth: true,
           accessToken: accessToken,
           username: emailOrUsername,
-          msg: 'login successful',
+          success: 'Login successful',
           isLoggedIn: true,
           basketProducts: basketProducts,
         });
       } else {
-        res.status(401).send({ msg: 'Incorrect Username/Email or Password' });
+        res.status(401).send({ error: 'Incorrect Username/Email or Password' });
       }
     });
   }

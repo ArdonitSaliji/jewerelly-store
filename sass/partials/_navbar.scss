@@ -79,6 +79,7 @@
   }
 
   .navbar-tab {
+    position: relative;
     background-color: theme-color-level('secondary', -10%);
     width: 100%;
     display: flex;
@@ -86,7 +87,11 @@
     align-items: center;
     padding: 1em 0;
     transition: all 0.7s;
-    .message {
+    .login-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: auto;
       display: inline-block;
       word-break: keep-all;
@@ -96,10 +101,31 @@
       &.show {
         opacity: 1;
         &.error {
-          color: rgb(141, 1, 1);
+          color: rgb(141, 1, 1) !important;
         }
         &.success {
-          color: green;
+          color: green !important;
+        }
+      }
+    }
+    .signup-message {
+      position: absolute;
+      top: 50%;
+      left: 62%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      display: inline-block;
+      word-break: keep-all;
+      white-space: nowrap;
+      opacity: 0;
+      transition: 0.5s all;
+      &.show {
+        opacity: 1;
+        &.error {
+          color: rgb(141, 1, 1) !important;
+        }
+        &.success {
+          color: green !important;
         }
       }
     }

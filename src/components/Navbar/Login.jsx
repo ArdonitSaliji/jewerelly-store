@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateBasket } from '../../feature/basketSlice';
 const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: '', password: '' });
-  const basket = useSelector((state) => state.basket.updateBasket);
+  const [message, setMessage] = useState();
   const dispatch = useDispatch();
   const loginUser = async () => {
     const res = await fetch('http://localhost:5000/api/login', {
@@ -15,12 +15,21 @@ const Login = ({ login, setIsLoggedIn }) => {
       body: JSON.stringify({ email: loginInUser.email, password: loginInUser.password }),
     });
     const json = await res.json();
-    sessionStorage.setItem('isLoggedIn', JSON.stringify(json.isLoggedIn));
-    sessionStorage.setItem('basketProducts', json.basketProducts.length);
-    sessionStorage.setItem('user', JSON.stringify(json.username));
-    console.log(json.basketProducts);
-    dispatch(updateBasket(json.basketProducts));
-    setIsLoggedIn(json.isLoggedIn);
+    if (res.status === 200) {
+      sessionStorage.setItem('isLoggedIn', JSON.stringify(json.isLoggedIn));
+      sessionStorage.setItem('user', JSON.stringify(json.username));
+      console.log(json.basketProducts);
+      dispatch(updateBasket(json.basketProducts));
+      setIsLoggedIn(json.isLoggedIn);
+      setMessage(json.success);
+      document.querySelector('.login-message').classList.add('show', 'success');
+    } else {
+      document.querySelector('.login-message').classList.add('show', 'error');
+      setMessage(json.error);
+      setTimeout(() => {
+        setMessage('');
+      }, 6000);
+    }
   };
 
   return (
@@ -34,7 +43,7 @@ const Login = ({ login, setIsLoggedIn }) => {
           <br />
           <div className='login-inputs'>
             <div className='form-group'>
-              <label htmlFor='email' className='sr-only'>
+              <label required htmlFor='email' className='sr-only'>
                 Username or Email
               </label>
               <input
@@ -49,14 +58,14 @@ const Login = ({ login, setIsLoggedIn }) => {
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='password' className='sr-only'>
+              <label required htmlFor='password' className='sr-only'>
                 Password
               </label>
               <input
+                required
                 onChange={(e) => {
                   setLoginInUser({ ...loginInUser, password: e.target.value });
                 }}
-                required
                 type='password'
                 placeholder='Password'
                 name='password'
@@ -72,6 +81,7 @@ const Login = ({ login, setIsLoggedIn }) => {
           </Link>
         </form>
       </div>
+      <span className='login-message'>{message}</span>
       <div className='right'>
         <form>
           <button type='button' className='btn btn-primary' onClick={() => loginUser()}>
