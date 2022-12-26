@@ -66,7 +66,7 @@ const SelectProducts = () => {
                 onClick={(e) => {
                   sessionStorage.getItem('user')
                     ? addToBasket(e)
-                    : toast.error('Login to add items to your cart!', {
+                    : toast.error('You need to login first!', {
                         position: 'top-center',
                       });
                 }}
