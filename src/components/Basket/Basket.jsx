@@ -5,7 +5,9 @@ import { AiFillDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { data } from '../../data';
 import {
+  decLengthByOne,
   selectAllProducts,
+  subtractPrice,
   sumProductPrices,
   updateBasket,
   updateLength,
@@ -15,7 +17,7 @@ const Basket = () => {
   const basketProducts = useSelector(selectAllProducts);
   const productsSum = useSelector((state) => state.basket.sum);
   const dispatch = useDispatch();
-
+  const [productPrices, setProductPrices] = useState();
   useEffect(() => {
     const getUserProducts = async () => {
       const res = await fetch('http://localhost:5000/user/cart/products', {
@@ -31,17 +33,19 @@ const Basket = () => {
       dispatch(updateProductsQuantity(json.foundUser.cart));
       dispatch(updateLength(json.basketProducts.length));
       dispatch(updateBasket(json.basketProducts));
-      const sum = basketProducts
-        .map((product) => {
-          const price = product.price.split('$').join('');
-          return price;
-        })
-        .reduce((a, b) => Number(a) + Number(b));
-      dispatch(sumProductPrices(sum));
+
+      if (basketProducts.length > 0) {
+        const sum = json.basketProducts
+          ?.map((product) => {
+            const price = product.price.split('$').join('');
+            return price;
+          })
+          ?.reduce((a, b) => Number(a) + Number(b));
+        dispatch(sumProductPrices(Number(sum)));
+      }
     };
     getUserProducts();
-  }, []);
-
+  }, [dispatch]);
   const deleteBasketProduct = async (e) => {
     const res = await fetch('http://localhost:5000/user/cart/delete', {
       method: 'POST',
@@ -50,9 +54,18 @@ const Basket = () => {
       },
       body: JSON.stringify({
         user: JSON.parse(sessionStorage.getItem('user')),
-        productId: e.target.parentElement.parentElement.parentElement.id,
+        productName: e.target.parentElement.parentElement.parentElement.id,
       }),
     });
+    const json = await res.json();
+    const {
+      parentElement: {
+        previousElementSibling: { previousElementSibling },
+      },
+    } = e.target;
+    const value = Number(previousElementSibling.innerHTML.split('$').join(''));
+    dispatch(subtractPrice(value));
+    dispatch(decLengthByOne());
     e.target.parentElement.parentElement.parentElement.remove();
   };
 
@@ -64,7 +77,7 @@ const Basket = () => {
         <ListGroup>
           {sessionStorage.getItem('isLoggedIn') ? (
             basketProducts?.map((prod) => (
-              <ListGroup.Item id={prod._id} key={prod._id}>
+              <ListGroup.Item id={prod.name} key={prod._id}>
                 <Row>
                   <Col md={2}>
                     <Image src={prod.image} alt={prod.name} fluid rounded />

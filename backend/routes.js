@@ -43,7 +43,13 @@ router.post('/user/cart/add', async (req, res) => {
 });
 
 router.post('/user/cart/delete', async (req, res) => {
-  await Users.findOne({ username: req.body.user });
+  const user = await Users.updateOne(
+    { username: req.body.user },
+    {
+      $pull: { cart: { product: req.body.productName } },
+    }
+  );
+  res.status(200).send(user);
 });
 
 router.post('/user/cart/products', async (req, res) => {

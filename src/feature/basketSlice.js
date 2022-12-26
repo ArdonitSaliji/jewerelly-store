@@ -18,20 +18,28 @@ export const basketSlice = createSlice({
     updateLengthByOne: (state) => {
       state.length += 1;
     },
+    decLengthByOne: (state) => {
+      state.length -= 1;
+    },
     updateProductsQuantity: (state, action) => {
       state.quantity = action.payload;
     },
     sumProductPrices: (state, action) => {
       state.sum = action.payload;
     },
+    subtractPrice: (state, action) => {
+      state.sum -= action.payload;
+    },
   },
 });
 export const {
+  decLengthByOne,
   updateBasket,
   updateLength,
   updateLengthByOne,
   updateProductsQuantity,
   sumProductPrices,
+  subtractPrice,
 } = basketSlice.actions;
 
 export const selectAllProducts = (state) => state.basket.basketProducts;

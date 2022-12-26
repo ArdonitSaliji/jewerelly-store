@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateLength, updateLengthByOne } from '../feature/basketSlice';
+import { sumProductPrices, updateLength, updateLengthByOne } from '../feature/basketSlice';
 const SelectProducts = () => {
   const dispatch = useDispatch();
   const basketLength = useSelector((state) => state.basket.length);
@@ -41,6 +41,12 @@ const SelectProducts = () => {
     if (res.status === 202) {
       dispatch(updateLengthByOne());
     }
+    const {
+      previousElementSibling: { children },
+    } = e.target;
+    const split = children[1].innerHTML;
+    const value = split.split('Price: $');
+    dispatch(sumProductPrices(Number(value)));
   };
 
   return (
