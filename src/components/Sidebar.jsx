@@ -32,7 +32,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to='/'>Partners</Link>
+            <Link to='/'>Orders</Link>
             <IoMdHome className='icon' />
           </li>
 
