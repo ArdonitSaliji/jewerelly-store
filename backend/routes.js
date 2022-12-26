@@ -1,9 +1,36 @@
+const stripe = require('stripe');
 const express = require('express');
 const router = express.Router();
 const Users = require('./Schema/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Products = require('./Schema/Products');
+let stripeGateway = stripe(
+  'sk_test_51MCkXgDplZI5a2XjhslbZ4ge0UxGgEIAOvgGnpRRwta6scGnPvWFBlvaYhYqAXvnHK58tHwnUw133AZOpIma1H4q005lxIADbl'
+);
+let DOMAIN = 'http://localhost:3000/';
+router.post('/user/checkout', async (req, res) => {
+  const session = await stripeGateway.checkout.sessions.create({
+    payment_method_types: ['card'],
+    mode: 'payment',
+    success_url: DOMAIN,
+    cancel_url: `${DOMAIN}basket`,
+    line_items: req.body.items.map((item) => {
+      return {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.name.slice(0, -1),
+            description: item.size,
+          },
+          unit_amount: Number(item.price.split('$').join('')) * 100,
+        },
+        quantity: 1,
+      };
+    }),
+  });
+  res.status(200).json(session.url);
+});
 
 router.get('/api/products/find', async (req, res) => {
   let foundProduct = await Products.find({

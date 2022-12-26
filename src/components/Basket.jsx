@@ -70,6 +70,21 @@ const Basket = () => {
     e.target.parentElement.parentElement.parentElement.remove();
   };
 
+  const checkout = async () => {
+    const res = await fetch('http://localhost:5000/user/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: basketProducts,
+      }),
+    });
+    const json = await res.json();
+    window.open(json, '_blank');
+    console.log(json);
+  };
+
   const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
@@ -142,7 +157,8 @@ const Basket = () => {
         <Button
           type='button'
           onClick={() => {
-            window.open('https://buy.stripe.com/test_fZe9B91jr9Ix7rG7ss', '_blank');
+            checkout();
+            // window.open('https://buy.stripe.com/test_fZe9B91jr9Ix7rG7ss', '_blank');
           }}
         >
           Proceed to checkout
