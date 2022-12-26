@@ -14,7 +14,7 @@ const Navbar = ({ setBasketProducts }) => {
     <div className='navbar-container'>
       <div className='navbar container-fluid'>
         <div className='navbar-title'>
-          <h3>Jewellery Traders</h3>
+          <img src={'/images/gem-logo.webp'} alt='' />
         </div>
 
         <div className='navbar-links'>

@@ -13,6 +13,41 @@
   .container-fluid {
     background-color: theme-color('secondary');
     z-index: 312;
+    .navbar-title {
+      height: 3rem;
+      width: 3rem;
+      img {
+        margin-left: 0.5rem;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .navbar-links {
+      ul {
+        li {
+          a {
+            font-weight: 500;
+            color: $white;
+            padding: 0 1em;
+            text-decoration: none;
+            transition: all 0.3s;
+            opacity: 0.75;
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+        .basket-indicator {
+          text-align: center;
+          border-radius: 5px;
+          display: inline-block;
+          background-color: theme-color('dark');
+          color: white;
+          width: 1rem;
+        }
+      }
+    }
     .navbar-user {
       display: flex;
       align-items: center;
@@ -41,40 +76,6 @@
     opacity: 0.75;
     &:hover {
       opacity: 1;
-    }
-  }
-
-  .navbar {
-    .navbar-title h3 {
-      font-weight: 300;
-      padding: 0 0.5em;
-      font-size: 1.1rem;
-    }
-
-    .navbar-links {
-      ul {
-        li {
-          a {
-            font-weight: 500;
-            color: $white;
-            padding: 0 1em;
-            text-decoration: none;
-            transition: all 0.3s;
-            opacity: 0.75;
-            &:hover {
-              opacity: 1;
-            }
-          }
-        }
-        .basket-indicator {
-          text-align: center;
-          border-radius: 5px;
-          display: inline-block;
-          background-color: theme-color('dark');
-          color: white;
-          width: 1rem;
-        }
-      }
     }
   }
 
