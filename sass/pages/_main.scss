@@ -8,8 +8,11 @@ select,
   font-size: 15px;
 }
 .main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   user-select: none;
-  min-height: 81.1vh;
   height: 100%;
 }
 .main-title h1 {
@@ -56,16 +59,16 @@ select,
   background-color: rgb(171, 171, 171);
 }
 .gems-container {
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   .gem {
-    width: 33.3%;
-    padding: 1em;
+    width: 20%;
+    margin: 1em;
     position: relative;
-    height: 450px;
+    height: 420px;
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
@@ -81,14 +84,13 @@ select,
       position: absolute;
       z-index: 2;
       opacity: 0;
-      transition: all 0.75s;
+      transition: all 0.75s ease-out;
       bottom: 0;
     }
     img {
       position: absolute;
       width: 100%;
       height: 100%;
-      object-fit: cover;
       top: 0;
       z-index: 1;
       transition: all 0.5s;

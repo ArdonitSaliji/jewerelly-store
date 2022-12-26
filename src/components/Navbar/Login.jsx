@@ -78,7 +78,9 @@ const Login = ({ login, setIsLoggedIn }) => {
             </div>
           </div>
           <Link
-            //   onClick={() => setLogin(false)}
+            onClick={() =>
+              document.querySelector('.navbar-tab navbar-tab-login').classList.remove('show-login')
+            }
             to={'/reset-password'}
           >
             Forgot password?

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Main from './components/Main.jsx';
-import Forgot from './components/ForgotPassword/ForgotPass.jsx';
-import Basket from './components/Basket/Basket.jsx';
+import Forgot from './components/ForgotPass.jsx';
+import Basket from './components/Basket.jsx';
 import Checkout from './components/Checkout.jsx';
 import Footer from './components/Footer.jsx';
 import SelectProducts from './components/SelectProducts';

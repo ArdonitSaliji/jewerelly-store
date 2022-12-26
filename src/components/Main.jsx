@@ -14,11 +14,11 @@ const Main = ({ setGemState }) => {
     getAllProducts();
   }, [searchState, setGemState]);
   return (
-    <div className='main container'>
+    <div className='main '>
       <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
-        <h1>Trading rare gems and crystals has never been easier.</h1>
+        <h1>Buying gems and crystals has never been easier.</h1>
       </div>
-      <div className='main-search'>
+      {/* <div className='main-search'>
         <div className='search'>
           <AiOutlineSearch style={{ fontSize: '22px', marginLeft: '0.5rem' }} />
           <input
@@ -27,7 +27,7 @@ const Main = ({ setGemState }) => {
             placeholder='Search...'
           />
         </div>
-      </div>
+      </div> */}
 
       <div className='gems-container'>
         {allProducts?.map((product) => {
