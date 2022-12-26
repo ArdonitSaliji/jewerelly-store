@@ -18,7 +18,6 @@ function App() {
     <BrowserRouter>
       <div className='app'>
         <Navbar basketProducts={basketProducts} setBasketProducts={setBasketProducts} />
-        <ToastContainer />
         <Routes>
           <Route path='/' element={<Main gemState={gemState} setGemState={setGemState} />} />
           <Route path={`/product/:name`} element={<SelectProducts />} />
@@ -29,6 +28,7 @@ function App() {
 
         <Sidebar />
         <Footer />
+        <ToastContainer />
       </div>
     </BrowserRouter>
   );

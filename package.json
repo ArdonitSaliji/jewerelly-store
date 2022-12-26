@@ -1,6 +1,6 @@
 {
-  "homepage": "https://ardonit-jewerelly-store.netlify.app/",
-  "name": "jewerelly-store",
+  "homepage": "https://ardonit-gem-store.netlify.app/",
+  "name": "gem-store",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

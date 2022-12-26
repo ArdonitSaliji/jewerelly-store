@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { sumProductPrices, updateLength, updateLengthByOne } from '../feature/basketSlice';
 const SelectProducts = () => {
   const dispatch = useDispatch();
@@ -63,7 +64,11 @@ const SelectProducts = () => {
               <div
                 className='cart-container'
                 onClick={(e) => {
-                  addToBasket(e);
+                  sessionStorage.getItem('user')
+                    ? addToBasket(e)
+                    : toast.error('Login to add items to your cart!', {
+                        position: 'top-center',
+                      });
                 }}
               >
                 <AiOutlineShoppingCart className='cart' />

@@ -4,6 +4,7 @@ import { Button, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
 import { AiFillDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { data } from '../data';
 import {
   decLengthByOne,
@@ -20,32 +21,34 @@ const Basket = () => {
   const dispatch = useDispatch();
   const [productPrices, setProductPrices] = useState();
   useEffect(() => {
-    const getUserProducts = async () => {
-      const res = await fetch('http://localhost:5000/user/cart/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user: JSON.parse(sessionStorage.getItem('user')),
-        }),
-      });
-      const json = await res.json();
-      dispatch(updateProductsQuantity(json.foundUser.cart));
-      dispatch(updateLength(json.basketProducts.length));
-      dispatch(updateBasket(json.basketProducts));
+    if (sessionStorage.getItem('user')) {
+      const getUserProducts = async () => {
+        const res = await fetch('http://localhost:5000/user/cart/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user: JSON.parse(sessionStorage.getItem('user')),
+          }),
+        });
+        const json = await res.json();
+        dispatch(updateProductsQuantity(json.foundUser.cart));
+        dispatch(updateLength(json.basketProducts.length));
+        dispatch(updateBasket(json.basketProducts));
 
-      if (basketProducts.length > 0) {
-        const sum = json.basketProducts
-          ?.map((product) => {
-            const price = product.price.split('$').join('');
-            return price;
-          })
-          ?.reduce((a, b) => Number(a) + Number(b));
-        dispatch(sumProductPrices(Number(sum.toFixed(2))));
-      }
-    };
-    getUserProducts();
+        if (basketProducts.length > 0) {
+          const sum = json.basketProducts
+            ?.map((product) => {
+              const price = product.price.split('$').join('');
+              return price;
+            })
+            ?.reduce((a, b) => Number(a) + Number(b));
+          dispatch(sumProductPrices(Number(sum.toFixed(2))));
+        }
+      };
+      getUserProducts();
+    }
   }, [dispatch]);
   const deleteBasketProduct = async (e) => {
     const res = await fetch('http://localhost:5000/user/cart/delete', {
@@ -157,7 +160,11 @@ const Basket = () => {
         <Button
           type='button'
           onClick={() => {
-            checkout();
+            if (sessionStorage.getItem('user')) {
+              checkout();
+            } else {
+              toast.error('Login to proceed to checkout!');
+            }
             // window.open('https://buy.stripe.com/test_fZe9B91jr9Ix7rG7ss', '_blank');
           }}
         >
