@@ -26,17 +26,32 @@
     .navbar-links {
       ul {
         li {
+          overflow: hidden;
           a {
-            font-weight: 500;
-            color: $white;
-            padding: 0 1em;
-            text-decoration: none;
-            transition: all 0.3s;
-            opacity: 0.75;
-            &:hover {
-              opacity: 1;
-            }
+            overflow: hidden;
+            --h: 1.2em; /* the height */
+            line-height: 1.2rem;
+            color: #0000;
+            text-shadow: 0 var(--_t, var(--h)) #fff, 0 0 var(--_c, #000);
+            background: linear-gradient(#1095c1 0 0) bottom/100% var(--_d, 0) no-repeat;
+            transition: 0.2s;
           }
+          a:hover {
+            --_d: 100%;
+            --_t: 0;
+            --_c: #0000;
+          }
+          // a {
+          //   font-weight: 500;
+          //   color: $white;
+          //   padding: 0 1em;
+          //   text-decoration: none;
+          //   transition: all 0.3s;
+          //   opacity: 0.75;
+          //   &:hover {
+          //     opacity: 1;
+          //   }
+          // }
         }
         .basket-indicator {
           text-align: center;
