@@ -16,9 +16,9 @@ import {
   updateProductsQuantity,
 } from '../feature/basketSlice';
 const Basket = () => {
-  const basketProducts = useSelector(selectAllProducts);
-  const productsSum = useSelector((state) => state.basket.sum);
   const dispatch = useDispatch();
+  const productsSum = useSelector((state) => state.basket.sum);
+  const basketProducts = useSelector((state) => state.basket.basketProducts);
   useEffect(() => {
     if (sessionStorage.getItem('user')) {
       const getUserProducts = async () => {
@@ -62,6 +62,7 @@ const Basket = () => {
       }),
     });
     const json = await res.json();
+    dispatch(updateBasket(json));
     const {
       parentElement: {
         previousElementSibling: { previousElementSibling },
@@ -70,9 +71,7 @@ const Basket = () => {
     const value = Number(previousElementSibling.innerHTML.split('$').join(''));
     const sub = value.toFixed(2);
     dispatch(subtractPrice(sub));
-
     dispatch(decLengthByOne());
-    e.target.parentElement.parentElement.parentElement.remove();
   };
 
   const checkout = async () => {
@@ -96,7 +95,7 @@ const Basket = () => {
       <div className='productContainer'>
         <ListGroup>
           {sessionStorage.getItem('isLoggedIn') ? (
-            basketProducts.length > 1 ? (
+            basketProducts && basketProducts.length > 0 ? (
               basketProducts?.map((prod) => (
                 <ListGroup.Item id={prod.name} key={prod._id}>
                   <Row>
@@ -131,12 +130,6 @@ const Basket = () => {
                         }}
                         type='button'
                         variant='light'
-                        // onClick={() =>
-                        //   dispatch({
-                        //     type: 'REMOVE_FROM_CART',
-                        //     payload: prod,
-                        //   })
-                        // }
                       >
                         <AiFillDelete fontSize='20px' style={{ pointerEvents: 'none' }} />
                       </Button>

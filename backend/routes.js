@@ -43,30 +43,19 @@ router.get('/api/products/find', async (req, res) => {
 
 router.post('/user/cart/add', async (req, res) => {
   let foundProduct = await Products.findOne({ name: req.body.product });
-  let foundUser = await Users.findOne({ username: req.body.user });
+  let foundUser = await Users.findOne({
+    username: req.body.user,
+    'cart.product': foundProduct.name,
+  });
+  console.log(foundUser);
   if (foundUser) {
-    const basketProducts = await Users.findOne({
-      'cart.product': foundProduct.name,
-    });
-    if (basketProducts) {
-      await Users.updateOne(
-        { 'cart.product': foundProduct.name },
-        {
-          $inc: {
-            'cart.$.quantity': 1,
-          },
-        }
-      );
-      return res.status(203).json({ message: 'Product already exists' });
-    }
-
-    await Users.findOne({ username: foundUser.username }).updateOne({
+    return res.status(203).json({ message: 'Product already exists' });
+  } else {
+    await Users.findOne({ username: req.body.user }).updateOne({
       $push: { cart: { _id: foundProduct._id, product: foundProduct.name, quantity: 1 } },
     });
-
-    return res.status(202).json({ message: 'success' });
+    return res.status(202).send(foundProduct);
   }
-  res.status(404).json({ msg: 'error' });
 });
 
 router.post('/user/cart/delete', async (req, res) => {
@@ -76,7 +65,20 @@ router.post('/user/cart/delete', async (req, res) => {
       $pull: { cart: { product: req.body.productName } },
     }
   );
-  res.status(200).send(user);
+  if (user) {
+    const foundUser = await Users.findOne({
+      username: req.body.user,
+    });
+    const values = foundUser.cart.map((prod) => prod.product);
+    if (foundUser) {
+      const basketProducts = await Products.find({
+        name: { $in: values },
+      });
+      res.status(200).send(basketProducts);
+    }
+  } else {
+    res.status(401);
+  }
 });
 
 router.post('/user/cart/products', async (req, res) => {
@@ -204,6 +206,6 @@ router.post('/api/signup', async (req, res) => {
 router.post('/api/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('connect.sid'); // clean up!
-  return res.json({ msg: 'logging you out' });
+  return res.status(200).json({ msg: 'logging you out' });
 });
 module.exports = router;

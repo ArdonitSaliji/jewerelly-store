@@ -15,7 +15,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-const logUserOur = async () => {
+const logUserOut = async () => {
   const res = await fetch('http://localhost:5000/api/logout');
 
   sessionStorage.clear();
@@ -48,7 +48,7 @@ const Sidebar = () => {
 
           <li
             onClick={() => {
-              logUserOur();
+              logUserOut();
             }}
           >
             <Link to='/'>Logout</Link>
