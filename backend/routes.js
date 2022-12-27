@@ -47,7 +47,6 @@ router.post('/user/cart/add', async (req, res) => {
     username: req.body.user,
     'cart.product': foundProduct.name,
   });
-  console.log(foundUser);
   if (foundUser) {
     return res.status(203).json({ message: 'Product already exists' });
   } else {
@@ -203,7 +202,7 @@ router.post('/api/signup', async (req, res) => {
   res.status(403).json({ error: 'Passwords must be matching!' });
 });
 
-router.post('/api/logout', (req, res) => {
+router.get('/api/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('connect.sid'); // clean up!
   return res.status(200).json({ msg: 'logging you out' });

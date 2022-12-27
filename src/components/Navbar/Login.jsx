@@ -54,10 +54,11 @@ const Login = ({ login, setIsLoggedIn }) => {
                 onChange={(e) => {
                   setLoginInUser({ ...loginInUser, email: e.target.value });
                 }}
-                required
+                required={true}
                 type='text'
                 placeholder='Username or email'
                 name='email'
+                id='email'
                 className='form-control'
               />
             </div>
@@ -66,12 +67,13 @@ const Login = ({ login, setIsLoggedIn }) => {
                 Password
               </label>
               <input
-                required
                 onChange={(e) => {
                   setLoginInUser({ ...loginInUser, password: e.target.value });
                 }}
+                id='password'
                 type='password'
                 placeholder='Password'
+                required
                 name='password'
                 className='form-control'
               />
@@ -90,7 +92,21 @@ const Login = ({ login, setIsLoggedIn }) => {
       <span className='login-message'>{message}</span>
       <div className='right'>
         <form>
-          <button type='button' className='btn btn-primary' onClick={() => loginUser()}>
+          <button
+            type='button'
+            className='btn btn-primary'
+            onClick={() => {
+              if (loginInUser.email.length < 1 && loginInUser.password.length < 1) {
+                setMessage('← Fields are empty!');
+                document.querySelector('.login-message').classList.add('show', 'error');
+                setTimeout(() => {
+                  setMessage('');
+                }, 5000);
+              } else {
+                loginUser();
+              }
+            }}
+          >
             Login
           </button>
           <hr />

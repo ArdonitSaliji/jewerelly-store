@@ -11,13 +11,14 @@ document.addEventListener('click', (e) => {
     elementMouseIsOver.className !== 'sidebar' &&
     elementMouseIsOver.className !== 'navbar-user-photo'
   ) {
-    document.querySelector('.sidebar').classList.remove('show');
+    setTimeout(() => {
+      document.querySelector('.sidebar').classList.remove('show');
+    }, 100);
   }
 });
 
 const logUserOut = async () => {
   const res = await fetch('http://localhost:5000/api/logout');
-
   sessionStorage.clear();
   window.location.reload();
 };

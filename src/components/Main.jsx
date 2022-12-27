@@ -40,7 +40,12 @@ const Main = ({ setGemState }) => {
               }}
             >
               <img src={process.env.PUBLIC_URL + product.image} alt='' />
-              <h3>{product.name.charAt(0).toUpperCase() + product.name.slice(1, -1)}</h3>
+              <em>Agate</em>
+              <h3>
+                {product.name.charAt(0).toUpperCase() + product.name.slice(1, -1)}
+                <span></span>
+              </h3>
+              <h3 id='refl'>{product.name.charAt(0).toUpperCase() + product.name.slice(1, -1)}</h3>
               <p>{product.text}</p>
             </div>
           );
