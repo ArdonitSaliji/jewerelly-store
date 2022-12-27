@@ -19,7 +19,6 @@ const Basket = () => {
   const basketProducts = useSelector(selectAllProducts);
   const productsSum = useSelector((state) => state.basket.sum);
   const dispatch = useDispatch();
-  const [productPrices, setProductPrices] = useState();
   useEffect(() => {
     if (sessionStorage.getItem('user')) {
       const getUserProducts = async () => {
@@ -37,14 +36,15 @@ const Basket = () => {
         dispatch(updateLength(json.basketProducts.length));
         dispatch(updateBasket(json.basketProducts));
 
-        if (basketProducts.length > 0) {
+        if (json.basketProducts.length > 0) {
           const sum = json.basketProducts
             ?.map((product) => {
               const price = product.price.split('$').join('');
               return price;
             })
             ?.reduce((a, b) => Number(a) + Number(b));
-          dispatch(sumProductPrices(Number(sum.toFixed(2))));
+          const val = Number(sum).toFixed(2);
+          dispatch(sumProductPrices(Number(val)));
         }
       };
       getUserProducts();
@@ -68,7 +68,9 @@ const Basket = () => {
       },
     } = e.target;
     const value = Number(previousElementSibling.innerHTML.split('$').join(''));
-    dispatch(subtractPrice(value.toFixed(2)));
+    const sub = value.toFixed(2);
+    dispatch(subtractPrice(sub));
+
     dispatch(decLengthByOne());
     e.target.parentElement.parentElement.parentElement.remove();
   };
@@ -85,7 +87,6 @@ const Basket = () => {
     });
     const json = await res.json();
     window.open(json, '_blank');
-    console.log(json);
   };
 
   const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -104,9 +105,8 @@ const Basket = () => {
                     </Col>
                     <Col md={2}>
                       <span>{prod.name[0].toUpperCase() + prod.name.slice(1, -1)}</span>
-                      <br />
-                      <br />
-                      <br />
+                    </Col>
+                    <Col md={2}>
                       <span>{prod.size}</span>
                     </Col>
                     <Col md={2}>{prod.price}</Col>
@@ -155,7 +155,8 @@ const Basket = () => {
       <div className='filters summary'>
         <span className='title'>Subtotal ({}) items</span>
         <span style={{ fontWeight: 700, fontSize: 20 }}>
-          Total: $ {sessionStorage.getItem('isLoggedIn') && productsSum}
+          Total: ${' '}
+          {sessionStorage.getItem('isLoggedIn') && productsSum && Number(productsSum).toFixed(2)}
         </span>
         <Button
           type='button'
@@ -165,7 +166,6 @@ const Basket = () => {
             } else {
               toast.error('Login to proceed to checkout!');
             }
-            // window.open('https://buy.stripe.com/test_fZe9B91jr9Ix7rG7ss', '_blank');
           }}
         >
           Proceed to checkout

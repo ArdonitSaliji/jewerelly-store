@@ -31,7 +31,7 @@ app.use('/', routesUrls);
 
 app.use((req, res, next) => {
   if (req.session.user) next();
-  else res.send(401);
+  else res.status(401);
 });
 
 app.listen(port, () => console.log(`Server started at port ${port}`));

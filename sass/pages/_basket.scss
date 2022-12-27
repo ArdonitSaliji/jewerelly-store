@@ -66,6 +66,7 @@ body::-webkit-scrollbar-thumb {
   padding-bottom: 20px;
 }
 .form-control {
+  height: 2.2rem;
   -webkit-appearance: menulist-button;
   option {
     height: 100px;
@@ -100,6 +101,7 @@ body::-webkit-scrollbar-thumb {
 
 .summary {
   width: 30%;
+  height: 100vh;
 }
 .list-group {
   position: relative;
@@ -131,7 +133,31 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
   align-items: center;
 }
+.list-group-item {
+  height: 7rem;
+}
+.row {
+  height: 100%;
+}
+.col-md-2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
 /* Media Queries */
+
+@media (max-width: 1450px) {
+  .list-group {
+    width: 75%;
+  }
+  // .col-md-2 {
+  //   padding: 0;
+  //   margin: 0 1rem;
+  // }
+}
+
 @media (max-width: 771px) {
   .filters {
     width: 40%;
@@ -154,9 +180,5 @@ body::-webkit-scrollbar-thumb {
 
   .search {
     display: none !important;
-  }
-
-  .products {
-    width: 100%;
   }
 }

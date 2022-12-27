@@ -23,7 +23,7 @@ const Navbar = ({ setBasketProducts }) => {
               <Link to='/'>Home</Link>
             </li>
             <li>
-              <Link to='/'>Prices</Link>
+              <Link to='/'>Orders</Link>
             </li>
             <li>
               <Link to='/'>About us</Link>

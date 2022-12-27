@@ -39,15 +39,16 @@ const SelectProducts = () => {
       }),
     });
     const json = await res.json();
+    console.log(json);
     if (res.status === 202) {
       dispatch(updateLengthByOne());
+      const {
+        previousElementSibling: { children },
+      } = e.target;
+      const split = children[1].innerHTML;
+      const value = split.split('Price: $');
+      dispatch(sumProductPrices(Number(value)));
     }
-    const {
-      previousElementSibling: { children },
-    } = e.target;
-    const split = children[1].innerHTML;
-    const value = split.split('Price: $');
-    dispatch(sumProductPrices(Number(value)));
   };
 
   return (
