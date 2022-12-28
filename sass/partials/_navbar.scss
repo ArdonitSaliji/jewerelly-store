@@ -1,5 +1,5 @@
 .navbar-container {
-  color: theme-color('light');
+  color: theme-color("light");
   position: relative;
   z-index: 999;
   width: 100vw;
@@ -11,7 +11,7 @@
     }
   }
   .container-fluid {
-    background-color: theme-color('secondary');
+    background-color: theme-color("secondary");
     z-index: 312;
     .navbar-title {
       height: 3rem;
@@ -22,6 +22,8 @@
         width: 100%;
       }
     }
+    // Mobile Styling
+
     &.mobile {
       .navbar-links {
         display: flex;
@@ -118,7 +120,9 @@
         }
       }
     }
+    // End of Mobile
   }
+
   .navbar-links {
     ul {
       li {
@@ -129,7 +133,8 @@
           line-height: 1.2rem;
           color: #0000;
           text-shadow: 0 var(--_t, var(--h)) #fff, 0 0 var(--_c, #000);
-          background: linear-gradient(#1095c1 0 0) bottom/100% var(--_d, 0) no-repeat;
+          background: linear-gradient(#1095c1 0 0) bottom/100% var(--_d, 0)
+            no-repeat;
           transition: 0.2s;
         }
         a:hover {
@@ -142,7 +147,7 @@
         text-align: center;
         border-radius: 5px;
         display: inline-block;
-        background-color: theme-color('dark');
+        background-color: theme-color("dark");
         color: white;
         width: 1rem;
       }
@@ -168,7 +173,7 @@
     }
   }
   a {
-    color: theme-color('light');
+    color: theme-color("light");
     padding: 0 1em;
     text-decoration: none;
     transition: all 0.3s;
@@ -182,9 +187,31 @@
     }
   }
 
+  //Login and Signup
   .navbar-tab {
+    &.mobile {
+      .login-title {
+        font-size: 1rem;
+      }
+      input {
+        &:placeholder-shown {
+          font-size: 13px;
+        }
+      }
+      .right {
+        form {
+          display: flex;
+          button {
+            white-space: nowrap;
+            margin: 7px 0;
+            padding: 5px;
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
     position: relative;
-    background-color: theme-color-level('secondary', -10%);
+    background-color: theme-color-level("secondary", -10%);
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
@@ -234,14 +261,6 @@
         }
       }
     }
-    .left,
-    .right {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
     &-login {
       position: absolute;
       transition: all 0.7s;
@@ -250,10 +269,18 @@
       &.show-login {
         transform: translateY(0);
       }
+      .login-title {
+        margin-bottom: 1rem;
+      }
       .left {
-        form {
-          .login-title {
-            margin-bottom: -1rem;
+        .login-form {
+          padding: 0 10px;
+          input {
+            height: auto;
+          }
+          a {
+            text-align: center;
+            font-size: 0.7rem;
           }
           .form-group {
             padding-bottom: 1em;
@@ -280,19 +307,25 @@
         form {
           .signup-inputs {
             display: flex;
+            .left-inputs,
+            .right-inputs {
+              width: 90%;
+              .form-group {
+                padding-bottom: 1em;
+                display: flex;
+                justify-content: center;
+                input {
+                  width: 80%;
+                }
+              }
+            }
           }
-          .login-title {
-            margin-bottom: -1rem;
-          }
-          .form-group {
-            margin: 0 1rem;
-            padding-bottom: 1em;
+          .signup-title {
+            margin-bottom: 1rem;
           }
         }
       }
-      .right {
-        margin-right: 2rem;
-      }
+
       form {
         height: 100%;
         display: flex;
@@ -300,6 +333,15 @@
         flex-direction: column;
         justify-content: center;
       }
+    }
+
+    .left,
+    .right {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
