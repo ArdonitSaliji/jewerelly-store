@@ -176,6 +176,24 @@ body::-webkit-scrollbar-thumb {
   .filters > span {
     font-size: 10px;
   }
+  .btn-checkout {
+    width: 90%;
+  }
+  .btn-checkout-container {
+    display: flex;
+    justify-content: center;
+    &.fixed {
+      background-color: #fff;
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      padding: 5px 0;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+    }
+  }
   .row {
     height: 90%;
   }

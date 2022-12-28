@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { data } from '../data';
+// import { AiOutlineSearch } from 'react-icons/ai';
 const Main = ({ setGemState }) => {
   const [searchState, setSearchState] = useState('');
   const [allProducts, setAllProducts] = useState(null);

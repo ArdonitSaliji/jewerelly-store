@@ -5,10 +5,9 @@ import { AiFillDelete } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { data } from '../data';
+import { useMediaQuery } from '@chakra-ui/react';
 import {
   decLengthByOne,
-  selectAllProducts,
   subtractPrice,
   sumProductPrices,
   updateBasket,
@@ -16,6 +15,30 @@ import {
   updateProductsQuantity,
 } from '../feature/basketSlice';
 const Basket = () => {
+  const [windowScrollY, setWindowScrollY] = useState();
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setWindowScrollY(window.scrollY);
+    });
+  }, []);
+  const media = useMediaQuery('(max-width: 771px)');
+  let checkoutBtn = document.querySelector('.btn-checkout-container');
+  let summary = document.querySelector('.summary');
+  if (media) {
+    if (checkoutBtn && windowScrollY >= summary.offsetTop + summary.offsetHeight) {
+      checkoutBtn.classList.add('fixed');
+    } else if (
+      checkoutBtn &&
+      summary &&
+      windowScrollY <= summary.offsetTop + summary.offsetHeight
+    ) {
+      console.log(summary.offsetTop + summary.offsetHeight);
+
+      checkoutBtn.classList.remove('fixed');
+    }
+  } else if (checkoutBtn && !media) {
+    checkoutBtn.classList.remove('fixed');
+  }
   const dispatch = useDispatch();
   const productsSum = useSelector((state) => state.basket.sum);
   const basketProducts = useSelector((state) => state.basket.basketProducts);
@@ -148,21 +171,24 @@ const Basket = () => {
       <div className='filters summary'>
         <span className='title'>Subtotal ({}) items</span>
         <span style={{ fontWeight: 700, fontSize: 20 }}>
-          Total: ${' '}
+          Total: $
           {sessionStorage.getItem('isLoggedIn') && productsSum && Number(productsSum).toFixed(2)}
         </span>
-        <Button
-          type='button'
-          onClick={() => {
-            if (sessionStorage.getItem('user')) {
-              checkout();
-            } else {
-              toast.error('Login to proceed to checkout!');
-            }
-          }}
-        >
-          Proceed to checkout
-        </Button>
+        <div className='btn-checkout-container'>
+          <Button
+            className='btn-checkout'
+            type='button'
+            onClick={() => {
+              if (sessionStorage.getItem('user')) {
+                checkout();
+              } else {
+                toast.error('Login to proceed to checkout!');
+              }
+            }}
+          >
+            Proceed to checkout
+          </Button>
+        </div>
       </div>
     </div>
   );
