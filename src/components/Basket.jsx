@@ -21,7 +21,7 @@ const Basket = () => {
       setWindowScrollY(window.scrollY);
     });
   }, []);
-  const media = useMediaQuery('(max-width: 771px)');
+  const media = useMediaQuery('(max-width: 771px)')[0];
   let checkoutBtn = document.querySelector('.btn-checkout-container');
   let summary = document.querySelector('.summary');
   if (media) {
@@ -32,8 +32,6 @@ const Basket = () => {
       summary &&
       windowScrollY <= summary.offsetTop + summary.offsetHeight
     ) {
-      console.log(summary.offsetTop + summary.offsetHeight);
-
       checkoutBtn.classList.remove('fixed');
     }
   } else if (checkoutBtn && !media) {
