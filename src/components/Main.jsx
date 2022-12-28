@@ -18,7 +18,6 @@ const Main = ({ setGemState }) => {
       <div className='main-title' style={{ textAlign: 'center', padding: '2rem 0 0rem' }}>
         <h1>Buying gems and crystals has never been easier.</h1>
       </div>
-
       <div className='gems-container'>
         {allProducts?.map((product) => {
           return (

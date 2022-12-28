@@ -136,6 +136,7 @@ body::-webkit-scrollbar-thumb {
 .list-group-item {
   img {
     max-height: 95%;
+    min-height: 40%;
   }
 }
 .row {
@@ -161,22 +162,33 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media (max-width: 771px) {
+  .home {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .filters {
-    width: 40%;
+    height: 100%;
+    width: 100%;
     padding: 10px;
-    margin: 5px;
+    margin: 0;
   }
 
   .filters > span {
     font-size: 10px;
   }
-
+  .row {
+    height: 90%;
+  }
+  .col-md-2 {
+    margin: 0.3rem 0;
+  }
   .title {
     font-size: 18px !important;
   }
 
   .productContainer {
-    width: 58%;
+    margin: 0.5rem 0;
+    width: auto;
     padding: 0;
   }
 
