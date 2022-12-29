@@ -40,6 +40,7 @@ const Login = ({ login, setIsLoggedIn }) => {
     }
   };
   const media = useMediaQuery("(max-width: 771px)")[0];
+  console.log(login);
   return (
     <div
       className={
@@ -48,8 +49,8 @@ const Login = ({ login, setIsLoggedIn }) => {
             ? "navbar-tab navbar-tab-login mobile show-login"
             : "navbar-tab navbar-tab-login mobile"
           : !login
-          ? "navbar-tab navbar-tab-login mobile show-login"
-          : "navbar-tab navbar-tab-login mobile"
+          ? "navbar-tab navbar-tab-login"
+          : "navbar-tab navbar-tab-login show-login"
       }
     >
       <div className="left">
