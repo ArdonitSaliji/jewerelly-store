@@ -120,7 +120,7 @@
         }
       }
     }
-    // End of Mobile
+    // End of Mobile Styling
   }
 
   .navbar-links {
@@ -210,6 +210,7 @@
         }
       }
     }
+
     position: relative;
     background-color: theme-color-level("secondary", -10%);
     width: 100%;
@@ -286,6 +287,11 @@
           .form-group {
             padding-bottom: 1em;
           }
+        }
+      }
+      .right {
+        .btn-primary {
+          margin-bottom: 1rem;
         }
       }
       form {
