@@ -21,6 +21,7 @@ const Navbar = ({ setBasketProducts }) => {
   const [showNav, setShowNav] = useState(false);
   const basketLength = useSelector((state) => state.basket.length);
   const media = useMediaQuery("(max-width: 771px)")[0];
+
   return (
     <div className="navbar-container">
       <div
@@ -49,11 +50,11 @@ const Navbar = ({ setBasketProducts }) => {
                 <GoBrowser /> Dashboard
               </Link>
             </li>
-            <li onClick={() => setShowNav(false)}>
+            {/* <li onClick={() => setShowNav(false)}>
               <Link to="/">
                 <AiOutlineHome /> Orders
               </Link>
-            </li>
+            </li> */}
             <li onClick={() => setShowNav(false)}>
               <Link to="/">
                 <MdOutlineDescription /> About us

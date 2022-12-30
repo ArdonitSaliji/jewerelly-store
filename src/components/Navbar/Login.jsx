@@ -9,6 +9,7 @@ const Login = ({ login, setIsLoggedIn }) => {
   const [message, setMessage] = useState();
   const dispatch = useDispatch();
   const media = useMediaQuery("(max-width: 771px)")[0];
+
   const loginUser = async () => {
     const res = await fetch("http://localhost:5000/api/login", {
       method: "POST",
@@ -20,6 +21,7 @@ const Login = ({ login, setIsLoggedIn }) => {
         password: loginInUser.password,
       }),
     });
+
     const json = await res.json();
     if (res.status === 200) {
       toast.success("Login successful!", {

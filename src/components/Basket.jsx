@@ -19,6 +19,9 @@ const Basket = () => {
   let checkoutBtn = document.querySelector(".btn-checkout-container");
   let summary = document.querySelector(".summary");
   const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const dispatch = useDispatch();
+  const productsSum = useSelector((state) => state.basket.sum);
+  const basketProducts = useSelector((state) => state.basket.basketProducts);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -26,28 +29,9 @@ const Basket = () => {
     });
   }, []);
 
-  if (media) {
-    if (
-      checkoutBtn &&
-      windowScrollY >= summary.offsetTop + summary.offsetHeight
-    ) {
-      checkoutBtn.classList.add("fixed");
-    } else if (
-      checkoutBtn &&
-      summary &&
-      windowScrollY <= summary.offsetTop + summary.offsetHeight
-    ) {
-      checkoutBtn.classList.remove("fixed");
-    }
-  } else if (checkoutBtn && !media) {
-    checkoutBtn.classList.remove("fixed");
-  }
-  const dispatch = useDispatch();
-  const productsSum = useSelector((state) => state.basket.sum);
-  const basketProducts = useSelector((state) => state.basket.basketProducts);
   useEffect(() => {
     if (sessionStorage.getItem("user")) {
-      const getUserProducts = async () => {
+      const getUserProducts = (async () => {
         const res = await fetch("http://localhost:5000/user/cart/products", {
           method: "POST",
           headers: {
@@ -72,10 +56,28 @@ const Basket = () => {
           const val = Number(sum).toFixed(2);
           dispatch(sumProductPrices(Number(val)));
         }
-      };
-      getUserProducts();
+      })();
+      // getUserProducts();
     }
   }, [dispatch]);
+
+  if (media) {
+    if (
+      checkoutBtn &&
+      windowScrollY >= summary.offsetTop + summary.offsetHeight
+    ) {
+      checkoutBtn.classList.add("fixed");
+    } else if (
+      checkoutBtn &&
+      summary &&
+      windowScrollY <= summary.offsetTop + summary.offsetHeight
+    ) {
+      checkoutBtn.classList.remove("fixed");
+    }
+  } else if (checkoutBtn && !media) {
+    checkoutBtn.classList.remove("fixed");
+  }
+
   const deleteBasketProduct = async (e) => {
     const res = await fetch("http://localhost:5000/user/cart/delete", {
       method: "POST",
@@ -89,12 +91,11 @@ const Basket = () => {
     });
     const json = await res.json();
     dispatch(updateBasket(json));
-    const {
-      parentElement: {
-        previousElementSibling: { previousElementSibling },
-      },
-    } = e.target;
-    const value = Number(previousElementSibling.innerHTML.split("$").join(""));
+    const value = Number(
+      e.target.parentElement.previousElementSibling.previousElementSibling.innerText
+        .split("$")
+        .join("")
+    );
     const sub = value.toFixed(2);
     dispatch(subtractPrice(sub));
     dispatch(decLengthByOne());
