@@ -40,7 +40,7 @@ const Login = ({ login, setIsLoggedIn }) => {
     }
   };
   const media = useMediaQuery("(max-width: 771px)")[0];
-  console.log(login);
+
   return (
     <div
       className={
