@@ -8,6 +8,7 @@ const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: "", password: "" });
   const [message, setMessage] = useState();
   const dispatch = useDispatch();
+  const media = useMediaQuery("(max-width: 771px)")[0];
   const loginUser = async () => {
     const res = await fetch("http://localhost:5000/api/login", {
       method: "POST",
@@ -39,7 +40,6 @@ const Login = ({ login, setIsLoggedIn }) => {
       }, 6000);
     }
   };
-  const media = useMediaQuery("(max-width: 771px)")[0];
 
   return (
     <div
@@ -57,38 +57,34 @@ const Login = ({ login, setIsLoggedIn }) => {
         <form name="login" className="login-form">
           <h4 className="login-title">Login</h4>
           <div className="login-inputs">
-            <div className="form-group">
-              <label required htmlFor="email" className="sr-only">
-                Username or Email
-              </label>
-              <input
-                onChange={(e) => {
-                  setLoginInUser({ ...loginInUser, email: e.target.value });
-                }}
-                required={true}
-                type="text"
-                placeholder="Username or email"
-                name="email"
-                id="email"
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <label required htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                onChange={(e) => {
-                  setLoginInUser({ ...loginInUser, password: e.target.value });
-                }}
-                id="password"
-                type="password"
-                placeholder="Password"
-                required
-                name="password"
-                className="form-control"
-              />
-            </div>
+            <label required htmlFor="email" className="sr-only">
+              Username or Email
+            </label>
+            <input
+              onChange={(e) => {
+                setLoginInUser({ ...loginInUser, email: e.target.value });
+              }}
+              required={true}
+              type="text"
+              placeholder="Username or email"
+              name="email"
+              id="email"
+              className="form-control"
+            />
+            <label required htmlFor="password" className="sr-only">
+              Password
+            </label>
+            <input
+              onChange={(e) => {
+                setLoginInUser({ ...loginInUser, password: e.target.value });
+              }}
+              id="password"
+              type="password"
+              placeholder="Password"
+              required
+              name="password"
+              className="form-control"
+            />
           </div>
           <Link
             onClick={() =>

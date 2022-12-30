@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,6 +10,8 @@ const Signup = ({ signUp }) => {
     password2: "",
   });
   const [message, setMessage] = useState(null);
+  const media = useMediaQuery("(max-width: 771px)")[0];
+
   const signupUser = async () => {
     if (
       signingInUser.username !== "" &&
@@ -68,9 +71,13 @@ const Signup = ({ signUp }) => {
   return (
     <div
       className={
-        signUp
-          ? "navbar-tab navbar-tab-signup show-signup"
-          : "navbar-tab navbar-tab-signup"
+        media
+          ? signUp
+            ? "navbar-tab navbar-tab-signup mobile show-signup"
+            : "navbar-tab navbar-tab-signup mobile"
+          : !signUp
+          ? "navbar-tab navbar-tab-signup"
+          : "navbar-tab navbar-tab-signup show-signup"
       }
     >
       <div className="left">
@@ -79,80 +86,72 @@ const Signup = ({ signUp }) => {
           <br />
           <div className="signup-inputs">
             <div className="left-inputs">
-              <div className="form-group">
-                <label required htmlFor="username" className="sr-only">
-                  Username
-                </label>
-                <input
-                  onChange={(e) => {
-                    setSigningInUser({
-                      ...signingInUser,
-                      username: e.target.value,
-                    });
-                  }}
-                  type="text"
-                  placeholder="Username"
-                  required
-                  name="username"
-                  className="form-control"
-                />
-              </div>
-              <div className="form-group">
-                <label required htmlFor="email" className="sr-only">
-                  Email
-                </label>
-                <input
-                  onChange={(e) => {
-                    setSigningInUser({
-                      ...signingInUser,
-                      email: e.target.value,
-                    });
-                  }}
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  className="form-control"
-                  required
-                />
-              </div>
+              <label required htmlFor="username" className="sr-only">
+                Username
+              </label>
+              <input
+                onChange={(e) => {
+                  setSigningInUser({
+                    ...signingInUser,
+                    username: e.target.value,
+                  });
+                }}
+                type="text"
+                placeholder="Username"
+                required
+                name="username"
+                className="form-control"
+              />
+              <label required htmlFor="email" className="sr-only">
+                Email
+              </label>
+              <input
+                onChange={(e) => {
+                  setSigningInUser({
+                    ...signingInUser,
+                    email: e.target.value,
+                  });
+                }}
+                type="email"
+                placeholder="Email"
+                name="email"
+                className="form-control"
+                required
+              />
             </div>
             <div className="right-inputs">
-              <div className="form-group">
-                <label required htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  onChange={(e) => {
-                    setSigningInUser({
-                      ...signingInUser,
-                      password1: e.target.value,
-                    });
-                  }}
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  className="form-control"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label required htmlFor="repeat-password" className="sr-only">
-                  Repeat Password
-                </label>
-                <input
-                  onChange={(e) => {
-                    setSigningInUser({
-                      ...signingInUser,
-                      password2: e.target.value,
-                    });
-                  }}
-                  type="password"
-                  placeholder="Repeat Password"
-                  name="repeat-password"
-                  className="form-control"
-                  required
-                />
-              </div>
+              <label required htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                onChange={(e) => {
+                  setSigningInUser({
+                    ...signingInUser,
+                    password1: e.target.value,
+                  });
+                }}
+                type="password"
+                placeholder="Password"
+                name="password"
+                className="form-control"
+                required
+              />
+              <label required htmlFor="repeat-password" className="sr-only">
+                Repeat Password
+              </label>
+              <input
+                onChange={(e) => {
+                  setSigningInUser({
+                    ...signingInUser,
+                    password2: e.target.value,
+                  });
+                }}
+                type="password"
+                placeholder="Repeat Password"
+                name="repeat-password"
+                className="form-control"
+                required
+              />
             </div>
           </div>
           <Link to={"/reset-password"}>Have an account? Login.</Link>
