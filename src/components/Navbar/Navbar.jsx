@@ -63,10 +63,8 @@ const Navbar = ({ setBasketProducts }) => {
               <Link to="/basket">
                 <AiOutlineShoppingCart />
                 Basket&nbsp;
-                {isLoggedIn && (
-                  <span className="basket-indicator">
-                    {basketLength > 0 && basketLength}
-                  </span>
+                {isLoggedIn && basketLength > 0 && basketLength && (
+                  <span className="basket-indicator">{basketLength}</span>
                 )}
               </Link>
             </li>

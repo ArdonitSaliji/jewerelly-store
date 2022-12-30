@@ -10,7 +10,7 @@
   z-index: 110;
   align-items: center;
   min-width: 15%;
-  max-width: 25%;
+  max-width: 65%;
 
   background-color: hsla(0, 2%, 10%, 0.658);
   &.show {
@@ -73,4 +73,10 @@
   nav .ul-item li:hover {
     transition: 1s ease;
   }
+}
+
+@media (max-width: 771px) {
+  // .sidebar {
+  //   width: 50%;
+  // }
 }

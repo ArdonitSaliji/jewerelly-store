@@ -1,11 +1,10 @@
 /* eslint-disable array-callback-return */
-import { useEffect, useState } from 'react';
-import { Button, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
-import { AiFillDelete } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useMediaQuery } from '@chakra-ui/react';
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
+import { AiFillDelete } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useMediaQuery } from "@chakra-ui/react";
 import {
   decLengthByOne,
   subtractPrice,
@@ -13,43 +12,49 @@ import {
   updateBasket,
   updateLength,
   updateProductsQuantity,
-} from '../feature/basketSlice';
+} from "../feature/basketSlice";
 const Basket = () => {
   const [windowScrollY, setWindowScrollY] = useState();
+  const media = useMediaQuery("(max-width: 771px)")[0];
+  let checkoutBtn = document.querySelector(".btn-checkout-container");
+  let summary = document.querySelector(".summary");
+  const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       setWindowScrollY(window.scrollY);
     });
   }, []);
-  const media = useMediaQuery('(max-width: 771px)')[0];
-  let checkoutBtn = document.querySelector('.btn-checkout-container');
-  let summary = document.querySelector('.summary');
+
   if (media) {
-    if (checkoutBtn && windowScrollY >= summary.offsetTop + summary.offsetHeight) {
-      checkoutBtn.classList.add('fixed');
+    if (
+      checkoutBtn &&
+      windowScrollY >= summary.offsetTop + summary.offsetHeight
+    ) {
+      checkoutBtn.classList.add("fixed");
     } else if (
       checkoutBtn &&
       summary &&
       windowScrollY <= summary.offsetTop + summary.offsetHeight
     ) {
-      checkoutBtn.classList.remove('fixed');
+      checkoutBtn.classList.remove("fixed");
     }
   } else if (checkoutBtn && !media) {
-    checkoutBtn.classList.remove('fixed');
+    checkoutBtn.classList.remove("fixed");
   }
   const dispatch = useDispatch();
   const productsSum = useSelector((state) => state.basket.sum);
   const basketProducts = useSelector((state) => state.basket.basketProducts);
   useEffect(() => {
-    if (sessionStorage.getItem('user')) {
+    if (sessionStorage.getItem("user")) {
       const getUserProducts = async () => {
-        const res = await fetch('http://localhost:5000/user/cart/products', {
-          method: 'POST',
+        const res = await fetch("http://localhost:5000/user/cart/products", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            user: JSON.parse(sessionStorage.getItem('user')),
+            user: JSON.parse(sessionStorage.getItem("user")),
           }),
         });
         const json = await res.json();
@@ -60,7 +65,7 @@ const Basket = () => {
         if (json.basketProducts.length > 0) {
           const sum = json.basketProducts
             ?.map((product) => {
-              const price = product.price.split('$').join('');
+              const price = product.price.split("$").join("");
               return price;
             })
             ?.reduce((a, b) => Number(a) + Number(b));
@@ -72,13 +77,13 @@ const Basket = () => {
     }
   }, [dispatch]);
   const deleteBasketProduct = async (e) => {
-    const res = await fetch('http://localhost:5000/user/cart/delete', {
-      method: 'POST',
+    const res = await fetch("http://localhost:5000/user/cart/delete", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user: JSON.parse(sessionStorage.getItem('user')),
+        user: JSON.parse(sessionStorage.getItem("user")),
         productName: e.target.parentElement.parentElement.parentElement.id,
       }),
     });
@@ -89,33 +94,31 @@ const Basket = () => {
         previousElementSibling: { previousElementSibling },
       },
     } = e.target;
-    const value = Number(previousElementSibling.innerHTML.split('$').join(''));
+    const value = Number(previousElementSibling.innerHTML.split("$").join(""));
     const sub = value.toFixed(2);
     dispatch(subtractPrice(sub));
     dispatch(decLengthByOne());
   };
 
   const checkout = async () => {
-    const res = await fetch('http://localhost:5000/user/checkout', {
-      method: 'POST',
+    const res = await fetch("http://localhost:5000/user/checkout", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         items: basketProducts,
       }),
     });
     const json = await res.json();
-    window.open(json, '_blank');
+    window.open(json, "_blank");
   };
 
-  const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
   return (
-    <div className='home'>
-      <div className='productContainer'>
+    <div className="home mobile">
+      <div className="productContainer">
         <ListGroup>
-          {sessionStorage.getItem('isLoggedIn') ? (
+          {sessionStorage.getItem("isLoggedIn") ? (
             basketProducts && basketProducts.length > 0 ? (
               basketProducts?.map((prod) => (
                 <ListGroup.Item id={prod.name} key={prod._id}>
@@ -124,7 +127,9 @@ const Basket = () => {
                       <Image src={prod.image} alt={prod.name} fluid rounded />
                     </Col>
                     <Col md={2}>
-                      <span>{prod.name[0].toUpperCase() + prod.name.slice(1, -1)}</span>
+                      <span>
+                        {prod.name[0].toUpperCase() + prod.name.slice(1, -1)}
+                      </span>
                     </Col>
                     <Col md={2}>
                       <span>{prod.size}</span>
@@ -133,12 +138,12 @@ const Basket = () => {
 
                     <Col md={2}>
                       <Form.Control
-                        as='select'
+                        as="select"
                         defaultValue={prod.quantity}
                         onChange={(e) => e.target.value}
                       >
                         {optionArray.map((x, index) => (
-                          <option style={{ height: '20px' }} key={index}>
+                          <option style={{ height: "20px" }} key={index}>
                             {x + 1}
                           </option>
                         ))}
@@ -149,38 +154,43 @@ const Basket = () => {
                         onClick={(e) => {
                           deleteBasketProduct(e);
                         }}
-                        type='button'
-                        variant='light'
+                        type="button"
+                        variant="light"
                       >
-                        <AiFillDelete fontSize='20px' style={{ pointerEvents: 'none' }} />
+                        <AiFillDelete
+                          fontSize="20px"
+                          style={{ pointerEvents: "none" }}
+                        />
                       </Button>
                     </Col>
                   </Row>
                 </ListGroup.Item>
               ))
             ) : (
-              <h3 className='empty-cart'>Your cart is empty!</h3>
+              <h3 className="empty-cart">Your cart is empty!</h3>
             )
           ) : (
-            <h3 className='login-first'>Login to add items to cart.</h3>
+            <h3 className="login-first">Login to add items to cart.</h3>
           )}
         </ListGroup>
       </div>
-      <div className='filters summary'>
-        <span className='title'>Subtotal ({}) items</span>
+      <div className="filters summary">
+        <span className="title">Subtotal ({}) items</span>
         <span style={{ fontWeight: 700, fontSize: 20 }}>
           Total: $
-          {sessionStorage.getItem('isLoggedIn') && productsSum && Number(productsSum).toFixed(2)}
+          {sessionStorage.getItem("isLoggedIn") &&
+            productsSum &&
+            Number(productsSum).toFixed(2)}
         </span>
-        <div className='btn-checkout-container'>
+        <div className="btn-checkout-container">
           <Button
-            className='btn-checkout'
-            type='button'
+            className="btn-checkout"
+            type="button"
             onClick={() => {
-              if (sessionStorage.getItem('user')) {
+              if (sessionStorage.getItem("user")) {
                 checkout();
               } else {
-                toast.error('Login to proceed to checkout!');
+                toast.error("Login to proceed to checkout!");
               }
             }}
           >
