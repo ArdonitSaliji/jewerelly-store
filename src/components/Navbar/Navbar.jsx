@@ -7,7 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import {
   AiOutlineBars,
-  AiOutlineHome,
+  // AiOutlineHome,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { GoBrowser } from "react-icons/go";
@@ -50,11 +50,7 @@ const Navbar = ({ setBasketProducts }) => {
                 <GoBrowser /> Dashboard
               </Link>
             </li>
-            {/* <li onClick={() => setShowNav(false)}>
-              <Link to="/">
-                <AiOutlineHome /> Orders
-              </Link>
-            </li> */}
+
             <li onClick={() => setShowNav(false)}>
               <Link to="/">
                 <MdOutlineDescription /> About us
