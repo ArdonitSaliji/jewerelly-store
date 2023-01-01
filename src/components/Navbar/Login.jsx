@@ -10,7 +10,8 @@ const Login = ({ login, setIsLoggedIn }) => {
   const dispatch = useDispatch();
   const media = useMediaQuery("(max-width: 771px)")[0];
 
-  const loginUser = async () => {
+  const loginUser = async (e) => {
+    e.preventDefault();
     const res = await fetch("http://localhost:5000/api/login", {
       method: "POST",
       headers: {
@@ -29,7 +30,6 @@ const Login = ({ login, setIsLoggedIn }) => {
       });
       sessionStorage.setItem("isLoggedIn", JSON.stringify(json.isLoggedIn));
       sessionStorage.setItem("user", JSON.stringify(json.username));
-      console.log(json.basketProducts);
       dispatch(updateBasket(json.basketProducts));
       setIsLoggedIn(json.isLoggedIn);
       setMessage(json.success);
@@ -42,7 +42,11 @@ const Login = ({ login, setIsLoggedIn }) => {
       }, 6000);
     }
   };
-
+  const handleChange = (e) => {
+    e.target.type === "text"
+      ? setLoginInUser({ ...loginInUser, email: e.target.value })
+      : setLoginInUser({ ...loginInUser, password: e.target.value });
+  };
   return (
     <div
       className={
@@ -64,9 +68,8 @@ const Login = ({ login, setIsLoggedIn }) => {
             </label>
             <input
               onChange={(e) => {
-                setLoginInUser({ ...loginInUser, email: e.target.value });
+                handleChange(e);
               }}
-              required={true}
               type="text"
               placeholder="Username or email"
               name="email"
@@ -78,7 +81,7 @@ const Login = ({ login, setIsLoggedIn }) => {
             </label>
             <input
               onChange={(e) => {
-                setLoginInUser({ ...loginInUser, password: e.target.value });
+                handleChange(e);
               }}
               id="password"
               type="password"
@@ -106,7 +109,7 @@ const Login = ({ login, setIsLoggedIn }) => {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => {
+            onClick={(e) => {
               if (
                 loginInUser.email.length < 1 &&
                 loginInUser.password.length < 1
@@ -119,7 +122,7 @@ const Login = ({ login, setIsLoggedIn }) => {
                   setMessage("");
                 }, 5000);
               } else {
-                loginUser();
+                loginUser(e);
               }
             }}
           >

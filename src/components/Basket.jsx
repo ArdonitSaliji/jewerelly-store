@@ -189,7 +189,7 @@ const Basket = () => {
             type="button"
             onClick={() => {
               if (sessionStorage.getItem("user")) {
-                checkout();
+                basketProducts.length > 0 && checkout();
               } else {
                 toast.error("Login to proceed to checkout!");
               }

@@ -9,6 +9,7 @@ const path = require("path");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
+dotenv.config();
 app.use(
   session({
     secret: "secret",
@@ -17,10 +18,13 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
-app.use(cors());
-app.use(express.json());
-app.options("*", cors());
-dotenv.config();
+app.use(
+  cors({
+    options: {
+      origin: "*",
+    },
+  })
+);
 app.use(express.static(path.join(__dirname, "public")));
 mongoose.set("strictQuery", false);
 mongoose.connect(
@@ -28,6 +32,7 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true, dbName: "jewerelly" },
   () => console.log("Database Connected")
 );
+
 app.use("/", routesUrls);
 
 app.use((req, res, next) => {

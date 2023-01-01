@@ -13,6 +13,23 @@ const Main = ({ setGemState }) => {
       setAllProducts(json);
     })();
   }, []);
+  const getGemName = (e) => {
+    const product = e.target;
+    setGemState(
+      product.title.substring(0, product.title.length - 1).toLowerCase()
+    );
+    sessionStorage.setItem(
+      "selectProduct",
+      JSON.stringify(
+        product.title.substring(0, product.title.length - 1).toLowerCase()
+      )
+    );
+    window.location.assign(
+      `${window.location.href}product/${product.title
+        .substring(0, product.title.length - 1)
+        .toLowerCase()}`
+    );
+  };
   return (
     <div className="main ">
       <div
@@ -25,23 +42,10 @@ const Main = ({ setGemState }) => {
         {allProducts?.map((product) => {
           return (
             <div
-              title={"Explorer " + product.name}
+              title={product.name}
               key={product._id}
               className="gem"
-              onClick={(e) => {
-                const product = e.target;
-                setGemState(product.children[1].textContent.toLowerCase());
-                console.log(product.children[1].textContent.toLowerCase());
-                sessionStorage.setItem(
-                  "selectProduct",
-                  JSON.stringify(product.children[1].textContent.toLowerCase())
-                );
-                window.location.assign(
-                  `${
-                    window.location.href
-                  }product/${product.children[1].textContent.toLowerCase()}`
-                );
-              }}
+              onClick={(e) => getGemName(e)}
             >
               <img src={process.env.PUBLIC_URL + product.image} alt="" />
               <em>Agate</em>
