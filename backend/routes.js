@@ -189,6 +189,7 @@ router.post("/api/login", async (req, res) => {
       }
     });
   }
+  res.status(202);
 });
 
 router.post("/api/signup", async (req, res) => {

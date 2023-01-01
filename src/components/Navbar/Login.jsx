@@ -11,7 +11,6 @@ const Login = ({ login, setIsLoggedIn }) => {
   const media = useMediaQuery("(max-width: 771px)")[0];
 
   const loginUser = async (e) => {
-    e.preventDefault();
     const res = await fetch("http://localhost:5000/api/login", {
       method: "POST",
       headers: {
