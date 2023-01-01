@@ -1,23 +1,23 @@
-@import '../node_modules/bootstrap/scss/functions';
+@import "../node_modules/bootstrap/scss/functions";
 
-@import './components/variables';
+@import "./components/variables";
 
 /** Bootstrap **/
-@import '../node_modules/bootstrap/scss/variables';
-@import '../node_modules/bootstrap/scss/mixins';
-// @import '../node_modules/bootstrap/scss/root';
-@import '../node_modules/bootstrap/scss/bootstrap';
-@import './components/functions';
-@import './components/mixins';
-@import './components/fonts';
-@import './partials/base';
-@import './partials/footer';
-@import './partials/navbar';
-@import './partials/sidebar';
-@import './pages/dashboard';
-@import './pages/basket';
-@import './pages/checkout';
-@import './pages/main';
-@import './pages/forgotpass';
-@import './pages/account';
-@import './pages/selectproducts';
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "./components/functions";
+@import "./components/mixins";
+@import "./components/fonts";
+@import "./partials/base";
+@import "./partials/footer";
+@import "./partials/navbar";
+@import "./partials/sidebar";
+@import "./pages/dashboard";
+@import "./pages/basket";
+@import "./pages/checkout";
+@import "./pages/main";
+@import "./pages/forgotpass";
+@import "./pages/account";
+@import "./pages/selectproducts";
+@import "./pages/profilescreen";

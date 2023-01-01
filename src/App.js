@@ -34,7 +34,7 @@ function App() {
             element={<Basket basketProducts={basketProducts} />}
           />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/:user/profile" element={ProfileScreen} />
+          <Route path="/:user/profile" element={<ProfileScreen />} />
         </Routes>
 
         <Sidebar />
