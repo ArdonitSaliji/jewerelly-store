@@ -3,11 +3,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+
 // import "./ProfileScreen.css";
 const ProfileScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [pic, setPic] = useState();
+  const [pic, setPic] = useState(process.env.PUBLIC_URL + "/images/user.webp");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [picMessage, setPicMessage] = useState();
@@ -59,13 +60,7 @@ const ProfileScreen = () => {
           </Button>
         </Form>
       </Col>
-      <Col
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <Col>
         <img src={pic} alt={name} className="profilePic" />
       </Col>
     </Row>

@@ -73,11 +73,10 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.13",
     "cors": "^2.8.5",
     "gh-pages": "^4.0.0",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-debug": "^3.2.0",
     "gulp-filelog": "^0.4.1",
@@ -85,6 +84,7 @@
     "gulp-include": "^2.4.1",
     "gulp-notify": "^4.0.0",
     "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^2.6.5",
