@@ -219,9 +219,25 @@ router.post("/api/signup", async (req, res) => {
   res.status(403).json({ error: "Passwords must be matching!" });
 });
 
-router.get("/api/logout", (req, res) => {
+router.get("/api/logout", async (req, res) => {
   req.session.destroy();
   res.clearCookie("connect.sid"); // clean up!
   return res.status(200).json({ msg: "logging you out" });
 });
+router.post("/user/profile", async (req, res) => {
+  const foundUser = await Users.findOne({
+    username: req.body.user,
+  });
+  res.status(200).send(foundUser);
+});
+router.post("/user/update-profile", async (req, res) => {
+  const body = req.body;
+  const foundUser = await Users.findOne({
+    username: body.username,
+  });
+
+  if (foundUser.username === body.username && foundUser.email === body.email) {
+  }
+});
+
 module.exports = router;
