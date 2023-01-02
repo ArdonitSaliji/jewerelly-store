@@ -6,9 +6,7 @@ const Main = ({ setGemState }) => {
 
   useEffect(() => {
     const getAllProducts = (async () => {
-      const getProducts = await fetch(
-        "http://localhost:5000/api/products/find"
-      );
+      const getProducts = await fetch("/api/products/find");
       let json = await getProducts.json();
       setAllProducts(json);
     })();

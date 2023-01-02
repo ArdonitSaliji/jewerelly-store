@@ -34,7 +34,9 @@ function App() {
             element={<Basket basketProducts={basketProducts} />}
           />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/:user/profile" element={<ProfileScreen />} />
+          {document.cookie && (
+            <Route path="/:user/profile" element={<ProfileScreen />} />
+          )}
         </Routes>
 
         <Sidebar />

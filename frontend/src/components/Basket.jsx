@@ -32,7 +32,7 @@ const Basket = () => {
   useEffect(() => {
     if (sessionStorage.getItem("user")) {
       const getUserProducts = (async () => {
-        const res = await fetch("http://localhost:5000/user/cart/products", {
+        const res = await fetch("/user/cart/products", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const Basket = () => {
   }
 
   const deleteBasketProduct = async (e) => {
-    const res = await fetch("http://localhost:5000/user/cart/delete", {
+    const res = await fetch("/user/cart/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const Basket = () => {
   };
 
   const checkout = async () => {
-    const res = await fetch("http://localhost:5000/user/checkout", {
+    const res = await fetch("/user/checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

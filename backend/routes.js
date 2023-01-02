@@ -1,5 +1,6 @@
 const stripe = require("stripe");
 const express = require("express");
+const session = require("express-session");
 const router = express.Router();
 const Users = require("./Schema/Users");
 const bcrypt = require("bcrypt");
@@ -9,7 +10,39 @@ let stripeGateway = stripe(
   "sk_test_51MCkXgDplZI5a2XjhslbZ4ge0UxGgEIAOvgGnpRRwta6scGnPvWFBlvaYhYqAXvnHK58tHwnUw133AZOpIma1H4q005lxIADbl"
 );
 let DOMAIN = "http://localhost:3000/";
-router.post("/user/checkout", async (req, res) => {
+
+// a middleware function to verify the JWT and set the req.user object
+function verifyJWT(req, res, next) {
+  // get the JWT from the request header
+  const token = req.cookies["access_token"];
+
+  // if the token is present, verify it
+  if (token) {
+    // if the token is valid, set the user on the request object
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(401).redirect("http://localhost:3000/");
+      }
+      req.user = decoded;
+      next();
+    });
+  } else {
+    // if the token is not present, return a 401 Unauthorized error
+    res.status(401).redirect("http://localhost:3000/");
+  }
+}
+router.use(
+  session({
+    secret: "secret",
+    resave: false,
+
+    saveUninitialized: true,
+  })
+);
+
+// router.use(verifyJWT);
+
+router.post("/user/checkout", verifyJWT, async (req, res) => {
   const session = await stripeGateway.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "payment",
@@ -41,7 +74,7 @@ router.get("/api/products/find", async (req, res) => {
     : res.status(204).send({ message: "No Products Available" });
 });
 
-router.post("/user/cart/add", async (req, res) => {
+router.post("/user/cart/add", verifyJWT, async (req, res) => {
   let foundProduct = await Products.findOne({ name: req.body.product });
   let foundUser = await Users.findOne({
     username: req.body.user,
@@ -63,7 +96,7 @@ router.post("/user/cart/add", async (req, res) => {
   }
 });
 
-router.post("/user/cart/delete", async (req, res) => {
+router.post("/user/cart/delete", verifyJWT, async (req, res) => {
   const user = await Users.updateOne(
     { username: req.body.user },
     {
@@ -86,7 +119,7 @@ router.post("/user/cart/delete", async (req, res) => {
   }
 });
 
-router.post("/user/cart/products", async (req, res) => {
+router.post("/user/cart/products", verifyJWT, async (req, res) => {
   const foundUser = await Users.findOne({
     username: req.body.user,
   });
@@ -122,27 +155,6 @@ router.post("/api/products/find/shape", async (req, res) => {
   res.status(202).json(foundProductShapes);
 });
 
-const authenticateToken = async (req, res, next) => {
-  const token = req.headers["x-access-token"];
-
-  if (!token) {
-    res.status(401).send({ msg: "No token provided!" });
-  } else {
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
-      if (err) {
-        res.json({ auth: false, message: "Authentication failed" });
-      } else {
-        req.userId = decoded.id;
-        next();
-      }
-    });
-  }
-};
-
-router.get("/api/auth", authenticateToken, async (req, res) => {
-  res.send({ message: "Authenticated Succesfully" });
-});
-
 router.post("/api/login", async (req, res) => {
   const userLoggingIn = req.body;
   const emailOrUsername = req.body.email;
@@ -161,6 +173,7 @@ router.post("/api/login", async (req, res) => {
     return res.status(404).send({ error: "Account does not exist" });
   }
   if (foundUser) {
+    req.session.user = foundUser.username;
     const basketProducts = await Products.find({
       _id: { $in: foundUser.cart },
     });
@@ -174,6 +187,11 @@ router.post("/api/login", async (req, res) => {
             expiresIn: "1d",
           }
         );
+        res.cookie("access_token", `${accessToken}`);
+        // res.setHeader(
+        //   "Set-Cookie",
+        //   `access_token=${accessToken}; Domain=http://localhost:3000; Path=/;`
+        // );
 
         req.session.user = user;
         res.status(200).json({
@@ -185,11 +203,10 @@ router.post("/api/login", async (req, res) => {
           basketProducts: basketProducts,
         });
       } else {
-        res.status(401).send({ error: "Incorrect Username/Email or Password" });
+        res.status(409).send({ error: "Incorrect Username/Email or Password" });
       }
     });
   }
-  res.status(202);
 });
 
 router.post("/api/signup", async (req, res) => {
@@ -221,22 +238,56 @@ router.post("/api/signup", async (req, res) => {
 
 router.get("/api/logout", async (req, res) => {
   req.session.destroy();
-  res.clearCookie("connect.sid"); // clean up!
+  res.clearCookie("access_token"); // clean up!
+  res.clearCookie("connect.sid");
+
   return res.status(200).json({ msg: "logging you out" });
 });
-router.post("/user/profile", async (req, res) => {
+router.post("/user/profile", verifyJWT, async (req, res) => {
   const foundUser = await Users.findOne({
     username: req.body.user,
   });
   res.status(200).send(foundUser);
 });
-router.post("/user/update-profile", async (req, res) => {
-  const body = req.body;
-  const foundUser = await Users.findOne({
-    username: body.username,
-  });
-
-  if (foundUser.username === body.username && foundUser.email === body.email) {
+router.post("/user/update-profile", verifyJWT, async (req, res) => {
+  const user = req.body;
+  const update = {};
+  if (user.profileImage) {
+    update.profileImage = user.profileImage;
+  }
+  if (user.password) {
+    update.password = await bcrypt.hash(user.password, 10);
+  }
+  if (user.email) {
+    update.email = user.email;
+  }
+  if (user.username) {
+    update.username = user.username;
+  }
+  // Find the user in the database
+  const existingUser = await Users.findById(user._id);
+  // Check if the email or username is already in use
+  if (
+    (update.email &&
+      update.email !== existingUser.email &&
+      (await Users.exists({ email: update.email }))) ||
+    (update.username &&
+      update.username !== existingUser.username &&
+      (await Users.exists({ username: update.username })))
+  ) {
+    res.status(400).send({ message: "Email or username is already in use" });
+  } else {
+    // Update the user's profile
+    Users.findByIdAndUpdate(user._id, update, (err) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send({
+          message: "Profile updated successfully",
+          username: user.username,
+        });
+      }
+    });
   }
 });
 

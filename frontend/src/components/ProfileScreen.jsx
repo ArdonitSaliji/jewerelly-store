@@ -33,9 +33,10 @@ const ProfileScreen = () => {
       return true;
     }
   };
+
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:5000/user/profile", {
+      const res = await fetch("/user/profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,6 +50,7 @@ const ProfileScreen = () => {
         ...formState,
         username: json.username,
         email: json.email,
+        _id: json._id,
       });
 
       setFirstFormState({
@@ -56,37 +58,40 @@ const ProfileScreen = () => {
         username: json.username,
         email: json.email,
       });
-
-      // console.log(firstFormState.username === json.username);
-      // console.log(json);
-      // console.log(firstFormState);
     })();
   }, []);
-
   const updateProfile = async () => {
     if (isFormChanged()) {
       if (formState.password1 !== formState.password2) {
         toast.error("Passwords are not matching!");
       } else {
-        const res = await fetch("http://localhost:5000/user/update-profile", {
+        let username = formState.username;
+        let email = formState.email;
+        let password = formState.password1;
+        let profileImage = formState.image;
+        let _id = formState._id;
+        const user = { username, email, password, profileImage, _id };
+
+        const res = await fetch("/user/update-profile", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            username: formState.username,
-            email: formState.email,
-            password: formState.password1,
-            profileImage: formState.image,
-          }),
+          body: JSON.stringify(user),
         });
+        const json = await res.json();
+        console.log(json);
+        if (res.status === 200) {
+          sessionStorage.setItem("user", JSON.stringify(json.username));
+          toast.success(json.message);
+        } else if (res.status === 400) {
+          toast.error(json.message);
+        }
       }
     } else {
       toast.info("You have not changed any field");
     }
   };
-
-  // console.log(formState);
 
   return (
     <Row className="profileContainer">
@@ -106,6 +111,7 @@ const ProfileScreen = () => {
               }}
             />
           </Form.Group>
+
           <Form.Group controlId="email">
             <Form.Label>Email Address</Form.Label>
             <Form.Control

@@ -18,7 +18,7 @@ document.addEventListener("click", (e) => {
 });
 
 const logUserOut = async () => {
-  const res = await fetch("http://localhost:5000/api/logout");
+  const res = await fetch("/api/logout");
   sessionStorage.clear();
   window.location.reload();
 };
