@@ -6,6 +6,15 @@ const Users = require("./Schema/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Products = require("./Schema/Products");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const dotenv = require("dotenv");
+dotenv.config({ path: "../.env" });
+
+const store = new MongoDBStore({
+  uri: process.env.DATABASE_ACCESS,
+  collection: "sessions",
+});
+
 let stripeGateway = stripe(
   "sk_test_51MCkXgDplZI5a2XjhslbZ4ge0UxGgEIAOvgGnpRRwta6scGnPvWFBlvaYhYqAXvnHK58tHwnUw133AZOpIma1H4q005lxIADbl"
 );
@@ -19,7 +28,7 @@ function verifyJWT(req, res, next) {
   // if the token is present, verify it
   if (token) {
     // if the token is valid, set the user on the request object
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
       if (err) {
         return res.status(401).redirect("http://localhost:3000/");
       }
@@ -34,13 +43,11 @@ function verifyJWT(req, res, next) {
 router.use(
   session({
     secret: "secret",
-    resave: false,
-
+    store: store,
+    resave: true,
     saveUninitialized: true,
   })
 );
-
-// router.use(verifyJWT);
 
 router.post("/user/checkout", verifyJWT, async (req, res) => {
   const session = await stripeGateway.checkout.sessions.create({
@@ -156,16 +163,21 @@ router.post("/api/products/find/shape", async (req, res) => {
 });
 
 router.post("/api/login", async (req, res) => {
+  req.session.user = req.body.email;
+
   const userLoggingIn = req.body;
   const emailOrUsername = req.body.email;
 
   const email = await Users.findOne({
     email: emailOrUsername,
   });
+
   const userExists = await Users.findOne({
     username: emailOrUsername,
   });
+
   let foundUser;
+
   if (email) foundUser = email;
   else foundUser = userExists;
 
@@ -173,27 +185,17 @@ router.post("/api/login", async (req, res) => {
     return res.status(404).send({ error: "Account does not exist" });
   }
   if (foundUser) {
-    req.session.user = foundUser.username;
     const basketProducts = await Products.find({
       _id: { $in: foundUser.cart },
     });
     bcrypt.compare(userLoggingIn.password, foundUser.password, (err, user) => {
       if (user) {
         const signUser = { username: emailOrUsername };
-        const accessToken = jwt.sign(
-          signUser,
-          process.env.ACCESS_TOKEN_SECRET,
-          {
-            expiresIn: "1d",
-          }
-        );
+        const accessToken = jwt.sign(signUser, process.env.ACCESS_TOKEN, {
+          expiresIn: "1d",
+        });
         res.cookie("access_token", `${accessToken}`);
-        // res.setHeader(
-        //   "Set-Cookie",
-        //   `access_token=${accessToken}; Domain=http://localhost:3000; Path=/;`
-        // );
 
-        req.session.user = user;
         res.status(200).json({
           auth: true,
           accessToken: accessToken,
@@ -236,13 +238,6 @@ router.post("/api/signup", async (req, res) => {
   res.status(403).json({ error: "Passwords must be matching!" });
 });
 
-router.get("/api/logout", async (req, res) => {
-  req.session.destroy();
-  res.clearCookie("access_token"); // clean up!
-  res.clearCookie("connect.sid");
-
-  return res.status(200).json({ msg: "logging you out" });
-});
 router.post("/user/profile", verifyJWT, async (req, res) => {
   const foundUser = await Users.findOne({
     username: req.body.user,
@@ -289,6 +284,19 @@ router.post("/user/update-profile", verifyJWT, async (req, res) => {
       }
     });
   }
+});
+
+router.get("/api/logout", async (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.clearCookie("access_token"); // clean up!
+      return res
+        .status(200)
+        .send({ msg: "logging you out", redirect_path: "/" });
+    }
+  });
 });
 
 module.exports = router;

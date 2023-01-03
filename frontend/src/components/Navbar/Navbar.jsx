@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useMediaQuery } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Login from "./Login";
@@ -12,6 +12,7 @@ import {
 } from "react-icons/ai";
 import { GoBrowser } from "react-icons/go";
 import { MdOutlineDescription } from "react-icons/md";
+import { toast } from "react-toastify";
 const Navbar = ({ setBasketProducts }) => {
   const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);

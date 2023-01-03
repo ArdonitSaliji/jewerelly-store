@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { IoMdCall, IoMdHome, IoMdPerson, IoMdSettings } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -19,8 +17,10 @@ document.addEventListener("click", (e) => {
 
 const logUserOut = async () => {
   const res = await fetch("/api/logout");
+  const json = await res.json();
+  console.log(json);
+  window.location.href = json.redirect_path;
   sessionStorage.clear();
-  window.location.reload();
 };
 const Sidebar = () => {
   return (

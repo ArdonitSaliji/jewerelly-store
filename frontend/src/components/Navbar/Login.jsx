@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateBasket } from "../../feature/basketSlice";
 import { toast } from "react-toastify";
 import { useMediaQuery } from "@chakra-ui/react";
+import { useLayoutEffect } from "react";
 const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: "", password: "" });
   const [message, setMessage] = useState();
   const dispatch = useDispatch();
   const media = useMediaQuery("(max-width: 771px)")[0];
 
-  const loginUser = async (e) => {
+  const loginUser = async () => {
     const res = await fetch("/api/login", {
       method: "POST",
       headers: {
@@ -24,14 +25,15 @@ const Login = ({ login, setIsLoggedIn }) => {
 
     const json = await res.json();
     if (res.status === 200) {
-      toast.success("Login successful!", {
-        position: "top-center",
-      });
+      dispatch(updateBasket(json.basketProducts));
       sessionStorage.setItem("isLoggedIn", JSON.stringify(json.isLoggedIn));
       sessionStorage.setItem("user", JSON.stringify(json.username));
-      dispatch(updateBasket(json.basketProducts));
       setIsLoggedIn(json.isLoggedIn);
       setMessage(json.success);
+
+      console.log("Reloading page");
+      window.location.reload();
+
       document.querySelector(".login-message").classList.add("show", "success");
     } else {
       document.querySelector(".login-message").classList.add("show", "error");

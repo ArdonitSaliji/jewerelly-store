@@ -8,24 +8,29 @@ const routesUrls = require("./routes");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
+dotenv.config({ path: "../.env" });
+
 app.use(cors());
 app.use(express.json());
-dotenv.config();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 mongoose.set("strictQuery", false);
-mongoose.connect(
-  process.env.DATABASE_ACCESS,
-  { useNewUrlParser: true, useUnifiedTopology: true, dbName: "jewerelly" },
-  () => console.log("Database Connected")
-);
+try {
+  mongoose.connect(
+    process.env.DATABASE_ACCESS,
+    { useNewUrlParser: true, useUnifiedTopology: true, dbName: "jewerelly" },
+    () => console.log("Database Connected")
+  );
+} catch (error) {
+  console.log(error);
+}
 
 app.use("/", routesUrls);
 
-app.use((req, res, next) => {
-  if (req.session.user) next();
-  else res.status(401);
-});
+// app.use((req, res, next) => {
+//   if (req.session.user) next();
+//   else res.status(401);
+// });
 
 app.listen(port, () => console.log(`Server started at port ${port}`));
