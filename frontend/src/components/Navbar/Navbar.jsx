@@ -22,7 +22,15 @@ const Navbar = ({ setBasketProducts }) => {
   const [showNav, setShowNav] = useState(false);
   const basketLength = useSelector((state) => state.basket.length);
   const media = useMediaQuery("(max-width: 771px)")[0];
+  window.onload = () => {
+    sessionStorage.getItem("loginRes") &&
+      toast.success("Login Successfull!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000,
+      });
 
+    sessionStorage.removeItem("loginRes");
+  };
   return (
     <div className="navbar-container">
       <div

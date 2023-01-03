@@ -18,7 +18,6 @@ document.addEventListener("click", (e) => {
 const logUserOut = async () => {
   const res = await fetch("/api/logout");
   const json = await res.json();
-  console.log(json);
   window.location.href = json.redirect_path;
   sessionStorage.clear();
 };

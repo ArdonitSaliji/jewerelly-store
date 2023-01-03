@@ -4,14 +4,42 @@ import { useDispatch } from "react-redux";
 import { updateBasket } from "../../feature/basketSlice";
 import { toast } from "react-toastify";
 import { useMediaQuery } from "@chakra-ui/react";
-import { useLayoutEffect } from "react";
+
 const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: "", password: "" });
   const [message, setMessage] = useState();
   const dispatch = useDispatch();
   const media = useMediaQuery("(max-width: 771px)")[0];
+  const [res, setRes] = useState(null);
+  const [json, setJson] = useState(null);
 
-  const loginUser = async () => {
+  useEffect(() => {
+    if (res && res.status === 200) {
+      sessionStorage.setItem("loginRes", JSON.stringify(res.status));
+      dispatch(updateBasket(json.basketProducts));
+      sessionStorage.setItem("isLoggedIn", JSON.stringify(json.isLoggedIn));
+      sessionStorage.setItem("user", JSON.stringify(json.username));
+      setIsLoggedIn(json.isLoggedIn);
+      setMessage(json.success);
+      toast.success("Login Successfull!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000,
+      });
+      window.location.reload();
+
+      // Reload the page
+    } else if (res && res.status !== 200) {
+      document.querySelector(".login-message").classList.add("show", "error");
+      setMessage(res.json.error);
+      setTimeout(() => {
+        setMessage("");
+      }, 6000);
+    }
+  }, [res]);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Login code here
     const res = await fetch("/api/login", {
       method: "POST",
       headers: {
@@ -22,27 +50,12 @@ const Login = ({ login, setIsLoggedIn }) => {
         password: loginInUser.password,
       }),
     });
+    let json = await res.json();
 
-    const json = await res.json();
-    if (res.status === 200) {
-      dispatch(updateBasket(json.basketProducts));
-      sessionStorage.setItem("isLoggedIn", JSON.stringify(json.isLoggedIn));
-      sessionStorage.setItem("user", JSON.stringify(json.username));
-      setIsLoggedIn(json.isLoggedIn);
-      setMessage(json.success);
-
-      console.log("Reloading page");
-      window.location.reload();
-
-      document.querySelector(".login-message").classList.add("show", "success");
-    } else {
-      document.querySelector(".login-message").classList.add("show", "error");
-      setMessage(json.error);
-      setTimeout(() => {
-        setMessage("");
-      }, 6000);
-    }
+    setJson(json);
+    setRes(res);
   };
+
   const handleChange = (e) => {
     e.target.type === "text"
       ? setLoginInUser({ ...loginInUser, email: e.target.value })
@@ -123,7 +136,7 @@ const Login = ({ login, setIsLoggedIn }) => {
                   setMessage("");
                 }, 5000);
               } else {
-                loginUser(e);
+                handleLogin(e);
               }
             }}
           >
