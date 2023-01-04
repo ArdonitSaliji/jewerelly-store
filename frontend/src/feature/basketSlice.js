@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   basketProducts: [],
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const basketSlice = createSlice({
-  name: 'basket',
+  name: "basket",
   initialState,
   reducers: {
     updateBasket: (state, action) => {
@@ -30,6 +30,9 @@ export const basketSlice = createSlice({
     subtractPrice: (state, action) => {
       state.sum -= action.payload;
     },
+    setLoginMessage: (state, action) => {
+      state.message = action.payload;
+    },
   },
 });
 export const {
@@ -40,6 +43,7 @@ export const {
   updateProductsQuantity,
   sumProductPrices,
   subtractPrice,
+  setLoginMessage,
 } = basketSlice.actions;
 
 export const selectAllProducts = (state) => state.basket.basketProducts;

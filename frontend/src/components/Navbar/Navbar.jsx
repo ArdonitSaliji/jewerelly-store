@@ -5,11 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
-import {
-  AiOutlineBars,
-  // AiOutlineHome,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
+import { AiOutlineBars, AiOutlineShoppingCart } from "react-icons/ai";
 import { GoBrowser } from "react-icons/go";
 import { MdOutlineDescription } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -23,13 +19,13 @@ const Navbar = ({ setBasketProducts }) => {
   const basketLength = useSelector((state) => state.basket.length);
   const media = useMediaQuery("(max-width: 771px)")[0];
   window.onload = () => {
-    sessionStorage.getItem("loginRes") &&
+    JSON.parse(sessionStorage.getItem("loginNtf")) &&
       toast.success("Login Successfull!", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 5000,
       });
 
-    sessionStorage.removeItem("loginRes");
+    sessionStorage.removeItem("loginNtf");
   };
   return (
     <div className="navbar-container">
@@ -76,11 +72,7 @@ const Navbar = ({ setBasketProducts }) => {
             </li>
           </ul>
 
-          {media && (
-            // <div className='navbar-title'>
-            <img src={"/images/gem-logo.webp"} alt="" />
-            // </div>
-          )}
+          {media && <img src={"/images/gem-logo.webp"} alt="" />}
         </div>
 
         <div className="navbar-content">

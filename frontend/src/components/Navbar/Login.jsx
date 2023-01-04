@@ -1,59 +1,37 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateBasket } from "../../feature/basketSlice";
 import { toast } from "react-toastify";
 import { useMediaQuery } from "@chakra-ui/react";
-
+import { useAuth } from "../../auth/useAuth";
+import { setLoginMessage } from "../../feature/basketSlice";
 const Login = ({ login, setIsLoggedIn }) => {
   const [loginInUser, setLoginInUser] = useState({ email: "", password: "" });
-  const [message, setMessage] = useState();
+
+  const message = useSelector((state) => state.basket.message);
+
   const dispatch = useDispatch();
   const media = useMediaQuery("(max-width: 771px)")[0];
-  const [res, setRes] = useState(null);
-  const [json, setJson] = useState(null);
+  const { setLogin } = useAuth();
 
   useEffect(() => {
-    if (res && res.status === 200) {
-      sessionStorage.setItem("loginRes", JSON.stringify(res.status));
-      dispatch(updateBasket(json.basketProducts));
-      sessionStorage.setItem("isLoggedIn", JSON.stringify(json.isLoggedIn));
-      sessionStorage.setItem("user", JSON.stringify(json.username));
-      setIsLoggedIn(json.isLoggedIn);
-      setMessage(json.success);
-      toast.success("Login Successfull!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 5000,
-      });
-      window.location.reload();
-
-      // Reload the page
-    } else if (res && res.status !== 200) {
-      document.querySelector(".login-message").classList.add("show", "error");
-      setMessage(res.json.error);
-      setTimeout(() => {
-        setMessage("");
-      }, 6000);
+    const userIsAuth = JSON.parse(sessionStorage.getItem("loginNtf"));
+    if (userIsAuth) {
+      setIsLoggedIn(userIsAuth);
     }
-  }, [res]);
+  }, []);
+
   const handleLogin = async (e) => {
-    e.preventDefault();
-
-    // Login code here
-    const res = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: loginInUser.email,
-        password: loginInUser.password,
-      }),
+    setLogin({
+      email: loginInUser.email,
+      password: loginInUser.password,
     });
-    let json = await res.json();
 
-    setJson(json);
-    setRes(res);
+    document.querySelector(".login-message").classList.add("show", "error");
+    setTimeout(() => {
+      dispatch(setLoginMessage(""));
+    }, 6000);
   };
 
   const handleChange = (e) => {
@@ -128,12 +106,12 @@ const Login = ({ login, setIsLoggedIn }) => {
                 loginInUser.email.length < 1 &&
                 loginInUser.password.length < 1
               ) {
-                setMessage("← Fields are empty!");
+                dispatch(setLoginMessage("← Fields are empty!"));
                 document
                   .querySelector(".login-message")
                   .classList.add("show", "error");
                 setTimeout(() => {
-                  setMessage("");
+                  dispatch(setLoginMessage(""));
                 }, 5000);
               } else {
                 handleLogin(e);

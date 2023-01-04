@@ -164,7 +164,6 @@ router.post("/api/products/find/shape", async (req, res) => {
 
 router.post("/api/login", async (req, res) => {
   req.session.user = req.body.email;
-
   const userLoggingIn = req.body;
   const emailOrUsername = req.body.email;
 
@@ -182,7 +181,7 @@ router.post("/api/login", async (req, res) => {
   else foundUser = userExists;
 
   if (!foundUser) {
-    return res.status(404).send({ error: "Account does not exist" });
+    return res.status(404).send({ message: "Account does not exist" });
   }
   if (foundUser) {
     const basketProducts = await Products.find({
@@ -199,13 +198,14 @@ router.post("/api/login", async (req, res) => {
         res.status(200).json({
           auth: true,
           accessToken: accessToken,
-          username: emailOrUsername,
+          user: emailOrUsername,
           success: "Login successful",
-          isLoggedIn: true,
           basketProducts: basketProducts,
         });
       } else {
-        res.status(409).send({ error: "Incorrect Username/Email or Password" });
+        res
+          .status(409)
+          .send({ message: "Incorrect Username/Email or Password" });
       }
     });
   }
