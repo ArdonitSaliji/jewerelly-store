@@ -14,6 +14,8 @@ select,
   align-items: center;
   user-select: none;
   height: 100%;
+  min-height: 100vh;
+  margin-bottom: 2rem;
 }
 .main-title h1 {
   font-size: 27px;
@@ -76,12 +78,13 @@ select,
     overflow: hidden;
     margin-bottom: 2em;
     cursor: pointer;
+
     &::before {
-      content: ' ';
+      content: " ";
       width: 100%;
       height: 150%;
       display: block;
-      background-color: theme-color('secondary');
+      background-color: theme-color("secondary");
       position: absolute;
       z-index: 2;
       opacity: 0;
@@ -101,10 +104,18 @@ select,
       position: relative;
       z-index: 3;
       margin: 0 1em;
-      color: theme-color('light');
+      color: theme-color("light");
       text-shadow: -2px 2px 0 rgb(66, 45, 45);
     }
+    &:hover {
+      #refl {
+        opacity: 0;
+      }
+    }
     #refl {
+      transition: 1s;
+      margin: 0;
+      position: absolute;
       -moz-transform: scaleY(-2);
       -o-transform: scaleY(-2);
       -webkit-transform: scaleY(-2);
@@ -130,7 +141,7 @@ select,
       max-height: 0;
       overflow: hidden;
       margin: 1em 2em;
-      color: theme-color('light');
+      color: theme-color("light");
       font-size: 1rem;
     }
     &:hover {
