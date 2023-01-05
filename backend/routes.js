@@ -7,7 +7,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Products = require("./Schema/Products");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const Token = require("./Schema/Token");
 const dotenv = require("dotenv");
+const sendEmail = require("./sendEmail");
+const crypto = require("crypto");
+
 dotenv.config({ path: "../.env" });
 
 const store = new MongoDBStore({
@@ -183,6 +187,22 @@ router.post("/api/login", async (req, res) => {
   if (!foundUser) {
     return res.status(404).send({ message: "Account does not exist" });
   }
+  if (!foundUser.verified) {
+    let token = await Token.findOne({ userId: foundUser._id });
+    if (!token) {
+      token = await new Token({
+        userId: dbUser._id,
+        token: crypto.randomBytes(32).toString("hex"),
+      }).save();
+      const url = `${process.env.BASE_URL}users/${foundUser._id}/verify/${token.token}`;
+      await sendEmail(
+        foundUser.email,
+        "ardonit.1980@gmail.com",
+        "Gem Store - Verify Account",
+        url
+      );
+    }
+  }
   if (foundUser) {
     const basketProducts = await Products.find({
       _id: { $in: foundUser.cart },
@@ -226,13 +246,27 @@ router.post("/api/signup", async (req, res) => {
   } else {
     if (user.password1 === user.password2) {
       user.password1 = await bcrypt.hash(req.body.password1, 10);
-      const dbUser = new Users({
+      let dbUser = await new Users({
         username: user.username,
         email: user.email,
         password: user.password1,
+      }).save();
+
+      const token = await new Token({
+        userId: dbUser._id,
+        token: crypto.randomBytes(32).toString("hex"),
+      }).save();
+      const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
+      console.log(dbUser.email);
+      await sendEmail(
+        dbUser.email,
+        "ardonit.1980@gmail.com",
+        "Gem Store - Verify Account",
+        url
+      );
+      return res.status(201).json({
+        success: "An Email has been sent to your account, please verify",
       });
-      await dbUser.save();
-      return res.status(201).json({ success: "Account created successfully!" });
     }
   }
   res.status(403).json({ error: "Passwords must be matching!" });
@@ -291,6 +325,25 @@ router.post("/user/update-profile", verifyJWT, async (req, res) => {
         });
       }
     });
+  }
+});
+
+router.get("/api/:id/verify/:token", async (req, res) => {
+  try {
+    const user = await Users.findOne({ _id: req.params.id });
+    if (!user) return res.status(400).send({ message: "Invalid Link" });
+
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
+    });
+    if (!token) return res.status(400).send({ message: "Invalid Link" });
+
+    await Users.updateOne({ _id: user._id, verified: true });
+    await token.remove();
+    res.status(200).send({ message: "Email Verified Successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
 

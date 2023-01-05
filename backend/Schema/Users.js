@@ -14,11 +14,12 @@ const Users = new Schema({
     required: true,
   },
   profileImage: { type: String },
+  cart: [],
+  verified: { type: Boolean, default: false },
   date: {
     type: Date,
     default: Date.now,
   },
-  cart: [],
 });
 
 module.exports = mongoose.model("User", Users);

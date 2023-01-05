@@ -17,6 +17,7 @@ import Sidebar from "./components/Sidebar.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProfileScreen from "./components/ProfileScreen.jsx";
+import EmailVerify from "./components/EmailVerify.jsx";
 function App() {
   const [gemState, setGemState] = useState("");
   const [basketProducts, setBasketProducts] = useState([]);
@@ -43,6 +44,7 @@ function App() {
           {JSON.parse(sessionStorage.getItem("user")) && (
             <Route path="/:user/profile" element={<ProfileScreen />} />
           )}
+          <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
         </Routes>
         <Sidebar />
         <Footer />

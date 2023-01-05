@@ -49,10 +49,10 @@ const Main = ({ setGemState }) => {
               <h3>
                 {product.name.charAt(0).toUpperCase() +
                   product.name.slice(1, -1)}{" "}
-                <h3 id="refl">
+                <span id="refl">
                   {product.name.charAt(0).toUpperCase() +
                     product.name.slice(1, -1)}
-                </h3>
+                </span>
                 <span></span>
               </h3>
 
