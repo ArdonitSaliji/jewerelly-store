@@ -26,10 +26,15 @@ const Sidebar = () => {
     <div className="sidebar">
       <nav>
         <ul className="ul-item">
-          <li>
-            <Link to={`/${JSON.parse(sessionStorage.getItem("user"))}/profile`}>
-              Account
-            </Link>
+          <li
+            onClick={() => {
+              window.open(
+                `/${JSON.parse(sessionStorage.getItem("user"))}/profile`,
+                "_self"
+              );
+            }}
+          >
+            <Link>Account</Link>
             <IoMdPerson className="icon" />
           </li>
 
@@ -53,7 +58,7 @@ const Sidebar = () => {
               logUserOut();
             }}
           >
-            <Link to="/">Logout</Link>
+            <Link>Logout</Link>
             <BiLogOut className="icon" />
           </li>
         </ul>

@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 // import "./ProfileScreen.css";
 const ProfileScreen = () => {
@@ -33,18 +34,26 @@ const ProfileScreen = () => {
       return true;
     }
   };
-
+  let { user } = useParams();
   useEffect(() => {
     (async () => {
-      const res = await fetch("/user/profile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: JSON.parse(sessionStorage.getItem("user")),
-        }),
-      });
+      const res = await fetch(
+        `/${user}/profile`,
+
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            user: user,
+          }),
+        }
+      );
+      if (res.status === 403) {
+        window.location.assign("http://localhost:3000/");
+      }
       const json = await res.json();
       setFormState({
         ...formState,
@@ -60,6 +69,7 @@ const ProfileScreen = () => {
       });
     })();
   }, []);
+
   const updateProfile = async () => {
     if (isFormChanged()) {
       if (formState.password1 !== formState.password2) {

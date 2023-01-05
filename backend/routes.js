@@ -238,7 +238,15 @@ router.post("/api/signup", async (req, res) => {
   res.status(403).json({ error: "Passwords must be matching!" });
 });
 
-router.post("/user/profile", verifyJWT, async (req, res) => {
+function checkSessionUser(req, res, next) {
+  if (req.session.user === req.params.user) {
+    next();
+  } else {
+    res.status(403).send("You do not have permission to access this route");
+  }
+}
+
+router.post("/:user/profile", verifyJWT, checkSessionUser, async (req, res) => {
   const foundUser = await Users.findOne({
     username: req.body.user,
   });

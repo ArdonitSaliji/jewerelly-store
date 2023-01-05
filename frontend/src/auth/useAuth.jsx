@@ -25,7 +25,6 @@ export function useAuth() {
     });
 
     const json = await res.json();
-    console.log(json);
     if (res.status === 200) {
       sessionStorage.setItem("loginNtf", JSON.stringify(res.ok));
       sessionStorage.setItem("isLoggedIn", JSON.stringify(json.auth));
@@ -43,22 +42,5 @@ export function useAuth() {
     throw new Error("Login failed");
   }
 
-  function logout() {
-    // Perform logout request to server
-    fetch("/api/logout", {
-      method: "POST",
-    })
-      .then((response) => {
-        if (response.ok) {
-          // If logout is successful, clear the user from the auth state
-          setUser(null);
-          sessionStorage.removeItem("user");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  return { user, setLogin, logout };
+  return { user, setLogin };
 }

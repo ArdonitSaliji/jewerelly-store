@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+  useSearchParams,
+  useParams,
+} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Main from "./components/Main.jsx";
 import Forgot from "./components/ForgotPass.jsx";
@@ -34,11 +40,10 @@ function App() {
             element={<Basket basketProducts={basketProducts} />}
           />
           <Route path="/checkout" element={<Checkout />} />
-          {document.cookie && (
+          {JSON.parse(sessionStorage.getItem("user")) && (
             <Route path="/:user/profile" element={<ProfileScreen />} />
           )}
         </Routes>
-
         <Sidebar />
         <Footer />
         <ToastContainer />
