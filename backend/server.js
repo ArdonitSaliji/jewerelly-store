@@ -7,7 +7,7 @@ const cors = require("cors");
 const routesUrls = require("./routes");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-
+const multer = require("multer");
 dotenv.config({ path: "../.env" });
 
 app.use(cors());
@@ -27,10 +27,5 @@ try {
 }
 
 app.use("/", routesUrls);
-
-// app.use((req, res, next) => {
-//   if (req.session.user) next();
-//   else res.status(401);
-// });
 
 app.listen(port, () => console.log(`Server started at port ${port}`));

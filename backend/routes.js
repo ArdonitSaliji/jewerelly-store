@@ -3,14 +3,15 @@ const express = require("express");
 const session = require("express-session");
 const router = express.Router();
 const Users = require("./Schema/Users");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const Products = require("./Schema/Products");
-const MongoDBStore = require("connect-mongodb-session")(session);
 const Token = require("./Schema/Token");
-const dotenv = require("dotenv");
-const sendEmail = require("./sendEmail");
+const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const MongoDBStore = require("connect-mongodb-session")(session);
+const sendEmail = require("./sendEmail");
+const dotenv = require("dotenv");
+const multer = require("multer");
 
 dotenv.config({ path: "../.env" });
 
@@ -52,6 +53,25 @@ router.use(
     saveUninitialized: true,
   })
 );
+
+const Storage = multer.diskStorage({
+  destination: "uploads",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({
+  storage: Storage,
+}).single("testImage");
+
+router.post("/upload", async (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+    }
+  });
+});
 
 router.post("/user/checkout", verifyJWT, async (req, res) => {
   const session = await stripeGateway.checkout.sessions.create({
@@ -191,16 +211,16 @@ router.post("/api/login", async (req, res) => {
     let token = await Token.findOne({ userId: foundUser._id });
     if (!token) {
       token = await new Token({
-        userId: dbUser._id,
+        userId: foundUser._id,
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
       const url = `${process.env.BASE_URL}users/${foundUser._id}/verify/${token.token}`;
-      await sendEmail(
-        foundUser.email,
-        "ardonit.1980@gmail.com",
-        "Gem Store - Verify Account",
-        url
-      );
+      // await sendEmail(
+      //   foundUser.email,
+      //   "ardonit.1980@gmail.com",
+      //   "Gem Store - Verify Account",
+      //   url
+      // );
     }
   }
   if (foundUser) {
@@ -287,6 +307,9 @@ router.post("/:user/profile", verifyJWT, checkSessionUser, async (req, res) => {
   res.status(200).send(foundUser);
 });
 router.post("/user/update-profile", verifyJWT, async (req, res) => {
+  console.log(req.file);
+  console.log(req.files);
+
   const user = req.body;
   const update = {};
   if (user.profileImage) {

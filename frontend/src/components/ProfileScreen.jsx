@@ -37,20 +37,17 @@ const ProfileScreen = () => {
   let { user } = useParams();
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        `/${user}/profile`,
+      const res = await fetch(`/${user}/profile`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            user: user,
-          }),
-        }
-      );
+        body: JSON.stringify({
+          user: user,
+          image: formState.image,
+        }),
+      });
       if (res.status === 403) {
         window.location.assign("http://localhost:3000/");
       }
@@ -171,8 +168,9 @@ const ProfileScreen = () => {
               onChange={(e) => {
                 setFormState({
                   ...formState,
-                  image: e.target.files[0],
+                  image: e.target.files[0].name,
                 });
+                console.log(formState);
               }}
             />
           </Form.Group>
