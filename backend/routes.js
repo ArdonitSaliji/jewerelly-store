@@ -60,6 +60,7 @@ const Storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
+
 const upload = multer({
   storage: Storage,
 }).single("testImage");
