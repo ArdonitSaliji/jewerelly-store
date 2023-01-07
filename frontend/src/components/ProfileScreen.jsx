@@ -8,8 +8,7 @@ import { useParams } from "react-router-dom";
 
 // import "./ProfileScreen.css";
 const ProfileScreen = () => {
-  const [pic, setPic] = useState(process.env.PUBLIC_URL + "/images/user.webp");
-
+  const [pic, setPic] = useState("");
   const [formState, setFormState] = useState({
     password1: "",
     password2: "",
@@ -52,17 +51,22 @@ const ProfileScreen = () => {
         window.location.assign("http://localhost:3000/");
       }
       const json = await res.json();
+      let resUser = json.user;
       setFormState({
         ...formState,
-        username: json.username,
-        email: json.email,
-        _id: json._id,
+        username: resUser.username,
+        email: resUser.email,
+        image: "",
+        _id: resUser._id,
       });
+
+      setPic(json.image);
+      sessionStorage.setItem("userImage", json.image);
 
       setFirstFormState({
         ...firstFormState,
-        username: json.username,
-        email: json.email,
+        username: resUser.username,
+        email: resUser.email,
       });
     })();
   }, []);
@@ -87,7 +91,17 @@ const ProfileScreen = () => {
           body: JSON.stringify(user),
         });
         const json = await res.json();
-        console.log(json);
+        let form = document.getElementById("form");
+        const formData = new FormData(form);
+
+        formData.append("user", JSON.parse(sessionStorage.getItem("user")));
+
+        const uploadImage = await fetch("/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const res2 = await uploadImage.json();
+
         if (res.status === 200) {
           sessionStorage.setItem("user", JSON.stringify(json.username));
           toast.success(json.message);
@@ -103,7 +117,7 @@ const ProfileScreen = () => {
   return (
     <Row className="profileContainer">
       <Col md={6}>
-        <Form>
+        <Form id="form">
           <Form.Group controlId="name">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -165,12 +179,13 @@ const ProfileScreen = () => {
             <Form.Control
               type="file"
               label="Upload Profile Picture"
+              name="file"
+              id="file"
               onChange={(e) => {
                 setFormState({
                   ...formState,
                   image: e.target.files[0].name,
                 });
-                console.log(formState);
               }}
             />
           </Form.Group>
@@ -186,7 +201,9 @@ const ProfileScreen = () => {
         </Form>
       </Col>
       <Col>
-        <img src={pic} className="profilePic" />
+        <div className="profile-img">
+          <img src={`data:image/jpeg;base64,${pic}`} className="profilePic" />
+        </div>
       </Col>
     </Row>
   );

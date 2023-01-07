@@ -12,7 +12,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const sendEmail = require("./sendEmail");
 const dotenv = require("dotenv");
 const multer = require("multer");
-
+const fs = require("fs");
 dotenv.config({ path: "../.env" });
 
 const store = new MongoDBStore({
@@ -63,14 +63,22 @@ const Storage = multer.diskStorage({
 
 const upload = multer({
   storage: Storage,
-}).single("testImage");
+}).single("file");
 
 router.post("/upload", async (req, res) => {
   upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-    }
+    if (err) return res.status(404).send({ message: "File Upload Failed" });
+    const imageBuffer = fs.readFileSync(`./uploads/${req.file.originalname}`);
+    Users.findOneAndUpdate(
+      { username: req.body.user },
+      { profileImage: imageBuffer, profileImageName: req.file.originalname },
+      (error, user) => {
+        if (error) {
+        } else {
+          return res.status(200).send({ filename: req.file.originalname });
+        }
+      }
+    );
   });
 });
 
@@ -235,11 +243,16 @@ router.post("/api/login", async (req, res) => {
           expiresIn: "1d",
         });
         res.cookie("access_token", `${accessToken}`);
+        const profileImage = Buffer.from(
+          foundUser.profileImage,
+          "binary"
+        ).toString("base64");
 
         res.status(200).json({
           auth: true,
           accessToken: accessToken,
           user: emailOrUsername,
+          profileImage: profileImage,
           success: "Login successful",
           basketProducts: basketProducts,
         });
@@ -305,12 +318,13 @@ router.post("/:user/profile", verifyJWT, checkSessionUser, async (req, res) => {
   const foundUser = await Users.findOne({
     username: req.body.user,
   });
-  res.status(200).send(foundUser);
+  const image = Buffer.from(foundUser.profileImage, "binary").toString(
+    "base64"
+  );
+
+  res.status(200).send({ user: foundUser, image: image });
 });
 router.post("/user/update-profile", verifyJWT, async (req, res) => {
-  console.log(req.file);
-  console.log(req.files);
-
   const user = req.body;
   const update = {};
   if (user.profileImage) {

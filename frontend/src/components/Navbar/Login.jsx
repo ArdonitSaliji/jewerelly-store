@@ -22,7 +22,7 @@ const Login = ({ login, setIsLoggedIn }) => {
     }
   }, []);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async () => {
     setLogin({
       email: loginInUser.email,
       password: loginInUser.password,
