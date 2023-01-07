@@ -243,19 +243,29 @@ router.post("/api/login", async (req, res) => {
           expiresIn: "1d",
         });
         res.cookie("access_token", `${accessToken}`);
-        const profileImage = Buffer.from(
-          foundUser.profileImage,
-          "binary"
-        ).toString("base64");
-
-        res.status(200).json({
-          auth: true,
-          accessToken: accessToken,
-          user: emailOrUsername,
-          profileImage: profileImage,
-          success: "Login successful",
-          basketProducts: basketProducts,
-        });
+        if (foundUser.profileImage && foundUser.profileImage !== "undefined") {
+          const profileImage = Buffer.from(
+            foundUser.profileImage,
+            "binary"
+          ).toString("base64");
+          return res.status(200).json({
+            auth: true,
+            accessToken: accessToken,
+            user: emailOrUsername,
+            profileImage: profileImage,
+            success: "Login successful",
+            basketProducts: basketProducts,
+          });
+        } else {
+          return res.status(200).json({
+            auth: true,
+            accessToken: accessToken,
+            user: emailOrUsername,
+            profileImage: "",
+            success: "Login successful",
+            basketProducts: basketProducts,
+          });
+        }
       } else {
         res
           .status(409)
@@ -291,7 +301,6 @@ router.post("/api/signup", async (req, res) => {
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
       const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
-      console.log(dbUser.email);
       await sendEmail(
         dbUser.email,
         "ardonit.1980@gmail.com",
@@ -388,7 +397,7 @@ router.get("/api/:id/verify/:token", async (req, res) => {
 router.get("/api/logout", async (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      throw new Error(err);
     } else {
       res.clearCookie("access_token"); // clean up!
       return res

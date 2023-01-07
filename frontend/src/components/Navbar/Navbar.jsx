@@ -18,7 +18,9 @@ const Navbar = ({ setBasketProducts }) => {
   const [showNav, setShowNav] = useState(false);
   const basketLength = useSelector((state) => state.basket.length);
   const media = useMediaQuery("(max-width: 771px)")[0];
+  const profileImage = useSelector((state) => state.basket.profileImage);
   window.onload = () => {
+    // Login Notification - will be sent only on login
     JSON.parse(sessionStorage.getItem("loginNtf")) &&
       toast.success("Login Successfull!", {
         position: toast.POSITION.TOP_CENTER,
@@ -27,6 +29,7 @@ const Navbar = ({ setBasketProducts }) => {
 
     sessionStorage.removeItem("loginNtf");
   };
+
   return (
     <div className="navbar-container">
       <div
@@ -108,10 +111,7 @@ const Navbar = ({ setBasketProducts }) => {
                     document.querySelector(".sidebar").classList.toggle("show");
                   }}
                 >
-                  <img
-                    src={process.env.PUBLIC_URL + "/images/user.webp"}
-                    alt=""
-                  />
+                  <img src={profileImage} alt="" />
                 </div>
                 <div className="navbar-user-username">
                   @{JSON.parse(sessionStorage.getItem("user"))}

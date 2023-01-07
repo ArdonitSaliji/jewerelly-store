@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   basketProducts: [],
   length: 0,
+  profileImage: "/images/user.webp",
 };
 
 export const basketSlice = createSlice({
@@ -33,6 +34,9 @@ export const basketSlice = createSlice({
     setLoginMessage: (state, action) => {
       state.message = action.payload;
     },
+    setProfileImage: (state, action) => {
+      state.profileImage = action.payload;
+    },
   },
 });
 export const {
@@ -44,6 +48,7 @@ export const {
   sumProductPrices,
   subtractPrice,
   setLoginMessage,
+  setProfileImage,
 } = basketSlice.actions;
 
 export const selectAllProducts = (state) => state.basket.basketProducts;

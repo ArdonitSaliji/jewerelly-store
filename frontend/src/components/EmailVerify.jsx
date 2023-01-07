@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import success from "../images/success.png";
 
 const EmailVerify = () => {
   const [validUrl, setValidUrl] = useState(true);
@@ -26,7 +25,7 @@ const EmailVerify = () => {
     <>
       {validUrl ? (
         <div className="container">
-          <img src={success} alt="success_img" />
+          <img src={"/images/success.png"} alt="success_img" />
           <h1>Email verified successfully</h1>
           <Link to="/login">
             <button className="green_btn">Login</button>
