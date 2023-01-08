@@ -61,29 +61,6 @@ const upload = multer({
 }).single("file");
 
 router.post("/upload", async (req, res) => {
-  // upload(req, res, async (err) => {
-  //   if (err) return res.status(404).send({ message: "File Upload Failed" });
-  //   const imageBuffer = fs.readFileSync(`./uploads/${req.file.originalname}`);
-  //   Users.findOneAndUpdate(
-  //     { username: req.body.user },
-  //     { profileImage: imageBuffer, profileImageName: req.file.originalname },
-  //     async (error, foundUser) => {
-  //       if (error) {
-  //       } else {
-  //         if (foundUser.profileImage) {
-  //           const profileImage = await Buffer.from(
-  //             foundUser.profileImage,
-  //             "binary"
-  //           ).toString("base64");
-  //           return res
-  //             .status(200)
-  //             .send({ filename: req.file.originalname, profileImage });
-  //         }
-  //         return res.status(200).send({ filename: req.file.originalname });
-  //       }
-  //     }
-  //   );
-  // });
   upload(req, res, async (err) => {
     if (err) return res.status(404).send({ message: "File Upload Failed" });
     const imageBuffer = await fs.promises.readFile(

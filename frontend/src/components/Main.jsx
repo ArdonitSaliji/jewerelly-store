@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 // import { AiOutlineSearch } from 'react-icons/ai';
 const Main = ({ setGemState }) => {
-  const [searchState, setSearchState] = useState("");
+  // const [searchState, setSearchState] = useState("");
   const [allProducts, setAllProducts] = useState(null);
 
-  useEffect(() => {
-    const getAllProducts = (async () => {
+  useLayoutEffect(() => {
+    (async () => {
       const getProducts = await fetch("/api/products/find");
       let json = await getProducts.json();
       setAllProducts(json);
@@ -30,10 +30,7 @@ const Main = ({ setGemState }) => {
   };
   return (
     <div className="main ">
-      <div
-        className="main-title"
-        style={{ textAlign: "center", padding: "2rem 0 0rem" }}
-      >
+      <div className="main-title">
         <h1>Buying gems and crystals has never been easier.</h1>
       </div>
       <div className="gems-container">
@@ -46,15 +43,10 @@ const Main = ({ setGemState }) => {
               onClick={(e) => getGemName(e)}
             >
               <img src={process.env.PUBLIC_URL + product.image} alt="" />
-              <h3>
+              <h4>
                 {product.name.charAt(0).toUpperCase() +
-                  product.name.slice(1, -1)}{" "}
-                <span id="refl">
-                  {product.name.charAt(0).toUpperCase() +
-                    product.name.slice(1, -1)}
-                </span>
-                <span></span>
-              </h3>
+                  product.name.slice(1, -1)}
+              </h4>
 
               <p>{product.text}</p>
             </div>

@@ -18,40 +18,10 @@ select,
   margin-bottom: 2rem;
 }
 .main-title h1 {
-  font-size: 27px;
+  text-align: center;
+  padding: 1.5rem 0 0.8rem 0;
+  font-size: 22px;
   font-weight: 400;
-}
-.main-search {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem 0 1rem;
-}
-.search {
-  display: flex;
-  background-color: rgb(171, 171, 171);
-  border-radius: 5px;
-  width: 48rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  margin-right: 3rem;
-}
-.search input {
-  user-select: none;
-  width: 100%;
-  height: 2rem;
-  color: white;
-  background-color: rgb(171, 171, 171);
-  border-radius: 5px;
-  border: none;
-  text-indent: 5px;
-}
-.search input::placeholder {
-  color: white;
-}
-.search input:focus {
-  outline: none;
 }
 .filter select {
   cursor: pointer;
@@ -61,17 +31,17 @@ select,
   background-color: rgb(171, 171, 171);
 }
 .gems-container {
-  width: 95%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   .gem {
     box-shadow: 0px 0px 5px black;
-    width: 19rem;
+    width: 15rem;
     margin: 1em;
     position: relative;
-    height: 19rem;
+    height: 15rem;
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
@@ -82,7 +52,7 @@ select,
     &::before {
       content: " ";
       width: 100%;
-      height: 150%;
+      height: 100%;
       display: block;
       background-color: theme-color("secondary");
       position: absolute;
@@ -99,7 +69,7 @@ select,
       z-index: 1;
       transition: all 0.5s;
     }
-    h3 {
+    h4 {
       pointer-events: none;
       position: relative;
       z-index: 3;
@@ -107,42 +77,16 @@ select,
       color: theme-color("light");
       text-shadow: -2px 2px 0 rgb(66, 45, 45);
     }
-    &:hover {
-      #refl {
-        opacity: 0;
-      }
-    }
-    #refl {
-      transition: 1s;
-      margin: 0;
-      position: absolute;
-      -moz-transform: scaleY(-2);
-      -o-transform: scaleY(-2);
-      -webkit-transform: scaleY(-2);
-      transform: scaleY(-2);
-      -moz-transform: rotateX(210deg);
-      -o-transform: rotateX(210deg);
-      -webkit-transform: rotateX(210deg);
-      transform: rotateX(210deg);
-      perspective: 220px;
-      -webkit-mask-image: -webkit-gradient(
-        linear,
-        right top,
-        right bottom,
-        from(transparent),
-        color-stop(20%, transparent),
-        to(rgba(0, 0, 0, 0.5))
-      );
-    }
+
     p {
       pointer-events: none;
       position: relative;
       z-index: 3;
       max-height: 0;
       overflow: hidden;
-      margin: 1em 2em;
+      margin: 0.5em 2em 1em;
       color: theme-color("light");
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
     &:hover {
       p {
