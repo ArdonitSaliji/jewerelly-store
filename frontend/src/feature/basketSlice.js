@@ -13,6 +13,16 @@ export const basketSlice = createSlice({
     updateBasket: (state, action) => {
       state.basketProducts = action.payload;
     },
+    updateBasketQuantity: (state, action) => {
+      // state.basketProducts = state.basketProducts[
+      //   action.payload.index
+      // ].quantity = action.payload.e;
+
+      return {
+        ...state,
+        basketProducts: [...state.basketProducts],
+      };
+    },
     updateLength: (state, action) => {
       state.length = action.payload;
     },
@@ -28,8 +38,11 @@ export const basketSlice = createSlice({
     sumProductPrices: (state, action) => {
       state.sum = action.payload;
     },
-    subtractPrice: (state, action) => {
+    subProductPrice: (state, action) => {
       state.sum -= action.payload;
+    },
+    incProductPrice: (state, action) => {
+      state.sum += action.payload;
     },
     setLoginMessage: (state, action) => {
       state.message = action.payload;
@@ -40,13 +53,15 @@ export const basketSlice = createSlice({
   },
 });
 export const {
+  updateBasketQuantity,
   decLengthByOne,
   updateBasket,
   updateLength,
   updateLengthByOne,
   updateProductsQuantity,
   sumProductPrices,
-  subtractPrice,
+  incProductPrice,
+  subProductPrice,
   setLoginMessage,
   setProfileImage,
 } = basketSlice.actions;

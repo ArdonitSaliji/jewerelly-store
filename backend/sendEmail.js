@@ -12,7 +12,6 @@ module.exports = async (to, from, subject, text) => {
   sgMail
     .send(msg)
     .then((msg) => {
-      console.log(msg);
       console.log("Email sent");
     })
     .catch((error) => {

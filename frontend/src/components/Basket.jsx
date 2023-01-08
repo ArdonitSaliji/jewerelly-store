@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 import { useMediaQuery } from "@chakra-ui/react";
 import {
   decLengthByOne,
-  subtractPrice,
+  subProductPrice,
+  incProductPrice,
   sumProductPrices,
   updateBasket,
   updateLength,
@@ -21,8 +22,8 @@ const Basket = () => {
   const optionArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const dispatch = useDispatch();
   const productsSum = useSelector((state) => state.basket.sum);
-  const basketProducts = useSelector((state) => state.basket.basketProducts);
-
+  let basketProducts = useSelector((state) => state.basket.basketProducts);
+  // console.log(basketProducts);
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setWindowScrollY(window.scrollY);
@@ -57,26 +58,8 @@ const Basket = () => {
           dispatch(sumProductPrices(Number(val)));
         }
       })();
-      // getUserProducts();
     }
   }, [dispatch]);
-
-  if (media) {
-    if (
-      checkoutBtn &&
-      windowScrollY >= summary.offsetTop + summary.offsetHeight
-    ) {
-      checkoutBtn.classList.add("fixed");
-    } else if (
-      checkoutBtn &&
-      summary &&
-      windowScrollY <= summary.offsetTop + summary.offsetHeight
-    ) {
-      checkoutBtn.classList.remove("fixed");
-    }
-  } else if (checkoutBtn && !media) {
-    checkoutBtn.classList.remove("fixed");
-  }
 
   const deleteBasketProduct = async (e) => {
     const res = await fetch("/user/cart/delete", {
@@ -97,7 +80,7 @@ const Basket = () => {
         .join("")
     );
     const sub = value.toFixed(2);
-    dispatch(subtractPrice(sub));
+    dispatch(subProductPrice(sub));
     dispatch(decLengthByOne());
   };
 
@@ -115,13 +98,45 @@ const Basket = () => {
     window.open(json, "_blank");
   };
 
+  const handleChange = (index, e, prod) => {
+    dispatch(updateBasket({ index: index, e: e.target.value }));
+    console.log(updateBasket({ index: index, e: e.target.value }));
+    const sum = basketProducts
+      ?.map((product) => {
+        const price = product.price.split("$").join("");
+        return price;
+      })
+      ?.reduce((a, b) => Number(a) + Number(b));
+    const val = Number(sum).toFixed(2);
+    let price = prod.price.split("$").join("");
+    const value = Number(e.target.value) * Number(price);
+    dispatch(sumProductPrices(productsSum + value));
+  };
+
+  if (media) {
+    if (
+      checkoutBtn &&
+      windowScrollY >= summary.offsetTop + summary.offsetHeight
+    ) {
+      checkoutBtn.classList.add("fixed");
+    } else if (
+      checkoutBtn &&
+      summary &&
+      windowScrollY <= summary.offsetTop + summary.offsetHeight
+    ) {
+      checkoutBtn.classList.remove("fixed");
+    }
+  } else if (checkoutBtn && !media) {
+    checkoutBtn.classList.remove("fixed");
+  }
+
   return (
     <div className="home mobile">
       <div className="productContainer">
         <ListGroup>
           {sessionStorage.getItem("isLoggedIn") ? (
             basketProducts && basketProducts.length > 0 ? (
-              basketProducts?.map((prod) => (
+              basketProducts.map((prod, index) => (
                 <ListGroup.Item id={prod.name} key={prod._id}>
                   <Row>
                     <Col md={2}>
@@ -141,10 +156,16 @@ const Basket = () => {
                       <Form.Control
                         as="select"
                         defaultValue={prod.quantity}
-                        onChange={(e) => e.target.value}
+                        onChange={(e) => {
+                          handleChange(index, e, prod);
+                        }}
                       >
                         {optionArray.map((x, index) => (
-                          <option style={{ height: "20px" }} key={index}>
+                          <option
+                            style={{ height: "20px" }}
+                            value={x + 1}
+                            key={index}
+                          >
                             {x + 1}
                           </option>
                         ))}
