@@ -5,10 +5,12 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setProfileImage } from "../feature/basketSlice";
 
-// import "./ProfileScreen.css";
 const ProfileScreen = () => {
-  const [pic, setPic] = useState("");
+  const profileImage = useSelector((state) => state.basket.profileImage);
+  const dispatch = useDispatch();
   const [formState, setFormState] = useState({
     password1: "",
     password2: "",
@@ -60,8 +62,11 @@ const ProfileScreen = () => {
         _id: resUser._id,
       });
 
-      setPic(json.image);
-      sessionStorage.setItem("userImage", json.image);
+      if (json.image) {
+        dispatch(setProfileImage(`data:image/jpeg;base64,${json.image}`));
+      }
+
+      // sessionStorage.setItem("userImage", json.image);
 
       setFirstFormState({
         ...firstFormState,
@@ -100,8 +105,15 @@ const ProfileScreen = () => {
           method: "POST",
           body: formData,
         });
-        const res2 = await uploadImage.json();
 
+        const json2 = await uploadImage.json();
+
+        console.log(json2.profileImage);
+        if (json2.profileImage) {
+          dispatch(
+            setProfileImage(`data:image/jpeg;base64,${json2.profileImage}`)
+          );
+        }
         if (res.status === 200) {
           sessionStorage.setItem("user", JSON.stringify(json.username));
           toast.success(json.message);
@@ -180,7 +192,6 @@ const ProfileScreen = () => {
               type="file"
               label="Upload Profile Picture"
               name="file"
-              id="file"
               onChange={(e) => {
                 setFormState({
                   ...formState,
@@ -202,7 +213,7 @@ const ProfileScreen = () => {
       </Col>
       <Col>
         <div className="profile-img">
-          <img src={`data:image/jpeg;base64,${pic}`} className="profilePic" />
+          <img src={profileImage} className="profilePic" />
         </div>
       </Col>
     </Row>

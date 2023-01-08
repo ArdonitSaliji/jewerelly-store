@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import {
   updateBasket,
   updateLength,
   updateProductsQuantity,
+  updateBasketQuantity,
 } from "../feature/basketSlice";
 const Basket = () => {
   const [windowScrollY, setWindowScrollY] = useState();
@@ -23,8 +24,8 @@ const Basket = () => {
   const dispatch = useDispatch();
   const productsSum = useSelector((state) => state.basket.sum);
   let basketProducts = useSelector((state) => state.basket.basketProducts);
-  // console.log(basketProducts);
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     window.addEventListener("scroll", () => {
       setWindowScrollY(window.scrollY);
     });
@@ -45,21 +46,50 @@ const Basket = () => {
         const json = await res.json();
         dispatch(updateProductsQuantity(json.foundUser.cart));
         dispatch(updateLength(json.basketProducts.length));
-        dispatch(updateBasket(json.basketProducts));
 
         if (json.basketProducts.length > 0) {
+          dispatch(updateBasket(json.basketProducts));
+
           const sum = json.basketProducts
             ?.map((product) => {
               const price = product.price.split("$").join("");
-              return price;
+              if (product.quantity) {
+                return Number(price) * Number(product.quantity);
+              } else {
+                return Number(price);
+              }
             })
-            ?.reduce((a, b) => Number(a) + Number(b));
+            ?.reduce((a, b) => Number(a) + Number(b), 0);
           const val = Number(sum).toFixed(2);
           dispatch(sumProductPrices(Number(val)));
         }
       })();
     }
-  }, [dispatch]);
+  }, []);
+  useEffect(() => {
+    const sum = basketProducts
+      ?.map((product) => {
+        const price = product.price.split("$").join("");
+        if (product.quantity) {
+          return Number(price) * Number(product.quantity);
+        } else {
+          return Number(price);
+        }
+      })
+      ?.reduce((a, b) => Number(a) + Number(b), 0);
+
+    let val = Number(sum).toFixed(2);
+    dispatch(sumProductPrices(val));
+  }, [basketProducts]);
+
+  const handleChange = async (index, e, prod) => {
+    dispatch(
+      updateBasketQuantity({
+        index: index,
+        e: e.target.value,
+      })
+    );
+  };
 
   const deleteBasketProduct = async (e) => {
     const res = await fetch("/user/cart/delete", {
@@ -98,21 +128,6 @@ const Basket = () => {
     window.open(json, "_blank");
   };
 
-  const handleChange = (index, e, prod) => {
-    dispatch(updateBasket({ index: index, e: e.target.value }));
-    console.log(updateBasket({ index: index, e: e.target.value }));
-    const sum = basketProducts
-      ?.map((product) => {
-        const price = product.price.split("$").join("");
-        return price;
-      })
-      ?.reduce((a, b) => Number(a) + Number(b));
-    const val = Number(sum).toFixed(2);
-    let price = prod.price.split("$").join("");
-    const value = Number(e.target.value) * Number(price);
-    dispatch(sumProductPrices(productsSum + value));
-  };
-
   if (media) {
     if (
       checkoutBtn &&
@@ -136,7 +151,7 @@ const Basket = () => {
         <ListGroup>
           {sessionStorage.getItem("isLoggedIn") ? (
             basketProducts && basketProducts.length > 0 ? (
-              basketProducts.map((prod, index) => (
+              basketProducts?.map((prod, index) => (
                 <ListGroup.Item id={prod.name} key={prod._id}>
                   <Row>
                     <Col md={2}>
@@ -197,7 +212,7 @@ const Basket = () => {
         </ListGroup>
       </div>
       <div className="filters summary">
-        <span className="title">Subtotal ({}) items</span>
+        <span className="title">Subtotal ({0}) items</span>
         <span style={{ fontWeight: 700, fontSize: 20 }}>
           Total: $
           {sessionStorage.getItem("isLoggedIn") &&

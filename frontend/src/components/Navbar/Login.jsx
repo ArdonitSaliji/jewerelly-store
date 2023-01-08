@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBasket } from "../../feature/basketSlice";
-import { toast } from "react-toastify";
 import { useMediaQuery } from "@chakra-ui/react";
 import { useAuth } from "../../auth/useAuth";
 import { setLoginMessage } from "../../feature/basketSlice";

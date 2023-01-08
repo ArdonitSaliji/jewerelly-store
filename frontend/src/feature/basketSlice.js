@@ -14,14 +14,12 @@ export const basketSlice = createSlice({
       state.basketProducts = action.payload;
     },
     updateBasketQuantity: (state, action) => {
-      // state.basketProducts = state.basketProducts[
-      //   action.payload.index
-      // ].quantity = action.payload.e;
-
-      return {
-        ...state,
-        basketProducts: [...state.basketProducts],
+      const newBasketProducts = [...state.basketProducts];
+      newBasketProducts[action.payload.index] = {
+        ...newBasketProducts[action.payload.index],
+        quantity: action.payload.e,
       };
+      state.basketProducts = newBasketProducts;
     },
     updateLength: (state, action) => {
       state.length = action.payload;

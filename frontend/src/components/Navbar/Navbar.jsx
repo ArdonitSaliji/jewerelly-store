@@ -23,7 +23,7 @@ const Navbar = ({ setBasketProducts }) => {
     // Login Notification - will be sent only on login
     JSON.parse(sessionStorage.getItem("loginNtf")) &&
       toast.success("Login Successfull!", {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,
       });
 
@@ -69,7 +69,9 @@ const Navbar = ({ setBasketProducts }) => {
                 <AiOutlineShoppingCart />
                 Basket&nbsp;
                 {isLoggedIn && basketLength > 0 && basketLength && (
-                  <span className="basket-indicator">{basketLength}</span>
+                  <span className="basket-indicator">
+                    {basketLength > 0 && basketLength}
+                  </span>
                 )}
               </Link>
             </li>

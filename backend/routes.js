@@ -25,14 +25,10 @@ let stripeGateway = stripe(
 );
 let DOMAIN = "http://localhost:3000/";
 
-// a middleware function to verify the JWT and set the req.user object
 function verifyJWT(req, res, next) {
-  // get the JWT from the request header
   const token = req.cookies["access_token"];
 
-  // if the token is present, verify it
   if (token) {
-    // if the token is valid, set the user on the request object
     jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
       if (err) {
         return res.status(401).redirect("http://localhost:3000/");
@@ -41,7 +37,6 @@ function verifyJWT(req, res, next) {
       next();
     });
   } else {
-    // if the token is not present, return a 401 Unauthorized error
     res.status(401).redirect("http://localhost:3000/");
   }
 }
@@ -66,15 +61,49 @@ const upload = multer({
 }).single("file");
 
 router.post("/upload", async (req, res) => {
-  upload(req, res, (err) => {
+  // upload(req, res, async (err) => {
+  //   if (err) return res.status(404).send({ message: "File Upload Failed" });
+  //   const imageBuffer = fs.readFileSync(`./uploads/${req.file.originalname}`);
+  //   Users.findOneAndUpdate(
+  //     { username: req.body.user },
+  //     { profileImage: imageBuffer, profileImageName: req.file.originalname },
+  //     async (error, foundUser) => {
+  //       if (error) {
+  //       } else {
+  //         if (foundUser.profileImage) {
+  //           const profileImage = await Buffer.from(
+  //             foundUser.profileImage,
+  //             "binary"
+  //           ).toString("base64");
+  //           return res
+  //             .status(200)
+  //             .send({ filename: req.file.originalname, profileImage });
+  //         }
+  //         return res.status(200).send({ filename: req.file.originalname });
+  //       }
+  //     }
+  //   );
+  // });
+  upload(req, res, async (err) => {
     if (err) return res.status(404).send({ message: "File Upload Failed" });
-    const imageBuffer = fs.readFileSync(`./uploads/${req.file.originalname}`);
+    const imageBuffer = await fs.promises.readFile(
+      `./uploads/${req.file.originalname}`
+    );
     Users.findOneAndUpdate(
       { username: req.body.user },
       { profileImage: imageBuffer, profileImageName: req.file.originalname },
-      (error, user) => {
+      async (error, foundUser) => {
         if (error) {
+          return res.status(500).send({ message: "Error updating user" });
         } else {
+          if (imageBuffer) {
+            const profileImage = Buffer.from(imageBuffer, "binary").toString(
+              "base64"
+            );
+            return res
+              .status(200)
+              .send({ filename: req.file.originalname, profileImage });
+          }
           return res.status(200).send({ filename: req.file.originalname });
         }
       }
@@ -167,7 +196,6 @@ router.post("/user/cart/products", verifyJWT, async (req, res) => {
     const basketProducts = await Products.find({
       _id: { $in: foundUser.cart },
     });
-
     return res.status(200).send({ basketProducts, foundUser });
   }
 });
@@ -327,11 +355,14 @@ router.post("/:user/profile", verifyJWT, checkSessionUser, async (req, res) => {
   const foundUser = await Users.findOne({
     username: req.body.user,
   });
-  const image = Buffer.from(foundUser.profileImage, "binary").toString(
-    "base64"
-  );
-
-  res.status(200).send({ user: foundUser, image: image });
+  if (foundUser.profileImage) {
+    const image = Buffer.from(foundUser.profileImage, "binary").toString(
+      "base64"
+    );
+    res.status(200).send({ user: foundUser, image: image });
+  } else {
+    res.status(200).send({ user: foundUser, image: "" });
+  }
 });
 router.post("/user/update-profile", verifyJWT, async (req, res) => {
   const user = req.body;

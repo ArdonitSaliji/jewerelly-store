@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -13,8 +13,8 @@ const SelectProducts = () => {
   const basketLength = useSelector((state) => state.basket.length);
 
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const selectProducts = async () => {
+  useLayoutEffect(() => {
+    const selectProducts = (async () => {
       const product = JSON.parse(
         sessionStorage.getItem("selectProduct").toLocaleLowerCase()
       );
@@ -29,8 +29,7 @@ const SelectProducts = () => {
       });
       let json = await res.json();
       setProducts(json);
-    };
-    selectProducts();
+    })();
   }, []);
 
   const addToBasket = async (e) => {

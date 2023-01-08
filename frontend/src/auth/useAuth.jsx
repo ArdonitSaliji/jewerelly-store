@@ -4,6 +4,7 @@ import {
   setLoginMessage,
   setProfileImage,
   updateBasket,
+  updateLength,
 } from "../feature/basketSlice";
 
 export function useAuth() {
@@ -43,6 +44,7 @@ export function useAuth() {
       }
       sessionStorage.setItem("user", JSON.stringify(json.user));
       dispatch(updateBasket(json.basketProducts));
+      dispatch(updateLength(json.basketProducts.length));
       window.location.reload();
     } else {
       dispatch(setLoginMessage(json.message));
