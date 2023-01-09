@@ -70,6 +70,7 @@
             border-bottom: 1px solid white;
 
             a {
+              margin: 0;
               display: flex;
               align-items: center;
               text-align: center;
@@ -126,6 +127,7 @@
 
   .navbar-links {
     .nav {
+      margin-left: 5rem;
       li {
         overflow: hidden;
         a {

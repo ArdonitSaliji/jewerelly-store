@@ -53,7 +53,6 @@ export function useAuth() {
     }
 
     sessionStorage.setItem("loginNtf", JSON.stringify(res.ok));
-    // throw new Error("Login failed");
   }
 
   return { user, setLogin };
