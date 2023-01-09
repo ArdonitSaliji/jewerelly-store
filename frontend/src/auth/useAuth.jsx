@@ -45,7 +45,9 @@ export function useAuth() {
       sessionStorage.setItem("user", JSON.stringify(json.user));
       dispatch(updateBasket(json.basketProducts));
       dispatch(updateLength(json.basketProducts.length));
+      dispatch(setLoginMessage(json.message));
       window.location.reload();
+      return res.status;
     } else {
       dispatch(setLoginMessage(json.message));
     }

@@ -129,6 +129,8 @@
       li {
         overflow: hidden;
         a {
+          border-radius: 5px;
+          padding: 0 0.8rem;
           margin-left: 1rem;
           overflow: hidden;
           --h: 1.2em; /* the height */

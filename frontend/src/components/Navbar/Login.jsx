@@ -21,12 +21,15 @@ const Login = ({ login, setIsLoggedIn }) => {
   }, []);
 
   const handleLogin = async () => {
-    setLogin({
+    const status = await setLogin({
       email: loginInUser.email,
       password: loginInUser.password,
     });
-
-    document.querySelector(".login-message").classList.add("show", "error");
+    if (status !== 200) {
+      document.querySelector(".login-message").classList.add("show", "error");
+    } else {
+      document.querySelector(".login-message").classList.add("show", "success");
+    }
     setTimeout(() => {
       dispatch(setLoginMessage(""));
     }, 6000);
