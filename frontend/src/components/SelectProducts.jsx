@@ -1,13 +1,8 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import {
-  sumProductPrices,
-  updateBasket,
-  updateLength,
-  updateLengthByOne,
-} from '../feature/basketSlice';
+import { sumProductPrices, updateBasket, updateLengthByOne } from '../feature/basketSlice';
 const SelectProducts = () => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.basketProducts);
