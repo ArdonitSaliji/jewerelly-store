@@ -1,37 +1,32 @@
-import { useMediaQuery } from "@chakra-ui/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useMediaQuery } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Signup = ({ signUp }) => {
   const [signingInUser, setSigningInUser] = useState({
-    username: "",
-    email: "",
-    password1: "",
-    password2: "",
+    username: '',
+    email: '',
+    password1: '',
+    password2: '',
   });
   const [message, setMessage] = useState(null);
-  const media = useMediaQuery("(max-width: 771px)")[0];
+  const media = useMediaQuery('(max-width: 771px)')[0];
 
   const signupUser = async () => {
     if (
-      signingInUser.username !== "" &&
-      signingInUser.email !== "" &&
-      signingInUser.password1 !== "" &&
-      signingInUser.password2 !== ""
+      signingInUser.username !== '' &&
+      signingInUser.email !== '' &&
+      signingInUser.password1 !== '' &&
+      signingInUser.password2 !== ''
     ) {
-      if (
-        signingInUser.password1.length < 8 &&
-        signingInUser.password2.length < 8
-      ) {
-        setMessage("Password must be at least 8 characters!");
-        document
-          .querySelector(".signup-message")
-          .classList.add("show", "error");
+      if (signingInUser.password1.length < 8 && signingInUser.password2.length < 8) {
+        setMessage('Password must be at least 8 characters!');
+        document.querySelector('.signup-message').classList.add('show', 'error');
       } else {
-        const res = await fetch("/api/signup", {
-          method: "POST",
+        const res = await fetch('http://localhost:5000/signup', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             username: signingInUser.username,
@@ -42,30 +37,22 @@ const Signup = ({ signUp }) => {
         });
         const json = await res.json();
         if (res.status === 409) {
-          document
-            .querySelector(".signup-message")
-            .classList.add("show", "error");
+          document.querySelector('.signup-message').classList.add('show', 'error');
           setMessage(json.error);
         } else if (res.status === 201) {
-          document
-            .querySelector(".signup-message")
-            .classList.add("show", "success");
+          document.querySelector('.signup-message').classList.add('show', 'success');
           setMessage(json.success);
           setTimeout(() => {
-            document
-              .querySelector(".navbar-tab-signup")
-              .classList.remove("show-signup");
+            document.querySelector('.navbar-tab-signup').classList.remove('show-signup');
           }, 3000);
         } else {
-          document
-            .querySelector(".signup-message")
-            .classList.add("show", "error");
+          document.querySelector('.signup-message').classList.add('show', 'error');
           setMessage(json.error);
         }
       }
     } else {
-      document.querySelector(".signup-message").classList.add("show", "error");
-      setMessage("All fields are required");
+      document.querySelector('.signup-message').classList.add('show', 'error');
+      setMessage('All fields are required');
     }
   };
   return (
@@ -73,20 +60,20 @@ const Signup = ({ signUp }) => {
       className={
         media
           ? signUp
-            ? "navbar-tab navbar-tab-signup mobile show-signup"
-            : "navbar-tab navbar-tab-signup mobile"
+            ? 'navbar-tab navbar-tab-signup mobile show-signup'
+            : 'navbar-tab navbar-tab-signup mobile'
           : !signUp
-          ? "navbar-tab navbar-tab-signup"
-          : "navbar-tab navbar-tab-signup show-signup"
+          ? 'navbar-tab navbar-tab-signup'
+          : 'navbar-tab navbar-tab-signup show-signup'
       }
     >
-      <div className="left">
-        <form name="signup" className="signup-form">
-          <h4 className="signup-title">Sign up</h4>
+      <div className='left'>
+        <form name='signup' className='signup-form'>
+          <h4 className='signup-title'>Sign up</h4>
           <br />
-          <div className="signup-inputs">
-            <div className="left-inputs">
-              <label required htmlFor="username" className="sr-only">
+          <div className='signup-inputs'>
+            <div className='left-inputs'>
+              <label required htmlFor='username' className='sr-only'>
                 Username
               </label>
               <input
@@ -96,13 +83,13 @@ const Signup = ({ signUp }) => {
                     username: e.target.value,
                   });
                 }}
-                type="text"
-                placeholder="Username"
+                type='text'
+                placeholder='Username'
                 required
-                name="username"
-                className="form-control"
+                name='username'
+                className='form-control'
               />
-              <label required htmlFor="email" className="sr-only">
+              <label required htmlFor='email' className='sr-only'>
                 Email
               </label>
               <input
@@ -112,15 +99,15 @@ const Signup = ({ signUp }) => {
                     email: e.target.value,
                   });
                 }}
-                type="email"
-                placeholder="Email"
-                name="email"
-                className="form-control"
+                type='email'
+                placeholder='Email'
+                name='email'
+                className='form-control'
                 required
               />
             </div>
-            <div className="right-inputs">
-              <label required htmlFor="password" className="sr-only">
+            <div className='right-inputs'>
+              <label required htmlFor='password' className='sr-only'>
                 Password
               </label>
               <input
@@ -130,13 +117,13 @@ const Signup = ({ signUp }) => {
                     password1: e.target.value,
                   });
                 }}
-                type="password"
-                placeholder="Password"
-                name="password"
-                className="form-control"
+                type='password'
+                placeholder='Password'
+                name='password'
+                className='form-control'
                 required
               />
-              <label required htmlFor="repeat-password" className="sr-only">
+              <label required htmlFor='repeat-password' className='sr-only'>
                 Repeat Password
               </label>
               <input
@@ -146,29 +133,27 @@ const Signup = ({ signUp }) => {
                     password2: e.target.value,
                   });
                 }}
-                type="password"
-                placeholder="Repeat Password"
-                name="repeat-password"
-                className="form-control"
+                type='password'
+                placeholder='Repeat Password'
+                name='repeat-password'
+                className='form-control'
                 required
               />
             </div>
           </div>
-          <Link to={"/reset-password"}>Have an account? Login.</Link>
+          <Link to={'/reset-password'}>Have an account? Login.</Link>
         </form>
       </div>
-      <div className="signup-message">{message}</div>
-      <div className="right">
+      <div className='signup-message'>{message}</div>
+      <div className='right'>
         <form>
           <button
-            type="button"
-            className="btn btn-primary"
+            type='button'
+            className='btn btn-primary'
             onClick={() => {
               signupUser();
               setTimeout(() => {
-                document
-                  .querySelector(".signup message")
-                  .classList.remove("show");
+                document.querySelector('.signup message').classList.remove('show');
               }, 5000);
             }}
           >
