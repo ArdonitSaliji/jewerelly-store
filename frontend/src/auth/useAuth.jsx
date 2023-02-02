@@ -21,8 +21,9 @@ export function useAuth() {
 
   async function setLogin(user) {
     // Perform login request to server
-    const res = await fetch('http://localhost:5000/auth/login', {
+    const res = await fetch('/auth/login', {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(user),
       headers: {
         'Content-Type': 'application/json',

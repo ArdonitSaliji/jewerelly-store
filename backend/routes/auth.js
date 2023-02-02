@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const sendEmail = require('../sendEmail');
 const crypto = require('crypto');
+
 router.post('/login', async (req, res) => {
   const userLoggingIn = req.body;
   const emailOrUsername = req.body.email;
@@ -23,27 +24,29 @@ router.post('/login', async (req, res) => {
 
   if (email) foundUser = email;
   else foundUser = userExists;
-  req.session.user = foundUser.username;
+
+  foundUser && (req.session.user = foundUser.username);
 
   if (!foundUser) {
     return res.status(404).send({ message: 'Account does not exist' });
   }
-  if (!foundUser.verified) {
-    let token = await Token.findOne({ userId: foundUser._id });
-    if (!token) {
-      token = await new Token({
-        userId: foundUser._id,
-        token: crypto.randomBytes(32).toString('hex'),
-      }).save();
-      const url = `${process.env.BASE_URL}users/${foundUser._id}/verify/${token.token}`;
-      // await sendEmail(
-      //   foundUser.email,
-      //   "ardonit.1980@gmail.com",
-      //   "Gem Store - Verify Account",
-      //   url
-      // );
-    }
-  }
+  // ? Email Verification
+  // if (!foundUser.verified) {
+  //   let token = await Token.findOne({ userId: foundUser._id });
+  //   if (!token) {
+  //     token = await new Token({
+  //       userId: foundUser._id,
+  //       token: crypto.randomBytes(32).toString('hex'),
+  //     }).save();
+  //     const url = `${process.env.BASE_URL}users/${foundUser._id}/verify/${token.token}`;
+  //     // await sendEmail(
+  //     //   foundUser.email,
+  //     //   "ardonit.1980@gmail.com",
+  //     //   "Gem Store - Verify Account",
+  //     //   url
+  //     // );
+  //   }
+  // }
   if (foundUser) {
     const basketProducts = await Products.find({
       _id: { $in: foundUser.cart },
@@ -54,7 +57,9 @@ router.post('/login', async (req, res) => {
         const accessToken = jwt.sign(signUser, process.env.ACCESS_TOKEN, {
           expiresIn: '1d',
         });
-        res.cookie('access_token', `${accessToken}`);
+        res.cookie('access_token', `${accessToken}`, {
+          maxAge: 31557600000,
+        });
         if (foundUser.profileImage && foundUser.profileImage !== 'undefined') {
           const profileImage = Buffer.from(foundUser.profileImage, 'binary').toString('base64');
           return res.status(200).json({
@@ -118,6 +123,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
+  console.log(req.session);
   req.session.destroy((err) => {
     if (err) {
       throw new Error(err);

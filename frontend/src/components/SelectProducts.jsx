@@ -10,7 +10,8 @@ import {
 } from '../feature/basketSlice';
 const SelectProducts = () => {
   const dispatch = useDispatch();
-
+  const basket = useSelector((state) => state.basket.basketProducts);
+  console.log(basket);
   const [products, setProducts] = useState([]);
   useLayoutEffect(() => {
     (async () => {
@@ -42,8 +43,9 @@ const SelectProducts = () => {
       }),
     });
     const json = await res.json();
+    console.log(json);
     if (res.status === 202) {
-      dispatch(updateBasket(json));
+      dispatch(updateBasket([...basket, json]));
       dispatch(updateLengthByOne());
       const {
         previousElementSibling: { children },
