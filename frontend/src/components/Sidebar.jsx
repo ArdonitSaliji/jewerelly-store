@@ -21,9 +21,9 @@ const Sidebar = () => {
   }, []);
 
   const logUserOut = async () => {
-    const res = await fetch('/logout');
+    const res = await fetch('/auth/logout');
     const json = await res.json();
-    window.location.href = json.redirect_path;
+    window.location.href = json.redirect_path || 'http://localhost:3000/';
     sessionStorage.clear();
   };
   return (

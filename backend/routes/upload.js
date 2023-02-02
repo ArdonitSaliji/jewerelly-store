@@ -1,36 +1,8 @@
-const stripe = require('stripe');
 const express = require('express');
-const session = require('express-session');
 const router = express.Router();
-const Users = require('../Schema/Users.js');
-const Products = require('../Schema/Products.js');
-const MongoDBStore = require('connect-mongodb-session')(session);
-const sendEmail = require('../sendEmail');
-const dotenv = require('dotenv');
 const multer = require('multer');
-const productRoutes = require('./products.js');
+const Users = require('../Schema/Users.js');
 const fs = require('fs');
-dotenv.config();
-
-const store = new MongoDBStore({
-  uri: process.env.DATABASE_ACCESS,
-  collection: 'sessions',
-});
-
-let stripeGateway = stripe(
-  'sk_test_51MCkXgDplZI5a2XjhslbZ4ge0UxGgEIAOvgGnpRRwta6scGnPvWFBlvaYhYqAXvnHK58tHwnUw133AZOpIma1H4q005lxIADbl'
-);
-
-let DOMAIN = 'http://localhost:3000/';
-
-router.use(
-  session({
-    secret: 'secret',
-    store: store,
-    resave: true,
-    saveUninitialized: true,
-  })
-);
 
 const Storage = multer.diskStorage({
   destination: 'uploads',

@@ -23,7 +23,7 @@ const Signup = ({ signUp }) => {
         setMessage('Password must be at least 8 characters!');
         document.querySelector('.signup-message').classList.add('show', 'error');
       } else {
-        const res = await fetch('http://localhost:5000/signup', {
+        const res = await fetch('http://localhost:5000/auth/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

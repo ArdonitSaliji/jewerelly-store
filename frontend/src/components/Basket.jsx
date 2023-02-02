@@ -67,30 +67,30 @@ const Basket = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const sum = [basketProducts]
-  //     ?.map((product) => {
-  //       const price = product.price.split('$').join('');
-  //       if (product.quantity) {
-  //         return Number(price) * Number(product.quantity);
-  //       } else {
-  //         return Number(price);
-  //       }
-  //     })
-  //     ?.reduce((a, b) => Number(a) + Number(b), 0);
+  useEffect(() => {
+    const sum = basketProducts
+      ?.map((product) => {
+        const price = product.price.split('$').join('');
+        if (product.quantity) {
+          return Number(price) * Number(product.quantity);
+        } else {
+          return Number(price);
+        }
+      })
+      ?.reduce((a, b) => Number(a) + Number(b), 0);
 
-  //   let val = Number(sum).toFixed(2);
-  //   dispatch(sumProductPrices(val));
-  // }, [basketProducts]);
+    let val = Number(sum).toFixed(2);
+    dispatch(sumProductPrices(val));
+  }, [basketProducts]);
 
-  // const handleChange = async (index, e, prod) => {
-  //   dispatch(
-  //     updateBasketQuantity({
-  //       index: index,
-  //       e: e.target.value,
-  //     })
-  //   );
-  // };
+  const handleChange = async (index, e, prod) => {
+    dispatch(
+      updateBasketQuantity({
+        index: index,
+        e: e.target.value,
+      })
+    );
+  };
 
   const deleteBasketProduct = async (e) => {
     const res = await fetch('http://localhost:5000/user/cart/delete', {
@@ -145,7 +145,7 @@ const Basket = () => {
 
   return (
     <div className='home mobile'>
-      {/* <div className='productContainer'>
+      <div className='productContainer'>
         <ListGroup>
           {sessionStorage.getItem('isLoggedIn') ? (
             basketProducts && basketProducts.length > 0 ? (
@@ -221,7 +221,7 @@ const Basket = () => {
             Proceed to checkout
           </Button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

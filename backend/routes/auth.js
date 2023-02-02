@@ -1,87 +1,12 @@
 const express = require('express');
-const session = require('express-session');
 const router = express.Router();
 const Users = require('../Schema/Users.js');
-const Products = require('../Schema/Products.js');
 const Token = require('../Schema/Token');
+const Products = require('../Schema/Products.js');
 const bcrypt = require('bcrypt');
-const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const MongoDBStore = require('connect-mongodb-session')(session);
 const sendEmail = require('../sendEmail');
-const dotenv = require('dotenv');
-const multer = require('multer');
-const fs = require('fs');
-
-const store = new MongoDBStore({
-  uri: process.env.DATABASE_ACCESS,
-  collection: 'sessions',
-});
-
-function verifyJWT(req, res, next) {
-  const token = req.cookies['access_token'];
-
-  if (token) {
-    jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
-      if (err) {
-        return res.status(401).redirect('http://localhost:3000/');
-      }
-      req.user = decoded;
-      next();
-    });
-  } else {
-    res.status(401).redirect('http://localhost:3000/');
-  }
-}
-router.use(
-  session({
-    secret: 'secret',
-    store: store,
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-
-const Storage = multer.diskStorage({
-  destination: 'uploads',
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({
-  storage: Storage,
-}).single('file');
-
-function checkSessionUser(req, res, next) {
-  if (req.session.user === req.params.user) {
-    next();
-  } else {
-    res.status(403).send('You do not have permission to access this route');
-  }
-}
-router.post('/upload', async (req, res) => {
-  upload(req, res, async (err) => {
-    if (err) return res.status(404).send({ message: 'File Upload Failed' });
-    const imageBuffer = await fs.promises.readFile(`./uploads/${req.file.originalname}`);
-    Users.findOneAndUpdate(
-      { username: req.body.user },
-      { profileImage: imageBuffer, profileImageName: req.file.originalname },
-      async (error, foundUser) => {
-        if (error) {
-          return res.status(500).send({ message: 'Error updating user' });
-        } else {
-          if (imageBuffer) {
-            const profileImage = Buffer.from(imageBuffer, 'binary').toString('base64');
-            return res.status(200).send({ filename: req.file.originalname, profileImage });
-          }
-          return res.status(200).send({ filename: req.file.originalname });
-        }
-      }
-    );
-  });
-});
-
+const crypto = require('crypto');
 router.post('/login', async (req, res) => {
   const userLoggingIn = req.body;
   const emailOrUsername = req.body.email;
@@ -192,57 +117,15 @@ router.post('/signup', async (req, res) => {
   res.status(403).json({ error: 'Passwords must be matching!' });
 });
 
-router.post('/:user/profile', verifyJWT, checkSessionUser, async (req, res) => {
-  const foundUser = await Users.findOne({
-    username: req.body.user,
+router.get('/logout', async (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      throw new Error(err);
+    } else {
+      res.clearCookie('access_token'); // clean up!
+      return res.status(200).send({ msg: 'logging you out', redirect_path: '/' });
+    }
   });
-  if (foundUser.profileImage) {
-    const image = Buffer.from(foundUser.profileImage, 'binary').toString('base64');
-    res.status(200).send({ user: foundUser, image: image });
-  } else {
-    res.status(200).send({ user: foundUser, image: '' });
-  }
-});
-router.post('/user/update-profile', verifyJWT, async (req, res) => {
-  const user = req.body;
-  const update = {};
-  if (user.profileImage) {
-    update.profileImage = user.profileImage;
-  }
-  if (user.password) {
-    update.password = await bcrypt.hash(user.password, 10);
-  }
-  if (user.email) {
-    update.email = user.email;
-  }
-  if (user.username) {
-    update.username = user.username;
-  }
-  // Find the user in the database
-  const existingUser = await Users.findById(user._id);
-  // Check if the email or username is already in use
-  if (
-    (update.email &&
-      update.email !== existingUser.email &&
-      (await Users.exists({ email: update.email }))) ||
-    (update.username &&
-      update.username !== existingUser.username &&
-      (await Users.exists({ username: update.username })))
-  ) {
-    res.status(400).send({ message: 'Email or username is already in use' });
-  } else {
-    // Update the user's profile
-    Users.findByIdAndUpdate(user._id, update, (err) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send({
-          message: 'Profile updated successfully',
-          username: user.username,
-        });
-      }
-    });
-  }
 });
 
 router.get('/:id/verify/:token', async (req, res) => {
@@ -262,17 +145,6 @@ router.get('/:id/verify/:token', async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: 'Internal Server Error' });
   }
-});
-
-router.get('/logout', async (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      throw new Error(err);
-    } else {
-      res.clearCookie('access_token'); // clean up!
-      return res.status(200).send({ msg: 'logging you out', redirect_path: '/' });
-    }
-  });
 });
 
 module.exports = router;
