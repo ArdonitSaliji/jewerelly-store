@@ -21,7 +21,7 @@ export function useAuth() {
 
   async function setLogin(user) {
     // Perform login request to server
-    const res = await fetch('/auth/login', {
+    const res = await fetch('http://127.0.0.1:8000/login', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(user),
@@ -29,13 +29,14 @@ export function useAuth() {
         'Content-Type': 'application/json',
       },
     });
-
     const json = await res.json();
+    console.log(json);
     if (res.status === 200) {
       sessionStorage.setItem('loginNtf', JSON.stringify(res.ok));
       sessionStorage.setItem('isLoggedIn', JSON.stringify(json.auth));
-
       setUser(json.user);
+
+      window.location.reload();
       if (json.profileImage) {
         dispatch(setProfileImage(`data:image/jpeg;base64,${json.profileImage}`));
       } else {

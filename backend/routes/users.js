@@ -16,7 +16,7 @@ let stripeGateway = stripe(
 let DOMAIN = 'http://localhost:3000/';
 router.use(bodyParser.json());
 
-router.post('/checkout', verifyJWT, async (req, res) => {
+router.post('/checkout', async (req, res) => {
   const session = await stripeGateway.checkout.sessions.create({
     payment_method_types: ['card'],
     mode: 'payment',

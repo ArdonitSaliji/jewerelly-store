@@ -43,7 +43,6 @@ const SelectProducts = () => {
       }),
     });
     const json = await res.json();
-    console.log(json);
     if (res.status === 202) {
       dispatch(updateBasket([...basket, json]));
       dispatch(updateLengthByOne());
