@@ -46,6 +46,11 @@ def all(db: Session = Depends(get_db)):
     products = db.query(models.Product).filter(models.Product.text != '').all()
     return products
 
+# @app.get('/products')
+# def select(db: Session = Depends(get_db)):
+#     select = db.query(models.Product).filter()
+
+
 @app.post('/login')
 async def login(request: Request, db: Session = Depends(get_db)):
     body = await request.json()

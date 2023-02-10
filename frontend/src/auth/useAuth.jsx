@@ -36,7 +36,6 @@ export function useAuth() {
       sessionStorage.setItem('isLoggedIn', JSON.stringify(json.auth));
       setUser(json.user);
 
-      window.location.reload();
       if (json.profileImage) {
         dispatch(setProfileImage(`data:image/jpeg;base64,${json.profileImage}`));
       } else {
