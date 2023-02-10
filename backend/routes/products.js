@@ -20,9 +20,9 @@ router.get('/', async (req, res) => {
     : res.status(204).send({ message: 'No Products Available' });
 });
 
-router.post('/select', async (req, res) => {
+router.get('/:product', async (req, res) => {
   let foundProduct = await Products.find({
-    name: { $regex: `^${req.body.name}` },
+    name: { $regex: `^${req.params.product}` },
   });
   foundProduct
     ? res.status(202).json(foundProduct)

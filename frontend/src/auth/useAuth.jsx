@@ -21,7 +21,7 @@ export function useAuth() {
 
   async function setLogin(user) {
     // Perform login request to server
-    const res = await fetch('http://127.0.0.1:8000/login', {
+    const res = await fetch('/auth/login', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(user),

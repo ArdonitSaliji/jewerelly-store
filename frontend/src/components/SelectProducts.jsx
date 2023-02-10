@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -11,20 +11,11 @@ import {
 const SelectProducts = () => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.basketProducts);
-  console.log(basket);
   const [products, setProducts] = useState([]);
-  useLayoutEffect(() => {
+  useEffect(() => {
     (async () => {
       const product = JSON.parse(sessionStorage.getItem('selectProduct').toLocaleLowerCase());
-      const res = await fetch('http://localhost:5000/products/select', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: product,
-        }),
-      });
+      const res = await fetch(`http://localhost:5000/products/${product}`);
       let json = await res.json();
       setProducts(json);
     })();

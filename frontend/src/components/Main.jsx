@@ -5,7 +5,7 @@ const Main = ({ setGemState }) => {
 
   useEffect(() => {
     (async () => {
-      const getProducts = await fetch('http://127.0.0.1:8000/products');
+      const getProducts = await fetch('http://localhost:5000/products');
       let json = await getProducts.json();
       setAllProducts(json);
     })();
@@ -33,7 +33,7 @@ const Main = ({ setGemState }) => {
           return (
             <div
               title={product.name}
-              key={product.id}
+              key={product._id}
               className='gem'
               onClick={(e) => getGemName(e)}
             >
